@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
   Search,
   Calendar,
@@ -30,6 +30,10 @@ interface DocumentHistoryViewProps {
   onToggleUrgent?: (docId: string, reason?: string) => Promise<any> | void;
   onOpenCalendar?: () => void;
   onOpenIcs?: () => void;
+  /** Fix a date the bot read wrong; returns the updated document. */
+  onEditDate?: (docId: string, patch: { events?: Array<{ id: string; date: string }>; actions?: Array<{ id: string; deadline: string }> }) => Promise<ExtractedDocument | null>;
+  /** Deep link (?doc=...) from the LINE reply: open this document's detail. */
+  initialDocId?: string | null;
 }
 
 export const DocumentHistoryView: React.FC<DocumentHistoryViewProps> = ({
@@ -39,6 +43,8 @@ export const DocumentHistoryView: React.FC<DocumentHistoryViewProps> = ({
   onToggleUrgent,
   onOpenCalendar,
   onOpenIcs,
+  onEditDate,
+  initialDocId,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedType, setSelectedType] = useState<string>('all');
@@ -48,6 +54,14 @@ export const DocumentHistoryView: React.FC<DocumentHistoryViewProps> = ({
   const [sortBy, setSortBy] = useState<'newest' | 'oldest' | 'confidence'>('newest');
   const [viewMode, setViewMode] = useState<'cards' | 'table'>('cards');
   const [selectedDocForDetail, setSelectedDocForDetail] = useState<ExtractedDocument | null>(null);
+  useEffect(() => {
+    if (initialDocId) setSelectedDocForDetail(documents.find((d) => d.id === initialDocId) || null);
+  }, [initialDocId, documents.length]);
+  const saveDate = async (patch: Parameters<NonNullable<typeof onEditDate>>[1]) => {
+    if (!onEditDate || !selectedDocForDetail) return;
+    const updated = await onEditDate(selectedDocForDetail.id, patch);
+    if (updated) setSelectedDocForDetail(updated);
+  };
   const [copiedSummaryId, setCopiedSummaryId] = useState<string | null>(null);
   const [copiedExportAll, setCopiedExportAll] = useState(false);
   const [urgentToast, setUrgentToast] = useState<string | null>(null);
@@ -843,10 +857,23 @@ export const DocumentHistoryView: React.FC<DocumentHistoryViewProps> = ({
                         </div>
                         <div className="flex-1">
                           <div className="font-medium text-slate-900">{act.todo_vi}</div>
-                          {act.deadline && (
+                          {(act.deadline || onEditDate) && (
                             <div className="text-[11px] text-amber-700 font-medium mt-0.5 flex items-center gap-1">
                               <Clock className="w-3 h-3" />
-                              <span>Hạn chót: {act.deadline}</span>
+                              <span>Hạn chót:</span>
+                              {onEditDate ? (
+                                <input
+                                  type="date"
+                                  value={act.deadline || ''}
+                                  onClick={(e) => e.stopPropagation()}
+                                  onChange={(e) => saveDate({ actions: [{ id: act.id, deadline: e.target.value }] })}
+                                  className="bg-white border border-amber-200 rounded px-1 tabular-nums"
+                                  aria-label="Sửa hạn chót"
+                                />
+                              ) : (
+                                <span>{act.deadline}</span>
+                              )}
+                              {act.deadline_uncertain && <span>⚠️ chưa chắc</span>}
                             </div>
                           )}
                         </div>
@@ -891,8 +918,20 @@ export const DocumentHistoryView: React.FC<DocumentHistoryViewProps> = ({
                           )}
                         </div>
                         <div className="text-right">
-                          <span className="font-bold text-slate-900 tabular-nums">{evt.date}</span>
-                          <span className="block text-[10px] text-emerald-700">VALARM -1 ngày</span>
+                          {onEditDate ? (
+                            <input
+                              type="date"
+                              value={evt.date}
+                              onChange={(e) => e.target.value && saveDate({ events: [{ id: evt.id, date: e.target.value }] })}
+                              className="font-bold text-slate-900 tabular-nums bg-white border border-emerald-200 rounded-lg px-2 py-1 text-xs"
+                              aria-label="Sửa ngày sự kiện"
+                            />
+                          ) : (
+                            <span className="font-bold text-slate-900 tabular-nums">{evt.date}</span>
+                          )}
+                          <span className="block text-[10px] text-emerald-700">
+                            {evt.date_uncertain ? '⚠️ Ngày chưa chắc — kiểm tra lại' : 'Nhắc trước 1 ngày'}
+                          </span>
                         </div>
                       </div>
                     ))}

@@ -16,6 +16,7 @@ import {
   RefreshCw,
   Send,
 } from 'lucide-react';
+import { apiFetch } from '../lib/api.ts';
 import { AdminMetrics, AuditLog, Family, InviteCode } from '../types/index.ts';
 
 interface AdminLIFFViewProps {
@@ -52,7 +53,7 @@ export const AdminLIFFView: React.FC<AdminLIFFViewProps> = ({
     setIsCreatingCode(true);
 
     try {
-      const res = await fetch('/api/admin/invite-codes', {
+      const res = await apiFetch('/api/admin/invite-codes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -82,7 +83,7 @@ export const AdminLIFFView: React.FC<AdminLIFFViewProps> = ({
     if (isNaN(newQuota) || newQuota < 1) return;
 
     try {
-      const res = await fetch('/api/admin/quota', {
+      const res = await apiFetch('/api/admin/quota', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ familyId, newQuota }),
@@ -98,7 +99,7 @@ export const AdminLIFFView: React.FC<AdminLIFFViewProps> = ({
 
   const handleToggleFamilySuspend = async (familyId: string) => {
     try {
-      const res = await fetch('/api/admin/suspend', {
+      const res = await apiFetch('/api/admin/suspend', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ familyId }),
@@ -215,7 +216,7 @@ export const AdminLIFFView: React.FC<AdminLIFFViewProps> = ({
             <TrendingUp className="w-4 h-4 text-slate-400" />
           </div>
           <div className="text-2xl font-bold text-slate-900 tabular-nums">
-            {metrics.accuracy_rate}%
+            {metrics.accuracy_rate === null ? "—" : `${metrics.accuracy_rate}%`}
           </div>
           <div className="flex items-center gap-2 mt-3 text-xs text-slate-600">
             <span className="text-emerald-700 font-semibold">{metrics.thumbs_up} Đúng</span>

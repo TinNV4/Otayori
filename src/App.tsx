@@ -5,11 +5,17 @@ import { DocumentHistoryView } from './components/DocumentHistoryView.tsx';
 import { LineSimulatorView } from './components/LineSimulatorView.tsx';
 import { AdminLIFFView } from './components/AdminLIFFView.tsx';
 import { PrivacyAndGuideView } from './components/PrivacyAndGuideView.tsx';
-import { ExtractedDocument, Family, AdminMetrics, InviteCode, AuditLog } from './types/index.ts';
+import { ExtractedDocument, Family, AdminMetrics, InviteCode, AuditLog, MeResponse } from './types/index.ts';
+import { apiFetch, initAuth } from './lib/api.ts';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<ActiveTab>('family_liff');
-  const [currentFamilyId, setCurrentFamilyId] = useState<string>('fam_tokyo_01');
+  const params = new URLSearchParams(window.location.search);
+  const deepDocId = params.get('doc');
+  const deepTab = params.get('tab');
+  const [activeTab, setActiveTab] = useState<ActiveTab>(deepTab === 'privacy' ? 'privacy_guide' : 'family_liff');
+  const [me, setMe] = useState<MeResponse | null>(null);
+  const [authError, setAuthError] = useState<string | null>(null);
+  const [currentFamilyId, setCurrentFamilyId] = useState<string | null>(params.get('familyId'));
   const [family, setFamily] = useState<Family | null>(null);
   const [documents, setDocuments] = useState<ExtractedDocument[]>([]);
   const [metrics, setMetrics] = useState<AdminMetrics | null>(null);
@@ -18,175 +24,115 @@ export default function App() {
   const [auditLogs, setAuditLogs] = useState<AuditLog[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Load all app data from backend APIs
-  const loadAppData = async () => {
+  const famQs = currentFamilyId ? `?familyId=${encodeURIComponent(currentFamilyId)}` : '';
+  const withFamily = (body: object = {}) => JSON.stringify({ ...body, familyId: currentFamilyId });
+
+  const loadMe = async () => {
     try {
-      // 1. Load family profile
-      const resFam = await fetch(`/api/family?familyId=${currentFamilyId}`);
-      if (resFam.ok) {
-        const data = await resFam.json();
-        setFamily(data.family);
-      }
-
-      // 2. Load family documents
-      const resDocs = await fetch(`/api/documents?familyId=${currentFamilyId}`);
-      if (resDocs.ok) {
-        const data = await resDocs.json();
-        setDocuments(data.documents);
-      }
-
-      // 3. Load admin metrics
-      const resMetrics = await fetch('/api/admin/metrics');
-      if (resMetrics.ok) {
-        const data = await resMetrics.json();
-        setMetrics(data.metrics);
-      }
-
-      // 4. Load all families (for admin)
-      const resAllFam = await fetch('/api/admin/families');
-      if (resAllFam.ok) {
-        const data = await resAllFam.json();
-        setAllFamilies(data.families);
-      }
-
-      // 5. Load invite codes
-      const resInv = await fetch('/api/admin/invite-codes');
-      if (resInv.ok) {
-        const data = await resInv.json();
-        setInviteCodes(data.invite_codes);
-      }
-
-      // 6. Load audit logs
-      const resLogs = await fetch('/api/admin/audit-logs');
-      if (resLogs.ok) {
-        const data = await resLogs.json();
-        setAuditLogs(data.audit_logs);
-      }
+      await initAuth();
+      const res = await apiFetch('/api/me');
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data: MeResponse = await res.json();
+      setMe(data);
+      if (!currentFamilyId && data.families[0]) setCurrentFamilyId(data.families[0].family_id);
+      if (!data.families.length && data.is_admin && !deepTab) setActiveTab('admin_dashboard');
     } catch (err) {
-      console.error('Error fetching data from server:', err);
+      setAuthError(String((err as Error).message || err));
     } finally {
       setIsLoading(false);
     }
   };
 
+  const loadAppData = async () => {
+    if (!me) return;
+    try {
+      if (currentFamilyId) {
+        const [resFam, resDocs] = await Promise.all([apiFetch(`/api/family${famQs}`), apiFetch(`/api/documents${famQs}`)]);
+        if (resFam.ok) setFamily((await resFam.json()).family);
+        if (resDocs.ok) setDocuments((await resDocs.json()).documents);
+      }
+      if (me.is_admin) {
+        const [m, f, i, l] = await Promise.all([
+          apiFetch('/api/admin/metrics'), apiFetch('/api/admin/families'), apiFetch('/api/admin/invite-codes'), apiFetch('/api/admin/audit-logs'),
+        ]);
+        if (m.ok) setMetrics((await m.json()).metrics);
+        if (f.ok) setAllFamilies((await f.json()).families);
+        if (i.ok) setInviteCodes((await i.json()).invite_codes);
+        if (l.ok) setAuditLogs((await l.json()).audit_logs);
+      }
+    } catch (err) {
+      console.error('Error fetching data from server:', err);
+    }
+  };
+
+  useEffect(() => {
+    loadMe();
+  }, []);
+
   useEffect(() => {
     loadAppData();
-  }, [currentFamilyId]);
+  }, [me, currentFamilyId]);
 
-  // Toggle todo task action
   const handleToggleAction = async (docId: string, actionId: string) => {
-    try {
-      const res = await fetch(`/api/documents/${docId}/action-toggle`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ actionId, familyId: currentFamilyId }),
-      });
-      if (res.ok) {
-        setDocuments((prev) =>
-          prev.map((doc) => {
-            if (doc.id !== docId) return doc;
-            return {
-              ...doc,
-              actions: doc.actions.map((act) =>
-                act.id === actionId ? { ...act, completed: !act.completed } : act
-              ),
-            };
-          })
-        );
-      }
-    } catch (err) {
-      console.error('Error toggling action:', err);
+    const res = await apiFetch(`/api/documents/${docId}/action-toggle`, { method: 'POST', body: withFamily({ actionId }) });
+    if (res.ok) {
+      setDocuments((prev) =>
+        prev.map((doc) =>
+          doc.id !== docId
+            ? doc
+            : { ...doc, actions: doc.actions.map((act) => (act.id === actionId ? { ...act, completed: !act.completed } : act)) }
+        )
+      );
     }
   };
 
-  // Submit feedback
   const handleSubmitFeedback = async (docId: string, feedback: 'up' | 'down', note?: string) => {
-    try {
-      const res = await fetch(`/api/documents/${docId}/feedback`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ feedback, note, familyId: currentFamilyId }),
-      });
-      if (res.ok) {
-        setDocuments((prev) =>
-          prev.map((doc) => (doc.id === docId ? { ...doc, feedback } : doc))
-        );
-        loadAppData();
-      }
-    } catch (err) {
-      console.error('Error submitting feedback:', err);
-    }
+    const res = await apiFetch(`/api/documents/${docId}/feedback`, { method: 'POST', body: withFamily({ feedback, note }) });
+    if (res.ok) setDocuments((prev) => prev.map((doc) => (doc.id === docId ? { ...doc, feedback } : doc)));
   };
 
-  // Rotate secret ICS Token
+  const handleEditDate = async (docId: string, patch: object) => {
+    const res = await apiFetch(`/api/documents/${docId}${famQs}`, { method: 'PATCH', body: withFamily(patch) });
+    if (!res.ok) return null;
+    const { document } = await res.json();
+    setDocuments((prev) => prev.map((d) => (d.id === docId ? document : d)));
+    return document as ExtractedDocument;
+  };
+
   const handleRotateIcsToken = async () => {
-    try {
-      const res = await fetch('/api/family/ics-token/rotate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ familyId: currentFamilyId }),
-      });
-      if (res.ok) {
-        const data = await res.json();
-        if (family && data.ics_token) {
-          setFamily({ ...family, ics_token: data.ics_token });
-        }
-      }
-    } catch (err) {
-      console.error('Error rotating token:', err);
+    const res = await apiFetch('/api/family/ics-token/rotate', { method: 'POST', body: withFamily() });
+    if (res.ok) {
+      const data = await res.json();
+      if (family && data.ics_token) setFamily({ ...family, ics_token: data.ics_token, ics_url: data.ics_url });
     }
   };
 
-  // Purge all family data
   const handleDeleteFamilyData = async () => {
-    try {
-      const res = await fetch('/api/family/delete-all', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ familyId: currentFamilyId }),
-      });
-      if (res.ok) {
-        setDocuments([]);
-        if (family) {
-          setFamily({ ...family, quota_used: 0 });
-        }
-        loadAppData();
-      }
-    } catch (err) {
-      console.error('Error deleting family data:', err);
+    const res = await apiFetch('/api/family/delete-all', { method: 'POST', body: withFamily() });
+    if (res.ok) {
+      setDocuments([]);
+      loadAppData();
     }
   };
 
-  // Toggle Urgent Reminder & Send immediate LINE notification
   const handleToggleUrgent = async (docId: string, reason?: string) => {
-    try {
-      const res = await fetch(`/api/documents/${docId}/toggle-urgent`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ familyId: currentFamilyId, reason }),
-      });
-      if (res.ok) {
-        const data = await res.json();
-        setDocuments((prev) =>
-          prev.map((d) => {
-            if (d.id === docId) {
-              return {
-                ...d,
-                is_urgent: data.is_urgent,
-                urgent_notified_at: data.notified_at,
-              };
-            }
-            return d;
-          })
-        );
-        loadAppData();
-        return data;
-      }
-    } catch (err) {
-      console.error('Error toggling urgent:', err);
-    }
-    return null;
+    const res = await apiFetch(`/api/documents/${docId}/toggle-urgent`, { method: 'POST', body: withFamily({ reason }) });
+    if (!res.ok) return null;
+    const data = await res.json();
+    setDocuments((prev) => prev.map((d) => (d.id === docId ? { ...d, is_urgent: data.is_urgent, urgent_notified_at: data.notified_at } : d)));
+    return data;
   };
+
+  if (isLoading) {
+    return <div className="min-h-screen flex items-center justify-center text-sm text-slate-500">Đang tải…</div>;
+  }
+  if (authError || !me) {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-6 text-center text-sm text-slate-600">
+        Không đăng nhập được. Vui lòng mở trang này từ LINE.{authError && <div className="mt-2 text-xs text-slate-400">{authError}</div>}
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col justify-between text-slate-900">
@@ -198,6 +144,8 @@ export default function App() {
           quotaUsed={family?.quota_used}
           quotaLimit={family?.quota_limit}
           totalDocs={documents.length}
+          showSimulator={me.dev_mode}
+          showAdmin={me.is_admin}
         />
 
         <main className="pb-16">
@@ -211,10 +159,22 @@ export default function App() {
               onRotateIcsToken={handleRotateIcsToken}
               onDeleteFamilyData={handleDeleteFamilyData}
               onOpenPrivacy={() => setActiveTab('privacy_guide')}
+              onEditDate={handleEditDate}
+              initialDocId={deepDocId}
+              initialSubTab={deepTab === 'calendar' ? 'ics' : undefined}
             />
           )}
 
-          {activeTab === 'doc_history' && (
+          {(activeTab === 'family_liff' || activeTab === 'doc_history') && !family && (
+            <div className="max-w-xl mx-auto px-4 py-16 text-center text-sm text-slate-600 space-y-3">
+              <div className="text-3xl">📮</div>
+              <p className="font-semibold text-slate-900">Chưa tìm thấy gia đình của bạn</p>
+              <p>Thêm bot vào nhóm LINE gia đình, bấm "Đồng ý", nhập mã mời và gửi ít nhất một tin nhắn trong nhóm. Sau đó mở lại trang này từ LINE.</p>
+              {me.families.length > 1 && <p>Bạn đang ở nhiều nhóm — chọn nhóm trong link bot gửi.</p>}
+            </div>
+          )}
+
+          {activeTab === 'doc_history' && family && (
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
               <DocumentHistoryView
                 documents={documents}
@@ -223,19 +183,25 @@ export default function App() {
                 onToggleUrgent={handleToggleUrgent}
                 onOpenCalendar={() => setActiveTab('family_liff')}
                 onOpenIcs={() => setActiveTab('family_liff')}
+                onEditDate={handleEditDate}
               />
             </div>
           )}
 
-          {activeTab === 'line_simulator' && (
+          {activeTab === 'line_simulator' && me.dev_mode && (
             <LineSimulatorView
-              familyId={currentFamilyId}
-              onRefreshData={loadAppData}
-              onOpenPrivacy={() => setActiveTab('privacy_guide')}
+              onRefreshData={async () => {
+                const res = await apiFetch('/api/me');
+                if (res.ok) {
+                  const data: MeResponse = await res.json();
+                  if (!currentFamilyId && data.families[0]) setCurrentFamilyId(data.families[0].family_id);
+                  setMe(data);
+                }
+              }}
             />
           )}
 
-          {activeTab === 'admin_dashboard' && metrics && (
+          {activeTab === 'admin_dashboard' && me.is_admin && metrics && (
             <AdminLIFFView
               metrics={metrics}
               families={allFamilies}
@@ -268,7 +234,7 @@ export default function App() {
               Chính sách bảo mật & Điều khoản
             </button>
             <span aria-hidden="true">·</span>
-            <span>Hạn mức: 20 gia đình</span>
+            <span>Beta: tối đa {metrics?.max_beta_families ?? 20} gia đình</span>
             <span aria-hidden="true">·</span>
             <span>Thời gian giữ dữ liệu: 90 ngày</span>
           </div>

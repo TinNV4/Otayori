@@ -32,6 +32,9 @@ interface FamilyLIFFViewProps {
   onRotateIcsToken: () => void;
   onDeleteFamilyData: () => void;
   onOpenPrivacy: () => void;
+  onEditDate?: React.ComponentProps<typeof DocumentHistoryView>['onEditDate'];
+  initialDocId?: string | null;
+  initialSubTab?: 'docs' | 'tasks' | 'calendar' | 'ics' | 'settings';
 }
 
 export const FamilyLIFFView: React.FC<FamilyLIFFViewProps> = ({
@@ -43,14 +46,17 @@ export const FamilyLIFFView: React.FC<FamilyLIFFViewProps> = ({
   onRotateIcsToken,
   onDeleteFamilyData,
   onOpenPrivacy,
+  onEditDate,
+  initialDocId,
+  initialSubTab,
 }) => {
-  const [subTab, setSubTab] = useState<'docs' | 'tasks' | 'calendar' | 'ics' | 'settings'>('docs');
+  const [subTab, setSubTab] = useState<'docs' | 'tasks' | 'calendar' | 'ics' | 'settings'>(initialSubTab || 'docs');
   const [copiedIcs, setCopiedIcs] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteConfirmationInput, setDeleteConfirmationInput] = useState('');
 
   // Generate full ICS URL
-  const icsUrl = `${window.location.origin}/ics/${family.ics_token}.ics`;
+  const icsUrl = family.ics_url || `${window.location.origin}/ics/${family.ics_token}.ics`;
 
   const copyIcsToClipboard = () => {
     navigator.clipboard.writeText(icsUrl);
@@ -99,8 +105,8 @@ export const FamilyLIFFView: React.FC<FamilyLIFFViewProps> = ({
               {family.family_name}
             </h1>
             <p className="text-sm text-slate-600 mt-0.5">
-              Mã mời: <span className="font-mono font-semibold text-slate-800">{family.invite_code}</span> · Nhóm LINE:{' '}
-              <span className="font-mono text-slate-700">{family.line_chat_id}</span>
+              Mã mời: <span className="font-mono font-semibold text-slate-800">{family.invite_code}</span> · Thành viên:{' '}
+              <span className="text-slate-700">{family.members_count ?? '—'}</span>
             </p>
           </div>
 
@@ -190,6 +196,8 @@ export const FamilyLIFFView: React.FC<FamilyLIFFViewProps> = ({
           onToggleUrgent={onToggleUrgent}
           onOpenCalendar={() => setSubTab('calendar')}
           onOpenIcs={() => setSubTab('ics')}
+          onEditDate={onEditDate}
+          initialDocId={initialDocId}
         />
       )}
 
@@ -345,7 +353,7 @@ export const FamilyLIFFView: React.FC<FamilyLIFFViewProps> = ({
             <div className="flex items-center gap-2 text-xs text-slate-500 mb-1">
               <span>Đồng bộ 1 chiều bảo mật</span>
               <span aria-hidden="true">·</span>
-              <span>Ký mã HMAC bí mật</span>
+              <span>Link ngẫu nhiên bí mật</span>
               <span aria-hidden="true">·</span>
               <span>Tự động cập nhật mỗi giờ</span>
             </div>

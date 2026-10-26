@@ -115,12 +115,12 @@ export const PrivacyAndGuideView: React.FC = () => {
               <ul className="list-disc list-inside space-y-1 pl-2">
                 <li><strong>LINE Corporation (Nhật Bản):</strong> Tiếp nhận tin nhắn và hình ảnh mã hóa đầu cuối từ ứng dụng LINE của bạn.</li>
                 <li><strong>Google Cloud Platform (Tokyo - region asia-northeast1):</strong> Máy chủ Cloud Run và Cơ sở dữ liệu Firestore Native xử lý webhook, quản lý hàng đợi và đồng bộ lịch ICS.</li>
-                <li><strong>Anthropic PBC (Hoa Kỳ):</strong> API Claude 3.5 Haiku và Claude 3.5 Sonnet xử lý OCR nhận diện ký tự quang học và trích xuất cấu trúc JSON. Dữ liệu gửi qua API trả phí của Anthropic không được dùng để huấn luyện mô hình (No training on API data).</li>
+                <li><strong>Anthropic PBC (Hoa Kỳ):</strong> API Claude Haiku 5.5 (mặc định) và Claude Sonnet 5.5 (giấy 役所/y tế/form) đọc ảnh và trích xuất nội dung. Dữ liệu gửi qua API trả phí của Anthropic không được dùng để huấn luyện mô hình (No training on API data).</li>
               </ul>
 
               <h3 className="text-sm font-bold text-slate-900 mt-4">3. Chính sách lưu trữ & Thời hạn giữ dữ liệu</h3>
               <ul className="list-disc list-inside space-y-1 pl-2">
-                <li><strong>Ảnh chụp gốc:</strong> Bị xóa vĩnh viễn khỏi Cloud Storage ngay sau khi pipeline trích xuất thành công (thường dưới 60 giây). Hệ thống KHÔNG lưu trữ file ảnh lâu dài.</li>
+                <li><strong>Ảnh chụp gốc:</strong> Chỉ nằm trong bộ nhớ máy chủ trong lúc đọc (vài chục giây), không ghi xuống ổ đĩa hay Cloud Storage. Hệ thống KHÔNG lưu ảnh.</li>
                 <li><strong>Dữ liệu văn bản & Sự kiện:</strong> Được cài đặt trường <code>expire_at = created_at + 90 ngày</code>. Tính năng Firestore TTL tự động xóa sạch dữ liệu sau 90 ngày mà không cần thao tác thủ công.</li>
               </ul>
 
@@ -156,7 +156,7 @@ export const PrivacyAndGuideView: React.FC = () => {
               <ul className="list-disc list-inside space-y-1 pl-2">
                 <li><strong>LINEヤフー株式会社（日本）:</strong> LINEメッセージおよび画像の送受信。</li>
                 <li><strong>Google Cloud Platform（東京リージョン asia-northeast1）:</strong> Cloud RunおよびFirestoreによる暗号化保管、ICSカレンダー生成。</li>
-                <li><strong>Anthropic PBC（米国）:</strong> Claude 3.5 Haiku/Sonnet APIによるOCR解析およびJSON構造化（API経由のデータはAIモデルの学習には一切使用されません）。</li>
+                <li><strong>Anthropic PBC（米国）:</strong> Claude Haiku 5.5 / Sonnet 5.5 APIによる画像解析およびJSON構造化（API経由のデータはAIモデルの学習には一切使用されません）。</li>
               </ul>
 
               <h3 className="text-sm font-bold text-slate-900 mt-4">3. 保存期間と画像の即時消去</h3>

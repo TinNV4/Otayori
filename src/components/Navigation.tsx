@@ -10,6 +10,8 @@ interface NavigationProps {
   quotaUsed?: number;
   quotaLimit?: number;
   totalDocs?: number;
+  showSimulator?: boolean;
+  showAdmin?: boolean;
 }
 
 export const Navigation: React.FC<NavigationProps> = ({
@@ -19,6 +21,8 @@ export const Navigation: React.FC<NavigationProps> = ({
   quotaUsed = 0,
   quotaLimit = 50,
   totalDocs = 0,
+  showSimulator = false,
+  showAdmin = false,
 }) => {
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200">
@@ -63,6 +67,8 @@ export const Navigation: React.FC<NavigationProps> = ({
               <span>Lịch Sử Giấy Tờ ({totalDocs})</span>
             </button>
 
+            {showSimulator && (
+
             <button
               onClick={() => onSelectTab('line_simulator')}
               className={`flex items-center gap-1.5 py-1 whitespace-nowrap shrink-0 transition-colors cursor-pointer ${
@@ -75,6 +81,10 @@ export const Navigation: React.FC<NavigationProps> = ({
               <span>LINE Test Lab</span>
             </button>
 
+            )}
+
+            {showAdmin && (
+
             <button
               onClick={() => onSelectTab('admin_dashboard')}
               className={`flex items-center gap-1.5 py-1 whitespace-nowrap shrink-0 transition-colors cursor-pointer ${
@@ -86,6 +96,8 @@ export const Navigation: React.FC<NavigationProps> = ({
               <Shield className="w-4 h-4" />
               <span>LIFF Quản Trị</span>
             </button>
+
+            )}
 
             <button
               onClick={() => onSelectTab('privacy_guide')}
@@ -104,12 +116,14 @@ export const Navigation: React.FC<NavigationProps> = ({
           <div className="flex items-center gap-4 shrink-0">
             <div className="hidden sm:flex flex-col items-end text-xs">
               <span className="font-medium text-slate-800 truncate max-w-[180px]">
-                {familyName || 'Gia Đình Anh Tuấn (Tokyo)'}
+                {familyName || 'Chưa có gia đình'}
               </span>
               <span className="text-slate-500 tabular-nums">
                 Quota: {quotaUsed}/{quotaLimit} giấy tờ/tháng
               </span>
             </div>
+
+            {showSimulator && (
 
             <button
               onClick={() => onSelectTab('line_simulator')}
@@ -118,6 +132,8 @@ export const Navigation: React.FC<NavigationProps> = ({
               <MessageSquare className="w-3.5 h-3.5" />
               <span>Mở LINE Bot</span>
             </button>
+
+            )}
           </div>
         </div>
       </div>
@@ -140,6 +156,7 @@ export const Navigation: React.FC<NavigationProps> = ({
         >
           📁 Lịch sử ({totalDocs})
         </button>
+        {showSimulator && (
         <button
           onClick={() => onSelectTab('line_simulator')}
           className={`whitespace-nowrap px-2.5 py-1.5 rounded-md ${
@@ -148,6 +165,8 @@ export const Navigation: React.FC<NavigationProps> = ({
         >
           💬 Chatbot
         </button>
+        )}
+        {showAdmin && (
         <button
           onClick={() => onSelectTab('admin_dashboard')}
           className={`whitespace-nowrap px-2.5 py-1.5 rounded-md ${
@@ -156,6 +175,7 @@ export const Navigation: React.FC<NavigationProps> = ({
         >
           🛡️ Admin
         </button>
+        )}
         <button
           onClick={() => onSelectTab('privacy_guide')}
           className={`whitespace-nowrap px-2.5 py-1.5 rounded-md ${
