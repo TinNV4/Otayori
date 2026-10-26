@@ -1,0 +1,6 @@
+{
+  "name": "Giấy Tờ Nhật - Trợ Lý Giấy Tờ Cho Gia Đình Việt",
+  "description": "Trợ lý thông minh xử lý giấy tờ tiếng Nhật (お便り, 役所, form...) trên LINE cho gia đình Việt. Tự động trích xuất việc cần làm, hạn chót và đồng bộ lịch ICS.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
