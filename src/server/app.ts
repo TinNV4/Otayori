@@ -42,7 +42,8 @@ export function createApp(deps: AppDeps) {
   app.set('trust proxy', true);
 
   // ---------- Health ----------
-  app.get('/healthz', (_req, res) => res.json({ ok: true }));
+  // Cloud Run reserves paths ending in "z" (e.g. /healthz), so expose /health.
+  app.get('/health', (_req, res) => res.json({ ok: true }));
 
   // ---------- ICS feed (secret token in URL) ----------
   app.get('/ics/:file', async (req, res) => {

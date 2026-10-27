@@ -30,7 +30,7 @@ async function main() {
   const auth = { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' };
 
   await step('health', async () => {
-    const r = await fetch(`${base}/healthz`);
+    const r = await fetch(`${base}/health`);
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     return 'ok';
   });
