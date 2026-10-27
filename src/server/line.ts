@@ -108,13 +108,27 @@ export class RecordingLineApi implements LineApi {
   async getGroupMemberCount() { return null; }
 }
 
-export function text(t: string, quickReply?: Array<{ label: string; text?: string; data?: string; uri?: string }>): LineMessage {
+export interface QuickItem {
+  label: string;
+  text?: string;
+  data?: string;
+  uri?: string;
+  /** Opens the phone camera / photo picker straight from the chat (quick reply only). */
+  camera?: boolean;
+  cameraRoll?: boolean;
+}
+
+export function text(t: string, quickReply?: QuickItem[]): LineMessage {
   const msg: LineMessage = { type: 'text', text: t.length > 5000 ? t.slice(0, 4990) + '…' : t };
   if (quickReply?.length) {
     msg.quickReply = {
       items: quickReply.slice(0, 13).map(q => ({
         type: 'action',
-        action: q.uri
+        action: q.camera
+          ? { type: 'camera', label: q.label.slice(0, 20) }
+          : q.cameraRoll
+            ? { type: 'cameraRoll', label: q.label.slice(0, 20) }
+            : q.uri
           ? { type: 'uri', label: q.label.slice(0, 20), uri: q.uri }
           : q.data
             ? { type: 'postback', label: q.label.slice(0, 20), data: q.data, displayText: q.text }

@@ -15,7 +15,8 @@
     "admin": "tsx scripts/admin.ts",
     "line:setup": "tsx scripts/line-setup.ts",
     "deploy": "bash scripts/deploy.sh",
-    "clean": "rm -rf dist .data"
+    "clean": "rm -rf dist .data",
+    "line:richmenu": "tsx scripts/richmenu.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.3.0",

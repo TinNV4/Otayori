@@ -4,7 +4,7 @@ import {
   ExtractionError, Extractor, MAX_IMAGE_BYTES, MAX_PDF_BYTES, Page, SONNET_MODEL, SUPPORTED_IMAGE_TYPES, toDocument,
 } from './extract.ts';
 import { Composer } from './renraku.ts';
-import { LineApi, LineMessage, text } from './line.ts';
+import { LineApi, LineMessage, QuickItem, text } from './line.ts';
 import { PageAggregator, PageBatch } from './aggregator.ts';
 import { findExactDuplicate, findSameDocument, mergeInto, pageHash } from './dedupe.ts';
 import { calendarPageUrl, familyIdForChat, liffUrl, newFamily, normalizeCode, rollQuotaMonth, Services } from './service.ts';
@@ -242,8 +242,9 @@ export class Bot {
       text(
         `🎉 Kích hoạt thành công! Hạn mức: ${family.quota_limit} giấy/tháng.\n\n` +
           '📸 Cách dùng: chụp rõ cả trang giấy, gửi vào đây. Giấy nhiều trang thì gửi liên tiếp, mình sẽ gộp lại.\n' +
-          '📅 Gõ "lịch" để lấy link thêm vào lịch điện thoại.\n' +
-          '❓ Gõ "hướng dẫn" để xem các lệnh.',
+          '📅 Gõ "lịch" để thêm hạn & sự kiện vào lịch điện thoại.\n' +
+          '❓ Gõ "menu" bất cứ lúc nào để hiện các nút bên dưới.',
+        this.menuItems(),
       ),
     ]);
   }
@@ -256,27 +257,49 @@ export class Bot {
     );
   }
 
+  /** Tap-able command list. Rich menus don't show in groups, so quick replies carry the menu there. */
+  private menuItems(): QuickItem[] {
+    const items: QuickItem[] = [
+      { label: '📷 Chụp giấy', camera: true },
+      { label: '🖼️ Chọn ảnh', cameraRoll: true },
+      { label: '📅 Lịch', data: 'action=calendar', text: 'Lịch' },
+      { label: '📊 Hạn mức', text: 'trạng thái' },
+      { label: '✍️ Soạn tin cô', text: '/soạn' },
+    ];
+    const home = liffUrl(this.cfg);
+    if (home) items.push({ label: '📱 Trang gia đình', uri: home });
+    items.push({ label: '❓ Hướng dẫn', text: 'hướng dẫn' });
+    return items;
+  }
+
   private helpMessage(): LineMessage {
     return text(
-      '❓ Hướng dẫn\n' +
+      '❓ Hướng dẫn — bấm nút bên dưới, hoặc gõ:\n' +
         '• Gửi ảnh/PDF giấy tờ → mình đọc và tóm tắt\n' +
-        '• "lịch" → link lịch gia đình\n' +
+        '• "lịch" → thêm hạn & sự kiện vào lịch điện thoại\n' +
         '• "trạng thái" → hạn mức tháng này\n' +
-        '• "/soạn <nội dung>" → soạn tin nhắn tiếng Nhật gửi cô giáo\n' +
+        '• "/soạn <nội dung>" → soạn tin tiếng Nhật gửi cô giáo\n' +
         '  Ví dụ: /soạn Hôm nay bé bị sốt xin nghỉ học\n' +
-        '• "xóa dữ liệu" → xóa toàn bộ dữ liệu gia đình',
+        '• "xóa dữ liệu" → xóa toàn bộ dữ liệu gia đình\n\n' +
+        '💡 Trong nhóm: gõ "menu" hoặc nhắc tên bot (@) để hiện lại các nút.',
+      this.menuItems(),
     );
   }
 
   private async onText(ev: LineEvent, family: Family, userId?: string) {
-    const raw: string = (ev.message.text || '').trim();
+    let raw: string = ev.message.text || '';
+    const selfMentions = (ev.message.mention?.mentionees || []).filter((m: { isSelf?: boolean }) => m.isSelf)
+      .sort((a: { index: number }, b: { index: number }) => b.index - a.index);
+    for (const m of selfMentions) raw = raw.slice(0, m.index) + raw.slice(m.index + m.length);
+    raw = raw.trim();
+    if (selfMentions.length && !raw) raw = 'menu';
     const t = fold(raw);
 
     if (t === '/whoami') {
       return this.reply(ev, [text(`🆔 userId: ${userId || 'N/A'}\nfamily: ${family.family_id}`)]);
     }
     if (t === 'dong y dieu khoan' || t === 'dong y') return this.acceptTerms(ev, family);
-    if (['huong dan', '/huongdan', '/help', 'help', '/start'].includes(t)) return this.reply(ev, [this.helpMessage()]);
+    if (['huong dan', '/huongdan', '/help', 'help', '/start', 'menu', '/menu', '?', 'lenh'].includes(t)) return this.reply(ev, [this.helpMessage()]);
     if (t === 'xoa du lieu' || t === '/xoa') {
       family.pending_delete_until = new Date(this.now().getTime() + DELETE_CONFIRM_MINUTES * 60_000).toISOString();
       await this.repo.saveFamily(family);
@@ -512,13 +535,14 @@ export class Bot {
       sonnet_docs: doc.model_used === SONNET_MODEL ? 1 : 0,
     });
 
-    const quick: Array<{ label: string; text?: string; data?: string; uri?: string }> = [
+    const quick: QuickItem[] = [
       { label: '👍 Đúng', data: `action=fb&doc=${doc.id}&v=up`, text: '👍 Đúng' },
       { label: '👎 Sai', data: `action=fb&doc=${doc.id}&v=down`, text: '👎 Có chỗ sai' },
     ];
     const detail = liffUrl(this.cfg, { doc: doc.id });
     if (detail) quick.push({ label: '✏️ Sửa / chi tiết', uri: detail });
     quick.push({ label: '📅 Link lịch', data: 'action=calendar', text: 'Lịch' });
+    quick.push({ label: '📷 Giấy khác', camera: true }, { label: '☰ Menu', text: 'menu' });
 
     // Quick replies only render on the last message of a reply.
     const body = formatDocumentReply(doc);

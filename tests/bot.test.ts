@@ -212,3 +212,25 @@ describe('duplicates (several family members send the same paper)', () => {
     expect(lastText(line)).toContain('Không thêm lại vào lịch');
   });
 });
+
+describe('menu', () => {
+  it('"menu" and a bare @mention show tap-able command buttons (camera, calendar…)', async () => {
+    const { bot, line } = await setup();
+    await activate(bot);
+    await bot.handleWebhook({ events: [textEv(group(), 'menu')] });
+    const qr = JSON.stringify(line.sent[line.sent.length - 1].messages[0].quickReply);
+    expect(qr).toContain('"type":"camera"');
+    expect(qr).toContain('action=calendar');
+    const before = line.sent.length;
+    await bot.handleWebhook({ events: [ev(group(), { type: 'message', message: { id: 'mm', type: 'text', text: '@Kami Việt', mention: { mentionees: [{ index: 0, length: 10, isSelf: true }] } } })] });
+    expect(line.sent.length).toBe(before + 1);
+    expect(lastText(line)).toContain('Hướng dẫn');
+  });
+
+  it('"@Kami Việt lịch" works like "lịch"', async () => {
+    const { bot, line } = await setup();
+    await activate(bot);
+    await bot.handleWebhook({ events: [ev(group(), { type: 'message', message: { id: 'm2', type: 'text', text: '@Kami Việt lịch', mention: { mentionees: [{ index: 0, length: 10, isSelf: true }] } } })] });
+    expect(lastText(line)).toContain('/cal/');
+  });
+});
