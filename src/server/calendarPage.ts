@@ -33,6 +33,7 @@ function upcoming(docs: ExtractedDocument[], today: string) {
 export function renderCalendarPage(family: Family, docs: ExtractedDocument[], links: CalendarLinks, userAgent = ''): string {
   const inLine = / Line\//i.test(userAgent);
   const isAndroid = /Android/i.test(userAgent);
+  const isMobile = isAndroid || /iPhone|iPad|Mobile/i.test(userAgent);
   const items = upcoming(docs, jstDate());
   const list = items.length
     ? items.map(i => `<li><b>${esc(i.date.slice(5).replace('-', '/'))}</b> ${esc(i.label)}</li>`).join('')
@@ -71,11 +72,17 @@ ${inLine ? `<div class="warn">Bạn đang mở trong LINE. Bấm <b>⋯</b> (gó
 
 <div class="card">
   <h2>🟦 Google Calendar ${isAndroid ? '(Android)' : ''}</h2>
-  <a class="btn${isAndroid ? ' primary' : ''}" href="${esc(links.google)}">Thêm vào Google Calendar</a>
+  <div class="muted">Google chỉ cho thêm lịch theo link trên <b>giao diện máy tính</b>. Làm 1 lần, sau đó lịch tự hiện trong app Google Calendar trên điện thoại.</div>
+  ${isMobile ? `<ol class="muted">
+    <li>Trong Chrome bấm <b>⋮</b> → bật <b>Trang web cho máy tính</b> (Desktop site).</li>
+    <li>Bấm nút dưới → đăng nhập Google → bấm <b>Thêm</b> (Add).</li>
+  </ol>` : ''}
+  <a class="btn${isAndroid ? ' primary' : ''}" href="${esc(links.google)}" target="_blank" rel="noopener">Thêm vào Google Calendar</a>
+  <a class="btn" href="#" onclick="navigator.clipboard.writeText('${esc(links.google)}').then(()=>{this.textContent='Đã sao chép ✓ — dán vào trình duyệt máy tính'});return false;">Sao chép link để mở trên máy tính</a>
   <ol class="muted">
-    <li>Mở bằng Chrome, đăng nhập tài khoản Google bạn dùng trên điện thoại → bấm <b>Thêm</b>.</li>
-    <li>Android: lịch hiện trong app Google Calendar sau vài phút. Nếu không thấy: app → ☰ → Cài đặt → chọn lịch "Giấy Tờ Nhật" → bật <b>Đồng bộ hóa</b>.</li>
-    <li>Google tự làm mới vài giờ/lần và dùng giờ nhắc mặc định của bạn.</li>
+    <li>Không thấy hộp thoại <b>Thêm lịch?</b> → mở link trên máy tính (gửi link qua LINE cho chính mình).</li>
+    <li>Không thấy lịch trong app điện thoại → app Google Calendar → ☰ → Cài đặt → lịch "Giấy Tờ Nhật" → bật <b>Đồng bộ hóa</b>.</li>
+    <li>Google tự làm mới vài giờ/lần và dùng giờ nhắc mặc định của bạn (không dùng nhắc trước 1 ngày như iPhone).</li>
   </ol>
 </div>
 
