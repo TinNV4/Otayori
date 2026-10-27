@@ -6,7 +6,8 @@
 #
 # Secrets are read from env on first run (or prompted) and stored in Secret Manager:
 #   LINE_CHANNEL_SECRET LINE_CHANNEL_ACCESS_TOKEN ANTHROPIC_API_KEY
-# Non-secret settings: LIFF_ID, ADMIN_USER_IDS (comma-separated LINE userIds, get yours with /whoami)
+# Non-secret settings (kept across deploys once set): LIFF_ID, ADMIN_USER_IDS (comma-separated LINE userIds,
+# get yours with /whoami), ANTHROPIC_WORKSPACE_ID (only for organization-level API keys)
 set -euo pipefail
 
 : "${PROJECT_ID:?set PROJECT_ID}"
@@ -55,6 +56,12 @@ fi
 
 URL=$(gcloud run services describe "$SERVICE" --region="$REGION" --format='value(status.url)' 2>/dev/null || true)
 
+# Optional settings are only sent when given, so a later --deploy-only keeps existing values.
+ENV_VARS="^@^NODE_ENV=production@STORAGE=firestore@PUBLIC_BASE_URL=${URL:-https://placeholder.invalid}"
+for v in LIFF_ID ADMIN_USER_IDS ANTHROPIC_WORKSPACE_ID MAX_BETA_FAMILIES MONTHLY_BUDGET_USD DEFAULT_FAMILY_QUOTA; do
+  [[ -n "${!v:-}" ]] && ENV_VARS="$ENV_VARS@$v=${!v}"
+done
+
 echo "▶ Deploying Cloud Run service"
 # max-instances=1: the multi-page aggregator and webhook dedupe are in-process (fine for 20 families).
 # no-cpu-throttling: webhook ACKs immediately and keeps extracting in the background.
@@ -66,7 +73,7 @@ gcloud run deploy "$SERVICE" \
   --min-instances=0 --max-instances=1 \
   --no-cpu-throttling \
   --memory=512Mi --cpu=1 --timeout=300 \
-  --set-env-vars="^@^NODE_ENV=production@STORAGE=firestore@MAX_BETA_FAMILIES=${MAX_BETA_FAMILIES:-20}@MONTHLY_BUDGET_USD=${MONTHLY_BUDGET_USD:-20}@LIFF_ID=${LIFF_ID:-}@ADMIN_USER_IDS=${ADMIN_USER_IDS:-}@PUBLIC_BASE_URL=${URL:-https://placeholder.invalid}" \
+  --update-env-vars="$ENV_VARS" \
   --set-secrets="LINE_CHANNEL_SECRET=line-channel-secret:latest,LINE_CHANNEL_ACCESS_TOKEN=line-channel-token:latest,ANTHROPIC_API_KEY=anthropic-api-key:latest,CRON_SECRET=cron-secret:latest"
 
 NEW_URL=$(gcloud run services describe "$SERVICE" --region="$REGION" --format='value(status.url)')

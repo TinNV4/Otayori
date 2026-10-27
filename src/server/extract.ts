@@ -135,11 +135,25 @@ function pageBlock(p: Page): Anthropic.Beta.BetaContentBlockParam {
   return { type: 'image', source: { type: 'base64', media_type: p.mediaType as (typeof SUPPORTED_IMAGE_TYPES)[number], data } };
 }
 
+/**
+ * Anthropic client. Organization-level API keys (not scoped to a workspace) must name the
+ * workspace on every request: set ANTHROPIC_WORKSPACE_ID (Console → Settings → Workspaces).
+ */
+export function createAnthropicClient(apiKey: string | undefined, timeout: number): Anthropic {
+  const workspaceId = process.env.ANTHROPIC_WORKSPACE_ID;
+  return new Anthropic({
+    apiKey,
+    maxRetries: 2,
+    timeout,
+    defaultHeaders: workspaceId ? { 'anthropic-workspace-id': workspaceId } : undefined,
+  });
+}
+
 export class ClaudeExtractor implements Extractor {
   private client: Anthropic;
 
   constructor(apiKey?: string, client?: Anthropic) {
-    this.client = client || new Anthropic({ apiKey, maxRetries: 2, timeout: 120_000 });
+    this.client = client || createAnthropicClient(apiKey, 120_000);
   }
 
   private async runModel(model: typeof HAIKU_MODEL | typeof SONNET_MODEL, pages: Page[], today: string): Promise<{ raw: RawExtraction; run: ModelRun }> {

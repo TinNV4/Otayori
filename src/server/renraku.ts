@@ -1,6 +1,6 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { ComposeRenrakuRequest, ComposeRenrakuResponse } from '../types/index.ts';
-import { calculateCostUsd, HAIKU_MODEL } from './extract.ts';
+import { calculateCostUsd, createAnthropicClient, HAIKU_MODEL } from './extract.ts';
 
 const SYSTEM = `Bạn giúp phụ huynh Việt viết tin liên lạc gửi giáo viên Nhật (連絡帳 / 欠席連絡 / メール).
 Viết tiếng Nhật kính ngữ tự nhiên, ngắn gọn, đúng phong cách trường học Nhật (mở đầu いつもお世話になっております, kết thúc よろしくお願いいたします).
@@ -26,7 +26,7 @@ export interface Composer {
 export class ClaudeComposer implements Composer {
   private client: Anthropic;
   constructor(apiKey?: string, client?: Anthropic) {
-    this.client = client || new Anthropic({ apiKey, maxRetries: 2, timeout: 60_000 });
+    this.client = client || createAnthropicClient(apiKey, 60_000);
   }
 
   async compose(req: ComposeRenrakuRequest) {
