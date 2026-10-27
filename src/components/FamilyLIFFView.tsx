@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import { ExtractedDocument, Family, DocType } from '../types/index.ts';
 import { DocumentHistoryView } from './DocumentHistoryView.tsx';
+import liff from '@line/liff';
 
 interface FamilyLIFFViewProps {
   family: Family;
@@ -57,6 +58,13 @@ export const FamilyLIFFView: React.FC<FamilyLIFFViewProps> = ({
 
   // Generate full ICS URL
   const icsUrl = family.ics_url || `${window.location.origin}/ics/${family.ics_token}.ics`;
+
+  // LIFF's in-app browser can't handle webcal://, so open the add-to-calendar page externally.
+  const openCalendarPage = () => {
+    const url = family.calendar_page_url || icsUrl;
+    if (liff.isInClient()) liff.openWindow({ url, external: true });
+    else window.open(url, '_blank', 'noopener');
+  };
 
   const copyIcsToClipboard = () => {
     navigator.clipboard.writeText(icsUrl);
@@ -409,42 +417,20 @@ export const FamilyLIFFView: React.FC<FamilyLIFFViewProps> = ({
             </div>
           </div>
 
-          {/* Setup Instructions for iOS and Google */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* iOS Calendar Guide */}
-            <div className="p-4 bg-white rounded-xl border border-slate-200">
-              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2 mb-2">
-                <span>🍎 Hướng dẫn trên iPhone / iPad (Apple Calendar)</span>
-              </h3>
-              <ol className="text-xs text-slate-600 space-y-1.5 list-decimal list-inside leading-relaxed">
-                <li>Mở ứng dụng <strong>Cài đặt (Settings)</strong> trên iPhone.</li>
-                <li>Chọn <strong>Lịch (Calendar)</strong> → <strong>Tài khoản (Accounts)</strong>.</li>
-                <li>Bấm <strong>Thêm tài khoản (Add Account)</strong> → <strong>Khác (Other)</strong>.</li>
-                <li>Chọn <strong>Thêm lịch đã đăng ký (Add Subscribed Calendar)</strong>.</li>
-                <li>Dán link bí mật ở trên vào ô Máy chủ (Server) và bấm <strong>Tiếp (Next)</strong>.</li>
-                <li>Bật tuỳ chọn Cảnh báo (Alerts) và bấm <strong>Lưu (Save)</strong>.</li>
-              </ol>
-              <div className="mt-3 text-[11px] text-slate-500 bg-slate-50 p-2 rounded-lg">
-                💡 iOS hỗ trợ cảnh báo VALARM nhắc trước 1 ngày rất chuẩn xác.
-              </div>
-            </div>
-
-            {/* Google Calendar Guide */}
-            <div className="p-4 bg-white rounded-xl border border-slate-200">
-              <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2 mb-2">
-                <span>🌐 Hướng dẫn trên Google Calendar</span>
-              </h3>
-              <ol className="text-xs text-slate-600 space-y-1.5 list-decimal list-inside leading-relaxed">
-                <li>Truy cập <a href="https://calendar.google.com" target="_blank" rel="noreferrer" className="text-emerald-700 underline font-medium">calendar.google.com</a> trên máy tính hoặc trình duyệt web.</li>
-                <li>Ở cột bên trái, tìm mục <strong>Lịch khác (Other calendars)</strong> và bấm dấu <strong>+</strong>.</li>
-                <li>Chọn <strong>Từ URL (From URL)</strong>.</li>
-                <li>Dán link bí mật ở trên vào và bấm <strong>Thêm lịch (Add calendar)</strong>.</li>
-                <li>Mở ứng dụng Google Calendar trên điện thoại và bật hiển thị lịch này.</li>
-              </ol>
-              <div className="mt-3 text-[11px] text-slate-500 bg-slate-50 p-2 rounded-lg">
-                💡 Google Calendar đồng bộ định kỳ khoảng 8-12 tiếng một lần.
-              </div>
-            </div>
+          {/* One-tap subscribe: raw .ics shows a blank page, so send people to the add-to-calendar page */}
+          <div className="p-4 bg-emerald-50/60 rounded-xl border border-emerald-100 space-y-3">
+            <h3 className="text-sm font-bold text-slate-900">Thêm vào lịch điện thoại (làm 1 lần)</h3>
+            <button
+              onClick={openCalendarPage}
+              className="w-full px-4 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-semibold"
+            >
+              📅 Mở trang thêm vào lịch
+            </button>
+            <ol className="text-xs text-slate-600 space-y-1.5 list-decimal list-inside leading-relaxed">
+              <li>Trang mở bằng Safari / Chrome, có 2 nút.</li>
+              <li><strong>iPhone</strong>: bấm "Thêm vào lịch iPhone" → <strong>Đăng ký</strong>. Nếu có mục <em>Xóa cảnh báo</em> thì tắt đi để được nhắc trước 1 ngày.</li>
+              <li><strong>Android / Google</strong>: bấm "Thêm vào Google Calendar" → đăng nhập → <strong>Thêm</strong>. Lịch hiện trong app sau vài phút (Google tự làm mới vài giờ/lần).</li>
+            </ol>
           </div>
         </div>
       )}

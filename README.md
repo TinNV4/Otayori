@@ -128,7 +128,7 @@ LINE push (giới hạn 200/tháng gói free) chỉ dùng khi reply token hết 
 
 ## Lịch ICS
 
-- Link `https://<url>/ics/<token 192-bit>.ics`, đổi được bất cứ lúc nào (LIFF → Đồng bộ ICS → Rotate) và tự đổi khi xóa dữ liệu.
+- Bot gửi trang `https://<url>/cal/<token>` (mở ngoài LINE): nút **Thêm vào lịch iPhone** (`webcal://` → hộp thoại Đăng ký) và **Thêm vào Google Calendar**. Feed thật là `https://<url>/ics/<token 192-bit>.ics`, đổi được bất cứ lúc nào (LIFF → Đồng bộ ICS → Rotate) và tự đổi khi xóa dữ liệu.
 - Sự kiện có giờ → `DTSTART;TZID=Asia/Tokyo`, không giờ → cả ngày. Hạn nộp = sự kiện cả ngày `[HẠN] …`, ẩn khi đã tick xong.
 - Ngày bot không chắc (giấy thiếu năm…) có tiền tố `[?]` — sửa trong LIFF (✏️) là lịch cập nhật ngay.
 - **iPhone** tôn trọng VALARM nhắc trước 1 ngày. **Google Calendar** bỏ qua VALARM của lịch đăng ký và dùng thông báo mặc định của người dùng; Google cũng chỉ refresh lịch đăng ký vài giờ một lần.

@@ -89,6 +89,7 @@ export interface Family {
   members_count?: number;
   /** Client-only: derived by the API. */
   ics_url?: string;
+  calendar_page_url?: string;
 }
 
 export interface InviteCode {

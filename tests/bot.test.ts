@@ -63,7 +63,7 @@ describe('document intake', () => {
     const reply = line.sent[line.sent.length - 1];
     expect(reply.kind).toBe('reply');
     expect(lastText(line)).toContain('Cần làm');
-    expect(lastText(line)).toContain('/ics/'); // first doc → calendar link included
+    expect(lastText(line)).toContain('/cal/'); // first doc → add-to-calendar page link included
     expect(JSON.stringify(reply.messages[reply.messages.length - 1].quickReply)).toContain('action=fb');
     expect((await repo.getFamily(fid))?.quota_used).toBe(1);
     expect((await repo.getUsage(jstMonth())).cost_usd).toBeGreaterThan(0);

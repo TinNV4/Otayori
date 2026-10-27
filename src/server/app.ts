@@ -7,7 +7,8 @@ import { Composer } from './renraku.ts';
 import { LineApi, RecordingLineApi, verifyLineSignature } from './line.ts';
 import { AuthedRequest, authMiddleware, IdTokenVerifier, requireAdmin } from './auth.ts';
 import { generateIcsCalendar } from './ics.ts';
-import { icsUrl, makeInvite, normalizeCode, rollQuotaMonth } from './service.ts';
+import { calendarLinks, renderCalendarPage } from './calendarPage.ts';
+import { calendarPageUrl, icsUrl, makeInvite, normalizeCode, rollQuotaMonth } from './service.ts';
 import { isValidHm, isValidIsoDate, jstMonth } from './time.ts';
 import { AdminMetrics, DOC_TYPES, DocType, ExtractedDocument, Family, MeResponse } from '../types/index.ts';
 import { text } from './line.ts';
@@ -24,7 +25,7 @@ export interface AppDeps {
 /** Client-safe family view: no LINE ids, plus derived links. */
 function publicFamily(cfg: AppConfig, f: Family) {
   const { member_user_ids, line_chat_id, pending_delete_until, ...rest } = f;
-  return { ...rest, members_count: f.members_count ?? member_user_ids.length, ics_url: icsUrl(cfg, f) };
+  return { ...rest, members_count: f.members_count ?? member_user_ids.length, ics_url: icsUrl(cfg, f), calendar_page_url: calendarPageUrl(cfg, f) };
 }
 
 /** Admin view: metadata only. */
@@ -58,6 +59,20 @@ export function createApp(deps: AppDeps) {
     res.setHeader('Cache-Control', 'private, max-age=300');
     res.setHeader('Content-Disposition', 'inline; filename="giaytonhat.ics"');
     res.send(generateIcsCalendar(family, docs));
+  });
+
+  // ---------- "Add to calendar" page (what the bot links to) ----------
+  app.get('/cal/:token', async (req, res) => {
+    const token = req.params.token;
+    const family = token.length >= 16 ? await repo.getFamilyByIcsToken(token) : null;
+    res.setHeader('Cache-Control', 'no-store');
+    res.setHeader('Referrer-Policy', 'no-referrer');
+    if (!family || family.status === 'left') {
+      res.status(404).type('text/plain; charset=utf-8').send('Link lịch không tồn tại hoặc đã được đổi. Gõ "lịch" trong LINE để lấy link mới.');
+      return;
+    }
+    const docs = await repo.listDocuments(family.family_id);
+    res.type('html').send(renderCalendarPage(family, docs, calendarLinks(cfg.publicBaseUrl, token), req.headers['user-agent']));
   });
 
   // ---------- LINE webhook ----------

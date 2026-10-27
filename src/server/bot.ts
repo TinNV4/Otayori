@@ -6,7 +6,7 @@ import {
 import { Composer } from './renraku.ts';
 import { LineApi, LineMessage, text } from './line.ts';
 import { PageAggregator, PageBatch } from './aggregator.ts';
-import { familyIdForChat, icsUrl, liffUrl, newFamily, normalizeCode, rollQuotaMonth, Services } from './service.ts';
+import { calendarPageUrl, familyIdForChat, liffUrl, newFamily, normalizeCode, rollQuotaMonth, Services } from './service.ts';
 import { jstDate, jstMonth } from './time.ts';
 import { ExtractedDocument, Family } from '../types/index.ts';
 
@@ -248,14 +248,10 @@ export class Bot {
   }
 
   private calendarMessage(family: Family): LineMessage {
-    const url = icsUrl(this.cfg, family);
-    const liff = liffUrl(this.cfg, { tab: 'calendar' });
     return text(
-      '📅 Link lịch bí mật của gia đình (đừng chia sẻ ra ngoài):\n' + url + '\n\n' +
-        '• iPhone: Cài đặt → Lịch → Tài khoản → Thêm tài khoản → Khác → Thêm lịch đã đăng ký → dán link.\n' +
-        '• Google Calendar (máy tính): calendar.google.com → Lịch khác (+) → Từ URL → dán link.\n' +
-        'Lịch tự cập nhật mỗi khi có giấy mới. iPhone sẽ nhắc trước 1 ngày; Google dùng cài đặt nhắc mặc định của bạn.' +
-        (liff ? `\n\nHoặc mở trang gia đình: ${liff}` : ''),
+      '📅 Thêm hạn & sự kiện vào lịch điện thoại (làm 1 lần):\n' + calendarPageUrl(this.cfg, family) + '\n\n' +
+        'Mở link → bấm nút "Thêm vào lịch iPhone" hoặc "Thêm vào Google Calendar". ' +
+        'Sau đó lịch tự cập nhật mỗi khi mình đọc giấy mới.\n🔒 Link riêng của gia đình, đừng chia sẻ ra ngoài.',
     );
   }
 

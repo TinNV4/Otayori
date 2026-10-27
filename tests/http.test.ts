@@ -71,6 +71,18 @@ describe('LIFF API', () => {
     expect(ics).toContain('20261201');
     expect((await fetch(`${base}/ics/not-a-real-token-123456.ics`)).status).toBe(404);
   });
+
+  it('serves an add-to-calendar page with webcal + Google subscribe links', async () => {
+    const { family } = await (await fetch(`${base}/api/family`, { headers: auth('tokA') })).json();
+    expect(family.calendar_page_url).toContain('openExternalBrowser=1');
+    const page = await fetch(family.calendar_page_url.replace(cfg.publicBaseUrl, base), { headers: { 'user-agent': 'Mozilla/5.0 (iPhone) Safari Line/14.0' } });
+    const html = await page.text();
+    expect(page.headers.get('content-type')).toContain('text/html');
+    expect(html).toContain(`webcal://bot.example.com/ics/${family.ics_token}.ics`);
+    expect(html).toContain('calendar.google.com/calendar/r?cid=webcal%3A%2F%2F');
+    expect(html).toContain('Mở bằng trình duyệt'); // opened inside LINE → tells user to go external
+    expect((await fetch(`${base}/cal/not-a-real-token-123456`)).status).toBe(404);
+  });
 });
 
 describe('admin', () => {

@@ -44,6 +44,11 @@ export function icsUrl(cfg: AppConfig, family: Family): string {
   return `${cfg.publicBaseUrl}/ics/${family.ics_token}.ics`;
 }
 
+/** Human "add to calendar" page; `openExternalBrowser=1` makes LINE open it in Safari/Chrome. */
+export function calendarPageUrl(cfg: AppConfig, family: Family): string {
+  return `${cfg.publicBaseUrl}/cal/${family.ics_token}?openExternalBrowser=1`;
+}
+
 export function liffUrl(cfg: AppConfig, params: Record<string, string> = {}): string | null {
   const qs = new URLSearchParams(params).toString();
   if (cfg.liffId) return `https://liff.line.me/${cfg.liffId}${qs ? `?${qs}` : ''}`;
