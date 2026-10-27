@@ -1,5 +1,6 @@
 import { ExtractedDocument, Family } from '../types/index.ts';
 import { nextDayCompact } from './time.ts';
+import { eventKey, normText } from './dedupe.ts';
 
 /** RFC 5545 §3.3.11 TEXT escaping. */
 export function escapeIcsText(str: string | undefined): string {
@@ -72,12 +73,16 @@ export function generateIcsCalendar(family: Family, documents: ExtractedDocument
     ...VTIMEZONE_TOKYO,
   ];
 
+  // Safety net: the same event/deadline from two documents appears once.
+  const seen = new Set<string>();
+  const firstTime = (key: string) => (seen.has(key) ? false : (seen.add(key), true));
+
   for (const doc of documents) {
     const source = `📄 ${doc.title_vi}${doc.title_jp ? ` (${doc.title_jp})` : ''}`;
 
     for (const evt of doc.events) {
       const date = compactDate(evt.date || '');
-      if (!/^\d{8}$/.test(date)) continue;
+      if (!/^\d{8}$/.test(date) || !firstTime(`e|${eventKey(evt)}`)) continue;
       const mark = evt.date_uncertain ? '[?] ' : '';
       const desc = [
         source,
@@ -104,7 +109,7 @@ export function generateIcsCalendar(family: Family, documents: ExtractedDocument
     for (const action of doc.actions) {
       if (!action.deadline || action.completed) continue;
       const date = compactDate(action.deadline);
-      if (!/^\d{8}$/.test(date)) continue;
+      if (!/^\d{8}$/.test(date) || !firstTime(`a|${action.deadline}|${normText(action.todo_vi)}`)) continue;
       const mark = action.deadline_uncertain ? '[?] ' : '';
       const desc = [
         `⚠️ Việc cần làm: ${action.todo_vi}`,

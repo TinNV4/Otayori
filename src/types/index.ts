@@ -65,6 +65,8 @@ export interface ExtractedDocument {
   is_urgent?: boolean;
   urgent_notified_at?: string;
   urgent_reason?: string;
+  /** sha256 prefixes of the source pages (photos are not stored) — for duplicate detection. */
+  source_hashes?: string[];
 }
 
 export type FamilyStatus = 'pending_terms' | 'pending_invite' | 'active' | 'suspended' | 'left';

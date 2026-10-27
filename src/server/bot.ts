@@ -6,6 +6,7 @@ import {
 import { Composer } from './renraku.ts';
 import { LineApi, LineMessage, text } from './line.ts';
 import { PageAggregator, PageBatch } from './aggregator.ts';
+import { findExactDuplicate, findSameDocument, mergeInto, pageHash } from './dedupe.ts';
 import { calendarPageUrl, familyIdForChat, liffUrl, newFamily, normalizeCode, rollQuotaMonth, Services } from './service.ts';
 import { jstDate, jstMonth } from './time.ts';
 import { ExtractedDocument, Family } from '../types/index.ts';
@@ -435,6 +436,19 @@ export class Bot {
     if (await this.line.push(batch.chatId, messages)) await this.repo.addUsage(jstMonth(this.now()), { push_messages: 1 });
   }
 
+  private duplicateMessage(doc: ExtractedDocument, added: number): LineMessage {
+    const when = new Date(Date.parse(doc.created_at) + 9 * 3600_000).toISOString();
+    const stamp = `${when.slice(11, 16)} ngày ${when.slice(8, 10)}/${when.slice(5, 7)}`;
+    const detail = liffUrl(this.cfg, { doc: doc.id });
+    return text(
+      `📌 Giấy này đã được đọc lúc ${stamp}:\n「${doc.title_vi}」\n\n` +
+        (added
+          ? `Đã bổ sung ${added} mục mới vào giấy cũ và lịch.`
+          : 'Không thêm lại vào lịch và không tính vào hạn mức.') +
+        (detail ? `\n\nXem lại chi tiết: ${detail}` : ''),
+    );
+  }
+
   /** Extract one (possibly multi-page) document and answer in the chat. */
   async processBatch(batch: PageBatch) {
     const now = this.now();
@@ -445,9 +459,23 @@ export class Bot {
     if (blocker) return this.send(batch, [text(blocker)]);
 
     const month = jstMonth(now);
+
+    // Layer 1: identical photos (forwarded / sent twice) — answer from storage, no Claude call, no quota.
+    const seen = new Set<string>();
+    const pages = batch.pages.filter(p => {
+      const h = pageHash(p.data);
+      if (seen.has(h)) return false;
+      seen.add(h);
+      return true;
+    });
+    const hashes = [...seen];
+    const existingDocs = await this.repo.listDocuments(family.family_id);
+    const exact = findExactDuplicate(hashes, existingDocs);
+    if (exact) return this.send(batch, [this.duplicateMessage(exact, 0)]);
+
     let outcome;
     try {
-      outcome = await this.deps.extractor.extract(batch.pages, { today: jstDate(now) });
+      outcome = await this.deps.extractor.extract(pages, { today: jstDate(now) });
     } catch (err) {
       if (err instanceof ExtractionError) {
         const cost = err.runs.reduce((s, r) => s + r.cost_usd, 0);
@@ -459,8 +487,19 @@ export class Bot {
       return this.send(batch, [text('😥 Có lỗi khi đọc giấy. Bạn thử lại sau ít phút nhé.')]);
     }
 
-    const doc = toDocument(outcome, { familyId: family.family_id, pages: batch.pages.length, now, retentionDays: this.cfg.retentionDays });
-    const isFirstDoc = (await this.repo.listDocuments(family.family_id)).length === 0;
+    const doc = toDocument(outcome, { familyId: family.family_id, pages: pages.length, now, retentionDays: this.cfg.retentionDays });
+    doc.source_hashes = hashes;
+
+    // Layer 2: same paper, different photo — merge anything new into the stored document, no quota.
+    const same = findSameDocument(doc, existingDocs, now);
+    if (same) {
+      const added = mergeInto(same, doc);
+      await this.repo.saveDocument(same);
+      await this.repo.addUsage(month, { cost_usd: doc.token_usage?.estimated_cost_usd || 0, pages: pages.length });
+      return this.send(batch, [this.duplicateMessage(same, added)]);
+    }
+
+    const isFirstDoc = existingDocs.length === 0;
     await this.repo.addDocument(doc);
 
     family.quota_used += 1;
@@ -469,7 +508,7 @@ export class Bot {
     await this.repo.addUsage(month, {
       cost_usd: doc.token_usage?.estimated_cost_usd || 0,
       docs: 1,
-      pages: batch.pages.length,
+      pages: pages.length,
       sonnet_docs: doc.model_used === SONNET_MODEL ? 1 : 0,
     });
 

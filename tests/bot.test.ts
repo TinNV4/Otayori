@@ -176,3 +176,39 @@ describe('privacy', () => {
     expect(await repo.getFamily(fid)).toBeNull();
   });
 });
+
+describe('duplicates (several family members send the same paper)', () => {
+  it('same photo twice → answered from storage, no extra doc/quota/cost', async () => {
+    const { bot, repo, line } = await setup();
+    await activate(bot);
+    line.contents.set('a', { data: Buffer.from('same-bytes'), contentType: 'image/jpeg' });
+    line.contents.set('b', { data: Buffer.from('same-bytes'), contentType: 'image/jpeg' });
+    await bot.handleWebhook({ events: [image(group(), 'a')] });
+    await bot.aggregator.flushAll();
+    const cost1 = (await repo.getUsage(jstMonth())).cost_usd;
+    await bot.handleWebhook({ events: [image(group('Cgroup1', 'Uother'), 'b')] });
+    await bot.aggregator.flushAll();
+    const fid = familyIdForChat('Cgroup1');
+    expect(await repo.listDocuments(fid)).toHaveLength(1);
+    expect((await repo.getFamily(fid))?.quota_used).toBe(1);
+    expect((await repo.getUsage(jstMonth())).cost_usd).toBe(cost1);
+    expect(lastText(line)).toContain('đã được đọc');
+  });
+
+  it('different photo of the same paper → recognised after reading, merged, quota not charged', async () => {
+    const { bot, repo, line } = await setup();
+    await activate(bot);
+    line.contents.set('a', { data: Buffer.from('photo-1'), contentType: 'image/jpeg' });
+    line.contents.set('b', { data: Buffer.from('photo-2'), contentType: 'image/jpeg' });
+    await bot.handleWebhook({ events: [image(group(), 'a')] });
+    await bot.aggregator.flushAll();
+    await bot.handleWebhook({ events: [image(group(), 'b')] });
+    await bot.aggregator.flushAll();
+    const fid = familyIdForChat('Cgroup1');
+    const docs = await repo.listDocuments(fid);
+    expect(docs).toHaveLength(1);
+    expect(docs[0].source_hashes).toHaveLength(2);
+    expect((await repo.getFamily(fid))?.quota_used).toBe(1);
+    expect(lastText(line)).toContain('Không thêm lại vào lịch');
+  });
+});

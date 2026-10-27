@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { signBody, verifyLineSignature } from '../src/server/line.ts';
 import { foldLine, generateIcsCalendar } from '../src/server/ics.ts';
 import { calculateCostUsd, ClaudeExtractor, HAIKU_MODEL, needsSonnet, SONNET_MODEL, toDocument } from '../src/server/extract.ts';
+import { findSameDocument, mergeInto } from '../src/server/dedupe.ts';
 import { nextDayCompact } from '../src/server/time.ts';
 import { ExtractedDocument, Family } from '../src/types/index.ts';
 
@@ -122,5 +123,30 @@ describe('ClaudeExtractor escalation', () => {
     expect(calls).toEqual([HAIKU_MODEL, SONNET_MODEL]);
     expect(out.raw.title_vi).toBe('sonnet');
     expect(out.runs).toHaveLength(2);
+  });
+});
+
+describe('dedupe', () => {
+  const base = () => toDocument({ raw, model: HAIKU_MODEL, runs: [] }, { familyId: 'f', pages: 1, now: new Date('2026-10-26T00:00:00Z'), retentionDays: 90 });
+
+  it('merges only new dated items into the stored doc', () => {
+    const a = base();
+    const b = base();
+    b.events.push({ id: 'x', title_vi: 'Họp', title_jp: '保護者会', date: '2026-11-20', start_time: '13:30' });
+    expect(findSameDocument(b, [a], new Date('2026-10-27T00:00:00Z'))?.id).toBe(a.id);
+    expect(mergeInto(a, b)).toBe(1);
+    expect(a.events).toHaveLength(2);
+    expect(mergeInto(a, b)).toBe(0);
+  });
+
+  it('does not treat a different paper as a duplicate', () => {
+    const a = base();
+    const b = { ...base(), title_jp: '運動会のお知らせ', events: [], actions: [] };
+    expect(findSameDocument(b, [a], new Date())).toBeNull();
+  });
+
+  it('ICS shows the same event once even if stored in two documents', () => {
+    const ics = generateIcsCalendar({ family_name: 'x' } as Family, [base(), base()]);
+    expect((ics.match(/BEGIN:VEVENT/g) || []).length).toBe(2); // 1 event + 1 dated action
   });
 });
