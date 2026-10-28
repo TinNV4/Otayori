@@ -1,20 +1,19 @@
 import { AppConfig } from '../config.ts';
 import { Repo, UsageDelta } from '../db/repo.ts';
-import { LineApi, LineMessage, QuickItem, text } from '../line.ts';
+import { DOT_MENU_ALIAS, LineApi, LineMessage, QuickItem, text } from '../line.ts';
 import { liffUrl } from '../service.ts';
 import { isValidIsoDate, jstDate, jstMonth } from '../time.ts';
 import {
-  PolicyFeed, PolicyItem, PolicyProfile, PolicyProfileInput, SEVERITY_ICON, Severity, VISA_TYPES,
+  CONTRACT_TYPES, FUTURE_PLANS, LICENSE_STATUSES, PolicyFeed, PolicyItem, PolicyProfile, PolicyProfileInput, RESIDENT_TAX, SEVERITY_ICON,
+  Severity, Tier, TOKUTEI_SECTORS, VISA_TYPES,
 } from '../../types/policy.ts';
 import { PolicyAnalyzer, toPolicyItem, policyId } from './analyzer.ts';
 import { candidateLinks, fetchHtml, htmlToText, Link, PageFetcher, pageTitle } from './fetch.ts';
-import { buildFeed, daysBetween, fmtDay, formatPolicyMessage, formatVisaReminder, isActive, matchItem } from './match.ts';
+import { buildFeed, fmtDay, formatPolicyMessage, isActive, matchItem, remindersDue } from './match.ts';
 import { POLICY_CITIES, POLICY_SOURCES, PolicySource } from './sources.ts';
 
 /** Push messages kept back for reply-token fallbacks and admin alerts (same reserve as the daily digest). */
 const PUSH_RESERVE = 20;
-/** Remind this many days before the period of stay ends. */
-const VISA_REMIND_DAYS = 90;
 /** Pages shorter than this are navigation/redirect shells, not notices. */
 const MIN_TEXT = 200;
 
@@ -50,17 +49,43 @@ export interface DispatchReport {
 
 export type ProfileResult = { ok: true; value: PolicyProfileInput } | { ok: false; error: string };
 
+const oneOf = (list: Array<{ id: string }>, v: unknown) => (typeof v === 'string' && list.some(x => x.id === v) ? v : undefined);
+
 export function validateProfileInput(body: Record<string, unknown>, today: string): ProfileResult {
   const visa_type = String(body.visa_type || '');
   if (!VISA_TYPES.some(v => v.id === visa_type)) return { ok: false, error: 'Chọn loại visa.' };
   const city = String(body.city || '');
   if (!POLICY_CITIES.some(c => c.id === city)) return { ok: false, error: 'Chọn nơi ở.' };
-  const rawExpiry = typeof body.visa_expiry === 'string' ? body.visa_expiry.trim() : '';
-  if (rawExpiry) {
-    if (!isValidIsoDate(rawExpiry)) return { ok: false, error: 'Ngày hết hạn visa không hợp lệ.' };
-    if (rawExpiry < addYears(today, -1) || rawExpiry > addYears(today, 15)) return { ok: false, error: 'Ngày hết hạn visa có vẻ sai — kiểm tra lại thẻ在留カード.' };
-  }
-  return { ok: true, value: { visa_type: visa_type as PolicyProfileInput['visa_type'], city, visa_expiry: rawExpiry || undefined, has_children: body.has_children === true } };
+
+  const date = (raw: unknown, what: string): { ok: true; value?: string } | { ok: false; error: string } => {
+    const v = typeof raw === 'string' ? raw.trim() : '';
+    if (!v) return { ok: true };
+    if (!isValidIsoDate(v)) return { ok: false, error: `Ngày hết hạn ${what} không hợp lệ.` };
+    if (v < addYears(today, -1) || v > addYears(today, 15)) return { ok: false, error: `Ngày hết hạn ${what} có vẻ sai — kiểm tra lại.` };
+    return { ok: true, value: v };
+  };
+  const visaExpiry = date(body.visa_expiry, 'visa');
+  if (!visaExpiry.ok) return visaExpiry;
+  const licenseExpiry = date(body.license_expiry, 'bằng lái');
+  if (!licenseExpiry.ok) return licenseExpiry;
+
+  const license_status = oneOf(LICENSE_STATUSES, body.license_status) as PolicyProfileInput['license_status'];
+  const tokutei = visa_type === 'tokutei1' || visa_type === 'tokutei2';
+  return {
+    ok: true,
+    value: {
+      visa_type: visa_type as PolicyProfileInput['visa_type'],
+      city,
+      visa_expiry: visaExpiry.value,
+      has_children: body.has_children === true,
+      license_status,
+      license_expiry: license_status && license_status !== 'none' ? licenseExpiry.value : undefined,
+      contract_type: oneOf(CONTRACT_TYPES, body.contract_type) as PolicyProfileInput['contract_type'],
+      sector: tokutei ? oneOf(TOKUTEI_SECTORS, body.sector) : undefined,
+      plan: oneOf(FUTURE_PLANS, body.plan) as PolicyProfileInput['plan'],
+      resident_tax: oneOf(RESIDENT_TAX, body.resident_tax) as PolicyProfileInput['resident_tax'],
+    },
+  };
 }
 
 function addYears(iso: string, n: number) {
@@ -183,7 +208,9 @@ export class PolicyService {
       action: 'POLICY_APPROVE', details: `${item.severity} ${item.title_vi.slice(0, 80)}`,
     });
     // dispatch:false lets the CLI approve without a LINE token; the daily job (or the next approval) sends it.
-    return { item, dispatch: opts.dispatch === false ? { sent: 0, failed: 0, deferred: 0 } : await this.dispatch() };
+    const dispatch = opts.dispatch === false ? { sent: 0, failed: 0, deferred: 0 } : await this.dispatch();
+    if (opts.dispatch !== false) await this.refreshDots(item);
+    return { item, dispatch };
   }
 
   async reject(id: string, actor: string): Promise<PolicyItem | null> {
@@ -220,7 +247,7 @@ export class PolicyService {
         for (const p of profiles) {
           if (item.pushed_user_ids.includes(p.user_id) || item.push_failed_user_ids.includes(p.user_id)) continue;
           const m = matchItem(p, item);
-          if (!m) continue;
+          if (!m || !this.mayPush(p)) continue;
           if (budget <= 0) { rep.deferred++; continue; }
           const ok = await this.line.push(p.user_id, [text(formatPolicyMessage({ ...item, ...m }))]).catch(() => false);
           (ok ? item.pushed_user_ids : item.push_failed_user_ids).push(p.user_id);
@@ -236,8 +263,13 @@ export class PolicyService {
     });
   }
 
-  /** 3 months before the residence card expires — once per expiry date. */
-  sendVisaReminders(): Promise<DispatchReport> {
+  /** Premium gating (off during beta): free users keep the app + "có gì mới", only pushes are withheld. */
+  private mayPush(p: PolicyProfile): boolean {
+    return !this.cfg.policyPremiumOnlyPush || p.tier === 'premium';
+  }
+
+  /** Personal deadlines (visa 90d, licence 60d, 住民税 7d) — each key is sent once. */
+  sendReminders(): Promise<DispatchReport> {
     return this.serial(async () => {
       const now = this.now();
       const today = jstDate(now);
@@ -246,25 +278,44 @@ export class PolicyService {
       let budget = await this.pushBudgetLeft();
 
       for (const p of await this.repo.listPolicyProfiles()) {
-        if (!p.visa_expiry) continue;
-        const days = daysBetween(today, p.visa_expiry);
-        const key = `visa${VISA_REMIND_DAYS}:${p.visa_expiry}`;
-        if (days < 0 || days > VISA_REMIND_DAYS || p.reminders_sent.includes(key)) continue;
-        if (budget <= 0) { rep.deferred++; continue; }
-        const ok = await this.line.push(p.user_id, [text(formatVisaReminder(p.visa_expiry, today))]).catch(() => false);
-        p.reminders_sent = [...p.reminders_sent, key].slice(-10); // mark even on failure: users who never added the bot would retry forever
-        await this.repo.savePolicyProfile(p);
-        if (ok) { rep.sent++; budget--; await this.record(month, { push_messages: 1 }); } else rep.failed++;
+        const due = remindersDue(p, today).filter(r => !p.reminders_sent.includes(r.key));
+        if (!due.length || !this.mayPush(p)) continue;
+        let changed = false;
+        for (const r of due) {
+          if (budget <= 0) { rep.deferred++; continue; }
+          const ok = await this.line.push(p.user_id, [text(r.text)]).catch(() => false);
+          p.reminders_sent = [...p.reminders_sent, r.key].slice(-20); // mark even on failure: users who never added the bot would retry forever
+          changed = true;
+          if (ok) { rep.sent++; budget--; await this.record(month, { push_messages: 1 }); } else rep.failed++;
+        }
+        if (changed) await this.repo.savePolicyProfile(p);
       }
       return rep;
     });
+  }
+
+  // ---------- red dot on the rich menu (per-user menu switch: not a message, costs no quota) ----------
+
+  private async setDot(p: PolicyProfile, on: boolean) {
+    if (!!p.menu_dot === on) return;
+    const ok = await (on ? this.line.linkRichMenu(p.user_id, DOT_MENU_ALIAS) : this.line.unlinkRichMenu(p.user_id)).catch(() => false);
+    if (!ok) return; // best effort: not a friend yet / menus not set up
+    p.menu_dot = on;
+    await this.repo.savePolicyProfile(p);
+  }
+
+  /** After approving an item: light the dot for everyone it concerns. */
+  private async refreshDots(item: PolicyItem) {
+    for (const p of await this.repo.listPolicyProfiles()) {
+      if (matchItem(p, item)) await this.setDot((await this.repo.getPolicyProfile(p.user_id)) || p, true);
+    }
   }
 
   /** What the daily Cloud Scheduler job runs. */
   async runDaily() {
     const ingest = await this.ingest();
     const dispatch = await this.dispatch();
-    const reminders = await this.sendVisaReminders();
+    const reminders = await this.sendReminders();
     return { ingest, dispatch, reminders };
   }
 
@@ -283,6 +334,8 @@ export class PolicyService {
       created_at: prev?.created_at || now,
       updated_at: now,
       last_seen_at: prev?.last_seen_at,
+      tier: prev?.tier,
+      menu_dot: prev?.menu_dot,
       reminders_sent: prev?.reminders_sent || [],
     };
     await this.repo.savePolicyProfile(profile);
@@ -294,7 +347,10 @@ export class PolicyService {
     const items = profile ? buildFeed(profile, await this.repo.listPolicyItems('approved'), jstDate(this.now())) : [];
     return {
       profile,
-      options: { visa_types: VISA_TYPES, cities: POLICY_CITIES },
+      options: {
+        visa_types: VISA_TYPES, cities: POLICY_CITIES, contract_types: CONTRACT_TYPES, license_statuses: LICENSE_STATUSES,
+        plans: FUTURE_PLANS, resident_tax: RESIDENT_TAX, sectors: TOKUTEI_SECTORS,
+      },
       items,
       unread_count: items.filter(i => i.unread).length,
     };
@@ -305,6 +361,16 @@ export class PolicyService {
     if (!p) return;
     p.last_seen_at = this.now().toISOString();
     await this.repo.savePolicyProfile(p);
+    await this.setDot(p, false);
+  }
+
+  /** Admin: Premium gating (see POLICY_PREMIUM_ONLY_PUSH). */
+  async setTier(userId: string, tier: Tier): Promise<boolean> {
+    const p = await this.repo.getPolicyProfile(userId);
+    if (!p) return false;
+    p.tier = tier;
+    await this.repo.savePolicyProfile(p);
+    return true;
   }
 
   // ---------- LINE chat ("có gì mới?" is a reply: free, no push quota) ----------
@@ -342,6 +408,7 @@ export class PolicyService {
       const when = e.deadline ? ` — hạn ${fmtDay(e.deadline)}` : e.effective_date ? ` — từ ${fmtDay(e.effective_date)}` : '';
       return [`${SEVERITY_ICON[e.severity]} ${e.title_vi}${when}`, e.personal_vi || e.summary_vi, e.action_vi && `✅ ${e.action_vi}`, `🔗 ${e.url}`].filter(Boolean).join('\n');
     });
+    await this.markSeen(userId!); // reading them here counts as seen (also clears the red dot)
     const more = feed.items.length > 4 ? `\n\n… và ${feed.items.length - 4} tin nữa trong app.` : '';
     return [text(`📰 Có gì mới cho bạn (${feed.items.length} tin):\n\n${lines.join('\n\n')}${more}\n\nℹ️ Tóm tắt từ nguồn chính thức, không phải tư vấn pháp lý.`, open)];
   }

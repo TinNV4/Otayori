@@ -3,13 +3,13 @@ import type { AddressInfo } from 'net';
 import type { Server } from 'http';
 import { createApp } from '../src/server/app.ts';
 import { MemoryRepo } from '../src/server/db/memory.ts';
-import { RecordingLineApi } from '../src/server/line.ts';
+import { DOT_MENU_ALIAS, RecordingLineApi } from '../src/server/line.ts';
 import { MockExtractor } from '../src/server/extract.ts';
 import { TemplateComposer } from '../src/server/renraku.ts';
 import { makeInvite } from '../src/server/service.ts';
 import { MockPolicyAnalyzer, toPolicyItem } from '../src/server/policy/analyzer.ts';
 import { candidateLinks, decodeBody, extractLinks, htmlToText, parseJaDate } from '../src/server/policy/fetch.ts';
-import { addMonths, formatPolicyMessage, matchItem, renewalWindowOpens, suggestSeverity } from '../src/server/policy/match.ts';
+import { addMonths, formatPolicyMessage, matchItem, remindersDue, renewalWindowOpens, suggestSeverity } from '../src/server/policy/match.ts';
 import { PolicyService, validateProfileInput } from '../src/server/policy/service.ts';
 import { PolicySource } from '../src/server/policy/sources.ts';
 import { PolicyItem, PolicyProfile } from '../src/types/policy.ts';
@@ -243,12 +243,134 @@ describe('ingest → review → push', () => {
     await repo.savePolicyProfile(profile({ user_id: 'Ua', visa_expiry: '2026-12-01' })); // 72 days
     await repo.savePolicyProfile(profile({ user_id: 'Ub', visa_expiry: '2027-03-15' })); // too early
     await repo.savePolicyProfile(profile({ user_id: 'Uc', visa_expiry: '2026-09-01' })); // already expired
-    expect((await svc.sendVisaReminders()).sent).toBe(1);
+    expect((await svc.sendReminders()).sent).toBe(1);
     expect(line.sent[0].target).toBe('Ua');
     expect(line.sent[0].messages[0].text).toContain('còn 72 ngày');
-    expect((await svc.sendVisaReminders()).sent).toBe(0);
+    expect((await svc.sendReminders()).sent).toBe(0);
     await svc.saveProfile('Ua', { visa_type: 'gijinkoku', city: 'nagoya', has_children: false, visa_expiry: '2027-12-01' }); // renewed
     expect((await repo.getPolicyProfile('Ua'))!.reminders_sent).toHaveLength(1);
+  });
+});
+
+describe('extended profile', () => {
+  const aud = (o: object) => ({ visa_types: [], cities: [], children_only: false, renewal_related: false, ...o });
+
+  it('optional answers only exclude when answered; unknown still gets the news', () => {
+    const lic = item({ audience: aud({ license_only: true }) });
+    expect(matchItem(profile({ license_status: 'none' }), lic)).toBeNull();
+    expect(matchItem(profile({ license_status: 'converting' }), lic)!.reason_vi).toContain('bằng lái');
+    expect(matchItem(profile(), lic)).not.toBeNull();
+
+    const kaigo = item({ audience: aud({ sectors: ['kaigo'] }) });
+    expect(matchItem(profile({ visa_type: 'gijinkoku' }), kaigo)).toBeNull(); // sector rules concern 特定技能 only
+    expect(matchItem(profile({ visa_type: 'tokutei1', sector: 'construction' }), kaigo)).toBeNull();
+    expect(matchItem(profile({ visa_type: 'tokutei1', sector: 'kaigo' }), kaigo)!.reason_vi).toContain('ngành');
+    expect(matchItem(profile({ visa_type: 'tokutei1' }), kaigo)).not.toBeNull();
+
+    const parts = item({ audience: aud({ contract_types: ['part'] }) });
+    expect(matchItem(profile({ contract_type: 'seishain' }), parts)).toBeNull();
+    expect(matchItem(profile({ contract_type: 'part' }), parts)).not.toBeNull();
+    expect(matchItem(profile(), parts)).not.toBeNull();
+
+    const leaving = item({ audience: aud({ plans: ['return'] }) });
+    expect(matchItem(profile({ plan: 'permanent' }), leaving)).toBeNull();
+    expect(matchItem(profile({ plan: 'return' }), leaving)).not.toBeNull();
+  });
+
+  it('validates the extras and drops answers that do not apply', () => {
+    const ok = validateProfileInput({
+      visa_type: 'gijinkoku', city: 'nagoya', sector: 'kaigo', license_status: 'none', license_expiry: '2027-05-01',
+      contract_type: 'part', plan: 'bogus', resident_tax: 'ordinary',
+    }, '2026-09-20');
+    expect(ok.ok && ok.value).toMatchObject({ sector: undefined, license_expiry: undefined, contract_type: 'part', plan: undefined, resident_tax: 'ordinary' });
+    const tk = validateProfileInput({ visa_type: 'tokutei1', city: 'other', sector: 'kaigo', license_status: 'japan', license_expiry: '2027-05-01' }, '2026-09-20');
+    expect(tk.ok && tk.value).toMatchObject({ sector: 'kaigo', license_expiry: '2027-05-01' });
+    expect(validateProfileInput({ visa_type: 'gijinkoku', city: 'other', license_status: 'japan', license_expiry: '2099-01-01' }, '2026-09-20').ok).toBe(false);
+  });
+
+  it('reminds licence expiry (60d) and 住民税 due dates (7d, only for 普通徴収)', () => {
+    const lic = profile({ visa_expiry: undefined, license_status: 'japan', license_expiry: '2026-11-10' });
+    expect(remindersDue(lic, '2026-10-28').map(r => r.key)).toEqual(['lic60:2026-11-10']);
+    expect(remindersDue({ ...lic, license_status: 'none' }, '2026-10-28')).toHaveLength(0);
+    expect(remindersDue(lic, '2026-08-01')).toHaveLength(0);
+
+    const tax = profile({ visa_expiry: undefined, resident_tax: 'ordinary' });
+    const due = remindersDue(tax, '2026-10-25');
+    expect(due.map(r => r.key)).toEqual(['jt:2026-10']);
+    expect(due[0].text).toContain('納付書');
+    expect(remindersDue(tax, '2026-10-20')).toHaveLength(0); // 11 days out
+    expect(remindersDue(tax, '2026-11-25')).toHaveLength(0); // November is not a usual due month
+    expect(remindersDue(tax, '2026-12-27')).toHaveLength(0);
+    expect(remindersDue(tax, '2027-01-26').map(r => r.key)).toEqual(['jt:2027-01']);
+    expect(remindersDue({ ...tax, resident_tax: 'special' }, '2026-10-25')).toHaveLength(0);
+    expect(remindersDue({ ...tax, resident_tax: undefined }, '2026-10-25')).toHaveLength(0);
+  });
+});
+
+describe('premium gating, rich-menu dot', () => {
+  const src: PolicySource = { id: 'isa', issuer: 'ISA', listUrl: 'https://www.moj.go.jp/isa/index.html', hosts: ['www.moj.go.jp'] };
+  const make = async (over = {}) => {
+    const cfg = testConfig(over);
+    const repo = new MemoryRepo();
+    const line = new RecordingLineApi();
+    const svc = new PolicyService({ repo, cfg, line, analyzer: new MockPolicyAnalyzer(), sources: [src], now: () => NOW });
+    return { svc, repo, line };
+  };
+
+  it('POLICY_PREMIUM_ONLY_PUSH: free users keep the app but get no push or reminders', async () => {
+    const { svc, repo, line } = await make({ policyPremiumOnlyPush: true });
+    await repo.savePolicyProfile(profile({ user_id: 'Ufree', visa_expiry: '2026-12-01' }));
+    await repo.savePolicyProfile(profile({ user_id: 'Upro', visa_expiry: '2026-12-01', tier: 'premium' }));
+    await repo.savePolicyItem(item({ status: 'pending' }));
+    await svc.approve('pol_x', 'U_admin');
+    expect(line.sent.map(s => s.target)).toEqual(['Upro']);
+    expect((await svc.sendReminders()).sent).toBe(1);
+    expect((await svc.feed('Ufree')).items).toHaveLength(1); // still sees it
+    expect((await repo.getPolicyProfile('Ufree'))!.reminders_sent).toHaveLength(0); // upgrade later → still reminded
+    expect(await svc.setTier('Ufree', 'premium')).toBe(true);
+    expect((await svc.sendReminders()).sent).toBe(1);
+    expect(await svc.setTier('Unobody', 'premium')).toBe(false);
+  });
+
+  it('keeps tier and dot state when the user edits their profile', async () => {
+    const { svc, repo } = await make();
+    await repo.savePolicyProfile(profile({ tier: 'premium', menu_dot: true }));
+    const saved = await svc.saveProfile('Ua', { visa_type: 'student', city: 'other', has_children: false });
+    expect(saved).toMatchObject({ tier: 'premium', menu_dot: true });
+  });
+
+  it('lights the red dot for matching users on approval and clears it when they read', async () => {
+    const { svc, repo, line } = await make();
+    await repo.savePolicyProfile(profile({ user_id: 'Ua' }));
+    await repo.savePolicyProfile(profile({ user_id: 'Ub', city: 'other' }));
+    await repo.savePolicyItem(item({ severity: 'yellow', status: 'pending', effective_date: undefined, audience: { visa_types: [], cities: ['nagoya'], children_only: false, renewal_related: false } }));
+    await svc.approve('pol_x', 'U_admin');
+    expect(line.menus.get('Ua')).toBe(DOT_MENU_ALIAS);
+    expect(line.menus.has('Ub')).toBe(false);
+    expect((await repo.getPolicyProfile('Ua'))!.menu_dot).toBe(true);
+
+    await svc.markSeen('Ua');
+    expect(line.menus.has('Ua')).toBe(false);
+    expect((await repo.getPolicyProfile('Ua'))!.menu_dot).toBe(false);
+  });
+
+  it('"có gì mới" in 1:1 counts as reading and clears the dot', async () => {
+    const { svc, repo, line } = await make();
+    await repo.savePolicyProfile(profile());
+    await repo.savePolicyItem(item({ severity: 'yellow', status: 'pending', effective_date: undefined, audience: { visa_types: [], cities: [], children_only: false, renewal_related: false } }));
+    await svc.approve('pol_x', 'U_admin');
+    expect(line.menus.get('Ua')).toBe(DOT_MENU_ALIAS);
+    await svc.chatReply('Ua', true, 'whatsnew');
+    expect(line.menus.has('Ua')).toBe(false);
+  });
+
+  it('a failed menu switch (not a friend / menus not set up) leaves the flag off so it retries', async () => {
+    const { svc, repo, line } = await make();
+    line.linkRichMenu = async () => false;
+    await repo.savePolicyProfile(profile());
+    await repo.savePolicyItem(item({ severity: 'yellow', status: 'pending', effective_date: undefined, audience: { visa_types: [], cities: [], children_only: false, renewal_related: false } }));
+    await svc.approve('pol_x', 'U_admin');
+    expect((await repo.getPolicyProfile('Ua'))!.menu_dot).toBeFalsy();
   });
 });
 
@@ -257,12 +379,15 @@ describe('model output is validated', () => {
   it('drops invalid dates / visa types and takes the city from the source, not the model', () => {
     const it0 = toPolicyItem({
       relevant: true, stage: 'decided', title_vi: 't', summary_vi: 's', action_vi: '', effective_date: '2026-13-45', deadline: '2026-11-02',
-      visa_types: ['gijinkoku', 'wizard'], children_only: false, renewal_related: false, confidence: 7,
+      visa_types: ['gijinkoku', 'wizard'], children_only: false, renewal_related: false, license_only: false, sectors: ['kaigo', 'bogus'], contract_types: ['part', 'x'], plans: ['permanent', 'y'], confidence: 7,
     }, source, { url: 'https://x/a', title: 'a' }, NOW, '2026-09-20');
     expect(it0.effective_date).toBeUndefined();
     expect(it0.deadline).toBe('2026-11-02');
     expect(it0.audience.visa_types).toEqual(['gijinkoku']);
     expect(it0.audience.cities).toEqual(['nagoya']);
+    expect(it0.audience.sectors).toEqual(['kaigo']);
+    expect(it0.audience.contract_types).toEqual(['part']);
+    expect(it0.audience.plans).toEqual(['permanent']);
     expect(it0.confidence).toBe(1);
     expect(it0.status).toBe('pending');
   });

@@ -69,6 +69,13 @@ const ProfileForm: React.FC<{
   const [expiry, setExpiry] = useState(p?.visa_expiry || '');
   const [city, setCity] = useState(p?.city || '');
   const [kids, setKids] = useState(p?.has_children || false);
+  const [license, setLicense] = useState<string>(p?.license_status || '');
+  const [licenseExpiry, setLicenseExpiry] = useState(p?.license_expiry || '');
+  const [contract, setContract] = useState<string>(p?.contract_type || '');
+  const [sector, setSector] = useState<string>(p?.sector || '');
+  const [plan, setPlan] = useState<string>(p?.plan || '');
+  const [tax, setTax] = useState<string>(p?.resident_tax || '');
+  const isTokutei = visa === 'tokutei1' || visa === 'tokutei2';
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -78,7 +85,10 @@ const ProfileForm: React.FC<{
     try {
       const res = await apiFetch('/api/policy/profile', {
         method: 'PUT',
-        body: JSON.stringify({ visa_type: visa, visa_expiry: expiry, city, has_children: kids }),
+        body: JSON.stringify({
+          visa_type: visa, visa_expiry: expiry, city, has_children: kids,
+          license_status: license, license_expiry: licenseExpiry, contract_type: contract, sector: isTokutei ? sector : '', plan, resident_tax: tax,
+        }),
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) setError(data.error || `Lỗi ${res.status}`);
@@ -123,6 +133,56 @@ const ProfileForm: React.FC<{
         <input type="checkbox" checked={kids} onChange={(e) => setKids(e.target.checked)} className="w-6 h-6 accent-emerald-600" />
         <span className="text-[16px] text-slate-800">3. Nhà mình có con nhỏ</span>
       </label>
+      <details className="rounded-2xl border border-slate-200 bg-white" open={!!(p && (p.license_status || p.contract_type || p.plan || p.resident_tax || p.sector))}>
+        <summary className="h-12 px-4 flex items-center text-[16px] font-semibold text-slate-800 cursor-pointer">➕ Thông tin thêm (không bắt buộc)</summary>
+        <div className="px-4 pb-4 space-y-4">
+          <p className="text-[13px] text-slate-500">Càng điền, tin càng đúng người — và bạn nhận được nhắc hạn bằng lái, 住民税. Bỏ trống = vẫn nhận mọi tin chung.</p>
+          {isTokutei && (
+            <label className="block">
+              <span className="text-[15px] font-semibold text-slate-800">Ngành 特定技能</span>
+              <select value={sector} onChange={(e) => setSector(e.target.value)} className={`${field} mt-1`}>
+                <option value="">— Không chọn —</option>
+                {feed.options.sectors.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
+              </select>
+            </label>
+          )}
+          <label className="block">
+            <span className="text-[15px] font-semibold text-slate-800">Loại hợp đồng</span>
+            <select value={contract} onChange={(e) => setContract(e.target.value)} className={`${field} mt-1`}>
+              <option value="">— Không chọn —</option>
+              {feed.options.contract_types.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
+            </select>
+          </label>
+          <label className="block">
+            <span className="text-[15px] font-semibold text-slate-800">Bằng lái xe</span>
+            <select value={license} onChange={(e) => setLicense(e.target.value)} className={`${field} mt-1`}>
+              <option value="">— Không chọn —</option>
+              {feed.options.license_statuses.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
+            </select>
+          </label>
+          {(license === 'japan' || license === 'converting') && (
+            <label className="block">
+              <span className="text-[15px] font-semibold text-slate-800">Ngày hết hạn bằng lái</span>
+              <input type="date" value={licenseExpiry} onChange={(e) => setLicenseExpiry(e.target.value)} className={`${field} mt-1`} />
+            </label>
+          )}
+          <label className="block">
+            <span className="text-[15px] font-semibold text-slate-800">Kế hoạch sắp tới</span>
+            <select value={plan} onChange={(e) => setPlan(e.target.value)} className={`${field} mt-1`}>
+              <option value="">— Không chọn —</option>
+              {feed.options.plans.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
+            </select>
+          </label>
+          <label className="block">
+            <span className="text-[15px] font-semibold text-slate-800">住民税 (thuế cư trú) đóng thế nào?</span>
+            <select value={tax} onChange={(e) => setTax(e.target.value)} className={`${field} mt-1`}>
+              <option value="">— Không chọn —</option>
+              {feed.options.resident_tax.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
+            </select>
+            <span className="text-[13px] text-slate-500">Chọn "tự đóng" để nhận nhắc trước hạn mỗi kỳ.</span>
+          </label>
+        </div>
+      </details>
       {error && <div className="rounded-xl bg-rose-50 border border-rose-200 p-3 text-[15px] text-rose-700">{error}</div>}
       <button disabled={busy || !visa || !city} onClick={save} className="w-full h-12 rounded-2xl bg-emerald-600 disabled:bg-slate-300 text-white text-[16px] font-semibold flex items-center justify-center gap-2">
         {busy && <Loader2 className="w-5 h-5 animate-spin" />} Lưu

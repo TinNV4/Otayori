@@ -13,7 +13,7 @@ Chụp お便り, giấy 役所, form… gửi vào group LINE gia đình → bo
 | App trong LINE (LIFF): việc sắp tới, giấy tờ, sửa ngày, chụp giấy | CLI: mã mời, gia đình, chi phí (biểu đồ), dọn dữ liệu |
 | `/soạn`: soạn tin kính ngữ gửi cô giáo | Test đầy đủ + script deploy/setup chạy lại được |
 | Nhắc sáng 7:00 qua LINE (tự chọn bật) | |
-| **Bản tin chính sách cá nhân hóa**: tab "Chính sách" + `có gì mới` + push 🔴 + nhắc hạn visa ([chi tiết](docs/policy-newsletter.md)) | Đọc 5 nguồn chính thức → AI soạn nháp → **admin duyệt** mới gửi (`npm run policy`) |
+| **Bản tin chính sách cá nhân hóa**: tab "Chính sách" + `có gì mới` + push 🔴 + nhắc hạn visa, bằng lái, 住民税 + chấm đỏ rich menu ([chi tiết](docs/policy-newsletter.md)) | Đọc 5 nguồn chính thức → AI soạn nháp → **admin duyệt** mới gửi (`npm run policy`) |
 
 ## Kiến trúc
 
@@ -90,7 +90,7 @@ Cài đặt → **LINE Test Lab**: Join → Đồng ý → `BETA2026` → gửi 
 | `PROJECT_ID=... bash scripts/deploy.sh --deploy-only` | Cập nhật code; giữ nguyên LIFF_ID/ADMIN_USER_IDS đã đặt; tạo lại job Scheduler |
 | `npx tsx scripts/line-setup.ts <url>` | Gắn webhook, test chữ ký, kiểm tra chế độ Bot, quota push |
 | `npx tsx scripts/richmenu.ts` | Cài rich menu (cần `LINE_CHANNEL_ACCESS_TOKEN`, `LIFF_ID`) |
-| `npm run policy -- fetch --dry` · `fetch` · `list` · `show <id>` · `approve <id>` · `reject <id>` · `stats` | Bản tin chính sách: xem nguồn, tạo bản nháp, duyệt, biểu đồ ([docs](docs/policy-newsletter.md)) |
+| `npm run policy -- fetch --dry` · `fetch` · `list` · `show <id>` · `approve <id>` · `reject <id>` · `tier <userId> premium` · `stats` | Bản tin chính sách: xem nguồn, tạo bản nháp, duyệt, gói, biểu đồ ([docs](docs/policy-newsletter.md)) |
 | `npm run admin -- invite:create DOT1 --max 5` | Tạo mã mời (`invite:list`, `invite:disable`) |
 | `npm run admin -- usage` | Biểu đồ chi phí / push / loại giấy / độ chính xác |
 | `npm run admin -- families` · `quota <id> <n>` · `cleanup` | Vận hành |
@@ -105,7 +105,7 @@ Lấy token LINE đang dùng mà không cần copy: `export LINE_CHANNEL_ACCESS_
 3. `PROJECT_ID=<id> bash scripts/deploy.sh` — nhập 3 khóa khi được hỏi. Key Anthropic cấp tổ chức (lỗi *"not scoped to a workspace"*): tạo key trong workspace, hoặc thêm `ANTHROPIC_WORKSPACE_ID=wrkspc_…`.
 4. `npx tsx scripts/line-setup.ts <url>` → bật **Webhooks** trong Response settings.
 5. **LIFF**: Provider → *Create channel* → **LINE Login** (web app) → tab LIFF → Add: Size *Full*, Endpoint = URL Cloud Run, scope `openid profile` → **Publish** channel. Rồi `LIFF_ID=… ADMIN_USER_IDS=U… bash scripts/deploy.sh --deploy-only`.
-6. `npx tsx scripts/richmenu.ts` · tạo mã mời · gửi `docs/invite-message.md`.
+6. `python3 scripts/make-richmenu-dot.py && npx tsx scripts/richmenu.ts` (menu thường + menu chấm đỏ cho tin chính sách) · tạo mã mời · gửi `docs/invite-message.md`.
 
 > Cloud Run `--max-instances=1 --no-cpu-throttling`: webhook trả 200 ngay rồi xử lý nền; gộp trang, chống trùng sự kiện, chế độ dịch nằm trong RAM. Đủ cho 20 gia đình; scale ngang cần Cloud Tasks.
 

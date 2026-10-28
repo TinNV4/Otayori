@@ -83,15 +83,50 @@ Cần `ANTHROPIC_API_KEY` để có bản tóm tắt thật (không có thì dù
 
 Đổi/thêm nguồn: sửa `src/server/policy/sources.ts` (URL trang "tin mới", `keywords`, `exclude`). Nguồn thành phố: đặt `city` và thêm vào `POLICY_CITIES`.
 
-## Phạm vi đã làm (MVP) và chưa làm
+## Hồ sơ và nhắc hạn riêng
 
-| Đã có | Chưa có (theo spec gốc) |
+3 trường bắt buộc (visa + ngày hết hạn, nơi ở, có con) và các trường **không bắt buộc**. Bỏ trống một trường = người đó **không bị loại** khỏi tin liên quan tới trường đó (thà báo thừa còn hơn bỏ sót).
+
+| Trường thêm | Dùng để |
 |---|---|
-| 5 nguồn: 入管庁, 厚労省, 国税庁, 警察庁, Nagoya | Hồ sơ mở rộng (bằng lái, 特定技能/ngành, hợp đồng, kế hoạch 永住) |
-| Hồ sơ 3 trường + sửa/xóa trong LIFF | Nhắc 住民税 / hạn bằng lái |
-| 🔴 push · 🟡🟢 trong app · `có gì mới` | Chấm đỏ trên rich menu (LINE không đổi được theo người nếu không dùng rich menu riêng; hiện dùng badge số ở tab) |
-| Nhắc hạn 在留 trước 3 tháng | Gói Premium / B2B 登録支援機関 |
-| Admin duyệt (CLI + API `/api/admin/policy`) | Màn hình duyệt trong LIFF |
+| Ngành 特定技能 (chỉ hiện khi chọn 特定技能) | Chỉ nhận tin của ngành mình |
+| Loại hợp đồng (正社員 / パート / khác / không đi làm) | Tin riêng cho từng loại hợp đồng |
+| Bằng lái (chưa có / bằng Nhật / định đổi 外免) + ngày hết hạn | Tin 外免切替, **nhắc trước 60 ngày** |
+| Kế hoạch (永住 / về nước / chưa quyết) | Tin riêng cho người xin 永住 hoặc sắp về nước |
+| 住民税 (công ty trừ lương / tự đóng) | Chọn "tự đóng" → nhắc **7 ngày trước** các kỳ cuối tháng 6, 8, 10, 1 |
+
+Nhắc hạn ghi chú rõ mốc 住民税 "thường là" cuối tháng đó và chỉ người dùng xem phiếu 納付書 của mình mới chắc chắn (mỗi thành phố khác nhau). Mỗi mốc chỉ nhắc 1 lần (`reminders_sent`).
+
+## Chấm đỏ trên rich menu
+
+Khi duyệt một tin (bất kỳ màu), bot đổi rich menu của những người liên quan sang bản có **chấm đỏ** trên nút "Trang gia đình" (bấm vào mở thẳng tab Chính sách). Đọc tin (mở tab hoặc gõ "có gì mới") thì chuyển lại menu thường. Đổi menu của từng người **không phải tin nhắn nên không tốn quota**.
+
+```bash
+python3 scripts/make-richmenu-dot.py   # tạo assets/richmenu-dot.png từ assets/richmenu.png (cần Pillow)
+npx tsx scripts/richmenu.ts            # tạo 2 menu + alias "giaytonhat-dot" (chạy lại sau khi deploy lần đầu)
+```
+
+Chưa chạy `richmenu.ts` (hoặc người dùng chưa kết bạn với bot) thì việc đổi menu bị bỏ qua, không gây lỗi. Chỉ hiện trong chat 1:1, không có ở nhóm.
+
+## Gói Premium (cờ, mặc định tắt)
+
+`POLICY_PREMIUM_ONLY_PUSH=true` → chỉ người dùng Premium nhận **push** (🔴 và nhắc hạn); mọi người vẫn xem tin trong app và "có gì mới". Đặt gói: `npm run policy -- tier <userId> premium`. Giai đoạn beta để tắt. **Chưa có thanh toán**: chuyển gói là thao tác tay của admin.
+
+## Duyệt trong LIFF
+
+Admin mở app → Quản trị → "Duyệt bản tin chính sách": thấy nháp, link gốc, đối tượng, chọn 🔴🟡🟢 rồi Duyệt/Loại (🔴 push ngay). CLI `npm run policy` vẫn dùng được.
+
+## Phạm vi
+
+| Đã có | Chưa làm |
+|---|---|
+| 5 nguồn: 入管庁, 厚労省, 国税庁, 警察庁, Nagoya | **B2B 登録支援機関** (gửi bản tin cho người lao động do tổ chức quản lý): cần quyết định hợp đồng, đối tượng được xem dữ liệu của ai, và thanh toán — chưa dựng khi chưa chốt các điểm này |
+| Hồ sơ 3 trường + 6 trường thêm, sửa/xóa trong LIFF | Thanh toán Premium tự động |
+| 🔴 push · 🟡🟢 trong app · `có gì mới` | |
+| Nhắc hạn: visa (90 ngày), bằng lái (60), 住民税 (7) | |
+| Chấm đỏ rich menu theo từng người | |
+| Admin duyệt (LIFF + CLI + API) | |
+| Cờ Premium + `tier` | |
 
 ## Lưu ý đã kiểm chứng (2026-10-28)
 

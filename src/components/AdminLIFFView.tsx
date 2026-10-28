@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { apiFetch } from '../lib/api.ts';
 import { AdminMetrics, AuditLog, Family, InviteCode } from '../types/index.ts';
+import { PolicyAdminPanel } from './PolicyAdminPanel.tsx';
 
 interface AdminLIFFViewProps {
   metrics: AdminMetrics;
@@ -34,7 +35,7 @@ export const AdminLIFFView: React.FC<AdminLIFFViewProps> = ({
   auditLogs,
   onRefresh,
 }) => {
-  const [adminTab, setAdminTab] = useState<'metrics' | 'families' | 'invites' | 'audit'>('metrics');
+  const [adminTab, setAdminTab] = useState<'metrics' | 'families' | 'invites' | 'policy' | 'audit'>('metrics');
   const [newCodeName, setNewCodeName] = useState('');
   const [newCodeQuota, setNewCodeQuota] = useState(50);
   const [newCodeMaxUses, setNewCodeMaxUses] = useState(20);
@@ -281,6 +282,15 @@ export const AdminLIFFView: React.FC<AdminLIFFViewProps> = ({
         </button>
 
         <button
+          onClick={() => setAdminTab('policy')}
+          className={`px-3.5 py-2 font-medium rounded-lg whitespace-nowrap transition-colors ${
+            adminTab === 'policy' ? 'bg-white text-slate-900 shadow-xs font-semibold' : 'text-slate-600 hover:text-slate-900'
+          }`}
+        >
+          Duyệt bản tin chính sách
+        </button>
+
+        <button
           onClick={() => setAdminTab('audit')}
           className={`px-3.5 py-2 font-medium rounded-lg whitespace-nowrap transition-colors ${
             adminTab === 'audit' ? 'bg-white text-slate-900 shadow-xs font-semibold' : 'text-slate-600 hover:text-slate-900'
@@ -289,6 +299,8 @@ export const AdminLIFFView: React.FC<AdminLIFFViewProps> = ({
           Nhật ký kiểm toán (Audit Logs)
         </button>
       </div>
+
+      {adminTab === 'policy' && <PolicyAdminPanel />}
 
       {/* TAB 1: BREAKDOWN BY DOCUMENT TYPE */}
       {adminTab === 'metrics' && (

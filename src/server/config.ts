@@ -38,6 +38,8 @@ export interface AppConfig {
   policyMaxNewPerRun: number;
   /** Policy newsletter: ignore list entries dated older than this many days. */
   policyMaxAgeDays: number;
+  /** Policy newsletter: only Premium users get 🔴 / reminder pushes (everyone still sees the app + "có gì mới"). Off during beta. */
+  policyPremiumOnlyPush: boolean;
   /** Wait window to group consecutive images (without LINE imageSet) into one document. */
   aggregationWindowMs: number;
   retentionDays: number;
@@ -70,6 +72,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
     maxPagesPerDoc: num('MAX_PAGES_PER_DOC', 6),
     policyMaxNewPerRun: num('POLICY_MAX_NEW_PER_RUN', 10),
     policyMaxAgeDays: num('POLICY_MAX_AGE_DAYS', 45),
+    policyPremiumOnlyPush: env.POLICY_PREMIUM_ONLY_PUSH === 'true',
     aggregationWindowMs: num('AGGREGATION_WINDOW_MS', 15000),
     retentionDays: num('RETENTION_DAYS', 90),
     leftGroupPurgeDays: num('LEFT_GROUP_PURGE_DAYS', 7),

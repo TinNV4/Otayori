@@ -8,6 +8,7 @@
  *   npm run policy -- show <id>                        # full draft + who would receive it
  *   npm run policy -- approve <id> [--severity red|yellow|green]   # publish; 🔴 is pushed right away (needs LINE_CHANNEL_ACCESS_TOKEN)
  *   npm run policy -- reject <id>
+ *   npm run policy -- tier <userId> free|premium       # Premium = gets pushes when POLICY_PREMIUM_ONLY_PUSH=true
  *   npm run policy -- stats                            # charts: items, users, push budget
  *
  * Nothing is ever sent without `approve`. Needs ANTHROPIC_API_KEY for real summaries (mock otherwise).
@@ -101,23 +102,37 @@ async function main() {
       console.log(`Đã loại: ${i.title_vi}`);
       break;
     }
+    case 'tier': {
+      const tier = process.argv[4];
+      if (tier !== 'free' && tier !== 'premium') throw new Error('dùng: tier <userId> free|premium');
+      if (!(await svc.setTier(a1 || '', tier))) throw new Error('người dùng chưa có hồ sơ chính sách');
+      console.log(`${a1} → ${tier}${cfg.policyPremiumOnlyPush ? '' : ' (POLICY_PREMIUM_ONLY_PUSH chưa bật: mọi người vẫn nhận push)'}`);
+      break;
+    }
     case 'stats': {
       const { items, profiles, usage } = await svc.stats();
       chart('Tin theo trạng thái', count(items, i => i.status));
       chart('Tin đã duyệt theo mức', count(items.filter(i => i.status === 'approved'), i => `${SEVERITY_ICON[i.severity]} ${i.severity}`));
       chart('Người dùng theo visa', count(profiles, p => visaLabel(p.visa_type).slice(0, 20)));
       chart('Người dùng theo nơi ở', count(profiles, p => cityLabel(p.city)));
+      chart('Người dùng theo gói', count(profiles, p => p.tier || 'free'));
+      chart('Hồ sơ đã điền thêm', {
+        'bằng lái': profiles.filter(p => p.license_status).length,
+        'hợp đồng': profiles.filter(p => p.contract_type).length,
+        'kế hoạch': profiles.filter(p => p.plan).length,
+        '住民税 tự đóng': profiles.filter(p => p.resident_tax === 'ordinary').length,
+      });
       const reds = items.filter(i => i.status === 'approved' && i.severity === 'red');
       const redPush = reds.reduce((n, i) => n + i.pushed_user_ids.length, 0);
-      const expiring = profiles.filter(p => p.visa_expiry).length;
+      const expiring = profiles.filter(p => p.visa_expiry || p.license_expiry).length;
       console.log(`\n  Push LINE ${jstMonth()}`);
       console.log(`  Đã dùng   ${bar(usage.push_messages, cfg.pushLimit)} ${usage.push_messages}/${cfg.pushLimit}`);
-      console.log(`  Tin 🔴 đã gửi: ${redPush} (${reds.length} tin) · hồ sơ có ngày visa (sẽ nhận nhắc hạn 1 lần): ${expiring}`);
+      console.log(`  Tin 🔴 đã gửi: ${redPush} (${reds.length} tin) · hồ sơ có ngày hết hạn visa/bằng lái (nhận nhắc 1 lần mỗi mốc): ${expiring}`);
       console.log(`  Ước tính tháng sau: ${profiles.length} người × ~2 tin 🔴 + ${expiring} nhắc visa ≈ ${profiles.length * 2 + expiring} push (giữ dự phòng 20)\n`);
       break;
     }
     default:
-      console.log('Commands: sources fetch list show approve reject stats (xem đầu file scripts/policy.ts)');
+      console.log('Commands: sources fetch list show approve reject tier stats (xem đầu file scripts/policy.ts)');
   }
   if ('flushSync' in repo) (repo as { flushSync(): void }).flushSync();
 }

@@ -2,7 +2,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import crypto from 'crypto';
 import { calculateCostUsd, createAnthropicClient, HAIKU_MODEL } from '../extract.ts';
 import { isValidIsoDate } from '../time.ts';
-import { PolicyItem, PolicyStage, VISA_TYPES, VisaType } from '../../types/policy.ts';
+import { CONTRACT_TYPES, ContractType, FUTURE_PLANS, FuturePlan, PolicyItem, PolicyStage, TOKUTEI_SECTORS, VISA_TYPES, VisaType } from '../../types/policy.ts';
 import { PolicySource } from './sources.ts';
 import { suggestSeverity } from './match.ts';
 
@@ -18,6 +18,10 @@ export interface RawPolicy {
   visa_types: string[];
   children_only: boolean;
   renewal_related: boolean;
+  license_only: boolean;
+  sectors: string[];
+  contract_types: string[];
+  plans: string[];
   confidence: number;
 }
 
@@ -50,6 +54,10 @@ Quy tắc:
 - visa_types: chỉ liệt kê khi trang NÊU RÕ chỉ áp dụng cho các loại tư cách lưu trú đó. Áp dụng cho mọi người hoặc không rõ → mảng rỗng. Giá trị hợp lệ: ${VISA_TYPES.map(v => v.id).join(', ')}.
 - children_only = true chỉ khi nội dung chỉ dành cho gia đình có con.
 - renewal_related = true khi thay đổi (ví dụ lệ phí) áp dụng cho đơn xin gia hạn/đổi/cấp tư cách lưu trú nộp từ ngày hiệu lực.
+- license_only = true chỉ khi nội dung chỉ dành cho người có hoặc sắp đổi bằng lái xe (運転免許, 外免切替).
+- sectors: chỉ khi trang NÊU RÕ chỉ áp dụng cho một số ngành 特定技能. Giá trị hợp lệ: ${TOKUTEI_SECTORS.map(v => v.id).join(', ')}. Không rõ/áp dụng chung → mảng rỗng.
+- contract_types: chỉ khi chỉ áp dụng cho một loại hợp đồng (${CONTRACT_TYPES.map(v => v.id).join(', ')}: seishain = 正社員, part = パート・アルバイト). Không rõ → mảng rỗng.
+- plans: chỉ khi nội dung chỉ liên quan tới người định ở lại lâu dài/xin vĩnh trú ("permanent") hoặc người sắp về nước ("return"; ví dụ 脱退一時金). Không rõ → mảng rỗng. Giá trị hợp lệ: ${FUTURE_PLANS.map(v => v.id).join(', ')}.
 - title_vi ≤ 80 ký tự. summary_vi 2–3 câu tiếng Việt đơn giản. action_vi: 1 câu việc cần làm chung (rỗng nếu không có việc phải làm).
 - confidence 0–1: mức chắc chắn về tóm tắt và các ngày.`;
 
@@ -66,9 +74,13 @@ const SCHEMA = {
     visa_types: { type: 'array', items: { type: 'string' } },
     children_only: { type: 'boolean' },
     renewal_related: { type: 'boolean' },
+    license_only: { type: 'boolean' },
+    sectors: { type: 'array', items: { type: 'string' } },
+    contract_types: { type: 'array', items: { type: 'string' } },
+    plans: { type: 'array', items: { type: 'string' } },
     confidence: { type: 'number' },
   },
-  required: ['relevant', 'stage', 'title_vi', 'summary_vi', 'action_vi', 'effective_date', 'deadline', 'visa_types', 'children_only', 'renewal_related', 'confidence'],
+  required: ['relevant', 'stage', 'title_vi', 'summary_vi', 'action_vi', 'effective_date', 'deadline', 'visa_types', 'children_only', 'renewal_related', 'license_only', 'sectors', 'contract_types', 'plans', 'confidence'],
   additionalProperties: false,
 };
 
@@ -129,6 +141,10 @@ export class MockPolicyAnalyzer implements PolicyAnalyzer {
       visa_types: [],
       children_only: /児童手当|子ども/.test(body),
       renewal_related: /手数料/.test(body) && /在留/.test(body),
+      license_only: /免許/.test(body),
+      sectors: [],
+      contract_types: [],
+      plans: /永住/.test(body) ? ['permanent'] : [],
       confidence: 0.6,
     };
     return { raw, cost_usd: 0 };
@@ -166,6 +182,10 @@ export function toPolicyItem(raw: RawPolicy, source: PolicySource, page: { url: 
       cities: source.city ? [source.city] : [],
       children_only: !!raw.children_only,
       renewal_related: !!raw.renewal_related,
+      license_only: !!raw.license_only,
+      sectors: [...new Set((raw.sectors || []).filter(v => TOKUTEI_SECTORS.some(x => x.id === v)))],
+      contract_types: [...new Set((raw.contract_types || []).filter(v => CONTRACT_TYPES.some(x => x.id === v)))] as ContractType[],
+      plans: [...new Set((raw.plans || []).filter(v => FUTURE_PLANS.some(x => x.id === v)))] as FuturePlan[],
     },
     status: raw.relevant ? 'pending' : 'ignored',
     confidence: Math.max(0, Math.min(1, Number(raw.confidence) || 0)),
