@@ -7,3 +7,8 @@ coverage/
 .env*
 !.env.example
 .data/
+
+# Master data: only the published snapshot (live.json) is committed; sync working files are local.
+data/masterdata/*/staged.json
+data/masterdata/*/state.json
+data/masterdata/*/history/

@@ -9,6 +9,11 @@ import { ClaudeTranslator, MockTranslator } from './src/server/translate.ts';
 import { LineClient, RecordingLineApi } from './src/server/line.ts';
 import { lineIdTokenVerifier } from './src/server/auth.ts';
 import { makeInvite } from './src/server/service.ts';
+import { ClaudeRecognizer, MockRecognizer } from './src/server/lens/gomi/recognize.ts';
+import { dictionaryFromStore } from './src/server/lens/gomi/dictionary.ts';
+import { loadSources } from './src/server/lens/masterdata/registry.ts';
+import { FileMasterStore } from './src/server/lens/masterdata/store.ts';
+import { loadCities, gsiGeocoder } from './src/server/lens/regions.ts';
 
 const cfg = loadConfig();
 const repo = createRepo(cfg);
@@ -18,7 +23,25 @@ const composer = cfg.anthropicApiKey ? new ClaudeComposer(cfg.anthropicApiKey) :
 const translator = cfg.anthropicApiKey ? new ClaudeTranslator(cfg.anthropicApiKey) : new MockTranslator();
 const verifyIdToken = cfg.liffChannelId ? lineIdTokenVerifier(cfg.liffChannelId) : null;
 
-const { app, bot } = createApp({ cfg, repo, line, extractor, composer, translator, verifyIdToken });
+// Waste sorting: published master data ships with the image (data/masterdata/<source>/live.json).
+// A broken registry must not take the bot down: log it loudly and fall back to national rules + generic answers.
+let sources: ReturnType<typeof loadSources> = [];
+let cities: ReturnType<typeof loadCities> = [];
+try {
+  sources = loadSources(cfg.masterdataSources);
+  cities = loadCities(cfg.citiesFile);
+} catch (err) {
+  console.error('[gomi] master data registry failed to load, serving generic answers only:', (err as Error).message);
+}
+const gomi = {
+  recognizer: cfg.anthropicApiKey ? new ClaudeRecognizer(cfg.anthropicApiKey) : new MockRecognizer(),
+  dictionary: dictionaryFromStore(new FileMasterStore(cfg.masterdataDir), sources),
+};
+
+const { app, bot } = createApp({
+  cfg, repo, line, extractor, composer, translator, verifyIdToken, gomi, cities,
+  geocoder: cfg.regionGeocoder === 'gsi' ? gsiGeocoder : undefined,
+});
 
 async function start() {
   if (cfg.devMode && (await repo.listInviteCodes()).length === 0) {

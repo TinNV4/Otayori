@@ -7,8 +7,8 @@ export interface PageBatch {
   /** Most recent reply token (freshest one is the most likely to still be valid). */
   replyToken?: string;
   userId?: string;
-  /** 'translate' = "dịch" mode: line-by-line translation only, nothing stored. */
-  mode?: 'read' | 'translate';
+  /** 'translate' = "dịch" mode (nothing stored); 'gomi' = waste-sorting question about the photographed item. */
+  mode?: 'read' | 'translate' | 'gomi';
 }
 
 interface Pending extends PageBatch {
@@ -32,7 +32,7 @@ export class PageAggregator {
     private readonly onFlush: (batch: PageBatch) => Promise<void>,
   ) {}
 
-  add(item: { chatId: string; familyId: string; page: Page; replyToken?: string; userId?: string; imageSet?: { total: number }; mode?: 'read' | 'translate' }) {
+  add(item: { chatId: string; familyId: string; page: Page; replyToken?: string; userId?: string; imageSet?: { total: number }; mode?: 'read' | 'translate' | 'gomi' }) {
     let p = this.pending.get(item.chatId);
     if (!p) {
       p = { chatId: item.chatId, familyId: item.familyId, pages: [], timer: null, received: 0 };
@@ -43,7 +43,7 @@ export class PageAggregator {
     if (p.pages.length < this.maxPages) p.pages.push(item.page);
     if (item.replyToken) p.replyToken = item.replyToken;
     if (item.userId) p.userId = item.userId;
-    if (item.mode === 'translate') p.mode = 'translate';
+    if (item.mode && item.mode !== 'read') p.mode = item.mode;
     if (item.imageSet?.total) p.expectedTotal = Math.max(p.expectedTotal || 0, item.imageSet.total);
 
     const complete = p.expectedTotal !== undefined && p.received >= p.expectedTotal;

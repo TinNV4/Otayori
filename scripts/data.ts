@@ -1,6 +1,6 @@
 /**
  * Master-data sync CLI (waste-sorting dictionary now; grocery tables later use the same pipeline).
- * Sources live in data/sources/<id>.json; results in $MASTERDATA_DIR (default .data/masterdata).
+ * Sources live in data/sources/<id>.json; results in $MASTERDATA_DIR (default data/masterdata).
  *
  *   npx tsx scripts/data.ts status
  *   npx tsx scripts/data.ts inspect <source-id> [--file x.csv] [--updated YYYY-MM-DD]
@@ -25,7 +25,7 @@ import { isDue, publishStaged, rejectStaged, rollback, syncSource } from '../src
 import { SourceConfig } from '../src/server/lens/masterdata/types.ts';
 
 const sourcesDir = process.env.MASTERDATA_SOURCES || 'data/sources';
-const store = new FileMasterStore(process.env.MASTERDATA_DIR || '.data/masterdata');
+const store = new FileMasterStore(process.env.MASTERDATA_DIR || 'data/masterdata');
 
 const args = process.argv.slice(2);
 const [cmd, ...rest] = args;

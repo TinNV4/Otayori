@@ -3,7 +3,7 @@ import { MemoryRepo } from '../src/server/db/memory.ts';
 import { RecordingLineApi } from '../src/server/line.ts';
 import { MockExtractor } from '../src/server/extract.ts';
 import { TemplateComposer } from '../src/server/renraku.ts';
-import { Bot } from '../src/server/bot.ts';
+import { Bot, BotDeps } from '../src/server/bot.ts';
 import { makeInvite } from '../src/server/service.ts';
 
 export function testConfig(over: Partial<AppConfig> = {}): AppConfig {
@@ -18,12 +18,12 @@ export function testConfig(over: Partial<AppConfig> = {}): AppConfig {
   };
 }
 
-export async function setup(over: Partial<AppConfig> = {}) {
+export async function setup(over: Partial<AppConfig> = {}, botExtra: Partial<BotDeps> = {}) {
   const cfg = testConfig(over);
   const repo = new MemoryRepo();
   const line = new RecordingLineApi();
   const extractor = new MockExtractor();
-  const bot = new Bot({ repo, line, extractor, composer: new TemplateComposer(), cfg });
+  const bot = new Bot({ repo, line, extractor, composer: new TemplateComposer(), cfg, ...botExtra });
   await repo.saveInviteCode(makeInvite('BETA2026', { quota: 50, maxUses: 20 }, new Date()));
   return { cfg, repo, line, extractor, bot };
 }

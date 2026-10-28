@@ -1,7 +1,7 @@
 import express, { Response } from 'express';
 import { AppConfig } from './config.ts';
 import { Repo } from './db/repo.ts';
-import { Bot } from './bot.ts';
+import { Bot, BotDeps } from './bot.ts';
 import { Extractor, MAX_IMAGE_BYTES, MAX_PDF_BYTES, Page, SUPPORTED_IMAGE_TYPES } from './extract.ts';
 import { Composer } from './renraku.ts';
 import { MockTranslator, TranslationError, Translator } from './translate.ts';
@@ -22,6 +22,9 @@ export interface AppDeps {
   composer: Composer;
   translator?: Translator;
   verifyIdToken: IdTokenVerifier | null;
+  gomi?: BotDeps['gomi'];
+  cities?: BotDeps['cities'];
+  geocoder?: BotDeps['geocoder'];
 }
 
 /** Client-safe family view: no LINE ids, plus derived links. */
@@ -39,7 +42,7 @@ function adminFamily(f: Family) {
 export function createApp(deps: AppDeps) {
   const { cfg, repo, line } = deps;
   const translator = deps.translator || new MockTranslator();
-  const bot = new Bot({ repo, line, extractor: deps.extractor, composer: deps.composer, translator, cfg });
+  const bot = new Bot({ repo, line, extractor: deps.extractor, composer: deps.composer, translator, cfg, gomi: deps.gomi, cities: deps.cities, geocoder: deps.geocoder });
   const services = bot.services;
   const app = express();
   app.disable('x-powered-by');

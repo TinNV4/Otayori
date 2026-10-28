@@ -1,0 +1,8 @@
+[
+  { "code": "13118", "prefecture_jp": "東京都", "name_jp": "荒川区", "name_vi": "quận Arakawa (Tokyo)", "aliases": ["arakawa"] },
+  { "code": "13114", "prefecture_jp": "東京都", "name_jp": "中野区", "name_vi": "quận Nakano (Tokyo)", "aliases": ["nakano"] },
+  { "code": "13213", "prefecture_jp": "東京都", "name_jp": "東村山市", "name_vi": "thành phố Higashimurayama (Tokyo)", "aliases": ["higashimurayama"] },
+  { "code": "13229", "prefecture_jp": "東京都", "name_jp": "西東京市", "name_vi": "thành phố Nishitokyo (Tokyo)", "aliases": ["nishitokyo", "nishi tokyo"] },
+  { "code": "14100", "prefecture_jp": "神奈川県", "name_jp": "横浜市", "name_vi": "thành phố Yokohama", "aliases": ["yokohama"] },
+  { "code": "28100", "prefecture_jp": "兵庫県", "name_jp": "神戸市", "name_vi": "thành phố Kobe", "aliases": ["kobe"] }
+]

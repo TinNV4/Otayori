@@ -48,6 +48,9 @@ flowchart LR
 | Chống trùng (hash ảnh · cùng giấy · lịch) | `src/server/dedupe.ts` |
 | Gộp ảnh nhiều trang | `src/server/aggregator.ts` |
 | Lịch ICS (RFC 5545) + trang "Thêm vào lịch" | `src/server/ics.ts`, `src/server/calendarPage.ts` |
+| Phân loại rác: nhận diện, luật quốc gia, khớp từ điển, soạn câu trả lời | `src/server/lens/gomi/*` |
+| Master data rác: sync dữ liệu mở, duyệt, rollback | `src/server/lens/masterdata/*`, `scripts/data.ts`, `data/sources/*.json` |
+| Khu vực (thành phố + 町丁目), danh sách thành phố | `src/server/lens/regions.ts`, `data/cities.json` |
 | HTTP routes | `src/server/app.ts` |
 | Lưu trữ: Firestore / file JSON (dev) / memory (test) | `src/server/db/*` |
 | App LIFF (mobile) | `src/components/mobile/FamilyApp.tsx`, `src/App.tsx` |
@@ -58,6 +61,8 @@ flowchart LR
 | Gõ / bấm | Tác dụng |
 |---|---|
 | *(gửi ảnh/PDF)* | Đọc & thêm lịch. Nhiều ảnh gửi liền nhau = 1 giấy |
+| `rác` rồi gửi ảnh / gõ tên · `rác pin sạc` | Phân loại rác: loại, cách bỏ, cảnh báo 家電4品目/pin/bình xịt. Chế độ 5 phút, hỏi nhiều món liên tiếp; `hủy` để thoát. Tính lượt riêng (`LOOKUP_QUOTA`, mặc định 60/tháng), không trừ quota giấy |
+| *(gửi vị trí LINE)* · `khu vực` · `khu vực <tên thành phố>` | Đặt thành phố + khu (町丁目) để tra rác đúng nơi. Từ vị trí LINE bot **đề xuất** thành phố để bạn bấm xác nhận; không lưu tọa độ/số nhà |
 | `dịch` rồi gửi ảnh · `dịch <chữ Nhật>` | Chỉ dịch từng dòng (không lưu, không tính quota) |
 | `lịch` | Trang "Thêm vào lịch iPhone / Google" |
 | `menu`, `?`, `@tên bot` | Hiện các nút bấm (trong group không có rich menu) |

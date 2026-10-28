@@ -116,6 +116,8 @@ export interface QuickItem {
   /** Opens the phone camera / photo picker straight from the chat (quick reply only). */
   camera?: boolean;
   cameraRoll?: boolean;
+  /** Opens LINE's location picker; the chosen place comes back as a location message. */
+  location?: boolean;
 }
 
 export function text(t: string, quickReply?: QuickItem[]): LineMessage {
@@ -128,7 +130,9 @@ export function text(t: string, quickReply?: QuickItem[]): LineMessage {
           ? { type: 'camera', label: q.label.slice(0, 20) }
           : q.cameraRoll
             ? { type: 'cameraRoll', label: q.label.slice(0, 20) }
-            : q.uri
+            : q.location
+              ? { type: 'location', label: q.label.slice(0, 20) }
+              : q.uri
           ? { type: 'uri', label: q.label.slice(0, 20), uri: q.uri }
           : q.data
             ? { type: 'postback', label: q.label.slice(0, 20), data: q.data, displayText: q.text }

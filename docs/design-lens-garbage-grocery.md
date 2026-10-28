@@ -1,6 +1,6 @@
 # Thiết kế: bộ "đọc ảnh" dùng chung (Lens) + 2 module Phân loại rác / Đi chợ Nhật
 
-> Trạng thái: thiết kế + đã cài đặt một phần. **Đã có**: sync master data (`scripts/data.ts`, adapter `ckan_csv_v1`, `src/server/lens/masterdata/`); lõi Lens cho rác (`src/server/lens/gomi/`: nhận diện Claude, luật quốc gia, khớp từ điển, soạn câu trả lời, fallback + `unknown_items`); CLI thử `scripts/lens.ts`; test `tests/masterdata.test.ts`, `tests/lens-gomi.test.ts`. **Chưa có**: nối vào bot LINE (lệnh `rác`, chế độ ảnh), hồ sơ vùng `Family.region` + cách hỏi khu vực, lịch đổ rác/ICS, `cityInfo` (link/phí 粗大ごみ) theo thành phố, bảng đi chợ, adapter Excel, store Firestore cho master data (hiện file JSON ở `.data/masterdata/`). Ngày: 2026-10-28.
+> Trạng thái: thiết kế + đã cài đặt phần rác. **Đã có**: sync master data (`scripts/data.ts`, adapter `ckan_csv_v1`); lõi Lens cho rác (`src/server/lens/gomi/`); **nối bot LINE** (lệnh `rác`, chế độ ảnh, `khu vực`, vị trí LINE → đề xuất thành phố → xác nhận); `Family.region`; lượt hỏi riêng (`LOOKUP_QUOTA`); log món chưa có; test `tests/masterdata.test.ts`, `lens-gomi`, `bot-gomi`, `regions`. **Chưa có**: lịch đổ rác/ICS (hook `nextCollection` sẵn), `cityInfo` (link/phí 粗大ごみ), nguồn dữ liệu thật đã bật (`data/sources/` mới có `_template.json`), bảng đi chợ, adapter Excel, store Firestore cho master data. Dữ liệu đã `publish` nằm ở `data/masterdata/<nguồn>/live.json`, commit vào git và đi cùng image (đổi dữ liệu = một PR xem được diff). Ngày: 2026-10-28.
 > Phần "đã kiểm chứng" / "chưa kiểm chứng" ghi rõ ở mục 8. Những gì thuộc buổi thảo luận trước ("schema chung như đã bàn", "bản tin chính sách") **không có trong repo** nên được thiết kế lại từ đầu ở đây — cần đối chiếu.
 
 ## 1. Nguyên tắc
@@ -56,17 +56,40 @@ interface LensModule<Q, M> {
 
 Tái dùng từ code hiện có: `pageBlock`, `createAnthropicClient`, `calculateCostUsd`, routing Haiku→Sonnet (`extract.ts`), hàng đợi gộp ảnh (`aggregator.ts`), ngân sách/cảnh báo admin (`bot.ts`), ICS (`ics.ts`). Mới: thư mục `lens/`, bảng master data, hồ sơ vùng.
 
-### Hồ sơ vùng dùng chung
+### Hồ sơ vùng dùng chung (đã cài đặt)
 
-`Family` hiện chưa có địa chỉ. Thêm:
+`Family.region = { city_code, city_name_jp, label_vi, chome_label?, set_at, via }`. Chỉ **thành phố + 町丁目** (ví dụ "西日暮里"), không lưu tọa độ, số nhà, mã bưu điện. `xóa dữ liệu` xóa luôn `region`. Module bản tin chính sách đọc cùng trường này.
 
-```ts
-region?: { city_code: string /* JIS 5 số */; chome_code?: string; label_vi: string; set_at: string }
+```mermaid
+flowchart TD
+  A[Người dùng hỏi rác] --> B{Đã có region?}
+  B -- có --> Z[Tra từ điển thành phố]
+  B -- chưa --> C[Luật quốc gia vẫn trả lời
+tivi · pin · PC]
+  C --> D[Món khác: mời đặt khu vực]
+  D --> E[Gửi vị trí LINE]
+  D --> F[Gõ: khu vực tên thành phố]
+  E --> G[Đọc địa chỉ trong tin nhắn vị trí
+khớp data/cities.json]
+  G -- khớp --> H[ĐỀ XUẤT thành phố + khu
+người dùng bấm Đúng]
+  G -- không có địa chỉ --> I[GSI reverse geocoder
+chỉ khi REGION_GEOCODER=gsi]
+  I --> H
+  G -- thành phố ngoài danh sách --> U[Mời dùng quy tắc chung
+ghi log nhu cầu thành phố mới]
+  F -- 1 kết quả --> R[Lưu region]
+  F -- nhiều --> P[Chọn trong nút]
+  P --> R
+  F -- không có --> U
+  H --> R
+  U -- người dùng đồng ý --> R2[region = unsupported]
 ```
 
-- Chỉ lưu **thành phố + 町丁目**, không lưu số nhà. Hỏi **một lần** (gõ tên khu / chọn từ danh sách / gửi vị trí), module bản tin chính sách và rác cùng đọc.
-- `xóa dữ liệu` xóa luôn `region`.
-- Danh sách 町丁目 chuẩn: lấy từ *大字・町丁目レベル位置参照情報* (MLIT, cung cấp miễn phí). Điều khoản dùng cần xác nhận lại trước khi nhúng (mục 8).
+- **Từ vị trí LINE**: mặc định chỉ đọc chuỗi địa chỉ trong tin nhắn (không gọi dịch vụ ngoài). Chuỗi đó được cắt ngay: giữ thành phố + 町丁目, bỏ số nhà/mã bưu điện. Luôn **đề xuất rồi xin xác nhận**, không tự lưu.
+- **Fallback tọa độ**: nếu pin không có địa chỉ, có thể bật `REGION_GEOCODER=gsi` để hỏi bộ chuyển tọa độ → địa chỉ của GSI (gửi tọa độ cho GSI, nên tắt mặc định; chưa kiểm tra được từ môi trường dev nên cần thử thật trước khi bật).
+- **Thành phố ngoài danh sách** (`data/cities.json`): chỉ được dùng quy tắc chung khi người dùng đồng ý rõ ràng (gõ nhầm không thành region); tên thành phố được ghi vào log nhu cầu (`npm run admin -- unknown`, dòng `region`) để biết nên thêm thành phố nào.
+- **町丁目 chuẩn hóa mã** (để khớp lịch đổ rác theo khu) sẽ cần danh sách 町丁目; hiện chỉ lưu nhãn chữ.
 
 ## 3. Module Phân loại rác
 
@@ -365,7 +388,7 @@ Rác làm trước vì dữ liệu có sẵn từ nguồn mở, rủi ro pháp l
 | Tỉnh Ishikawa (các thị xã) | Danh mục phân loại + lịch theo địa chỉ | CSV, CC BY; có data dictionary | [ごみ分別品目一覧](https://ckan.opendata.pref.ishikawa.lg.jp/en/dataset/172065_gomibunbetu/resource/5704ec35-a26c-474a-a722-0cdcdb27f22d) · [recycle_calendar](https://ckan.opendata.pref.ishikawa.lg.jp/en/dataset/173614_recycle_calendar/resource/3949fc87-319d-459a-9e0c-e7746eb80fe4) |
 | 荒川区 | Danh mục phân loại | CSV, CC BY | [ごみと資源の分別品目](https://catalog.data.metro.tokyo.lg.jp/zh_Hant_TW/dataset/t131181d0000000002/resource/4b0d4ed6-d9a0-46f5-929a-eeb17ca4e136) |
 | 中野区 | Thứ đổ rác theo khu | CSV | [catalog Tokyo](https://catalog.data.metro.tokyo.lg.jp/zh_Hans_CN/dataset/t131148d0000000135/resource/2372d8ea-1d6c-4df0-b4a8-b92fabafc331) |
-| 東村山市 / 西東京市 | Danh mục phân loại | CSV, CC BY | [東村山](https://catalog.data.metro.tokyo.lg.jp/dataset/t132292d3000000001/resource/7cc48e8b-b837-4384-a3e8-542998ae4162) · [西東京](https://catalog.data.metro.tokyo.lg.jp/zh_Hant_TW/dataset/t132136d3000000001/resource/3f18c688-c091-4252-87d5-011eacd37862) |
+| 東村山市 (13213) / 西東京市 (13229) | Danh mục phân loại | CSV, CC BY | [東村山](https://catalog.data.metro.tokyo.lg.jp/zh_Hant_TW/dataset/t132136d3000000001/resource/3f18c688-c091-4252-87d5-011eacd37862) · [西東京](https://catalog.data.metro.tokyo.lg.jp/dataset/t132292d3000000001/resource/7cc48e8b-b837-4384-a3e8-542998ae4162) (hai link này lần trước bị gán ngược; mã dataset `t13213…` = 東村山, `t13229…` = 西東京, **vẫn cần mở để xác nhận**) |
 | 神戸市 | Danh mục + ngày đổ theo địa chỉ | Excel, CC BY 2.1 JP | [神戸市 ごみ オープンデータ](https://www.city.kobe.lg.jp/a04164/kurashi/recycle/gomi/shisaku/opendeta.html) |
 | 横浜市 | Trang open data về rác | chưa xác nhận | [横浜市](https://www.city.yokohama.lg.jp/city-info/yokohamashi/tokei-chosa/portal/opendata/gomi.html) |
 | 広島市 | Lịch theo 町丁目 | Excel theo khu (bản 令和8年度) | [広島市](https://www.city.hiroshima.lg.jp/living/gomi-kankyo/1021277/1003072/1036671/1048041/1048070/1048071.html) |

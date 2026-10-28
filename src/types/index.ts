@@ -69,6 +69,17 @@ export interface ExtractedDocument {
   source_hashes?: string[];
 }
 
+export interface FamilyRegion {
+  /** 5-digit JIS code, or 'unsupported' when the city isn't in data/cities.json (generic answers only). */
+  city_code: string;
+  city_name_jp: string;
+  label_vi: string;
+  /** e.g. "西日暮里2丁目": town + chome only. */
+  chome_label?: string;
+  set_at: string;
+  via: 'text' | 'location';
+}
+
 export type FamilyStatus = 'pending_terms' | 'pending_invite' | 'active' | 'suspended' | 'left';
 
 export interface Family {
@@ -89,6 +100,11 @@ export interface Family {
   pending_delete_until?: string; // "xóa dữ liệu" confirmation window
   /** Opt-in 7:00 JST LINE reminder of today's/tomorrow's items (uses push quota). */
   daily_digest?: boolean;
+  /** Where the family lives, to town level (町丁目). Shared by the waste module and the policy newsletter. No coordinates, no street number. */
+  region?: FamilyRegion;
+  /** Waste/lookup questions this month (own counter: they don't use the paper quota). */
+  lookup_used?: number;
+  lookup_month?: string; // YYYY-MM (JST)
   member_user_ids: string[]; // LINE userIds seen in this chat (for LIFF access)
   members_count?: number;
   /** Client-only: derived by the API. */

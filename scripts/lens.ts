@@ -4,7 +4,7 @@
  *   npx tsx scripts/lens.ts "pin sạc" --city 12345
  *   npx tsx scripts/lens.ts --file photo.jpg --city 12345 [--json]
  *
- * Reads the live master data written by `npm run data` ($MASTERDATA_DIR, default .data/masterdata).
+ * Reads the live master data written by `npm run data` ($MASTERDATA_DIR, default data/masterdata).
  * Uses Claude when ANTHROPIC_API_KEY is set; otherwise an offline mock that treats your text as the
  * Japanese item name (good for checking the dictionary and the national rules, not for photos).
  * Items missing from the dictionary are counted in the dev database (`npm run admin -- unknown`).
@@ -39,7 +39,7 @@ async function main() {
     : undefined;
 
   const live = !!process.env.ANTHROPIC_API_KEY;
-  const store = new FileMasterStore(process.env.MASTERDATA_DIR || '.data/masterdata');
+  const store = new FileMasterStore(process.env.MASTERDATA_DIR || 'data/masterdata');
   const sources = loadSources(process.env.MASTERDATA_SOURCES || 'data/sources');
   const cfg = { ...loadConfig({ ...process.env, NODE_ENV: 'development' }), storage: 'file' as const };
   const repo = createRepo(cfg);
