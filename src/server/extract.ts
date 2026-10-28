@@ -127,7 +127,7 @@ export class ExtractionError extends Error {
   }
 }
 
-function pageBlock(p: Page): Anthropic.Beta.BetaContentBlockParam {
+export function pageBlock(p: Page): Anthropic.Beta.BetaContentBlockParam {
   const data = p.data.toString('base64');
   if (p.mediaType === 'application/pdf') {
     return { type: 'document', source: { type: 'base64', media_type: 'application/pdf', data } };

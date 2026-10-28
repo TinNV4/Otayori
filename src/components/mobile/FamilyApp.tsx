@@ -2,9 +2,9 @@ import React, { useEffect, useMemo, useState } from 'react';
 import liff from '@line/liff';
 import {
   ListTodo, FileText, CalendarDays, Settings, ChevronLeft, ChevronRight, Check, ThumbsUp, ThumbsDown,
-  Trash2, MapPin, Clock, AlertTriangle, Search, RefreshCw, Shield, Pencil, Wrench, BarChart3, Camera, Plus, X, Loader2,
+  Trash2, MapPin, Clock, AlertTriangle, Search, RefreshCw, Shield, Pencil, Wrench, BarChart3, Camera, Plus, X, Loader2, Languages, Copy,
 } from 'lucide-react';
-import { DocAction, DocEvent, DocType, ExtractedDocument, Family } from '../../types/index.ts';
+import { DocAction, DocEvent, DocType, ExtractedDocument, Family, Translation } from '../../types/index.ts';
 
 type Tab = 'upcoming' | 'docs' | 'calendar' | 'settings';
 
@@ -27,6 +27,8 @@ export interface FamilyAppProps {
   onOpenSimulator: () => void;
   /** Read photos/PDF taken inside the app. */
   onUpload: (files: File[]) => Promise<UploadOutcome>;
+  /** "Chỉ dịch": translate line by line, nothing stored. */
+  onTranslate: (files: File[]) => Promise<{ ok: true; translation: Translation } | { ok: false; error: string }>;
 }
 
 export type UploadOutcome =
@@ -425,8 +427,8 @@ const CaptureSheet: React.FC<{
   onAddMore: () => void;
   onRemove: (i: number) => void;
   onCancel: () => void;
-  onSubmit: () => void;
-  busy: boolean;
+  onSubmit: (mode: 'read' | 'translate') => void;
+  busy: 'read' | 'translate' | null;
   error: string | null;
 }> = ({ files, onAddMore, onRemove, onCancel, onSubmit, busy, error }) => {
   // Create + revoke preview URLs in the same effect (StrictMode-safe).
@@ -438,13 +440,13 @@ const CaptureSheet: React.FC<{
   }, [files]);
   return (
     <div className="fixed inset-0 z-50 bg-slate-50 overflow-y-auto">
-      <div className="max-w-md mx-auto pb-32">
+      <div className="max-w-md mx-auto pb-44">
         <header className="sticky top-0 z-10 bg-white/95 backdrop-blur border-b border-slate-200 h-14 flex items-center px-2">
-          <button disabled={busy} onClick={onCancel} className="h-11 px-3 text-[16px] text-slate-600 disabled:opacity-30">Hủy</button>
+          <button disabled={!!busy} onClick={onCancel} className="h-11 px-3 text-[16px] text-slate-600 disabled:opacity-30">Hủy</button>
           <div className="flex-1 text-center text-[16px] font-semibold text-slate-900">{files.length} trang</div>
           <div className="w-14" />
         </header>
-        <div className="p-4 grid grid-cols-3 gap-3">
+        <div className="p-4 pb-0 grid grid-cols-3 gap-3">
           {files.map((f, i) => (
             <div key={i} className="relative aspect-[3/4] rounded-xl overflow-hidden bg-white border border-slate-200">
               {urls[i] ? <img src={urls[i]} alt={`Trang ${i + 1}`} className="w-full h-full object-cover" /> : <div className="w-full h-full flex items-center justify-center text-3xl">📄</div>}
@@ -460,13 +462,60 @@ const CaptureSheet: React.FC<{
             </button>
           )}
         </div>
-        <p className="px-4 text-[14px] text-slate-500">Giấy nhiều trang: thêm đủ các trang rồi gửi 1 lần. Chụp thẳng, đủ sáng, không bị cắt mép.</p>
+        <p className="px-4 mt-4 text-[14px] text-slate-500">Giấy nhiều trang: thêm đủ các trang rồi gửi 1 lần. Chụp thẳng, đủ sáng, không bị cắt mép.</p>
         {error && <div className="mx-4 mt-4 rounded-2xl bg-rose-50 border border-rose-200 p-4 text-[15px] text-rose-800">{error}</div>}
       </div>
       <div className="fixed bottom-0 inset-x-0 bg-white border-t border-slate-200 p-4" style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom))' }}>
         <div className="max-w-md mx-auto">
-          <button disabled={busy || !files.length} onClick={onSubmit} className="w-full h-14 rounded-2xl bg-emerald-600 text-white text-[17px] font-semibold flex items-center justify-center gap-2 disabled:opacity-60">
-            {busy ? <><Loader2 className="w-5 h-5 animate-spin" /> Đang đọc… (20–40 giây)</> : `Gửi đọc ${files.length} trang`}
+          <button disabled={!!busy || !files.length} onClick={() => onSubmit('read')} className="w-full h-14 rounded-2xl bg-emerald-600 text-white text-[17px] font-semibold flex items-center justify-center gap-2 disabled:opacity-60">
+            {busy === 'read' ? <><Loader2 className="w-5 h-5 animate-spin" /> Đang đọc… (20–40 giây)</> : <>📋 Đọc & thêm vào lịch</>}
+          </button>
+          <button disabled={!!busy || !files.length} onClick={() => onSubmit('translate')} className="mt-2 w-full h-12 rounded-2xl border border-slate-200 bg-white text-slate-800 text-[16px] font-semibold flex items-center justify-center gap-2 disabled:opacity-60">
+            {busy === 'translate' ? <><Loader2 className="w-5 h-5 animate-spin" /> Đang dịch… (5–15 giây)</> : <><Languages className="w-5 h-5" /> Chỉ dịch (không lưu)</>}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const TranslationSheet: React.FC<{ t: Translation; onBack: () => void; onRead: () => void; reading: boolean }> = ({ t, onBack, onRead, reading }) => {
+  const [showJp, setShowJp] = useState(true);
+  const [copied, setCopied] = useState(false);
+  const copy = async () => {
+    await navigator.clipboard.writeText(t.lines.map((l) => (showJp ? `${l.jp}\n→ ${l.vi}` : l.vi)).join('\n\n'));
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+  return (
+    <div className="fixed inset-0 z-[55] bg-slate-50 overflow-y-auto">
+      <div className="max-w-md mx-auto pb-32">
+        <header className="sticky top-0 z-10 bg-white/95 backdrop-blur border-b border-slate-200 h-14 flex items-center px-2">
+          <button onClick={onBack} className="h-11 px-2 flex items-center gap-1 text-[16px] text-emerald-700 font-medium"><ChevronLeft className="w-6 h-6" /> Quay lại</button>
+          <div className="flex-1" />
+          <button onClick={() => setShowJp((v) => !v)} className="h-11 px-3 text-[15px] text-slate-700">{showJp ? 'Ẩn tiếng Nhật' : 'Hiện tiếng Nhật'}</button>
+        </header>
+        <div className="px-4 pt-4 space-y-3">
+          {t.title_jp && <h1 className="text-[18px] font-bold text-slate-900">{t.title_jp}</h1>}
+          {t.notes_vi && <div className="rounded-2xl bg-amber-50 border border-amber-200 p-3 text-[14px] text-amber-900">⚠️ {t.notes_vi}</div>}
+          <Card className="divide-y divide-slate-100">
+            {t.lines.map((l, i) => (
+              <div key={i} className="p-4">
+                <div className="text-[17px] leading-relaxed text-slate-900">{l.vi}</div>
+                {showJp && <div className="mt-1 text-[14px] leading-relaxed text-slate-500">{l.jp}</div>}
+              </div>
+            ))}
+          </Card>
+          <button onClick={copy} className="w-full h-12 rounded-2xl text-[15px] text-slate-600 flex items-center justify-center gap-2">
+            <Copy className="w-4 h-4" /> {copied ? 'Đã sao chép ✓' : 'Sao chép bản dịch'}
+          </button>
+          <p className="text-center text-[13px] text-slate-400">Bản dịch không được lưu lại.</p>
+        </div>
+      </div>
+      <div className="fixed bottom-0 inset-x-0 bg-white border-t border-slate-200 p-4" style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom))' }}>
+        <div className="max-w-md mx-auto">
+          <button disabled={reading} onClick={onRead} className="w-full h-14 rounded-2xl bg-emerald-600 text-white text-[17px] font-semibold flex items-center justify-center gap-2 disabled:opacity-60">
+            {reading ? <><Loader2 className="w-5 h-5 animate-spin" /> Đang đọc…</> : '📋 Có việc cần làm? Đọc & thêm vào lịch'}
           </button>
         </div>
       </div>
@@ -490,7 +539,8 @@ export const FamilyApp: React.FC<FamilyAppProps> = (props) => {
   const openCount = documents.reduce((n, d) => n + d.actions.filter((a) => !a.completed).length, 0);
   const fileInput = React.useRef<HTMLInputElement>(null);
   const [captured, setCaptured] = useState<File[] | null>(null);
-  const [uploading, setUploading] = useState(false);
+  const [uploading, setUploading] = useState<'read' | 'translate' | null>(null);
+  const [translation, setTranslation] = useState<Translation | null>(null);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
 
@@ -502,13 +552,23 @@ export const FamilyApp: React.FC<FamilyAppProps> = (props) => {
     setUploadError(null);
     setCaptured((prev) => [...(prev || []), ...picked].slice(0, MAX_PAGES));
   };
-  const submit = async () => {
+  const submit = async (mode: 'read' | 'translate') => {
     if (!captured?.length) return;
-    setUploading(true);
+    setUploading(mode);
     setUploadError(null);
+    if (mode === 'translate') {
+      const t = await props.onTranslate(captured);
+      setUploading(null);
+      if (!t.ok) return setUploadError(t.error);
+      return setTranslation(t.translation); // keep photos so "Đọc & thêm vào lịch" can reuse them
+    }
     const r = await props.onUpload(captured);
-    setUploading(false);
-    if (!r.ok) return setUploadError(r.error);
+    setUploading(null);
+    if (!r.ok) {
+      setTranslation(null);
+      return setUploadError(r.error);
+    }
+    setTranslation(null);
     setCaptured(null);
     setOpenDocId(r.document.id);
     if (r.result === 'duplicate') {
@@ -580,6 +640,10 @@ export const FamilyApp: React.FC<FamilyAppProps> = (props) => {
           onCancel={() => { setCaptured(null); setUploadError(null); }}
           onSubmit={submit}
         />
+      )}
+
+      {translation && captured && (
+        <TranslationSheet t={translation} onBack={() => setTranslation(null)} onRead={() => submit('read')} reading={uploading === 'read'} />
       )}
 
       {toast && (

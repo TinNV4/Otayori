@@ -4,7 +4,7 @@ import { prepareFile } from './lib/images.ts';
 import { LineSimulatorView } from './components/LineSimulatorView.tsx';
 import { AdminLIFFView } from './components/AdminLIFFView.tsx';
 import { PrivacyAndGuideView } from './components/PrivacyAndGuideView.tsx';
-import { ExtractedDocument, Family, AdminMetrics, InviteCode, AuditLog, MeResponse } from './types/index.ts';
+import { ExtractedDocument, Family, AdminMetrics, InviteCode, AuditLog, MeResponse, Translation } from './types/index.ts';
 import { apiFetch, initAuth } from './lib/api.ts';
 import { ChevronLeft } from 'lucide-react';
 
@@ -155,6 +155,18 @@ export default function App() {
     }
   };
 
+  const handleTranslate = async (files: File[]) => {
+    try {
+      const pages = await Promise.all(files.map(prepareFile));
+      const res = await apiFetch('/api/translate', { method: 'POST', body: withFamily({ pages }) });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) return { ok: false as const, error: data.error || `Lỗi ${res.status}. Thử lại sau nhé.` };
+      return { ok: true as const, translation: data.translation as Translation };
+    } catch (err) {
+      return { ok: false as const, error: String((err as Error).message || err) };
+    }
+  };
+
   if (isLoading) {
     return <div className="min-h-[100dvh] flex items-center justify-center text-[15px] text-slate-500">Đang tải…</div>;
   }
@@ -226,6 +238,7 @@ export default function App() {
       onOpenAdmin={() => setScreen('admin')}
       onOpenSimulator={() => setScreen('simulator')}
       onUpload={handleUpload}
+      onTranslate={handleTranslate}
     />
   );
 }

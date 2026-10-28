@@ -162,6 +162,13 @@ export interface ComposeRenrakuResponse {
   etiquette_tips: string;
 }
 
+/** "Chỉ dịch" result: line-by-line Japanese → Vietnamese (never stored). */
+export interface Translation {
+  title_jp: string;
+  lines: Array<{ jp: string; vi: string }>;
+  notes_vi: string;
+}
+
 export interface MeResponse {
   user_id: string;
   is_admin: boolean;

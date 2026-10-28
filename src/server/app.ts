@@ -4,6 +4,7 @@ import { Repo } from './db/repo.ts';
 import { Bot } from './bot.ts';
 import { Extractor, MAX_IMAGE_BYTES, MAX_PDF_BYTES, Page, SUPPORTED_IMAGE_TYPES } from './extract.ts';
 import { Composer } from './renraku.ts';
+import { MockTranslator, TranslationError, Translator } from './translate.ts';
 import { LineApi, RecordingLineApi, verifyLineSignature } from './line.ts';
 import { AuthedRequest, authMiddleware, IdTokenVerifier, requireAdmin } from './auth.ts';
 import { generateIcsCalendar } from './ics.ts';
@@ -19,6 +20,7 @@ export interface AppDeps {
   line: LineApi;
   extractor: Extractor;
   composer: Composer;
+  translator?: Translator;
   verifyIdToken: IdTokenVerifier | null;
 }
 
@@ -38,6 +40,7 @@ export function createApp(deps: AppDeps) {
   const { cfg, repo, line } = deps;
   const bot = new Bot({ repo, line, extractor: deps.extractor, composer: deps.composer, cfg });
   const services = bot.services;
+  const translator = deps.translator || new MockTranslator();
   const app = express();
   app.disable('x-powered-by');
   app.set('trust proxy', true);
@@ -114,7 +117,7 @@ export function createApp(deps: AppDeps) {
   // Photos uploaded from the LIFF app need a bigger body; everything else stays small.
   const smallJson = express.json({ limit: cfg.devMode ? '15mb' : '100kb' });
   const uploadJson = express.json({ limit: '25mb' });
-  api.use((req, res, next) => (req.path === '/documents/upload' ? uploadJson : smallJson)(req, res, next));
+  api.use((req, res, next) => (['/documents/upload', '/translate'].includes(req.path) ? uploadJson : smallJson)(req, res, next));
   api.use(authMiddleware(cfg, deps.verifyIdToken));
 
   /** Resolve the family the caller may access (must be a member of the LINE chat). */
@@ -276,13 +279,12 @@ export function createApp(deps: AppDeps) {
    * Read a paper photographed inside the LIFF app (same pipeline as LINE photos).
    * Body: { familyId, pages: [{ data: base64, mediaType }] } — the client downsizes images first.
    */
-  api.post('/documents/upload', async (req: AuthedRequest, res) => {
-    const fam = await memberFamily(req, res);
-    if (!fam) return;
+  /** Validate `{ pages: [{ data: base64, mediaType }] }`; sends the error response and returns null if invalid. */
+  function parsePages(req: AuthedRequest, res: Response): Page[] | null {
     const raw = Array.isArray(req.body.pages) ? req.body.pages : [];
     if (!raw.length || raw.length > cfg.maxPagesPerDoc) {
       res.status(400).json({ error: `1–${cfg.maxPagesPerDoc} trang` });
-      return;
+      return null;
     }
     const pages: Page[] = [];
     for (const p of raw) {
@@ -291,20 +293,54 @@ export function createApp(deps: AppDeps) {
       const isPdf = mediaType === 'application/pdf';
       if (!isPdf && !(SUPPORTED_IMAGE_TYPES as readonly string[]).includes(mediaType)) {
         res.status(400).json({ error: 'Chỉ nhận ảnh JPG/PNG/WebP hoặc PDF' });
-        return;
+        return null;
       }
       if (!data.length || data.length > (isPdf ? MAX_PDF_BYTES : MAX_IMAGE_BYTES)) {
         res.status(413).json({ error: 'File quá lớn' });
-        return;
+        return null;
       }
       pages.push({ data, mediaType });
     }
+    return pages;
+  }
+
+  api.post('/documents/upload', async (req: AuthedRequest, res) => {
+    const fam = await memberFamily(req, res);
+    if (!fam) return;
+    const pages = parsePages(req, res);
+    if (!pages) return;
     const r = await bot.ingest(fam.family_id, pages);
     if (r.kind === 'blocked' || r.kind === 'error') {
       res.status(r.kind === 'blocked' ? 403 : 422).json({ error: r.message });
       return;
     }
     res.json({ result: r.kind, added: r.kind === 'duplicate' ? r.added : undefined, document: r.doc });
+  });
+
+  /**
+   * "Chỉ dịch": line-by-line translation of photographed pages. Nothing is stored;
+   * doesn't use the family's paper quota, only the shared monthly budget.
+   */
+  api.post('/translate', async (req: AuthedRequest, res) => {
+    const fam = await memberFamily(req, res);
+    if (!fam) return;
+    if (fam.status !== 'active') { res.status(403).json({ error: 'Gia đình chưa kích hoạt hoặc đang tạm dừng.' }); return; }
+    const pages = parsePages(req, res);
+    if (!pages) return;
+    const month = jstMonth();
+    if ((await repo.getUsage(month)).cost_usd >= cfg.monthlyBudgetUsd) {
+      res.status(429).json({ error: 'Hệ thống tạm dừng do đã hết ngân sách Beta tháng này.' });
+      return;
+    }
+    try {
+      const { result, cost_usd } = await translator.translate(pages);
+      await repo.addUsage(month, { cost_usd, pages: pages.length });
+      res.json({ translation: result });
+    } catch (err) {
+      if (err instanceof TranslationError && err.cost_usd) await repo.addUsage(month, { cost_usd: err.cost_usd });
+      await services.logError(fam.family_id, 'TRANSLATE', String((err as Error).message || err));
+      res.status(422).json({ error: '😥 Chưa dịch được. Bạn thử chụp lại thẳng, đủ sáng, rõ chữ nhé.' });
+    }
   });
 
   api.post('/compose-renraku', async (req: AuthedRequest, res) => {

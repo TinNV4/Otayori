@@ -107,6 +107,29 @@ describe('in-app upload', () => {
   });
 });
 
+describe('chỉ dịch (translate only)', () => {
+  const page = { data: Buffer.from('translate-me').toString('base64'), mediaType: 'image/jpeg' };
+
+  it('returns line-by-line translation without storing a document or using quota', async () => {
+    const famB = familyIdForChat('CB');
+    const before = await repo.listDocuments(famB);
+    const quotaBefore = (await repo.getFamily(famB))!.quota_used;
+    const res = await fetch(`${base}/api/translate`, { method: 'POST', headers: auth('tokB'), body: JSON.stringify({ pages: [page] }) });
+    expect(res.status).toBe(200);
+    const { translation } = await res.json();
+    expect(translation.lines.length).toBeGreaterThan(0);
+    expect(translation.lines[0]).toHaveProperty('vi');
+    expect(await repo.listDocuments(famB)).toHaveLength(before.length);
+    expect((await repo.getFamily(famB))!.quota_used).toBe(quotaBefore);
+  });
+
+  it('requires membership and valid pages', async () => {
+    expect((await fetch(`${base}/api/translate`, { method: 'POST', headers: auth('tokB'), body: JSON.stringify({ familyId: familyIdForChat('CA'), pages: [page] }) })).status).toBe(404);
+    expect((await fetch(`${base}/api/translate`, { method: 'POST', headers: auth('tokB'), body: JSON.stringify({ pages: [] }) })).status).toBe(400);
+    expect((await fetch(`${base}/api/translate`, { method: 'POST', body: JSON.stringify({ pages: [page] }) })).status).toBe(401);
+  });
+});
+
 describe('admin', () => {
   it('is forbidden for regular users', async () => {
     expect((await fetch(`${base}/api/admin/metrics`, { headers: auth('tokA') })).status).toBe(403);
