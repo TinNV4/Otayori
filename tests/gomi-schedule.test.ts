@@ -260,7 +260,7 @@ describe('scheduleFromStore + city info file', () => {
     expect(() => loadCityInfo(f)).toThrow(/https/);
     fs.writeFileSync(f, JSON.stringify({ '13118': { sodai_booking_url: 'https://c.example/x', source_url: 'https://c.example', updated_at: '2026-09-01' } }));
     expect(loadCityInfo(f)['13118'].sodai_booking_url).toBe('https://c.example/x');
-    expect(loadCityInfo('data/city-info.json')).toEqual({});
+    expect(Object.keys(loadCityInfo('data/city-info.json'))).toEqual(['12204', '27100']); // the shipped file passes the same validation
   });
 });
 
