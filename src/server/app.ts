@@ -38,9 +38,9 @@ function adminFamily(f: Family) {
 
 export function createApp(deps: AppDeps) {
   const { cfg, repo, line } = deps;
-  const bot = new Bot({ repo, line, extractor: deps.extractor, composer: deps.composer, cfg });
-  const services = bot.services;
   const translator = deps.translator || new MockTranslator();
+  const bot = new Bot({ repo, line, extractor: deps.extractor, composer: deps.composer, translator, cfg });
+  const services = bot.services;
   const app = express();
   app.disable('x-powered-by');
   app.set('trust proxy', true);

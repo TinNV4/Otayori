@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { activate, ev, group, lastText, setup, textEv } from './helpers.ts';
 import { familyIdForChat } from '../src/server/service.ts';
+import { formatTranslation } from '../src/server/bot.ts';
 import { jstMonth } from '../src/server/time.ts';
 
 const image = (source: object, id: string, imageSet?: object) =>
@@ -232,5 +233,70 @@ describe('menu', () => {
     await activate(bot);
     await bot.handleWebhook({ events: [ev(group(), { type: 'message', message: { id: 'm2', type: 'text', text: '@Kami Việt lịch', mention: { mentionees: [{ index: 0, length: 10, isSelf: true }] } } })] });
     expect(lastText(line)).toContain('/cal/');
+  });
+});
+
+describe('"dịch" command (translate only)', () => {
+  it('"dịch" then a photo → bilingual translation, nothing stored, no quota; then one tap reads it', async () => {
+    const { bot, repo, line } = await setup();
+    await activate(bot);
+    const fid = familyIdForChat('Cgroup1');
+    await bot.handleWebhook({ events: [textEv(group(), 'dịch')] });
+    expect(lastText(line)).toContain('CHỈ DỊCH');
+
+    line.contents.set('t1', { data: Buffer.from('to-translate'), contentType: 'image/jpeg' });
+    await bot.handleWebhook({ events: [image(group(), 't1')] });
+    await bot.aggregator.flushAll();
+    expect(lastText(line)).toContain('Bản dịch (không lưu)');
+    expect(JSON.stringify(line.sent[line.sent.length - 1].messages)).toContain('action=read_last');
+    expect(await repo.listDocuments(fid)).toHaveLength(0);
+    expect((await repo.getFamily(fid))?.quota_used).toBe(0);
+
+    // one tap: full read of the same pages (no re-send)
+    await bot.handleWebhook({ events: [ev(group(), { type: 'postback', postback: { data: 'action=read_last' } })] });
+    expect(await repo.listDocuments(fid)).toHaveLength(1);
+    expect((await repo.getFamily(fid))?.quota_used).toBe(1);
+  });
+
+  it('mode is one-shot: the next photo is read normally', async () => {
+    const { bot, repo, line } = await setup();
+    await activate(bot);
+    await bot.handleWebhook({ events: [textEv(group(), 'dịch')] });
+    line.contents.set('a', { data: Buffer.from('a'), contentType: 'image/jpeg' });
+    line.contents.set('b', { data: Buffer.from('b'), contentType: 'image/jpeg' });
+    await bot.handleWebhook({ events: [image(group(), 'a')] });
+    await bot.aggregator.flushAll();
+    await bot.handleWebhook({ events: [image(group(), 'b')] });
+    await bot.aggregator.flushAll();
+    expect(await repo.listDocuments(familyIdForChat('Cgroup1'))).toHaveLength(1);
+  });
+
+  it('works even when the paper quota is used up', async () => {
+    const { bot, repo, line } = await setup();
+    await activate(bot);
+    const fam = (await repo.getFamily(familyIdForChat('Cgroup1')))!;
+    fam.quota_used = fam.quota_limit;
+    await repo.saveFamily(fam);
+    await bot.handleWebhook({ events: [textEv(group(), '/dịch')] });
+    line.contents.set('q', { data: Buffer.from('q'), contentType: 'image/jpeg' });
+    await bot.handleWebhook({ events: [image(group(), 'q')] });
+    await bot.aggregator.flushAll();
+    expect(lastText(line)).toContain('Bản dịch');
+  });
+
+  it('"dịch <text>" translates pasted Japanese directly', async () => {
+    const { bot, line } = await setup();
+    await activate(bot);
+    await bot.handleWebhook({ events: [textEv(group(), 'dịch 明日は休園日です')] });
+    expect(lastText(line)).toContain('明日は休園日です');
+  });
+
+  it('splits long translations across ≤5 messages', () => {
+    const lines = Array.from({ length: 200 }, (_, i) => ({ jp: 'あ'.repeat(60) + i, vi: 'chữ '.repeat(20) + i }));
+    const msgs = formatTranslation({ title_jp: 'x', lines, notes_vi: '' }, [{ label: 'm', text: 'menu' }]);
+    expect(msgs.length).toBe(5);
+    for (const m of msgs) expect((m.text as string).length).toBeLessThanOrEqual(5000);
+    expect(msgs[4].quickReply).toBeDefined();
+    expect(msgs[0].quickReply).toBeUndefined();
   });
 });

@@ -4,12 +4,13 @@ import {
   ExtractionError, Extractor, MAX_IMAGE_BYTES, MAX_PDF_BYTES, Page, SONNET_MODEL, SUPPORTED_IMAGE_TYPES, toDocument,
 } from './extract.ts';
 import { Composer } from './renraku.ts';
+import { MockTranslator, Translator } from './translate.ts';
 import { LineApi, LineMessage, QuickItem, text } from './line.ts';
 import { PageAggregator, PageBatch } from './aggregator.ts';
 import { findExactDuplicate, findSameDocument, mergeInto, pageHash } from './dedupe.ts';
 import { calendarPageUrl, familyIdForChat, liffUrl, newFamily, normalizeCode, rollQuotaMonth, Services } from './service.ts';
 import { jstDate, jstMonth } from './time.ts';
-import { ExtractedDocument, Family } from '../types/index.ts';
+import { ExtractedDocument, Family, Translation } from '../types/index.ts';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type LineEvent = any;
@@ -21,6 +22,26 @@ const MODEL_LABEL: Record<string, string> = {
 };
 
 const DELETE_CONFIRM_MINUTES = 5;
+const TRANSLATE_MODE_MS = 5 * 60_000;
+const LAST_PAGES_TTL_MS = 10 * 60_000;
+
+/** Bilingual line list split across LINE messages (≤5 per reply, 5000 chars each). Quick replies go on the last one. */
+export function formatTranslation(t: Translation, quick: QuickItem[]): LineMessage[] {
+  const blocks = t.lines.map(l => (l.jp && l.jp !== l.vi ? `${l.vi}\n（${l.jp}）` : l.vi));
+  const header = `🌐 Bản dịch (không lưu)${t.title_jp ? `\n📄 ${t.title_jp}` : ''}`;
+  const chunks: string[] = [header];
+  for (const b of blocks) {
+    const cur = chunks[chunks.length - 1];
+    if (cur.length + b.length + 2 > 4500) chunks.push(b);
+    else chunks[chunks.length - 1] = `${cur}\n\n${b}`;
+  }
+  if (t.notes_vi) chunks[chunks.length - 1] += `\n\n⚠️ ${t.notes_vi}`;
+  if (chunks.length > 5) {
+    chunks.length = 5;
+    chunks[4] += '\n\n… (còn tiếp — mở app "Chụp giấy → Chỉ dịch" để xem đầy đủ)';
+  }
+  return chunks.map((c, i) => text(c, i === chunks.length - 1 ? quick : undefined));
+}
 
 export type IngestResult =
   | { kind: 'blocked'; message: string }
@@ -80,6 +101,7 @@ export interface BotDeps {
   line: LineApi;
   extractor: Extractor;
   composer: Composer;
+  translator?: Translator;
   cfg: AppConfig;
   now?: () => Date;
 }
@@ -88,12 +110,18 @@ export class Bot {
   readonly services: Services;
   readonly aggregator: PageAggregator;
   private seenEvents: string[] = [];
+  /** Chats that typed "dịch": the next photos are translated only (one-shot, expires). */
+  private translateUntil = new Map<string, number>();
+  /** Last translated pages per chat (RAM only, 10 min) so "Đọc & thêm lịch" doesn't need a re-send. */
+  private lastPages = new Map<string, { pages: Page[]; at: number }>();
+  private translator: Translator;
   private repo: Repo;
   private line: LineApi;
   private cfg: AppConfig;
   private now: () => Date;
 
   constructor(private readonly deps: BotDeps) {
+    this.translator = deps.translator || new MockTranslator();
     this.repo = deps.repo;
     this.line = deps.line;
     this.cfg = deps.cfg;
@@ -269,6 +297,7 @@ export class Bot {
       { label: '📷 Chụp giấy', camera: true },
       { label: '🖼️ Chọn ảnh', cameraRoll: true },
       { label: '📅 Lịch', data: 'action=calendar', text: 'Lịch' },
+      { label: '🌐 Chỉ dịch', data: 'action=translate_mode', text: 'dịch' },
       { label: '📊 Hạn mức', text: 'trạng thái' },
       { label: '✍️ Soạn tin cô', text: '/soạn' },
     ];
@@ -283,6 +312,8 @@ export class Bot {
       '❓ Hướng dẫn — bấm nút bên dưới, hoặc gõ:\n' +
         '• Gửi ảnh/PDF giấy tờ → mình đọc và tóm tắt\n' +
         '• "lịch" → thêm hạn & sự kiện vào lịch điện thoại\n' +
+        '• "dịch" rồi gửi ảnh → chỉ dịch từng dòng (không lưu, không thêm lịch)\n' +
+        '• "dịch <chữ tiếng Nhật>" → dịch đoạn chữ đó\n' +
         '• "trạng thái" → hạn mức tháng này\n' +
         '• "/soạn <nội dung>" → soạn tin tiếng Nhật gửi cô giáo\n' +
         '  Ví dụ: /soạn Hôm nay bé bị sốt xin nghỉ học\n' +
@@ -329,6 +360,12 @@ export class Bot {
     }
 
     if (t === 'lich' || t === '/lich') return this.reply(ev, [this.calendarMessage(family)]);
+    if (t === 'dich' || t === '/dich') return this.startTranslateMode(ev, family);
+    if (/^\/?dich\s/.test(t)) return this.translateText(ev, family, raw.replace(/^\S+\s+/, ''));
+    if ((t === 'huy' || t === '/huy') && this.translateUntil.has(family.line_chat_id)) {
+      this.translateUntil.delete(family.line_chat_id);
+      return this.reply(ev, [text('Đã tắt chế độ dịch. Ảnh gửi tiếp sẽ được đọc và thêm vào lịch như bình thường.')]);
+    }
     if (t === 'trang thai' || t === '/trangthai') {
       return this.reply(ev, [text(`📊 Tháng ${family.quota_month}: đã dùng ${family.quota_used}/${family.quota_limit} giấy.\nMã mời: ${family.invite_code}`)]);
     }
@@ -376,6 +413,15 @@ export class Bot {
       return this.reply(ev, [text('Đã hủy. Dữ liệu được giữ nguyên.')]);
     }
     if (action === 'calendar' && family.status === 'active') return this.reply(ev, [this.calendarMessage(family)]);
+    if (action === 'translate_mode' && family.status === 'active') return this.startTranslateMode(ev, family);
+    if (action === 'read_last' && family.status === 'active') {
+      const last = this.lastPages.get(family.line_chat_id);
+      if (!last || Date.now() - last.at > LAST_PAGES_TTL_MS) {
+        return this.reply(ev, [text('Ảnh đã hết hạn lưu tạm (10 phút). Bạn gửi lại ảnh giấy nhé.')]);
+      }
+      this.lastPages.delete(family.line_chat_id);
+      return this.processBatch({ chatId: family.line_chat_id, familyId: family.family_id, pages: last.pages, replyToken: ev.replyToken, userId, mode: 'read' });
+    }
     if (action === 'fb') {
       const doc = await this.repo.getDocument(family.family_id, params.get('doc') || '');
       const v = params.get('v');
@@ -411,7 +457,8 @@ export class Bot {
 
   private async onMedia(ev: LineEvent, family: Family, userId?: string) {
     const msg = ev.message;
-    const blocker = await this.intakeBlocker(family);
+    const translating = (this.translateUntil.get(family.line_chat_id) || 0) > Date.now();
+    const blocker = translating ? await this.translateBlocker(family) : await this.intakeBlocker(family);
     if (blocker) {
       // In groups, don't nag on every photo of a pending family — only active/suspended/quota cases.
       if (family.chat_type === 'user' || family.status !== 'pending_terms') await this.reply(ev, [text(blocker)]);
@@ -440,6 +487,7 @@ export class Bot {
     await this.line.showLoading(family.line_chat_id, 30);
     const page: Page = { data: content.data, mediaType, hint: content.hint };
     const res = this.aggregator.add({
+      mode: translating ? 'translate' : 'read',
       chatId: family.line_chat_id,
       familyId: family.family_id,
       page,
@@ -545,8 +593,65 @@ export class Bot {
     return { kind: 'new', family, doc, isFirstDoc: existingDocs.length === 0 };
   }
 
+  private async startTranslateMode(ev: LineEvent, family: Family) {
+    this.translateUntil.set(family.line_chat_id, Date.now() + TRANSLATE_MODE_MS);
+    return this.reply(ev, [text(
+      '🌐 Chế độ CHỈ DỊCH: gửi ảnh giấy (1–6 trang) trong 5 phút tới.\nMình sẽ dịch từng dòng Nhật → Việt. Không lưu, không thêm vào lịch, không tính hạn mức.',
+      [{ label: '📷 Chụp giấy', camera: true }, { label: '🖼️ Chọn ảnh', cameraRoll: true }, { label: 'Hủy', text: 'hủy' }],
+    )]);
+  }
+
+  /** Translation shares the monthly budget but not the paper quota. */
+  private async translateBlocker(family: Family): Promise<string | null> {
+    if (family.status !== 'active') return '⚠️ Gia đình chưa kích hoạt hoặc đang tạm dừng.';
+    if (!(await this.withinBudget())) return '⚠️ Hệ thống tạm dừng do đã hết ngân sách Beta tháng này. Xin lỗi gia đình!';
+    return null;
+  }
+
+  private async translateText(ev: LineEvent, family: Family, content: string) {
+    const blocker = await this.translateBlocker(family);
+    if (blocker) return this.reply(ev, [text(blocker)]);
+    try {
+      const { result, cost_usd } = await this.translator.translate([], content.slice(0, 3000));
+      await this.repo.addUsage(jstMonth(this.now()), { cost_usd });
+      return this.reply(ev, formatTranslation(result, [{ label: '☰ Menu', text: 'menu' }]));
+    } catch (err) {
+      await this.services.logError(family.family_id, 'TRANSLATE', String((err as Error).message || err));
+      return this.reply(ev, [text('😥 Chưa dịch được. Bạn thử lại sau ít phút nhé.')]);
+    }
+  }
+
+  /** LINE "dịch" mode: translate the batch, keep pages in RAM briefly for a one-tap full read. */
+  private async translateBatch(batch: PageBatch) {
+    this.translateUntil.delete(batch.chatId); // one-shot
+    const family = await this.repo.getFamily(batch.familyId);
+    if (!family) return;
+    const blocker = await this.translateBlocker(family);
+    if (blocker) return this.send(batch, [text(blocker)]);
+    const seen = new Set<string>();
+    const pages = batch.pages.filter(p => !seen.has(pageHash(p.data)) && seen.add(pageHash(p.data)));
+    try {
+      const { result, cost_usd } = await this.translator.translate(pages);
+      await this.repo.addUsage(jstMonth(this.now()), { cost_usd, pages: pages.length });
+      this.lastPages.set(batch.chatId, { pages, at: Date.now() });
+      setTimeout(() => {
+        const last = this.lastPages.get(batch.chatId);
+        if (last && Date.now() - last.at >= LAST_PAGES_TTL_MS) this.lastPages.delete(batch.chatId);
+      }, LAST_PAGES_TTL_MS + 1000).unref?.();
+      return this.send(batch, formatTranslation(result, [
+        { label: '📋 Đọc & thêm lịch', data: 'action=read_last', text: '📋 Đọc & thêm vào lịch' },
+        { label: '🌐 Dịch tiếp', data: 'action=translate_mode', text: 'dịch' },
+        { label: '☰ Menu', text: 'menu' },
+      ]));
+    } catch (err) {
+      await this.services.logError(family.family_id, 'TRANSLATE', String((err as Error).message || err));
+      return this.send(batch, [text('😥 Chưa dịch được. Bạn thử chụp lại thẳng, đủ sáng, rõ chữ rồi gõ "dịch" và gửi lại nhé.')]);
+    }
+  }
+
   /** LINE path: ingest a batch from the chat and answer there. */
   async processBatch(batch: PageBatch) {
+    if (batch.mode === 'translate') return this.translateBatch(batch);
     const r = await this.ingest(batch.familyId, batch.pages);
     if (r.kind === 'blocked' || r.kind === 'error') return this.send(batch, [text(r.message)]);
     if (r.kind === 'duplicate') return this.send(batch, [this.duplicateMessage(r.doc, r.added)]);

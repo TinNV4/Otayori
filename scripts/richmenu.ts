@@ -35,7 +35,7 @@ async function main() {
     { type: 'message', label: 'Lịch', text: 'lịch' },
     { type: 'message', label: 'Soạn tin', text: '/soạn' },
     { type: 'uri', label: 'Trang gia đình', uri: home },
-    { type: 'message', label: 'Hạn mức', text: 'trạng thái' },
+    { type: 'message', label: 'Dịch giấy', text: 'dịch' },
     { type: 'message', label: 'Hướng dẫn', text: 'hướng dẫn' },
   ];
   const areas = actions.map((action, i) => {

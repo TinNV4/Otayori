@@ -15,6 +15,8 @@ Mình đang thử nghiệm **Kami Việt** – trợ lý LINE đọc giấy tờ
 4. Chụp giấy gửi vào nhóm 📷 → bot trả lời sau ~30 giây
 5. Gõ **lịch** → bấm **Thêm vào lịch iPhone / Google** (làm 1 lần)
 
+Chỉ cần hiểu nội dung (không thêm lịch): gõ **dịch** rồi gửi ảnh → bot dịch từng dòng Nhật–Việt.
+
 Quên lệnh thì gõ **menu** hoặc nhắc tên bot **@Kami Việt** để hiện các nút.
 
 🔒 Bot không lưu ảnh; nội dung đã đọc tự xóa sau 90 ngày; gõ **xóa dữ liệu** để xóa hết bất cứ lúc nào.
