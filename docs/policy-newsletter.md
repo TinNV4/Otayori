@@ -120,8 +120,8 @@ Admin mở app → Quản trị → "Duyệt bản tin chính sách": thấy nh�
 
 | Đã có | Chưa làm |
 |---|---|
-| 5 nguồn: 入管庁, 厚労省, 国税庁, 警察庁, Nagoya | **B2B 登録支援機関** (gửi bản tin cho người lao động do tổ chức quản lý): cần quyết định hợp đồng, đối tượng được xem dữ liệu của ai, và thanh toán — chưa dựng khi chưa chốt các điểm này |
-| Hồ sơ 3 trường + 6 trường thêm, sửa/xóa trong LIFF | Thanh toán Premium tự động |
+| 5 nguồn: 入管庁, 厚労省, 国税庁, 警察庁, Nagoya | Thanh toán Premium tự động (chuyển gói là thao tác tay của admin) |
+| Hồ sơ 3 trường + 6 trường thêm, sửa/xóa trong LIFF | |
 | 🔴 push · 🟡🟢 trong app · `có gì mới` | |
 | Nhắc hạn: visa (90 ngày), bằng lái (60), 住民税 (7) | |
 | Chấm đỏ rich menu theo từng người | |
