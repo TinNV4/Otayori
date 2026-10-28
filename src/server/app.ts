@@ -2,7 +2,7 @@ import express, { Response } from 'express';
 import { AppConfig } from './config.ts';
 import { Repo } from './db/repo.ts';
 import { Bot } from './bot.ts';
-import { Extractor } from './extract.ts';
+import { Extractor, MAX_IMAGE_BYTES, MAX_PDF_BYTES, Page, SUPPORTED_IMAGE_TYPES } from './extract.ts';
 import { Composer } from './renraku.ts';
 import { LineApi, RecordingLineApi, verifyLineSignature } from './line.ts';
 import { AuthedRequest, authMiddleware, IdTokenVerifier, requireAdmin } from './auth.ts';
@@ -111,7 +111,10 @@ export function createApp(deps: AppDeps) {
 
   // ---------- Authenticated LIFF API ----------
   const api = express.Router();
-  api.use(express.json({ limit: cfg.devMode ? '15mb' : '100kb' }));
+  // Photos uploaded from the LIFF app need a bigger body; everything else stays small.
+  const smallJson = express.json({ limit: cfg.devMode ? '15mb' : '100kb' });
+  const uploadJson = express.json({ limit: '25mb' });
+  api.use((req, res, next) => (req.path === '/documents/upload' ? uploadJson : smallJson)(req, res, next));
   api.use(authMiddleware(cfg, deps.verifyIdToken));
 
   /** Resolve the family the caller may access (must be a member of the LINE chat). */
@@ -267,6 +270,41 @@ export function createApp(deps: AppDeps) {
     if (!fam) return;
     const token = await services.rotateIcsToken(fam.family_id, req.userId!);
     res.json({ success: !!token, ics_token: token, ics_url: token ? icsUrl(cfg, { ...fam, ics_token: token }) : null });
+  });
+
+  /**
+   * Read a paper photographed inside the LIFF app (same pipeline as LINE photos).
+   * Body: { familyId, pages: [{ data: base64, mediaType }] } — the client downsizes images first.
+   */
+  api.post('/documents/upload', async (req: AuthedRequest, res) => {
+    const fam = await memberFamily(req, res);
+    if (!fam) return;
+    const raw = Array.isArray(req.body.pages) ? req.body.pages : [];
+    if (!raw.length || raw.length > cfg.maxPagesPerDoc) {
+      res.status(400).json({ error: `1–${cfg.maxPagesPerDoc} trang` });
+      return;
+    }
+    const pages: Page[] = [];
+    for (const p of raw) {
+      const mediaType = String(p?.mediaType || '');
+      const data = Buffer.from(String(p?.data || ''), 'base64');
+      const isPdf = mediaType === 'application/pdf';
+      if (!isPdf && !(SUPPORTED_IMAGE_TYPES as readonly string[]).includes(mediaType)) {
+        res.status(400).json({ error: 'Chỉ nhận ảnh JPG/PNG/WebP hoặc PDF' });
+        return;
+      }
+      if (!data.length || data.length > (isPdf ? MAX_PDF_BYTES : MAX_IMAGE_BYTES)) {
+        res.status(413).json({ error: 'File quá lớn' });
+        return;
+      }
+      pages.push({ data, mediaType });
+    }
+    const r = await bot.ingest(fam.family_id, pages);
+    if (r.kind === 'blocked' || r.kind === 'error') {
+      res.status(r.kind === 'blocked' ? 403 : 422).json({ error: r.message });
+      return;
+    }
+    res.json({ result: r.kind, added: r.kind === 'duplicate' ? r.added : undefined, document: r.doc });
   });
 
   api.post('/compose-renraku', async (req: AuthedRequest, res) => {

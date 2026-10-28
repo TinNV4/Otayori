@@ -85,6 +85,28 @@ describe('LIFF API', () => {
   });
 });
 
+describe('in-app upload', () => {
+  const page = { data: Buffer.from('fake-jpeg-bytes-123').toString('base64'), mediaType: 'image/jpeg' };
+
+  it('reads photos uploaded from the LIFF app through the same pipeline', async () => {
+    const res = await fetch(`${base}/api/documents/upload`, { method: 'POST', headers: auth('tokB'), body: JSON.stringify({ pages: [page] }) });
+    expect(res.status).toBe(200);
+    const body = await res.json();
+    expect(body.result).toBe('new');
+    expect(body.document.family_id).toBe(familyIdForChat('CB'));
+    // same bytes again → answered from storage
+    const again = await (await fetch(`${base}/api/documents/upload`, { method: 'POST', headers: auth('tokB'), body: JSON.stringify({ pages: [page] }) })).json();
+    expect(again.result).toBe('duplicate');
+  });
+
+  it('rejects other families, bad types and empty uploads', async () => {
+    const famA = familyIdForChat('CA');
+    expect((await fetch(`${base}/api/documents/upload`, { method: 'POST', headers: auth('tokB'), body: JSON.stringify({ familyId: famA, pages: [page] }) })).status).toBe(404);
+    expect((await fetch(`${base}/api/documents/upload`, { method: 'POST', headers: auth('tokB'), body: JSON.stringify({ pages: [{ ...page, mediaType: 'text/html' }] }) })).status).toBe(400);
+    expect((await fetch(`${base}/api/documents/upload`, { method: 'POST', headers: auth('tokB'), body: JSON.stringify({ pages: [] }) })).status).toBe(400);
+  });
+});
+
 describe('admin', () => {
   it('is forbidden for regular users', async () => {
     expect((await fetch(`${base}/api/admin/metrics`, { headers: auth('tokA') })).status).toBe(403);

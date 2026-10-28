@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import liff from '@line/liff';
 import {
   ListTodo, FileText, CalendarDays, Settings, ChevronLeft, ChevronRight, Check, ThumbsUp, ThumbsDown,
-  Trash2, MapPin, Clock, AlertTriangle, Search, RefreshCw, Shield, Pencil, Wrench, BarChart3,
+  Trash2, MapPin, Clock, AlertTriangle, Search, RefreshCw, Shield, Pencil, Wrench, BarChart3, Camera, Plus, X, Loader2,
 } from 'lucide-react';
 import { DocAction, DocEvent, DocType, ExtractedDocument, Family } from '../../types/index.ts';
 
@@ -25,7 +25,13 @@ export interface FamilyAppProps {
   onOpenPrivacy: () => void;
   onOpenAdmin: () => void;
   onOpenSimulator: () => void;
+  /** Read photos/PDF taken inside the app. */
+  onUpload: (files: File[]) => Promise<UploadOutcome>;
 }
+
+export type UploadOutcome =
+  | { ok: true; result: 'new' | 'duplicate'; added?: number; document: ExtractedDocument }
+  | { ok: false; error: string };
 
 // ---------- helpers ----------
 const todayJst = () => new Date(Date.now() + 9 * 3600_000).toISOString().slice(0, 10);
@@ -126,7 +132,7 @@ const UpcomingTab: React.FC<{ documents: ExtractedDocument[]; onToggle: FamilyAp
       <div className="px-6 pt-20 text-center">
         <div className="text-5xl">🎉</div>
         <p className="mt-4 text-lg font-semibold text-slate-900">Không có việc nào sắp tới</p>
-        <p className="mt-2 text-[15px] text-slate-500">Chụp giấy tờ gửi vào nhóm LINE, việc cần làm và hạn sẽ hiện ở đây.</p>
+        <p className="mt-2 text-[15px] text-slate-500">Bấm “Chụp giấy” bên dưới (hoặc gửi ảnh vào nhóm LINE), việc cần làm và hạn sẽ hiện ở đây.</p>
       </div>
     );
   }
@@ -410,6 +416,64 @@ const SettingsTab: React.FC<Pick<FamilyAppProps, 'family' | 'isAdmin' | 'devMode
   );
 };
 
+
+// ---------- in-app capture ----------
+const MAX_PAGES = 6;
+
+const CaptureSheet: React.FC<{
+  files: File[];
+  onAddMore: () => void;
+  onRemove: (i: number) => void;
+  onCancel: () => void;
+  onSubmit: () => void;
+  busy: boolean;
+  error: string | null;
+}> = ({ files, onAddMore, onRemove, onCancel, onSubmit, busy, error }) => {
+  // Create + revoke preview URLs in the same effect (StrictMode-safe).
+  const [urls, setUrls] = useState<string[]>([]);
+  useEffect(() => {
+    const created = files.map((f) => (f.type.startsWith('image/') ? URL.createObjectURL(f) : ''));
+    setUrls(created);
+    return () => created.forEach((u) => u && URL.revokeObjectURL(u));
+  }, [files]);
+  return (
+    <div className="fixed inset-0 z-50 bg-slate-50 overflow-y-auto">
+      <div className="max-w-md mx-auto pb-32">
+        <header className="sticky top-0 z-10 bg-white/95 backdrop-blur border-b border-slate-200 h-14 flex items-center px-2">
+          <button disabled={busy} onClick={onCancel} className="h-11 px-3 text-[16px] text-slate-600 disabled:opacity-30">Hủy</button>
+          <div className="flex-1 text-center text-[16px] font-semibold text-slate-900">{files.length} trang</div>
+          <div className="w-14" />
+        </header>
+        <div className="p-4 grid grid-cols-3 gap-3">
+          {files.map((f, i) => (
+            <div key={i} className="relative aspect-[3/4] rounded-xl overflow-hidden bg-white border border-slate-200">
+              {urls[i] ? <img src={urls[i]} alt={`Trang ${i + 1}`} className="w-full h-full object-cover" /> : <div className="w-full h-full flex items-center justify-center text-3xl">📄</div>}
+              <span className="absolute bottom-1 left-1 text-[12px] font-bold bg-black/60 text-white rounded px-1.5">{i + 1}</span>
+              {!busy && (
+                <button onClick={() => onRemove(i)} aria-label="Bỏ trang này" className="absolute top-1 right-1 w-7 h-7 rounded-full bg-black/60 text-white flex items-center justify-center"><X className="w-4 h-4" /></button>
+              )}
+            </div>
+          ))}
+          {files.length < MAX_PAGES && !busy && (
+            <button onClick={onAddMore} className="aspect-[3/4] rounded-xl border-2 border-dashed border-slate-300 text-slate-500 flex flex-col items-center justify-center gap-1 text-[14px]">
+              <Plus className="w-7 h-7" /> Thêm trang
+            </button>
+          )}
+        </div>
+        <p className="px-4 text-[14px] text-slate-500">Giấy nhiều trang: thêm đủ các trang rồi gửi 1 lần. Chụp thẳng, đủ sáng, không bị cắt mép.</p>
+        {error && <div className="mx-4 mt-4 rounded-2xl bg-rose-50 border border-rose-200 p-4 text-[15px] text-rose-800">{error}</div>}
+      </div>
+      <div className="fixed bottom-0 inset-x-0 bg-white border-t border-slate-200 p-4" style={{ paddingBottom: 'calc(1rem + env(safe-area-inset-bottom))' }}>
+        <div className="max-w-md mx-auto">
+          <button disabled={busy || !files.length} onClick={onSubmit} className="w-full h-14 rounded-2xl bg-emerald-600 text-white text-[17px] font-semibold flex items-center justify-center gap-2 disabled:opacity-60">
+            {busy ? <><Loader2 className="w-5 h-5 animate-spin" /> Đang đọc… (20–40 giây)</> : `Gửi đọc ${files.length} trang`}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // ---------- shell ----------
 const TABS: Array<{ id: Tab; label: string; icon: React.FC<{ className?: string }> }> = [
   { id: 'upcoming', label: 'Sắp tới', icon: ListTodo },
@@ -424,6 +488,34 @@ export const FamilyApp: React.FC<FamilyAppProps> = (props) => {
   const [openDocId, setOpenDocId] = useState<string | null>(props.initialDocId || null);
   const openDoc = documents.find((d) => d.id === openDocId) || null;
   const openCount = documents.reduce((n, d) => n + d.actions.filter((a) => !a.completed).length, 0);
+  const fileInput = React.useRef<HTMLInputElement>(null);
+  const [captured, setCaptured] = useState<File[] | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const [toast, setToast] = useState<string | null>(null);
+
+  const pickFiles = () => fileInput.current?.click();
+  const onPicked = (list: FileList | null) => {
+    const picked = Array.from(list || []);
+    if (fileInput.current) fileInput.current.value = '';
+    if (!picked.length) return;
+    setUploadError(null);
+    setCaptured((prev) => [...(prev || []), ...picked].slice(0, MAX_PAGES));
+  };
+  const submit = async () => {
+    if (!captured?.length) return;
+    setUploading(true);
+    setUploadError(null);
+    const r = await props.onUpload(captured);
+    setUploading(false);
+    if (!r.ok) return setUploadError(r.error);
+    setCaptured(null);
+    setOpenDocId(r.document.id);
+    if (r.result === 'duplicate') {
+      setToast(r.added ? `Giấy này đã có — đã bổ sung ${r.added} mục mới.` : 'Giấy này đã được đọc trước đó. Không tính thêm hạn mức.');
+      setTimeout(() => setToast(null), 4000);
+    }
+  };
 
   useEffect(() => {
     document.body.style.overflow = openDoc ? 'hidden' : '';
@@ -458,6 +550,41 @@ export const FamilyApp: React.FC<FamilyAppProps> = (props) => {
           ))}
         </div>
       </nav>
+
+      <input
+        ref={fileInput}
+        type="file"
+        accept="image/*,application/pdf"
+        multiple
+        className="hidden"
+        onChange={(e) => onPicked(e.target.files)}
+      />
+
+      {(tab === 'upcoming' || tab === 'docs') && !openDoc && !captured && (
+        <button
+          onClick={pickFiles}
+          className="fixed z-40 right-4 h-14 px-5 rounded-full bg-emerald-600 active:bg-emerald-700 text-white text-[16px] font-semibold shadow-lg flex items-center gap-2"
+          style={{ bottom: 'calc(5rem + env(safe-area-inset-bottom))' }}
+        >
+          <Camera className="w-5 h-5" /> Chụp giấy
+        </button>
+      )}
+
+      {captured && (
+        <CaptureSheet
+          files={captured}
+          busy={uploading}
+          error={uploadError}
+          onAddMore={pickFiles}
+          onRemove={(i) => setCaptured((prev) => (prev || []).filter((_, j) => j !== i))}
+          onCancel={() => { setCaptured(null); setUploadError(null); }}
+          onSubmit={submit}
+        />
+      )}
+
+      {toast && (
+        <div className="fixed z-[60] top-16 inset-x-4 max-w-md mx-auto rounded-2xl bg-slate-900 text-white text-[15px] p-4 shadow-lg">{toast}</div>
+      )}
 
       {openDoc && (
         <DocSheet

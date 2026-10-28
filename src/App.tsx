@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { FamilyApp } from './components/mobile/FamilyApp.tsx';
+import { FamilyApp, UploadOutcome } from './components/mobile/FamilyApp.tsx';
+import { prepareFile } from './lib/images.ts';
 import { LineSimulatorView } from './components/LineSimulatorView.tsx';
 import { AdminLIFFView } from './components/AdminLIFFView.tsx';
 import { PrivacyAndGuideView } from './components/PrivacyAndGuideView.tsx';
@@ -139,6 +140,21 @@ export default function App() {
     if (res.ok) setFamily((await res.json()).family);
   };
 
+  const handleUpload = async (files: File[]): Promise<UploadOutcome> => {
+    try {
+      const pages = await Promise.all(files.map(prepareFile));
+      const res = await apiFetch('/api/documents/upload', { method: 'POST', body: withFamily({ pages }) });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) return { ok: false, error: data.error || `Lỗi ${res.status}. Thử lại sau nhé.` };
+      const doc: ExtractedDocument = data.document;
+      setDocuments((prev) => [doc, ...prev.filter((d) => d.id !== doc.id)]);
+      if (data.result === 'new') loadAppData(); // quota counter
+      return { ok: true, result: data.result, added: data.added, document: doc };
+    } catch (err) {
+      return { ok: false, error: String((err as Error).message || err) };
+    }
+  };
+
   if (isLoading) {
     return <div className="min-h-[100dvh] flex items-center justify-center text-[15px] text-slate-500">Đang tải…</div>;
   }
@@ -209,6 +225,7 @@ export default function App() {
       onOpenPrivacy={() => setScreen('privacy')}
       onOpenAdmin={() => setScreen('admin')}
       onOpenSimulator={() => setScreen('simulator')}
+      onUpload={handleUpload}
     />
   );
 }

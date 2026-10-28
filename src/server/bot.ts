@@ -22,6 +22,12 @@ const MODEL_LABEL: Record<string, string> = {
 
 const DELETE_CONFIRM_MINUTES = 5;
 
+export type IngestResult =
+  | { kind: 'blocked'; message: string }
+  | { kind: 'error'; message: string }
+  | { kind: 'duplicate'; family: Family; doc: ExtractedDocument; added: number }
+  | { kind: 'new'; family: Family; doc: ExtractedDocument; isFirstDoc: boolean };
+
 /** Strip Vietnamese diacritics + lowercase, for forgiving command matching. */
 export function fold(s: string): string {
   return s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase().trim();
@@ -473,19 +479,23 @@ export class Bot {
   }
 
   /** Extract one (possibly multi-page) document and answer in the chat. */
-  async processBatch(batch: PageBatch) {
+  /**
+   * Shared pipeline for LINE photos and in-app uploads: gates (status/quota/budget),
+   * dedupe, Claude extraction, storage, quota + cost accounting.
+   */
+  async ingest(familyId: string, rawPages: Page[]): Promise<IngestResult> {
     const now = this.now();
-    const family = await this.repo.getFamily(batch.familyId);
-    if (!family) return;
+    const family = await this.repo.getFamily(familyId);
+    if (!family) return { kind: 'blocked', message: 'Không tìm thấy gia đình.' };
     rollQuotaMonth(family, now);
     const blocker = await this.intakeBlocker(family);
-    if (blocker) return this.send(batch, [text(blocker)]);
+    if (blocker) return { kind: 'blocked', message: blocker };
 
     const month = jstMonth(now);
 
     // Layer 1: identical photos (forwarded / sent twice) — answer from storage, no Claude call, no quota.
     const seen = new Set<string>();
-    const pages = batch.pages.filter(p => {
+    const pages = rawPages.filter(p => {
       const h = pageHash(p.data);
       if (seen.has(h)) return false;
       seen.add(h);
@@ -494,7 +504,7 @@ export class Bot {
     const hashes = [...seen];
     const existingDocs = await this.repo.listDocuments(family.family_id);
     const exact = findExactDuplicate(hashes, existingDocs);
-    if (exact) return this.send(batch, [this.duplicateMessage(exact, 0)]);
+    if (exact) return { kind: 'duplicate', family, doc: exact, added: 0 };
 
     let outcome;
     try {
@@ -504,10 +514,10 @@ export class Bot {
         const cost = err.runs.reduce((s, r) => s + r.cost_usd, 0);
         if (cost) await this.repo.addUsage(month, { cost_usd: cost });
         await this.services.logError(family.family_id, `EXTRACT_${err.code.toUpperCase()}`, err.message);
-        return this.send(batch, [text('😥 Mình chưa đọc được giấy này. Bạn thử chụp lại thẳng, đủ sáng, rõ chữ rồi gửi lại nhé.')]);
+        return { kind: 'error', message: '😥 Mình chưa đọc được giấy này. Bạn thử chụp lại thẳng, đủ sáng, rõ chữ rồi gửi lại nhé.' };
       }
       await this.services.logError(family.family_id, 'EXTRACT_UNKNOWN', String((err as Error)?.message || err));
-      return this.send(batch, [text('😥 Có lỗi khi đọc giấy. Bạn thử lại sau ít phút nhé.')]);
+      return { kind: 'error', message: '😥 Có lỗi khi đọc giấy. Bạn thử lại sau ít phút nhé.' };
     }
 
     const doc = toDocument(outcome, { familyId: family.family_id, pages: pages.length, now, retentionDays: this.cfg.retentionDays });
@@ -519,12 +529,10 @@ export class Bot {
       const added = mergeInto(same, doc);
       await this.repo.saveDocument(same);
       await this.repo.addUsage(month, { cost_usd: doc.token_usage?.estimated_cost_usd || 0, pages: pages.length });
-      return this.send(batch, [this.duplicateMessage(same, added)]);
+      return { kind: 'duplicate', family, doc: same, added };
     }
 
-    const isFirstDoc = existingDocs.length === 0;
     await this.repo.addDocument(doc);
-
     family.quota_used += 1;
     family.last_active = now.toISOString();
     await this.repo.saveFamily(family);
@@ -534,7 +542,16 @@ export class Bot {
       pages: pages.length,
       sonnet_docs: doc.model_used === SONNET_MODEL ? 1 : 0,
     });
+    return { kind: 'new', family, doc, isFirstDoc: existingDocs.length === 0 };
+  }
 
+  /** LINE path: ingest a batch from the chat and answer there. */
+  async processBatch(batch: PageBatch) {
+    const r = await this.ingest(batch.familyId, batch.pages);
+    if (r.kind === 'blocked' || r.kind === 'error') return this.send(batch, [text(r.message)]);
+    if (r.kind === 'duplicate') return this.send(batch, [this.duplicateMessage(r.doc, r.added)]);
+
+    const { doc, family } = r;
     const quick: QuickItem[] = [
       { label: '👍 Đúng', data: `action=fb&doc=${doc.id}&v=up`, text: '👍 Đúng' },
       { label: '👎 Sai', data: `action=fb&doc=${doc.id}&v=down`, text: '👎 Có chỗ sai' },
@@ -546,7 +563,7 @@ export class Bot {
 
     // Quick replies only render on the last message of a reply.
     const body = formatDocumentReply(doc);
-    const messages = isFirstDoc && (doc.events.length || doc.actions.some(a => a.deadline))
+    const messages = r.isFirstDoc && (doc.events.length || doc.actions.some(a => a.deadline))
       ? [text(body), { ...this.calendarMessage(family), quickReply: text('', quick).quickReply }]
       : [text(body, quick)];
     await this.send(batch, messages);
