@@ -109,6 +109,14 @@ export function createApp(deps: AppDeps) {
     res.json(await services.runCleanup());
   });
 
+  app.post('/tasks/digest', async (req, res) => {
+    if (!cfg.cronSecret || req.headers['x-cron-secret'] !== cfg.cronSecret) {
+      res.status(403).json({ error: 'forbidden' });
+      return;
+    }
+    res.json(await bot.sendDailyDigests());
+  });
+
   // Public: lets the SPA decide between LIFF login and dev auth.
   app.get('/api/config', (_req, res) => res.json({ liff_id: cfg.liffId, dev_mode: cfg.devMode }));
 
@@ -155,6 +163,7 @@ export function createApp(deps: AppDeps) {
     if (!fam) return;
     const name = String(req.body.family_name || '').trim().slice(0, 60);
     if (name) fam.family_name = name;
+    if (typeof req.body.daily_digest === 'boolean') fam.daily_digest = req.body.daily_digest;
     await repo.saveFamily(fam);
     res.json({ family: publicFamily(cfg, fam) });
   });
@@ -232,35 +241,6 @@ export function createApp(deps: AppDeps) {
     res.json({ success: await repo.deleteDocument(r.fam.family_id, r.doc.id) });
   });
 
-  /** Mark urgent → one LINE push to the family chat (counts against the monthly push quota). */
-  api.post('/documents/:id/toggle-urgent', async (req: AuthedRequest, res) => {
-    const r = await memberDoc(req, res);
-    if (!r) return;
-    const { doc, fam } = r;
-    doc.is_urgent = !doc.is_urgent;
-    let notification_text: string | undefined;
-    if (doc.is_urgent) {
-      doc.urgent_reason = String(req.body.reason || '').slice(0, 200) || undefined;
-      const usage = await repo.getUsage(jstMonth());
-      const open = doc.actions.filter(a => !a.completed);
-      const nearest = open.map(a => a.deadline).filter(Boolean).sort()[0] || doc.events.map(e => e.date).sort()[0];
-      notification_text = [
-        `🚨 GẤP: ${doc.title_vi}`,
-        nearest ? `⏰ Hạn gần nhất: ${nearest}` : '',
-        ...open.map(a => `• ${a.todo_vi}${a.deadline ? ` (hạn ${a.deadline})` : ''}`),
-        doc.urgent_reason ? `📝 ${doc.urgent_reason}` : '',
-      ].filter(Boolean).join('\n');
-      if (usage.push_messages < cfg.pushLimit && (await line.push(fam.line_chat_id, [text(notification_text)]))) {
-        await repo.addUsage(jstMonth(), { push_messages: 1 });
-        doc.urgent_notified_at = new Date().toISOString();
-      }
-    } else {
-      doc.urgent_reason = undefined;
-    }
-    await repo.saveDocument(doc);
-    res.json({ success: true, is_urgent: doc.is_urgent, notified_at: doc.urgent_notified_at, notification_text });
-  });
-
   api.post('/family/delete-all', async (req: AuthedRequest, res) => {
     const fam = await memberFamily(req, res);
     if (!fam) return;
@@ -334,10 +314,10 @@ export function createApp(deps: AppDeps) {
     }
     try {
       const { result, cost_usd } = await translator.translate(pages);
-      await repo.addUsage(month, { cost_usd, pages: pages.length });
+      await bot.recordUsage(month, { cost_usd, pages: pages.length });
       res.json({ translation: result });
     } catch (err) {
-      if (err instanceof TranslationError && err.cost_usd) await repo.addUsage(month, { cost_usd: err.cost_usd });
+      if (err instanceof TranslationError && err.cost_usd) await bot.recordUsage(month, { cost_usd: err.cost_usd });
       await services.logError(fam.family_id, 'TRANSLATE', String((err as Error).message || err));
       res.status(422).json({ error: '😥 Chưa dịch được. Bạn thử chụp lại thẳng, đủ sáng, rõ chữ nhé.' });
     }
@@ -353,7 +333,7 @@ export function createApp(deps: AppDeps) {
     const { result, cost_usd } = await deps.composer.compose({
       topic: req.body.topic || 'general', content_vi: content, child_name: req.body.child_name, class_name: req.body.class_name,
     });
-    await repo.addUsage(jstMonth(), { cost_usd });
+    await bot.recordUsage(jstMonth(), { cost_usd });
     res.json(result);
   });
 

@@ -1,5 +1,5 @@
 import { AppConfig } from './config.ts';
-import { Repo } from './db/repo.ts';
+import { Repo, UsageDelta } from './db/repo.ts';
 import {
   ExtractionError, Extractor, MAX_IMAGE_BYTES, MAX_PDF_BYTES, Page, SONNET_MODEL, SUPPORTED_IMAGE_TYPES, toDocument,
 } from './extract.ts';
@@ -23,6 +23,8 @@ const MODEL_LABEL: Record<string, string> = {
 
 const DELETE_CONFIRM_MINUTES = 5;
 const TRANSLATE_MODE_MS = 5 * 60_000;
+/** Push messages kept back from digests for reply-token fallbacks and admin alerts. */
+const PUSH_RESERVE = 20;
 const LAST_PAGES_TTL_MS = 10 * 60_000;
 
 /** Bilingual line list split across LINE messages (≤5 per reply, 5000 chars each). Quick replies go on the last one. */
@@ -127,7 +129,100 @@ export class Bot {
     this.cfg = deps.cfg;
     this.now = deps.now || (() => new Date());
     this.services = new Services(deps.repo, deps.cfg);
+    this.services.onError = (_familyId, type) => this.trackError(type);
     this.aggregator = new PageAggregator(deps.cfg.aggregationWindowMs, deps.cfg.maxPagesPerDoc, b => this.processBatch(b));
+  }
+
+  // ---------- usage + admin alerts ----------
+  private errorTimes: number[] = [];
+  private lastErrorAlert = 0;
+
+  /** All usage writes go through here so budget/push thresholds alert the admin once per month. */
+  async recordUsage(month: string, delta: UsageDelta) {
+    await this.repo.addUsage(month, delta);
+    if (!delta.cost_usd && !delta.push_messages) return;
+    const u = await this.repo.getUsage(month);
+    const budget = this.cfg.monthlyBudgetUsd;
+    const checks: Array<[string, boolean, string]> = [
+      ['budget100', u.cost_usd >= budget, `⛔ Đã dùng hết ngân sách tháng ${month}: $${u.cost_usd.toFixed(2)} / $${budget}. Bot đã ngừng đọc giấy cho đến tháng sau (hoặc tăng MONTHLY_BUDGET_USD rồi deploy lại).`],
+      ['budget80', u.cost_usd >= budget * 0.8, `⚠️ Ngân sách tháng ${month} đã dùng 80%: $${u.cost_usd.toFixed(2)} / $${budget}.`],
+      ['push80', u.push_messages >= this.cfg.pushLimit * 0.8, `⚠️ Đã dùng ${u.push_messages}/${this.cfg.pushLimit} tin LINE gửi chủ động tháng ${month}.`],
+    ];
+    for (const [key, hit, msg] of checks) {
+      if (hit && (await this.repo.markUsageAlert(month, key))) {
+        await this.notifyAdmins(`🔔 [Admin] ${msg}`);
+        if (key === 'budget100') await this.repo.markUsageAlert(month, 'budget80'); // don't send both
+        break;
+      }
+    }
+  }
+
+  /** Error spike: ≥5 reading/LINE errors within an hour → one alert (at most every 3 hours). */
+  private trackError(type: string) {
+    if (!/^(EXTRACT_|TRANSLATE|EVENT_HANDLER|CONTENT_DOWNLOAD)/.test(type)) return;
+    const now = Date.now();
+    this.errorTimes = [...this.errorTimes.filter(t => now - t < 3600_000), now];
+    if (this.errorTimes.length >= 5 && now - this.lastErrorAlert > 3 * 3600_000) {
+      this.lastErrorAlert = now;
+      void this.notifyAdmins(`🔔 [Admin] ${this.errorTimes.length} lỗi đọc/dịch trong 1 giờ qua (mới nhất: ${type}). Xem: gcloud run services logs read giaytonhat --region asia-northeast1 --limit 100`);
+    }
+  }
+
+  /** Push to admins' 1:1 chats (counts against the monthly push quota; admins must have added the bot). */
+  async notifyAdmins(message: string) {
+    for (const id of this.cfg.adminUserIds) {
+      if (await this.line.push(id, [text(message)]).catch(() => false)) {
+        await this.repo.addUsage(jstMonth(this.now()), { push_messages: 1 });
+      }
+    }
+  }
+
+  /**
+   * 7:00 JST digest for families that opted in. Only sends when something is due today/tomorrow,
+   * and keeps PUSH_RESERVE messages of the monthly quota for reply fallbacks and admin alerts.
+   */
+  async sendDailyDigests(now = this.now()) {
+    const month = jstMonth(now);
+    const today = jstDate(now);
+    const tomorrow = jstDate(new Date(now.getTime() + 86400_000));
+    let sent = 0;
+    let skippedQuota = 0;
+    for (const family of await this.repo.listFamilies()) {
+      if (!family.daily_digest || family.status !== 'active') continue;
+      const docs = await this.repo.listDocuments(family.family_id);
+      const lines = (day: string) => {
+        const out: string[] = [];
+        for (const d of docs) {
+          for (const a of d.actions) if (!a.completed && a.deadline === day) out.push(`• [HẠN] ${a.todo_vi}`);
+          for (const e of d.events) if (e.date === day) out.push(`• ${e.time ? e.time + ' ' : ''}${e.title_vi}${e.location ? ` @ ${e.location}` : ''}`);
+        }
+        return out;
+      };
+      const weekAgo = jstDate(new Date(now.getTime() - 7 * 86400_000)); // don't nag about old items forever
+      const overdue = docs.flatMap(d => d.actions.filter(a => !a.completed && a.deadline && a.deadline < today && a.deadline >= weekAgo).map(a => `• ${a.todo_vi} (hạn ${a.deadline!.slice(5).replace('-', '/')})`));
+      const t = lines(today);
+      const tm = lines(tomorrow);
+      if (!t.length && !tm.length && !overdue.length) continue;
+      const usage = await this.repo.getUsage(month);
+      if (usage.push_messages >= this.cfg.pushLimit - PUSH_RESERVE) {
+        skippedQuota++;
+        continue;
+      }
+      const body = [
+        '☀️ Chào buổi sáng! Việc của gia đình:',
+        t.length ? `\n📌 Hôm nay:\n${t.join('\n')}` : '',
+        tm.length ? `\n📅 Ngày mai:\n${tm.join('\n')}` : '',
+        overdue.length ? `\n⚠️ Quá hạn chưa xong:\n${overdue.slice(0, 5).join('\n')}` : '',
+        '\n(Tắt nhắc: gõ "nhắc sáng tắt")',
+      ].filter(Boolean).join('\n');
+      const home = liffUrl(this.cfg);
+      if (await this.line.push(family.line_chat_id, [text(body, home ? [{ label: '📱 Xem & đánh dấu xong', uri: home }] : undefined)])) {
+        await this.recordUsage(month, { push_messages: 1 });
+        sent++;
+      }
+    }
+    if (skippedQuota) await this.notifyAdmins(`🔔 [Admin] Nhắc sáng: bỏ qua ${skippedQuota} gia đình vì sắp hết quota tin LINE tháng này.`);
+    return { sent, skippedQuota };
   }
 
   /** Process a verified webhook payload. Errors per event are isolated. */
@@ -278,6 +373,9 @@ export class Bot {
           '📸 Cách dùng: chụp rõ cả trang giấy, gửi vào đây. Giấy nhiều trang thì gửi liên tiếp, mình sẽ gộp lại.\n' +
           '📅 Gõ "lịch" để thêm hạn & sự kiện vào lịch điện thoại.\n' +
           '❓ Gõ "menu" bất cứ lúc nào để hiện các nút bên dưới.',
+      ),
+      text(
+        `✏️ Đặt tên cho gia đình (hiện trên lịch điện thoại), gõ:\nđặt tên <tên>\nVí dụ: đặt tên Nhà Tuấn Mai\n(Tên hiện tại: ${family.family_name})`,
         this.menuItems(),
       ),
     ]);
@@ -315,6 +413,8 @@ export class Bot {
         '• "dịch" rồi gửi ảnh → chỉ dịch từng dòng (không lưu, không thêm lịch)\n' +
         '• "dịch <chữ tiếng Nhật>" → dịch đoạn chữ đó\n' +
         '• "trạng thái" → hạn mức tháng này\n' +
+        '• "đặt tên <tên>" → đổi tên gia đình\n' +
+        '• "nhắc sáng bật/tắt" → 7:00 nhắn việc hôm nay & ngày mai\n' +
         '• "/soạn <nội dung>" → soạn tin tiếng Nhật gửi cô giáo\n' +
         '  Ví dụ: /soạn Hôm nay bé bị sốt xin nghỉ học\n' +
         '• "xóa dữ liệu" → xóa toàn bộ dữ liệu gia đình\n\n' +
@@ -360,6 +460,23 @@ export class Bot {
     }
 
     if (t === 'lich' || t === '/lich') return this.reply(ev, [this.calendarMessage(family)]);
+    if (t === 'nhac sang bat' || t === 'nhac sang tat' || t === 'nhac sang') {
+      if (t !== 'nhac sang') {
+        family.daily_digest = t.endsWith('bat');
+        await this.repo.saveFamily(family);
+      }
+      return this.reply(ev, [text(
+        family.daily_digest
+          ? '⏰ Nhắc sáng: ĐANG BẬT. 7:00 mỗi sáng mình gửi việc của hôm nay & ngày mai (chỉ khi có việc).\nTắt: gõ "nhắc sáng tắt".'
+          : '⏰ Nhắc sáng: ĐANG TẮT. Hạn & sự kiện vẫn nhắc qua lịch điện thoại.\nBật: gõ "nhắc sáng bật".',
+      )]);
+    }
+    if (/^\/?dat ten\s+\S/.test(t)) {
+      const name = raw.replace(/^\/?\S+\s+\S+\s+/, '').trim().slice(0, 40);
+      family.family_name = name;
+      await this.repo.saveFamily(family);
+      return this.reply(ev, [text(`✅ Đã đổi tên thành “${name}”. Lịch thêm sau này sẽ mang tên mới (lịch đã thêm trên điện thoại giữ tên cũ, đổi được trong app Lịch).`)]);
+    }
     if (t === 'dich' || t === '/dich') return this.startTranslateMode(ev, family);
     if (/^\/?dich\s/.test(t)) return this.translateText(ev, family, raw.replace(/^\S+\s+/, ''));
     if ((t === 'huy' || t === '/huy') && this.translateUntil.has(family.line_chat_id)) {
@@ -390,7 +507,7 @@ export class Bot {
     }
     if (!(await this.withinBudget())) return this.reply(ev, [text('⚠️ Hệ thống tạm dừng do đã hết ngân sách tháng này. Xin lỗi gia đình!')]);
     const { result, cost_usd } = await this.deps.composer.compose({ topic: 'general', content_vi: content });
-    await this.repo.addUsage(jstMonth(this.now()), { cost_usd });
+    await this.recordUsage(jstMonth(this.now()), { cost_usd });
     return this.reply(ev, [
       text(result.japanese_text),
       text(
@@ -510,7 +627,7 @@ export class Bot {
       await this.services.logError(batch.familyId, 'PUSH_QUOTA', 'Không gửi được kết quả: hết quota push');
       return;
     }
-    if (await this.line.push(batch.chatId, messages)) await this.repo.addUsage(jstMonth(this.now()), { push_messages: 1 });
+    if (await this.line.push(batch.chatId, messages)) await this.recordUsage(jstMonth(this.now()), { push_messages: 1 });
   }
 
   private duplicateMessage(doc: ExtractedDocument, added: number): LineMessage {
@@ -560,7 +677,7 @@ export class Bot {
     } catch (err) {
       if (err instanceof ExtractionError) {
         const cost = err.runs.reduce((s, r) => s + r.cost_usd, 0);
-        if (cost) await this.repo.addUsage(month, { cost_usd: cost });
+        if (cost) await this.recordUsage(month, { cost_usd: cost });
         await this.services.logError(family.family_id, `EXTRACT_${err.code.toUpperCase()}`, err.message);
         return { kind: 'error', message: '😥 Mình chưa đọc được giấy này. Bạn thử chụp lại thẳng, đủ sáng, rõ chữ rồi gửi lại nhé.' };
       }
@@ -576,7 +693,7 @@ export class Bot {
     if (same) {
       const added = mergeInto(same, doc);
       await this.repo.saveDocument(same);
-      await this.repo.addUsage(month, { cost_usd: doc.token_usage?.estimated_cost_usd || 0, pages: pages.length });
+      await this.recordUsage(month, { cost_usd: doc.token_usage?.estimated_cost_usd || 0, pages: pages.length });
       return { kind: 'duplicate', family, doc: same, added };
     }
 
@@ -584,7 +701,7 @@ export class Bot {
     family.quota_used += 1;
     family.last_active = now.toISOString();
     await this.repo.saveFamily(family);
-    await this.repo.addUsage(month, {
+    await this.recordUsage(month, {
       cost_usd: doc.token_usage?.estimated_cost_usd || 0,
       docs: 1,
       pages: pages.length,
@@ -613,7 +730,7 @@ export class Bot {
     if (blocker) return this.reply(ev, [text(blocker)]);
     try {
       const { result, cost_usd } = await this.translator.translate([], content.slice(0, 3000));
-      await this.repo.addUsage(jstMonth(this.now()), { cost_usd });
+      await this.recordUsage(jstMonth(this.now()), { cost_usd });
       return this.reply(ev, formatTranslation(result, [{ label: '☰ Menu', text: 'menu' }]));
     } catch (err) {
       await this.services.logError(family.family_id, 'TRANSLATE', String((err as Error).message || err));
@@ -632,7 +749,7 @@ export class Bot {
     const pages = batch.pages.filter(p => !seen.has(pageHash(p.data)) && seen.add(pageHash(p.data)));
     try {
       const { result, cost_usd } = await this.translator.translate(pages);
-      await this.repo.addUsage(jstMonth(this.now()), { cost_usd, pages: pages.length });
+      await this.recordUsage(jstMonth(this.now()), { cost_usd, pages: pages.length });
       this.lastPages.set(batch.chatId, { pages, at: Date.now() });
       setTimeout(() => {
         const last = this.lastPages.get(batch.chatId);

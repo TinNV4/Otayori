@@ -87,6 +87,8 @@ export interface Family {
   terms_accepted_at?: string;
   left_at?: string; // bot removed from group -> data purged 7 days later
   pending_delete_until?: string; // "xóa dữ liệu" confirmation window
+  /** Opt-in 7:00 JST LINE reminder of today's/tomorrow's items (uses push quota). */
+  daily_digest?: boolean;
   member_user_ids: string[]; // LINE userIds seen in this chat (for LIFF access)
   members_count?: number;
   /** Client-only: derived by the API. */
@@ -112,6 +114,8 @@ export interface MonthlyUsage {
   pages: number;
   push_messages: number;
   sonnet_docs: number;
+  /** Admin alerts already sent this month (e.g. 'budget80'). */
+  alerts?: string[];
 }
 
 export interface ErrorLog {

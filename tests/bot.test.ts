@@ -300,3 +300,69 @@ describe('"dịch" command (translate only)', () => {
     expect(msgs[0].quickReply).toBeUndefined();
   });
 });
+
+describe('admin alerts', () => {
+  it('budget 80% and 100% alert the admin once each month', async () => {
+    const { bot, line, cfg } = await setup({ adminUserIds: ['U_admin'], monthlyBudgetUsd: 10 });
+    const m = jstMonth();
+    await bot.recordUsage(m, { cost_usd: 8.5 });
+    await bot.recordUsage(m, { cost_usd: 0.1 });
+    const toAdmin = () => line.sent.filter(s => s.kind === 'push' && s.target === 'U_admin');
+    expect(toAdmin()).toHaveLength(1);
+    expect(JSON.stringify(toAdmin()[0].messages)).toContain('80%');
+    await bot.recordUsage(m, { cost_usd: 2 });
+    await bot.recordUsage(m, { cost_usd: 1 });
+    expect(toAdmin()).toHaveLength(2);
+    expect(JSON.stringify(toAdmin()[1].messages)).toContain('hết ngân sách');
+    expect(cfg.adminUserIds).toContain('U_admin');
+  });
+
+  it('5 reading errors within an hour → one alert', async () => {
+    const { bot, line } = await setup({ adminUserIds: ['U_admin'] });
+    for (let i = 0; i < 7; i++) await bot.services.logError('f', 'EXTRACT_API', 'boom');
+    await new Promise(r => setTimeout(r, 10));
+    expect(line.sent.filter(s => s.target === 'U_admin')).toHaveLength(1);
+  });
+});
+
+describe('family name + morning digest', () => {
+  it('"đặt tên ..." renames the family; plain "tên ..." chatter does not', async () => {
+    const { bot, repo } = await setup();
+    await activate(bot);
+    const fid = familyIdForChat('Cgroup1');
+    await bot.handleWebhook({ events: [textEv(group(), 'tên bé là gì nhỉ')] });
+    expect((await repo.getFamily(fid))!.family_name).toMatch(/^Gia đình #/);
+    await bot.handleWebhook({ events: [textEv(group(), 'đặt tên Nhà Tuấn Mai')] });
+    expect((await repo.getFamily(fid))!.family_name).toBe('Nhà Tuấn Mai');
+  });
+
+  it('digest is opt-in and only sent when something is due', async () => {
+    const { bot, repo, line } = await setup();
+    await activate(bot);
+    const fid = familyIdForChat('Cgroup1');
+    const now = new Date('2026-11-01T22:00:00Z'); // 07:00 JST 11/02 — preset deadline 2026-11-02
+    line.contents.set('x', { data: Buffer.from('x'), contentType: 'image/jpeg' });
+    await bot.handleWebhook({ events: [image(group(), 'x')] });
+    await bot.aggregator.flushAll();
+
+    expect((await bot.sendDailyDigests(now)).sent).toBe(0); // not opted in
+    await bot.handleWebhook({ events: [textEv(group(), 'nhắc sáng bật')] });
+    expect((await repo.getFamily(fid))!.daily_digest).toBe(true);
+    expect((await bot.sendDailyDigests(now)).sent).toBe(1);
+    expect(lastText(line)).toContain('Hôm nay');
+    expect((await bot.sendDailyDigests(new Date('2027-03-01T22:00:00Z'))).sent).toBe(0); // overdue > 7 days → silent
+  });
+
+  it('keeps a push reserve', async () => {
+    const { bot, repo, line, cfg } = await setup();
+    await activate(bot);
+    const fam = (await repo.getFamily(familyIdForChat('Cgroup1')))!;
+    fam.daily_digest = true;
+    await repo.saveFamily(fam);
+    line.contents.set('x', { data: Buffer.from('x'), contentType: 'image/jpeg' });
+    await bot.handleWebhook({ events: [image(group(), 'x')] });
+    await bot.aggregator.flushAll();
+    await repo.addUsage(jstMonth(new Date('2026-11-01T22:00:00Z')), { push_messages: cfg.pushLimit - 5 });
+    expect(await bot.sendDailyDigests(new Date('2026-11-01T22:00:00Z'))).toEqual({ sent: 0, skippedQuota: 1 });
+  });
+});

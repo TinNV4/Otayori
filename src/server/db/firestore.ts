@@ -119,6 +119,17 @@ export class FirestoreRepo implements Repo {
     await this.db.collection('usage').doc(month).set(inc, { merge: true });
   }
 
+  async markUsageAlert(month: string, key: string) {
+    const ref = this.db.collection('usage').doc(month);
+    return this.db.runTransaction(async tx => {
+      const snap = await tx.get(ref);
+      const alerts: string[] = (snap.exists && (snap.data() as MonthlyUsage).alerts) || [];
+      if (alerts.includes(key)) return false;
+      tx.set(ref, { month, alerts: FieldValue.arrayUnion(key) }, { merge: true });
+      return true;
+    });
+  }
+
   async addAudit(log: AuditLog) { await this.db.collection('audit_logs').doc(log.id).set(log); }
   async listAudit(limit: number) {
     const q = await this.db.collection('audit_logs').orderBy('timestamp', 'desc').limit(limit).get();

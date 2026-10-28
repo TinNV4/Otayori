@@ -82,15 +82,18 @@ if [[ "$NEW_URL" != "${URL:-}" ]]; then
   gcloud run services update "$SERVICE" --region="$REGION" --update-env-vars="PUBLIC_BASE_URL=$NEW_URL" >/dev/null
 fi
 
-if ! $DEPLOY_ONLY; then
-  echo "▶ Cloud Scheduler: hourly cleanup"
-  CRON=$(gcloud secrets versions access latest --secret=cron-secret)
-  gcloud scheduler jobs describe "${SERVICE}-cleanup" --location="$REGION" >/dev/null 2>&1 && \
-    gcloud scheduler jobs delete "${SERVICE}-cleanup" --location="$REGION" --quiet >/dev/null
-  gcloud scheduler jobs create http "${SERVICE}-cleanup" --location="$REGION" \
-    --schedule="17 * * * *" --uri="$NEW_URL/tasks/cleanup" --http-method=POST \
+# Scheduler jobs are (re)created on every run so new jobs appear after a --deploy-only update too.
+echo "▶ Cloud Scheduler: hourly cleanup + 7:00 JST digest"
+CRON=$(gcloud secrets versions access latest --secret=cron-secret)
+schedule_job() { # name schedule path
+  gcloud scheduler jobs describe "$1" --location="$REGION" >/dev/null 2>&1 && \
+    gcloud scheduler jobs delete "$1" --location="$REGION" --quiet >/dev/null
+  gcloud scheduler jobs create http "$1" --location="$REGION" --time-zone="Asia/Tokyo" \
+    --schedule="$2" --uri="$NEW_URL$3" --http-method=POST \
     --headers="x-cron-secret=$CRON" >/dev/null
-fi
+}
+schedule_job "${SERVICE}-cleanup" "17 * * * *" /tasks/cleanup
+schedule_job "${SERVICE}-digest" "0 7 * * *" /tasks/digest
 
 echo
 echo "✅ Deployed: $NEW_URL"

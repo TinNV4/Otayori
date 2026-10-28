@@ -247,9 +247,6 @@ export const AdminLIFFView: React.FC<AdminLIFFViewProps> = ({
             <span className={`font-medium ${isPushWarning ? 'text-amber-800' : 'text-slate-500'}`}>
               {isPushWarning ? '⚠️ Đã vượt 80% quota!' : 'Ưu tiên Reply miễn phí'}
             </span>
-            <span className="font-semibold text-rose-700 bg-rose-50 px-1.5 py-0.5 rounded text-[10px]">
-              🚨 {metrics.urgent_docs_count || 0} tin khẩn
-            </span>
           </div>
         </div>
       </div>
@@ -368,13 +365,6 @@ export const AdminLIFFView: React.FC<AdminLIFFViewProps> = ({
               <span className="text-[10px] text-emerald-800 block mt-0.5">Model: Haiku</span>
             </div>
 
-            <div className="p-3 bg-rose-50/70 rounded-xl border border-rose-200">
-              <span className="text-rose-700 font-semibold block mb-1">🚨 Khẩn cấp (Urgent)</span>
-              <span className="text-lg font-bold text-rose-950 tabular-nums">
-                {metrics.urgent_docs_count || 0}
-              </span>
-              <span className="text-[10px] text-rose-800 block mt-0.5">Push LINE ngay</span>
-            </div>
           </div>
         </div>
       )}

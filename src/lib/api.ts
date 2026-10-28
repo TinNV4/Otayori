@@ -39,10 +39,35 @@ export function currentDevUser() {
   return devUserId;
 }
 
-export function apiFetch(path: string, init: RequestInit = {}): Promise<Response> {
+/** Re-run LINE login (keeps the current URL). Guarded so a server-side problem can't cause a redirect loop. */
+function relogin(): Promise<never> {
+  let last = 0;
+  try {
+    last = Number(sessionStorage.getItem('relogin_at') || 0);
+    sessionStorage.setItem('relogin_at', String(Date.now()));
+  } catch {
+    /* storage blocked: still try once */
+  }
+  if (Date.now() - last > 60_000) {
+    if (liff.isLoggedIn()) liff.logout();
+    liff.login({ redirectUri: window.location.href });
+  }
+  return new Promise<never>(() => undefined); // page is navigating away
+}
+
+/** LIFF ID tokens expire; refresh before they do instead of failing with 401. */
+function tokenExpiringSoon(): boolean {
+  const exp = liff.getDecodedIDToken()?.exp;
+  return !!exp && exp * 1000 < Date.now() + 60_000;
+}
+
+export async function apiFetch(path: string, init: RequestInit = {}): Promise<Response> {
+  if (idToken && tokenExpiringSoon()) return relogin();
   const headers = new Headers(init.headers);
   if (init.body && !headers.has('Content-Type')) headers.set('Content-Type', 'application/json');
   if (idToken) headers.set('Authorization', `Bearer ${idToken}`);
   else if (devUserId) headers.set('x-dev-user-id', devUserId);
-  return fetch(path, { ...init, headers });
+  const res = await fetch(path, { ...init, headers });
+  if (res.status === 401 && idToken) return relogin();
+  return res;
 }

@@ -42,6 +42,8 @@ export interface Repo {
 
   getUsage(month: string): Promise<MonthlyUsage>;
   addUsage(month: string, delta: UsageDelta): Promise<void>;
+  /** Record that an alert was sent this month; returns false if it already was (send once). */
+  markUsageAlert(month: string, key: string): Promise<boolean>;
 
   addAudit(log: AuditLog): Promise<void>;
   listAudit(limit: number): Promise<AuditLog[]>;

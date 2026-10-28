@@ -135,6 +135,11 @@ export default function App() {
     if (res.ok) setDocuments((prev) => prev.filter((d) => d.id !== docId));
   };
 
+  const handleToggleDigest = async (on: boolean) => {
+    const res = await apiFetch(`/api/family${famQs}`, { method: 'PATCH', body: withFamily({ daily_digest: on }) });
+    if (res.ok) setFamily((await res.json()).family);
+  };
+
   const handleRename = async (name: string) => {
     const res = await apiFetch(`/api/family${famQs}`, { method: 'PATCH', body: withFamily({ family_name: name }) });
     if (res.ok) setFamily((await res.json()).family);
@@ -232,6 +237,7 @@ export default function App() {
       onEditDate={handleEditDate}
       onDeleteDocument={handleDeleteDocument}
       onRename={handleRename}
+      onToggleDigest={handleToggleDigest}
       onRotateIcsToken={handleRotateIcsToken}
       onDeleteFamilyData={handleDeleteFamilyData}
       onOpenPrivacy={() => setScreen('privacy')}

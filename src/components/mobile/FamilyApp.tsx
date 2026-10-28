@@ -20,6 +20,7 @@ export interface FamilyAppProps {
   onEditDate: (docId: string, patch: { events?: Array<{ id: string; date: string }>; actions?: Array<{ id: string; deadline: string }> }) => Promise<ExtractedDocument | null>;
   onDeleteDocument: (docId: string) => Promise<void>;
   onRename: (name: string) => Promise<void>;
+  onToggleDigest: (on: boolean) => Promise<void>;
   onRotateIcsToken: () => void;
   onDeleteFamilyData: () => void;
   onOpenPrivacy: () => void;
@@ -365,7 +366,7 @@ const CalendarTab: React.FC<{ family: Family; onRotate: () => void }> = ({ famil
 );
 
 // ---------- tab: settings ----------
-const SettingsTab: React.FC<Pick<FamilyAppProps, 'family' | 'isAdmin' | 'devMode' | 'onRename' | 'onDeleteFamilyData' | 'onOpenPrivacy' | 'onOpenAdmin' | 'onOpenSimulator'>> = (p) => {
+const SettingsTab: React.FC<Pick<FamilyAppProps, 'family' | 'isAdmin' | 'devMode' | 'onRename' | 'onToggleDigest' | 'onDeleteFamilyData' | 'onOpenPrivacy' | 'onOpenAdmin' | 'onOpenSimulator'>> = (p) => {
   const [name, setName] = useState(p.family.family_name);
   const pct = Math.min(100, Math.round((p.family.quota_used / Math.max(1, p.family.quota_limit)) * 100));
   const Row: React.FC<{ icon: React.ReactNode; label: string; onClick: () => void; danger?: boolean }> = ({ icon, label, onClick, danger }) => (
@@ -380,6 +381,24 @@ const SettingsTab: React.FC<Pick<FamilyAppProps, 'family' | 'isAdmin' | 'devMode
         <Card className="p-2 flex gap-2">
           <input value={name} onChange={(e) => setName(e.target.value)} maxLength={60} className="flex-1 h-12 px-3 text-[16px] outline-none rounded-xl" />
           <button disabled={!name.trim() || name === p.family.family_name} onClick={() => p.onRename(name.trim())} className="h-12 px-4 rounded-xl bg-emerald-600 text-white text-[15px] font-semibold disabled:opacity-30">Lưu</button>
+        </Card>
+      </section>
+
+      <section>
+        <h2 className="px-1 mb-2 text-[13px] font-bold uppercase tracking-wide text-slate-500">Nhắc qua LINE</h2>
+        <Card className="p-4 flex items-center gap-3">
+          <div className="flex-1">
+            <div className="text-[16px] font-medium text-slate-900">⏰ Nhắc sáng 7:00</div>
+            <div className="text-[13px] text-slate-500 mt-0.5">Nhắn vào nhóm việc của hôm nay & ngày mai (chỉ khi có việc).</div>
+          </div>
+          <button
+            role="switch"
+            aria-checked={!!p.family.daily_digest}
+            onClick={() => p.onToggleDigest(!p.family.daily_digest)}
+            className={`w-14 h-8 rounded-full p-1 transition-colors ${p.family.daily_digest ? 'bg-emerald-600' : 'bg-slate-300'}`}
+          >
+            <span className={`block w-6 h-6 rounded-full bg-white shadow transition-transform ${p.family.daily_digest ? 'translate-x-6' : ''}`} />
+          </button>
         </Card>
       </section>
 

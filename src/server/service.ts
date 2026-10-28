@@ -86,8 +86,16 @@ export class Services {
     });
   }
 
+  /** Set by the bot to watch for error spikes. */
+  onError?: (familyId: string, type: string) => void;
+
   async logError(familyId: string, type: string, message: string) {
     console.error(`[error] ${type} family=${familyId}: ${message}`);
+    try {
+      this.onError?.(familyId, type);
+    } catch {
+      /* alerting must never break the request */
+    }
     await this.repo.addError({
       id: `err_${Date.now().toString(36)}_${crypto.randomBytes(3).toString('hex')}`,
       timestamp: new Date().toISOString(),

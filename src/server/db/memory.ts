@@ -140,6 +140,15 @@ export class MemoryRepo implements Repo {
     this.touch();
   }
 
+  async markUsageAlert(month: string, key: string) {
+    const u = this.usage.get(month) || emptyUsage(month);
+    if (u.alerts?.includes(key)) return false;
+    u.alerts = [...(u.alerts || []), key];
+    this.usage.set(month, u);
+    this.touch();
+    return true;
+  }
+
   async addAudit(log: AuditLog) { this.audit.push(log); if (this.audit.length > 1000) this.audit.shift(); this.touch(); }
   async listAudit(limit: number) { return this.audit.slice(-limit).reverse(); }
   async addError(e: ErrorLog) { this.errors.push(e); if (this.errors.length > 500) this.errors.shift(); this.touch(); }
