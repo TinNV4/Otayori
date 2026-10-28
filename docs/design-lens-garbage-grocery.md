@@ -342,6 +342,42 @@ Chưa cài: kiểm tra `area_key` với danh sách 町丁目 (cần lịch đổ
 - **Alert**: tái dùng kênh cảnh báo LINE cho admin (chỉ gửi khi sync lỗi hoặc diff lớn cần duyệt).
 - **Hiển thị**: mỗi câu trả lời có dòng nhỏ "Nguồn: <thành phố>, cập nhật <ngày>" (đồng thời đáp ứng yêu cầu ghi nguồn của CC BY).
 
+### Runbook: nhập dữ liệu một thành phố (Tokyo, Kanagawa… cùng cách)
+
+```mermaid
+flowchart LR
+  D[data discover\ntìm dataset trên cổng CKAN] --> S[data scaffold\nđoán mã hóa · cột · loại rác\nghi nháp enabled:false]
+  H[Tải tay CSV\nhoặc --file + --url] --> S
+  S --> T{TODO còn?}
+  T -- có --> E[Sửa category_map / cột\nxác nhận giấy phép trên trang dataset]
+  E --> I
+  T -- không --> I[data inspect]
+  I --> Y[data sync --dry-run → sync]
+  Y --> R[data diff → publish --by tên]
+  R --> C[enabled:true + commit\nsources/*.json + masterdata/*/live.json]
+  C --> L[npm run lens -- tên món --city mã]
+```
+
+1. **Tìm**: `npm run data -- discover https://catalog.data.metro.tokyo.lg.jp/api/3/action --query ごみ分別` (Tokyo; địa chỉ API là giả định theo chuẩn CKAN, chưa gọi được). Kanagawa chưa biết cổng CKAN: tải CSV từ [trang open data của Yokohama](https://www.city.yokohama.lg.jp/city-info/yokohamashi/tokei-chosa/portal/opendata/gomi.html) rồi dùng `--file`.
+2. **Phác thảo**: `npm run data -- scaffold city-13118-items --city 13118 --kind gomi_items --ckan <api> --dataset <tên> --write` (hoặc `--file x.csv --url <trang dataset>`). Lệnh tự đoán mã hóa (Shift_JIS/UTF-8), cột (品目/読み/分別区分/備考), gợi ý `category_map`, lấy giấy phép và ghi nguồn từ cổng CKAN. Nhãn nào không chắc thì **không** map: sync sẽ dừng để người xác nhận. Bảng lịch (`--kind gomi_schedule`) kiểm luôn các ô "月・木 / 第2・4水" có đọc được không; file dạng "dài" (mỗi dòng một khu × một loại) phải đổi sang dạng rộng trước.
+3. **Xác nhận**: sửa các mục TODO, đối chiếu giấy phép trên trang dataset.
+4. **Thử**: `data inspect <id>` → `data sync <id> --dry-run` → `data sync <id>` (lần đầu luôn vào hàng chờ duyệt) → `data diff <id>` → `data publish <id> --by <tên>`.
+5. **Đưa vào sản phẩm**: đặt `enabled:true`, commit `data/sources/<id>.json` và `data/masterdata/<id>/live.json` (diff của dữ liệu xem được trong PR), rồi thử `npm run lens -- "ペットボトル" --city 13118`.
+
+**Tokyo + Kanagawa: dataset ứng viên từ kết quả tìm kiếm** (chưa mở được trang nên chưa biết cột/giấy phép thật; mã dataset của 東村山/西東京 đã sửa theo mã JIS, cần `discover` để xác nhận):
+
+| Thành phố | Mã | Loại | Dataset / trang |
+|---|---|---|---|
+| 荒川区 | 13118 | danh mục | `t131181d0000000002` ([trang](https://catalog.data.metro.tokyo.lg.jp/zh_Hant_TW/dataset/t131181d0000000002/resource/4b0d4ed6-d9a0-46f5-929a-eeb17ca4e136)) |
+| 東村山市 | 13213 | danh mục | `t132136d3000000001` |
+| 西東京市 | 13229 | danh mục | `t132292d3000000001` |
+| 中野区 | 13114 | lịch (theo khu) | `t131148d0000000135` |
+| 中央区 | 13102 | lịch (thứ) | `t131024d0000000002` |
+| 文京区 | 13105 | lịch | `t131059d0110060001` |
+| 江戸川区, 足立区 (MVP) | 13123, 13121 | — | chưa thấy dataset: tìm bằng `discover --query 江戸川区` |
+| 横浜市 | 14100 | trang open data | [gomi.html](https://www.city.yokohama.lg.jp/city-info/yokohamashi/tokei-chosa/portal/opendata/gomi.html) |
+| 川崎市, 相模原市, 大和市 | 14130, 14150, 14213 | — | chưa tìm |
+
 ### Quy trình Claude tạo bản đầu + admin duyệt (cho Đi chợ và alias rác)
 
 `Claude tạo draft (kèm lý do, mức chắc chắn)` → `admin duyệt trong CLI/LIFF admin` → `verified` → nút "gợi ý món thay thế khác" của người dùng sinh `draft` mới với `status=community` (không hiển thị cho đến khi admin duyệt).
@@ -365,11 +401,8 @@ xychart-beta
 
 ## 7. Kiếm tiền & MVP
 
-### B2B 管理会社 (rác)
+Rác là tính năng miễn phí để kéo người dùng (không làm hướng B2B 管理会社).
 
-- Giá trị: giảm khiếu nại "bỏ rác sai" từ người thuê nước ngoài; gửi kèm hướng dẫn khi vào ở.
-- Cơ chế: mỗi bất động sản có `property_code` → link/QR LINE → tự điền `region` (city + 町丁目) cho người thuê, không phải hỏi lại. Báo cáo cho công ty chỉ ở mức tổng hợp ẩn danh (đồ hay hỏi nhất theo tòa nhà), **không** theo người thuê.
-- **Chưa có số liệu để định giá.** Cần xác nhận trước: 5 cuộc phỏng vấn 管理会社, thử một tòa nhà. Không đặt giá khi chưa kiểm chứng.
 
 ### Đi chợ
 
@@ -456,7 +489,6 @@ Nguồn số liệu: [bài tổng hợp 12/2025](https://akimajimusho.com/easy-t
 | 2 | Mở từng dataset ứng viên, xác nhận **cột, giấy phép, ngày cập nhật** | Mình, sau khi host được cho phép |
 | 3 | Xác nhận điều khoản dùng dữ liệu MLIT (町丁目) | Bạn/mình |
 | 4 | Đối chiếu "schema chung như đã bàn" và "bản tin chính sách" (không có trong repo) | Bạn |
-| 5 | Phỏng vấn 管理会社 trước khi định giá B2B | Bạn |
 
 ## 9. Rủi ro
 

@@ -61,6 +61,19 @@ describe('cityFromAddress (LINE location address)', () => {
     expect(cityFromAddress(CITIES, '日本、大阪府大阪市北区梅田1-1')!.city.code).toBe('27103');
     expect(cityFromAddress(CITIES, '日本、京都府京都市北区紫野1-1')!.city.code).toBe('26101');
   });
+  it('same ward name in several prefectures: the prefecture in the address decides', () => {
+    const many: City[] = [
+      { code: '13102', prefecture_jp: '東京都', name_jp: '中央区', name_vi: 'quận Chuo (Tokyo)' },
+      { code: '27100', prefecture_jp: '大阪府', name_jp: '大阪市', name_vi: 'thành phố Osaka', designated: true },
+      { code: '14150', prefecture_jp: '神奈川県', name_jp: '相模原市', name_vi: 'thành phố Sagamihara', designated: true },
+    ];
+    expect(cityFromAddress(many, '日本、東京都中央区銀座1-1')?.city.code).toBe('13102');
+    expect(cityFromAddress(many, '日本、〒542-0076 大阪府大阪市中央区難波1-1')).toMatchObject({ city: { code: '27100' }, chome_label: '難波' });
+    expect(cityFromAddress(many, '日本、神奈川県相模原市中央区中央2丁目1-1')).toMatchObject({ city: { code: '14150' }, chome_label: '中央2丁目' });
+    expect(cityFromAddress(many, '日本、千葉県千葉市中央区中央1-1')).toBeNull(); // Chiba's 中央区 is not Tokyo's
+    expect(cityFromAddress(many, '中央区銀座1-1')?.city.code).toBe('13102'); // no prefecture: unambiguous bare name
+    expect(cityFromAddress([...many, { ...many[0], code: '27102', prefecture_jp: '大阪府' }], '中央区銀座1-1')).toBeNull(); // ambiguous
+  });
   it('skips the ward of a designated city when reading the town', () => {
     const r = cityFromAddress(CITIES, '日本、〒222-0033 神奈川県横浜市港北区新横浜2丁目1-1')!;
     expect(r.city.code).toBe('14100');
@@ -86,13 +99,16 @@ describe('cityByMuniCd (GSI geocoder)', () => {
 describe('data/cities.json (MVP cities)', () => {
   const cities = loadCities('data/cities.json');
   it('is valid and has unique codes', () => {
-    expect(cities.map(c => c.name_jp)).toEqual(['川口市', '船橋市', '松戸市', '江戸川区', '足立区', '名古屋市', '大阪市']);
+    const names = cities.map(c => c.name_jp);
+    for (const mvp of ['川口市', '船橋市', '松戸市', '江戸川区', '足立区', '名古屋市', '大阪市']) expect(names).toContain(mvp);
+    // Tokyo + Kanagawa: wards/cities with open data found so far, plus the big Kanagawa cities
+    for (const c of ['荒川区', '中野区', '中央区', '文京区', '東村山市', '西東京市', '横浜市', '川崎市', '相模原市', '大和市']) expect(names).toContain(c);
     expect(new Set(cities.map(c => c.code)).size).toBe(cities.length);
   });
   it('finds every MVP city by Japanese, romaji, or a LINE address', () => {
     for (const c of cities) {
-      expect(findCities(cities, c.name_jp).map(x => x.code)).toEqual([c.code]);
-      expect(findCities(cities, c.aliases![0]).map(x => x.code)).toEqual([c.code]);
+      expect(findCities(cities, c.name_jp).map(x => x.code)).toContain(c.code);
+      expect(findCities(cities, c.aliases![0]).map(x => x.code)).toContain(c.code);
       expect(cityFromAddress(cities, `日本、${c.prefecture_jp}${c.name_jp}テスト町1-2-3`)?.city.code).toBe(c.code);
     }
   });

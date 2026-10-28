@@ -52,20 +52,40 @@ const isoDate = (s?: string | null): string | undefined => {
   return Number.isNaN(t) ? undefined : new Date(t).toISOString().slice(0, 10);
 };
 
-interface CkanResource { name?: string; format?: string; url?: string; last_modified?: string | null; metadata_modified?: string | null }
+export interface CkanResource { name?: string; format?: string; url?: string; last_modified?: string | null; metadata_modified?: string | null }
+export interface CkanPackage {
+  id?: string;
+  name?: string;
+  title?: string;
+  license_id?: string;
+  license_title?: string;
+  metadata_modified?: string;
+  organization?: { title?: string; name?: string } | null;
+  resources?: CkanResource[];
+}
+
+/** CKAN action call → `result`, with the failures a person can act on. */
+export async function ckanAction<T>(fetcher: Fetcher, api: string, action: string, query: Record<string, string>): Promise<T> {
+  const qs = new URLSearchParams(query).toString();
+  const { bytes } = await fetcher.get(`${api.replace(/\/$/, '')}/${action}?${qs}`, { accept: 'application/json' });
+  let body: { success?: boolean; result?: T; error?: { message?: string } };
+  try { body = JSON.parse(bytes.toString('utf8')); } catch { throw new SyncError('fetch', `CKAN ${action}: response is not JSON`); }
+  if (!body.success || body.result === undefined) throw new SyncError('fetch', `CKAN ${action} failed${body.error?.message ? `: ${body.error.message}` : ''}`);
+  return body.result;
+}
+
+export const isCsvResource = (r: CkanResource) => /csv/i.test(r.format || '') || /\.csv(\?|$)/i.test(r.url || '');
+export const resourceDate = (r: CkanResource, pkg: CkanPackage) => isoDate(r.last_modified) || isoDate(r.metadata_modified) || isoDate(pkg.metadata_modified);
 
 /** Resolve the CSV resource of a CKAN dataset and the dates the portal reports for it. */
 async function resolveCkan(src: SourceConfig, fetcher: Fetcher): Promise<{ url: string; updated?: string }> {
   const { api, dataset, resource_match } = src.ckan!;
-  const { bytes } = await fetcher.get(`${api.replace(/\/$/, '')}/package_show?id=${encodeURIComponent(dataset)}`, { accept: 'application/json' });
-  let body: { success?: boolean; result?: { metadata_modified?: string; resources?: CkanResource[] } };
-  try { body = JSON.parse(bytes.toString('utf8')); } catch { throw new SyncError('fetch', `CKAN ${dataset}: response is not JSON`); }
-  if (!body.success || !body.result) throw new SyncError('fetch', `CKAN ${dataset}: package_show failed`);
-  const csvs = (body.result.resources || []).filter(r => /csv/i.test(r.format || '') || /\.csv(\?|$)/i.test(r.url || ''));
+  const pkg = await ckanAction<CkanPackage>(fetcher, api, 'package_show', { id: dataset });
+  const csvs = (pkg.resources || []).filter(isCsvResource);
   const match = resource_match?.toLowerCase();
   const res = match ? csvs.find(r => (r.name || '').toLowerCase().includes(match)) : csvs[0];
   if (!res?.url) throw new SyncError('fetch', `CKAN ${dataset}: no CSV resource${match ? ` matching "${resource_match}"` : ''} (found ${csvs.length} CSV)`);
-  return { url: res.url, updated: isoDate(res.last_modified) || isoDate(res.metadata_modified) || isoDate(body.result.metadata_modified) };
+  return { url: res.url, updated: resourceDate(res, pkg) };
 }
 
 /** Download the source file (resolving the CKAN resource first when configured). */

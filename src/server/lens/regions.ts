@@ -61,23 +61,32 @@ export function chomeAfterCity(city: City, query: string): string | undefined {
   return undefined;
 }
 
-/** Match LINE's `address` string ("日本、〒116-0013 東京都荒川区西日暮里2-3-4") to a known city. Longest name wins. */
+const PREFECTURES = [
+  '北海道', '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県', '茨城県', '栃木県', '群馬県', '埼玉県', '千葉県', '東京都', '神奈川県',
+  '新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県', '岐阜県', '静岡県', '愛知県', '三重県', '滋賀県', '京都府', '大阪府', '兵庫県',
+  '奈良県', '和歌山県', '鳥取県', '島根県', '岡山県', '広島県', '山口県', '徳島県', '香川県', '愛媛県', '高知県', '福岡県', '佐賀県', '長崎県',
+  '熊本県', '大分県', '宮崎県', '鹿児島県', '沖縄県',
+];
+
+/**
+ * Match LINE's `address` string ("日本、〒116-0013 東京都荒川区西日暮里2-3-4") to a known city.
+ * Ward names repeat across Japan (中央区, 北区, 西区…), so when the address names a prefecture only that
+ * prefecture's cities can match: "大阪府大阪市中央区" is never Tokyo's 中央区. Without a prefecture a bare
+ * name must be unambiguous. Longest name wins.
+ */
 export function cityFromAddress(cities: City[], address: string): { city: City; chome_label?: string } | null {
   const a = address.normalize('NFKC');
-  const hit = [...cities]
-    .sort((x, y) => y.name_jp.length - x.name_jp.length)
-    .map(c => {
-      for (const full of [`${c.prefecture_jp}${c.name_jp}`, `${bare(c.prefecture_jp)}${c.name_jp}`, c.name_jp]) {
-        const i = a.indexOf(full);
-        if (i >= 0) return { c, end: i + full.length, withPref: full !== c.name_jp };
-      }
-      return null;
-    })
-    .find(Boolean);
-  if (!hit) return null;
-  let rest = a.slice(hit.end);
-  if (hit.c.designated) rest = rest.replace(/^[,、\s]*[^\d\s,、]{1,4}区/, ''); // ward of a designated city
-  return { city: hit.c, chome_label: chomeFrom(rest) };
+  const prefs = PREFECTURES.filter(p => a.includes(p));
+  const named = [...cities]
+    .filter(c => a.includes(c.name_jp) && (prefs.length ? prefs.includes(c.prefecture_jp) : true))
+    .sort((x, y) => y.name_jp.length - x.name_jp.length);
+  if (!named.length) return null;
+  if (!prefs.length && new Set(named.map(c => c.name_jp)).size < named.length) return null;
+  const c = named[0];
+  const end = a.indexOf(c.name_jp) + c.name_jp.length;
+  let rest = a.slice(end);
+  if (c.designated) rest = rest.replace(/^[,、\s]*[^\d\s,、]{1,4}区/, ''); // ward of a designated city
+  return { city: c, chome_label: chomeFrom(rest) };
 }
 
 /** GSI reports a ward code for designated cities (14109 → 14100 Yokohama). */

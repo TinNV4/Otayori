@@ -10,16 +10,21 @@
  *   npx tsx scripts/data.ts reject <source-id>                # drop staged
  *   npx tsx scripts/data.ts rollback <source-id> [--to N] [--by name]
  *   npx tsx scripts/data.ts check-links
+ *   npx tsx scripts/data.ts discover <ckan-api> [--query ごみ分別] [--rows 30] [--json]   # find datasets on a CKAN portal
+ *   npx tsx scripts/data.ts scaffold <source-id> --city <JIS> [--kind gomi_items|gomi_schedule]
+ *        (--ckan <api> --dataset <name> [--resource-match r] | --file x.csv --url <dataset page>)
+ *        [--license ...] [--attribution ...] [--updated YYYY-MM-DD] [--write] [--force]   # draft a registry entry from a real file
  *
  * `sync --all` only runs sources that are due (monthly; weekly Jan–Apr for fiscal-year calendars);
  * add --force to run all. Exit code 1 if any sync failed, so a scheduler can alert.
  */
 import fs from 'fs';
 import path from 'path';
-import { fetchSource, httpFetcher } from '../src/server/lens/masterdata/adapters.ts';
+import { ckanAction, CkanPackage, fetchSource, httpFetcher, isCsvResource } from '../src/server/lens/masterdata/adapters.ts';
+import { renderScaffold, scaffoldSource } from '../src/server/lens/masterdata/scaffold.ts';
 import { diffRows, formatDiff } from '../src/server/lens/masterdata/diff.ts';
 import { loadCityInfo } from '../src/server/lens/cityinfo.ts';
-import { loadSources } from '../src/server/lens/masterdata/registry.ts';
+import { loadSources, validateSourceConfig } from '../src/server/lens/masterdata/registry.ts';
 import { renderInspect, renderStatus } from '../src/server/lens/masterdata/report.ts';
 import { FileMasterStore } from '../src/server/lens/masterdata/store.ts';
 import { isDue, publishStaged, rejectStaged, rollback, syncSource } from '../src/server/lens/masterdata/sync.ts';
@@ -104,6 +109,66 @@ async function main() {
       const to = flag('to');
       const s = rollback(store, pick(positional[0]).id, to ? Number(to) : undefined, flag('by') || process.env.USER || 'admin');
       console.log(`Live is now v${s.meta.version} (${s.meta.note}).`);
+      break;
+    }
+
+    case 'discover': {
+      const api = positional[0];
+      if (!api) throw new Error('usage: discover <ckan-api-base>, e.g. https://catalog.data.metro.tokyo.lg.jp/api/3/action');
+      const res = await ckanAction<{ count: number; results: CkanPackage[] }>(httpFetcher, api, 'package_search', { q: flag('query') || 'ごみ 分別', rows: flag('rows') || '30' });
+      if (has('json')) { console.log(JSON.stringify(res.results, null, 1)); break; }
+      console.log(`${res.count} dataset(s) match; showing ${res.results.length}\n`);
+      for (const p of res.results) {
+        const csv = (p.resources ?? []).filter(isCsvResource).length;
+        const formats = [...new Set((p.resources ?? []).map(r => (r.format || '?').toUpperCase()))].join('/');
+        console.log(`${(p.name ?? p.id ?? '').padEnd(24)} ${(p.organization?.title ?? '').padEnd(12)} ${(p.license_title || p.license_id || 'license?').padEnd(18)} ${`csv×${csv} (${formats})`.padEnd(16)} ${(p.metadata_modified ?? '').slice(0, 10)}  ${p.title ?? ''}`);
+      }
+      console.log('\nNext: scaffold <source-id> --city <JIS> --kind gomi_items|gomi_schedule --ckan <api> --dataset <name>');
+      break;
+    }
+
+    case 'scaffold': {
+      const id = positional[0];
+      const city = flag('city');
+      const kind = (flag('kind') || 'gomi_items') as 'gomi_items' | 'gomi_schedule';
+      if (!id || !city) throw new Error('usage: scaffold <source-id> --city <JIS 5 digits> [--kind ...] (--ckan <api> --dataset <name> | --file x.csv --url <page>)');
+      if (kind !== 'gomi_items' && kind !== 'gomi_schedule') throw new Error('--kind must be gomi_items or gomi_schedule');
+      const ckanApi = flag('ckan');
+      const dataset = flag('dataset');
+      const local = localFile();
+      if (!local && !(ckanApi && dataset)) throw new Error('give --ckan <api> --dataset <name>, or --file <csv> --url <dataset page>');
+      let bytes: Buffer;
+      let license = flag('license');
+      let attribution = flag('attribution');
+      let url = flag('url');
+      let ckan: { api: string; dataset: string; resource_match?: string } | undefined;
+      if (local) {
+        if (!url) throw new Error('--url <dataset page> is required with --file: every row must say where it came from');
+        bytes = local.bytes;
+      } else {
+        ckan = { api: ckanApi!, dataset: dataset!, ...(flag('resource-match') ? { resource_match: flag('resource-match') } : {}) };
+        const pkg = await ckanAction<CkanPackage>(httpFetcher, ckan.api, 'package_show', { id: ckan.dataset });
+        license ||= pkg.license_title || pkg.license_id;
+        attribution ||= `${pkg.organization?.title ?? ''} 「${pkg.title ?? dataset}」${license ? ` (${license})` : ''}`.trim();
+        bytes = (await fetchSource({ id, ckan, url: '' } as SourceConfig, httpFetcher)).bytes;
+      }
+      if (!license) throw new Error('--license is required (the dataset page says which)');
+      attribution ||= `${id} (${license})`;
+      const r = scaffoldSource({ id, city_code: city, kind, bytes, license, attribution, url, ckan, source_updated_at: flag('updated') });
+      console.log(renderScaffold(r));
+      const out = path.join(sourcesDir, `${id}.json`);
+      if (!has('write')) { console.log(`\n(dry run: add --write to create ${out})`); break; }
+      if (fs.existsSync(out) && !has('force')) throw new Error(`${out} exists (use --force to overwrite)`);
+      try {
+        validateSourceConfig(r.config, out); // an invalid file would break every command that loads the registry
+      } catch (err) {
+        console.log(`\nNot written: ${(err as Error).message}\nFix the TODO items (e.g. pass the right columns by editing a copy), then re-run.\n${JSON.stringify(r.config, null, 2)}`);
+        process.exitCode = 1;
+        break;
+      }
+      fs.mkdirSync(sourcesDir, { recursive: true });
+      fs.writeFileSync(out, JSON.stringify(r.config, null, 2) + '\n');
+      console.log(`\nWrote ${out} (enabled:false). Next: data inspect ${id}${local ? ` --file ${flag('file')}` : ''} → data sync ${id}${local ? ` --file ${flag('file')} --updated YYYY-MM-DD` : ''} → data diff / publish → set enabled:true.`);
       break;
     }
 
