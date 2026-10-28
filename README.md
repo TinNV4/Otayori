@@ -50,6 +50,7 @@ flowchart LR
 | Lịch ICS (RFC 5545) + trang "Thêm vào lịch" | `src/server/ics.ts`, `src/server/calendarPage.ts` |
 | Phân loại rác: nhận diện, luật quốc gia, khớp từ điển, soạn câu trả lời | `src/server/lens/gomi/*` |
 | Master data rác: sync dữ liệu mở, duyệt, rollback | `src/server/lens/masterdata/*`, `scripts/data.ts`, `data/sources/*.json` |
+| Đi chợ: bảng nguyên liệu/món/đồ thay thế, đọc nhãn, luật an toàn | `src/server/lens/grocery/*`, `data/grocery/*.json`, `scripts/grocery.ts` |
 | Khu vực (thành phố + 町丁目), danh sách thành phố, thông tin 粗大ごみ | `src/server/lens/regions.ts`, `data/cities.json`, `data/city-info.json` |
 | Lịch đổ rác: đọc "月・木 / 第2・4水", ngày kế tiếp, ICS | `src/server/lens/masterdata/scheduleRule.ts`, `src/server/lens/gomi/schedule.ts`, `gomiIcs.ts` |
 | HTTP routes | `src/server/app.ts` |
@@ -63,6 +64,7 @@ flowchart LR
 |---|---|
 | *(gửi ảnh/PDF)* | Đọc & thêm lịch. Nhiều ảnh gửi liền nhau = 1 giấy |
 | `rác` rồi gửi ảnh / gõ tên · `rác pin sạc` | Phân loại rác: loại, cách bỏ, cảnh báo 家電4品目/pin/bình xịt. Chế độ 5 phút, hỏi nhiều món liên tiếp; `hủy` để thoát. Tính lượt riêng (`LOOKUP_QUOTA`, mặc định 60/tháng), không trừ quota giấy |
+| `đi chợ` rồi chụp nhãn / gõ tên món / `thay rau răm` · `đi chợ phở bò` · `/chợ …` | Đi chợ Nhật: đọc nhãn sản phẩm (hạn dùng, bảo quản, mục dị ứng chép nguyên văn — không bao giờ kết luận "an toàn"), danh sách đồ cần mua theo nơi bán cho 20 món Việt, đồ thay thế. Gõ chữ không gọi model, không tốn lượt; ảnh nhãn tính vào `LOOKUP_QUOTA` |
 | `lịch rác` | Link thêm lịch đổ rác của khu vào lịch điện thoại (feed riêng `/ics/<token>.gomi.ics`, nhắc 20:00 tối hôm trước) |
 | *(gửi vị trí LINE)* · `khu vực` · `khu vực <tên thành phố> [町丁目]` | Đặt thành phố + khu (町丁目) để tra rác đúng nơi. Từ vị trí LINE bot **đề xuất** thành phố để bạn bấm xác nhận; không lưu tọa độ/số nhà |
 | `dịch` rồi gửi ảnh · `dịch <chữ Nhật>` | Chỉ dịch từng dòng (không lưu, không tính quota) |
@@ -98,6 +100,7 @@ Cài đặt → **LINE Test Lab**: Join → Đồng ý → `BETA2026` → gửi 
 | `npx tsx scripts/richmenu.ts` | Cài rich menu (cần `LINE_CHANNEL_ACCESS_TOKEN`, `LIFF_ID`) |
 | `npm run data -- inspect <id> [--file x.csv]` · `sync <id>\|--all [--dry-run]` · `diff` · `publish` · `reject` · `rollback` · `status` · `check-links` | Master data (từ điển rác từ dữ liệu mở): xem file nguồn, đồng bộ, duyệt/rollback — xem `docs/design-lens-garbage-grocery.md` §5 |
 | `npm run lens -- "pin sạc" --city 12345` · `--file anh.jpg` | Thử module phân loại rác từ terminal (dùng Claude nếu có `ANTHROPIC_API_KEY`, không thì mock); đọc master data đã `publish` |
+| `npm run grocery -- check` · `list --status draft` · `verify <id> --table <t> --by <tên>` · `export` · `ask "phở bò"` | Duyệt bảng đi chợ (Claude soạn → admin kiểm → `verified`), xuất CSV để xem bằng bảng tính, thử câu trả lời |
 | `npm run admin -- unknown [--top 30]` | Đồ người dùng hỏi mà từ điển thành phố chưa có (admin bổ sung) |
 | `npm run admin -- invite:create DOT1 --max 5` | Tạo mã mời (`invite:list`, `invite:disable`) |
 | `npm run admin -- usage` | Biểu đồ chi phí / push / loại giấy / độ chính xác |

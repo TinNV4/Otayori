@@ -46,6 +46,8 @@ export interface AppConfig {
   masterdataSources: string;
   citiesFile: string;
   cityInfoFile: string;
+  /** "Đi chợ" tables (ingredients, dishes, substitutes). */
+  groceryDir: string;
   /** 'gsi' = fall back to GSI's reverse geocoder when a LINE location has no usable address. Sends coordinates to a third party, so off by default. */
   regionGeocoder: 'off' | 'gsi';
 }
@@ -82,6 +84,7 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
     masterdataSources: env.MASTERDATA_SOURCES || 'data/sources',
     citiesFile: env.CITIES_FILE || 'data/cities.json',
     cityInfoFile: env.CITY_INFO_FILE || 'data/city-info.json',
+    groceryDir: env.GROCERY_DIR || 'data/grocery',
     regionGeocoder: env.REGION_GEOCODER === 'gsi' ? 'gsi' : 'off',
   };
 

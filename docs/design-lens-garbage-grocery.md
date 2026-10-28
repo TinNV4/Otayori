@@ -1,6 +1,6 @@
 # Thiết kế: bộ "đọc ảnh" dùng chung (Lens) + 2 module Phân loại rác / Đi chợ Nhật
 
-> Trạng thái: thiết kế + đã cài đặt phần rác. **Đã có**: sync master data cho cả 2 loại (`gomi_items` qua `ckan_csv_v1`, `gomi_schedule` qua `schedule_csv_v1`; `scripts/data.ts`); lõi Lens cho rác (`src/server/lens/gomi/`); bot LINE (`rác`, chế độ ảnh, `khu vực [町丁目]`, vị trí LINE → đề xuất → xác nhận, `lịch rác`); `Family.region`; lượt hỏi riêng (`LOOKUP_QUOTA`); log món chưa có; **lịch đổ rác**: đọc "月・木 / 第2・4水", ngày đổ gần nhất trong câu trả lời, feed ICS riêng có nhắc 20:00 tối hôm trước, EXDATE theo ngày nghỉ thành phố công bố; `data/city-info.json` (link/phí 粗大ごみ, bắt buộc có nguồn + ngày). **Chưa có**: nguồn dữ liệu thật đã bật (`data/sources/` mới có `_template.json`, `data/city-info.json` đang rỗng), bảng đi chợ, adapter Excel, lịch dạng liệt kê ngày (`dates`), store Firestore cho master data. Dữ liệu đã `publish` nằm ở `data/masterdata/<nguồn>/live.json`, commit vào git và đi cùng image. Ngày: 2026-10-28.
+> Trạng thái: thiết kế + đã cài đặt phần rác. **Đã có**: sync master data cho cả 2 loại (`gomi_items` qua `ckan_csv_v1`, `gomi_schedule` qua `schedule_csv_v1`; `scripts/data.ts`); lõi Lens cho rác (`src/server/lens/gomi/`); bot LINE (`rác`, chế độ ảnh, `khu vực [町丁目]`, vị trí LINE → đề xuất → xác nhận, `lịch rác`); `Family.region`; lượt hỏi riêng (`LOOKUP_QUOTA`); log món chưa có; **lịch đổ rác**: đọc "月・木 / 第2・4水", ngày đổ gần nhất trong câu trả lời, feed ICS riêng có nhắc 20:00 tối hôm trước, EXDATE theo ngày nghỉ thành phố công bố; `data/city-info.json` (link/phí 粗大ごみ, bắt buộc có nguồn + ngày). **Đi chợ (MVP) đã có**: `src/server/lens/grocery/*`, bảng `data/grocery/*.json` (109 nguyên liệu, 20 món, 43 nhóm đồ thay thế — **Claude soạn, tất cả còn `draft` chờ admin duyệt**), đọc nhãn bằng Claude, `scripts/grocery.ts`, lệnh `đi chợ`. **Chưa có**: nguồn dữ liệu thật đã bật (`data/sources/` mới có `_template.json`, `data/city-info.json` đang rỗng), adapter Excel, nút "gợi ý món thay thế khác" của cộng đồng, quảng cáo/affiliate, lịch dạng liệt kê ngày (`dates`), store Firestore cho master data. Dữ liệu đã `publish` nằm ở `data/masterdata/<nguồn>/live.json`, commit vào git và đi cùng image. Ngày: 2026-10-28.
 > Phần "đã kiểm chứng" / "chưa kiểm chứng" ghi rõ ở mục 8. Những gì thuộc buổi thảo luận trước ("schema chung như đã bàn", "bản tin chính sách") **không có trong repo** nên được thiết kế lại từ đầu ở đây — cần đối chiếu.
 
 ## 1. Nguyên tắc
@@ -156,6 +156,26 @@ Quy tắc đặt tên: danh sách "luật quốc gia" (家電4品目, hazard chu
 2. **Thuốc** (drugstore, 医薬品, 第◯類医薬品): `guard = refuse` — không đọc liều, khuyên hỏi 薬剤師. Ngoài MVP.
 3. **Hạn dùng**: 消費期限 quá hạn → nói rõ "đừng ăn"; 賞味期限 quá hạn → chỉ nói đây là hạn "ngon nhất", không khẳng định ăn được. Không đoán nếu ngày bị mờ (`warnings_vi`).
 4. **Quảng cáo/affiliate**: gợi ý "mua ở đâu" có merchant trả phí phải **ghi rõ "PR/quảng cáo"** (quy định ステマ có hiệu lực từ 10/2023) và tách khỏi gợi ý trung lập.
+
+### Đã cài đặt (MVP đi chợ)
+
+```mermaid
+flowchart LR
+  T[Gõ chữ\nphở bò · thay rau răm · húng quế] --> M[Khớp bảng\nkhông gọi model]
+  P[Ảnh nhãn] --> R[Claude Haiku → Sonnet\nchép + dịch, không đánh giá]
+  M --> D[Danh sách mua theo nơi bán\nđồ thay thế · thẻ nguyên liệu]
+  R --> G{Thuốc?}
+  G -- có --> X[Từ chối: hỏi 薬剤師]
+  G -- không --> L[Nhãn: bảo quản · hạn dùng\nmục dị ứng NGUYÊN VĂN\nthẻ 賞味 vs 消費]
+  D --> N[Bảng còn draft?\nthêm dòng chờ kiểm duyệt]
+```
+
+- **Bảng** (`data/grocery/`): `ingredients.json` (tên Việt + alias, tên Nhật trên kệ, nơi bán thật sự của đúng món đó, bảo quản), `dishes.json` (nguyên liệu + vai trò), `substitutes.json` (độ giống `high|medium|low` + ghi chú). Mọi dòng có `source` và `status: draft|verified` (+ `verified_by/at`). Đồ **xấp xỉ** (ナンプラー cho nước mắm Việt) nằm ở `substitutes`, không nằm ở "nơi bán".
+- **Quy trình duyệt**: `npm run grocery -- export --status draft > review.csv` (xem bằng bảng tính, kiểm tên Nhật và nơi bán trên kệ thật) → `verify <id> --table <t> --by <tên>` → commit. Câu trả lời tự ghi "bảng đang chờ kiểm duyệt" chừng nào còn dùng dòng `draft`.
+- **Khớp chữ**: bỏ dấu, nhưng từ đơn dễ nhầm ("tôi"/"tỏi", "mẹ"/"me") chỉ khớp khi gõ đúng dấu. Món cụ thể thắng từ chung ("phở bò" thay vì cả phở bò + phở gà); gõ "phở" thì ra cả hai; nhiều món trong một câu được gộp danh sách.
+- **An toàn (có test)**: mục アレルギー chép nguyên văn trong khung riêng, lời dịch ghi "AI dịch, có thể sai"; **không có** câu "an toàn với bạn / không chứa…" ở bất kỳ câu trả lời nào; thuốc → từ chối; `消費期限` quá hạn → "đừng ăn"; `賞味期限` quá hạn → "không phải hạn an toàn nhưng mình không thể nói còn ăn được hay không"; ngày mờ → ghi rõ không đọc được.
+- **Chi phí**: gõ chữ = 0; một ảnh nhãn ≈ $0,0004 (Haiku), Sonnet chỉ khi Haiku không chắc; tính vào `LOOKUP_QUOTA` chung với rác.
+- **Chưa làm**: nút "gợi ý món thay thế khác" cho cộng đồng, quảng cáo/affiliate (cần gắn nhãn PR), thuốc ở drugstore (cố ý ngoài MVP).
 
 ## 5. Master data & cơ chế sync
 

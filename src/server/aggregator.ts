@@ -8,7 +8,7 @@ export interface PageBatch {
   replyToken?: string;
   userId?: string;
   /** 'translate' = "dịch" mode (nothing stored); 'gomi' = waste-sorting question about the photographed item. */
-  mode?: 'read' | 'translate' | 'gomi';
+  mode?: 'read' | 'translate' | 'gomi' | 'grocery';
 }
 
 interface Pending extends PageBatch {
@@ -32,7 +32,7 @@ export class PageAggregator {
     private readonly onFlush: (batch: PageBatch) => Promise<void>,
   ) {}
 
-  add(item: { chatId: string; familyId: string; page: Page; replyToken?: string; userId?: string; imageSet?: { total: number }; mode?: 'read' | 'translate' | 'gomi' }) {
+  add(item: { chatId: string; familyId: string; page: Page; replyToken?: string; userId?: string; imageSet?: { total: number }; mode?: 'read' | 'translate' | 'gomi' | 'grocery' }) {
     let p = this.pending.get(item.chatId);
     if (!p) {
       p = { chatId: item.chatId, familyId: item.familyId, pages: [], timer: null, received: 0 };

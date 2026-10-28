@@ -1,0 +1,2055 @@
+[
+ {
+  "id": "rau-ram",
+  "vi": "rau răm",
+  "aliases_vi": [
+   "rau ram"
+  ],
+  "jp": "ラウラム",
+  "jp_alt": [
+   "ベトナムコリアンダー",
+   "ベトナムミント"
+  ],
+  "where": [
+   "asian_store",
+   "vn_store",
+   "online"
+  ],
+  "storage_vi": "Bọc khăn giấy ẩm, để ngăn rau củ tủ lạnh, dùng trong 3–5 ngày.",
+  "note_vi": "Ít có ở siêu thị thường; tiệm Á/Việt hoặc online.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "rau-mui",
+  "vi": "rau mùi (ngò rí)",
+  "aliases_vi": [
+   "ngò rí",
+   "ngò",
+   "mùi",
+   "ngo ri",
+   "rau mui"
+  ],
+  "jp": "パクチー",
+  "jp_alt": [
+   "コリアンダー",
+   "香菜"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Cắm rễ vào cốc nước hoặc bọc khăn ẩm, tủ lạnh 3–5 ngày.",
+  "note_vi": "Siêu thị thường có, bán bó nhỏ.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "ngo-gai",
+  "vi": "ngò gai (mùi tàu)",
+  "aliases_vi": [
+   "mùi tàu",
+   "ngo gai",
+   "mui tau"
+  ],
+  "jp": "ノコギリコリアンダー",
+  "jp_alt": [
+   "オオバコエンドロ"
+  ],
+  "where": [
+   "asian_store",
+   "vn_store",
+   "online"
+  ],
+  "storage_vi": "Bọc khăn giấy ẩm, tủ lạnh vài ngày.",
+  "note_vi": "Mùi mạnh hơn rau mùi; tiệm Á/Việt.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "hung-que",
+  "vi": "húng quế",
+  "aliases_vi": [
+   "rau quế",
+   "hung que",
+   "húng"
+  ],
+  "jp": "タイバジル",
+  "jp_alt": [
+   "スイートバジル",
+   "バジル"
+  ],
+  "where": [
+   "asian_store",
+   "vn_store",
+   "online"
+  ],
+  "storage_vi": "Không để tủ lạnh lạnh sâu (dễ thâm); cắm nước ở nơi mát.",
+  "note_vi": "Siêu thị chỉ có basil kiểu Ý (vị nhạt hơn); tiệm Á có タイバジル.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "hung-lui",
+  "vi": "húng lủi (bạc hà)",
+  "aliases_vi": [
+   "bạc hà",
+   "húng lủi",
+   "hung lui",
+   "bac ha"
+  ],
+  "jp": "ミント",
+  "jp_alt": [
+   "スペアミント"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Cắm nước hoặc bọc khăn ẩm, tủ lạnh.",
+  "note_vi": "Siêu thị có mint tươi (khu rau thơm).",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "tia-to",
+  "vi": "tía tô",
+  "aliases_vi": [
+   "tia to"
+  ],
+  "jp": "大葉",
+  "jp_alt": [
+   "青じそ",
+   "しそ",
+   "赤じそ"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Bọc khăn giấy ẩm, ngăn rau củ.",
+  "note_vi": "大葉 gần giống tía tô Việt nhưng nhỏ và ít thơm hơn.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "diep-ca",
+  "vi": "diếp cá (rau giấp cá)",
+  "aliases_vi": [
+   "rau diếp cá",
+   "rau giấp cá",
+   "diep ca",
+   "dấp cá"
+  ],
+  "jp": "ドクダミ",
+  "jp_alt": [
+   "魚腥草"
+  ],
+  "where": [
+   "asian_store",
+   "vn_store",
+   "online"
+  ],
+  "storage_vi": "Bọc khăn ẩm, tủ lạnh vài ngày.",
+  "note_vi": "Mùi tanh đặc trưng; chỉ có ở tiệm Việt/online. Trà ドクダミ khô không thay được.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "kinh-gioi",
+  "vi": "kinh giới",
+  "aliases_vi": [
+   "kinh gioi"
+  ],
+  "jp": "ナギナタコウジュ",
+  "jp_alt": [
+   "近縁種"
+  ],
+  "where": [
+   "vn_store",
+   "online"
+  ],
+  "storage_vi": "Bọc khăn ẩm, tủ lạnh.",
+  "note_vi": "Hiếm; tên Nhật là loài họ hàng gần.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "hanh-la",
+  "vi": "hành lá",
+  "aliases_vi": [
+   "hành xanh",
+   "hanh la"
+  ],
+  "jp": "万能ねぎ",
+  "jp_alt": [
+   "小ねぎ",
+   "青ねぎ"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Bọc khăn giấy, để đứng trong ngăn rau củ.",
+  "note_vi": "Hành lá Việt gần với 小ねぎ; 長ねぎ (hành to trắng) là loại khác.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "hanh-tim",
+  "vi": "hành tím",
+  "aliases_vi": [
+   "hành khô",
+   "hanh tim",
+   "shallot"
+  ],
+  "jp": "エシャロット",
+  "jp_alt": [
+   "赤玉ねぎ"
+  ],
+  "where": [
+   "supermarket",
+   "asian_store"
+  ],
+  "storage_vi": "Để nơi khô thoáng.",
+  "note_vi": "エシャロット ở siêu thị khá đắt.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "toi",
+  "vi": "tỏi",
+  "aliases_vi": [
+   "toi"
+  ],
+  "jp": "にんにく",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Nơi khô thoáng.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "gung",
+  "vi": "gừng",
+  "aliases_vi": [
+   "gung"
+  ],
+  "jp": "しょうが",
+  "jp_alt": [
+   "生姜"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Ngăn rau củ; cắt khúc cấp đông được.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "sa",
+  "vi": "sả",
+  "aliases_vi": [
+   "cây sả",
+   "sa"
+  ],
+  "jp": "レモングラス",
+  "jp_alt": [],
+  "where": [
+   "asian_store",
+   "vn_store",
+   "online"
+  ],
+  "storage_vi": "Cấp đông từng khúc.",
+  "note_vi": "Một số siêu thị lớn có (tươi hoặc khô).",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "rieng",
+  "vi": "riềng",
+  "aliases_vi": [
+   "rieng"
+  ],
+  "jp": "ガランガル",
+  "jp_alt": [
+   "ナンキョウ",
+   "南姜"
+  ],
+  "where": [
+   "asian_store",
+   "vn_store",
+   "online"
+  ],
+  "storage_vi": "Cấp đông từng lát.",
+  "note_vi": "Chỉ có ở tiệm Á/Việt; tuýp ガランガル có ở một số siêu thị.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "nghe",
+  "vi": "nghệ tươi",
+  "aliases_vi": [
+   "củ nghệ",
+   "nghe tuoi"
+  ],
+  "jp": "生ウコン",
+  "jp_alt": [
+   "ターメリック(生)"
+  ],
+  "where": [
+   "asian_store",
+   "vn_store",
+   "online"
+  ],
+  "storage_vi": "Ngăn rau củ.",
+  "note_vi": "Bột nghệ (ターメリックパウダー) có ở siêu thị.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "ot",
+  "vi": "ớt",
+  "aliases_vi": [
+   "ớt hiểm",
+   "ớt tươi",
+   "ot"
+  ],
+  "jp": "唐辛子",
+  "jp_alt": [
+   "生唐辛子",
+   "青唐辛子",
+   "鷹の爪"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Ngăn rau củ, hoặc phơi khô.",
+  "note_vi": "Ớt hiểm tươi hiếm; dùng 鷹の爪 (khô) hoặc ớt tươi vào mùa hè.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "chanh",
+  "vi": "chanh",
+  "aliases_vi": [
+   "chanh xanh",
+   "chanh ta"
+  ],
+  "jp": "ライム",
+  "jp_alt": [
+   "レモン"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Ngăn rau củ.",
+  "note_vi": "Chanh Việt nhỏ, vỏ mỏng, gần với ライム; レモン vị khác (ngọt, thơm hơn).",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "la-chanh",
+  "vi": "lá chanh",
+  "aliases_vi": [
+   "la chanh"
+  ],
+  "jp": "コブミカンの葉",
+  "jp_alt": [
+   "バイマックルー",
+   "カフィアライム葉"
+  ],
+  "where": [
+   "asian_store",
+   "vn_store",
+   "online"
+  ],
+  "storage_vi": "Cấp đông trong túi kín.",
+  "note_vi": "Tiệm Á/Việt hoặc online (có loại cấp đông).",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "la-chuoi",
+  "vi": "lá chuối",
+  "aliases_vi": [
+   "la chuoi"
+  ],
+  "jp": "バナナの葉",
+  "jp_alt": [],
+  "where": [
+   "asian_store",
+   "vn_store",
+   "online"
+  ],
+  "storage_vi": "Cấp đông.",
+  "note_vi": "Thường bán đông lạnh.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "la-dua",
+  "vi": "lá dứa (lá nếp)",
+  "aliases_vi": [
+   "lá nếp",
+   "la dua"
+  ],
+  "jp": "パンダンリーフ",
+  "jp_alt": [
+   "パンダナス"
+  ],
+  "where": [
+   "asian_store",
+   "vn_store",
+   "online"
+  ],
+  "storage_vi": "Cấp đông.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "rau-muong",
+  "vi": "rau muống",
+  "aliases_vi": [
+   "rau muong"
+  ],
+  "jp": "空心菜",
+  "jp_alt": [
+   "エンサイ",
+   "蕹菜"
+  ],
+  "where": [
+   "supermarket",
+   "asian_store"
+  ],
+  "storage_vi": "Bọc giấy, ngăn rau củ, dùng nhanh.",
+  "note_vi": "Siêu thị có vào mùa hè; mùa đông ít.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "cai-xanh",
+  "vi": "cải xanh (cải bẹ xanh)",
+  "aliases_vi": [
+   "cải bẹ xanh",
+   "cai xanh",
+   "cải canh"
+  ],
+  "jp": "からし菜",
+  "jp_alt": [
+   "高菜",
+   "芥菜"
+  ],
+  "where": [
+   "supermarket",
+   "asian_store"
+  ],
+  "storage_vi": "Bọc giấy, ngăn rau củ.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "cai-thia",
+  "vi": "cải thìa",
+  "aliases_vi": [
+   "cai thia",
+   "cải chíp"
+  ],
+  "jp": "チンゲンサイ",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Bọc giấy, ngăn rau củ.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "cai-ngot",
+  "vi": "cải ngọt",
+  "aliases_vi": [
+   "cai ngot"
+  ],
+  "jp": "菜心 (サイシン)",
+  "jp_alt": [
+   "チョイサム"
+  ],
+  "where": [
+   "asian_store",
+   "supermarket"
+  ],
+  "storage_vi": "Bọc giấy, ngăn rau củ.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "cai-thao",
+  "vi": "cải thảo",
+  "aliases_vi": [
+   "cai thao"
+  ],
+  "jp": "白菜",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Bọc giấy báo, nơi mát.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "bap-cai",
+  "vi": "bắp cải",
+  "aliases_vi": [
+   "cải bắp",
+   "bap cai"
+  ],
+  "jp": "キャベツ",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Ngăn rau củ.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "gia-do",
+  "vi": "giá đỗ",
+  "aliases_vi": [
+   "giá",
+   "giá sống",
+   "gia do"
+  ],
+  "jp": "もやし",
+  "jp_alt": [
+   "緑豆もやし"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Dùng trong 1–2 ngày.",
+  "note_vi": "もやし ở Nhật là giá đỗ xanh, hơi ngắn hơn.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "ca-chua",
+  "vi": "cà chua",
+  "aliases_vi": [
+   "ca chua"
+  ],
+  "jp": "トマト",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Nhiệt độ phòng nếu chưa chín.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "dua-leo",
+  "vi": "dưa leo (dưa chuột)",
+  "aliases_vi": [
+   "dưa chuột",
+   "dua leo"
+  ],
+  "jp": "きゅうり",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Ngăn rau củ.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "xa-lach",
+  "vi": "xà lách",
+  "aliases_vi": [
+   "xa lach",
+   "rau xà lách"
+  ],
+  "jp": "レタス",
+  "jp_alt": [
+   "サニーレタス",
+   "リーフレタス"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Bọc giấy, ngăn rau củ.",
+  "note_vi": "Ăn cuốn: サニーレタス/リーフレタス hợp hơn レタス tròn.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "he",
+  "vi": "hẹ",
+  "aliases_vi": [
+   "lá hẹ"
+  ],
+  "jp": "ニラ",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Bọc giấy, ngăn rau củ.",
+  "note_vi": "ニラ gần với hẹ nhưng lá to hơn.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "kho-qua",
+  "vi": "khổ qua (mướp đắng)",
+  "aliases_vi": [
+   "mướp đắng",
+   "kho qua"
+  ],
+  "jp": "ゴーヤ",
+  "jp_alt": [
+   "ニガウリ"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Ngăn rau củ.",
+  "note_vi": "Mùa hè nhiều, mùa khác ít.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "bi-dao",
+  "vi": "bí đao",
+  "aliases_vi": [
+   "bi dao"
+  ],
+  "jp": "冬瓜 (トウガン)",
+  "jp_alt": [],
+  "where": [
+   "supermarket",
+   "asian_store"
+  ],
+  "storage_vi": "Cắt dở thì bọc màng, tủ lạnh.",
+  "note_vi": "Mùa hè–thu.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "bi-do",
+  "vi": "bí đỏ",
+  "aliases_vi": [
+   "bí ngô",
+   "bi do"
+  ],
+  "jp": "かぼちゃ",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Nơi mát; đã cắt thì tủ lạnh.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "su-su",
+  "vi": "su su",
+  "aliases_vi": [
+   "su su"
+  ],
+  "jp": "ハヤトウリ",
+  "jp_alt": [],
+  "where": [
+   "asian_store",
+   "supermarket"
+  ],
+  "storage_vi": "Ngăn rau củ.",
+  "note_vi": "Siêu thị ít bán.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "dua",
+  "vi": "thơm (dứa)",
+  "aliases_vi": [
+   "dứa",
+   "thom",
+   "dua"
+  ],
+  "jp": "パイナップル",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Tủ lạnh khi đã cắt.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "dau-bap",
+  "vi": "đậu bắp",
+  "aliases_vi": [
+   "dau bap"
+  ],
+  "jp": "オクラ",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Ngăn rau củ.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "mang",
+  "vi": "măng",
+  "aliases_vi": [
+   "mang"
+  ],
+  "jp": "たけのこ(水煮)",
+  "jp_alt": [
+   "水煮筍"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Đã mở: ngâm nước sạch, tủ lạnh, thay nước hàng ngày.",
+  "note_vi": "Dùng loại 水煮 đóng gói; rửa kỹ.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "nam-mo",
+  "vi": "nấm mèo (mộc nhĩ)",
+  "aliases_vi": [
+   "mộc nhĩ",
+   "nam meo",
+   "moc nhi"
+  ],
+  "jp": "キクラゲ",
+  "jp_alt": [
+   "乾燥キクラゲ"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Khô: nơi khô ráo. Ngâm nước ấm trước khi dùng.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "nam-huong",
+  "vi": "nấm hương",
+  "aliases_vi": [
+   "nam huong"
+  ],
+  "jp": "干し椎茸",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Nơi khô ráo.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "cu-cai",
+  "vi": "củ cải trắng",
+  "aliases_vi": [
+   "cu cai"
+  ],
+  "jp": "大根",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Ngăn rau củ.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "ca-rot",
+  "vi": "cà rốt",
+  "aliases_vi": [
+   "ca rot"
+  ],
+  "jp": "にんじん",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Ngăn rau củ.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "khoai-tay",
+  "vi": "khoai tây",
+  "aliases_vi": [
+   "khoai tay"
+  ],
+  "jp": "じゃがいも",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Nơi tối, mát.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "khoai-lang",
+  "vi": "khoai lang",
+  "aliases_vi": [
+   "khoai lang"
+  ],
+  "jp": "さつまいも",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Nơi mát.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "khoai-mon",
+  "vi": "khoai môn",
+  "aliases_vi": [
+   "khoai so"
+  ],
+  "jp": "タロイモ",
+  "jp_alt": [
+   "里芋(近い)"
+  ],
+  "where": [
+   "asian_store",
+   "supermarket"
+  ],
+  "storage_vi": "Nơi mát.",
+  "note_vi": "里芋 ở siêu thị gần giống nhưng nhớt hơn.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "du-du-xanh",
+  "vi": "đu đủ xanh",
+  "aliases_vi": [
+   "du du xanh"
+  ],
+  "jp": "青パパイヤ",
+  "jp_alt": [],
+  "where": [
+   "asian_store",
+   "vn_store",
+   "online"
+  ],
+  "storage_vi": "Ngăn rau củ.",
+  "note_vi": "Hiếm ở siêu thị.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "chuoi-xanh",
+  "vi": "chuối xanh",
+  "aliases_vi": [
+   "chuoi xanh"
+  ],
+  "jp": "青バナナ",
+  "jp_alt": [],
+  "where": [
+   "asian_store",
+   "vn_store",
+   "online"
+  ],
+  "storage_vi": "Nơi mát.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "me",
+  "vi": "me chua (tamarind)",
+  "aliases_vi": [
+   "me vắt",
+   "tamarind"
+  ],
+  "jp": "タマリンド",
+  "jp_alt": [],
+  "where": [
+   "asian_store",
+   "vn_store",
+   "online"
+  ],
+  "storage_vi": "Tủ lạnh sau khi mở.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "dua-cai-chua",
+  "vi": "dưa cải chua",
+  "aliases_vi": [
+   "cải chua",
+   "dưa chua",
+   "dua chua"
+  ],
+  "jp": "酸菜 (サンサイ)",
+  "jp_alt": [
+   "高菜漬け(近い)"
+  ],
+  "where": [
+   "asian_store",
+   "vn_store",
+   "online"
+  ],
+  "storage_vi": "Tủ lạnh.",
+  "note_vi": "高菜漬け ở siêu thị gần giống nhưng ít chua hơn.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "hanh-tay",
+  "vi": "hành tây",
+  "aliases_vi": [
+   "hanh tay"
+  ],
+  "jp": "玉ねぎ",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Nơi khô thoáng.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "hanh-phi",
+  "vi": "hành phi",
+  "aliases_vi": [
+   "hành khô chiên"
+  ],
+  "jp": "フライドオニオン",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Đậy kín, nơi khô.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "dau-phong",
+  "vi": "đậu phộng (lạc)",
+  "aliases_vi": [
+   "lạc",
+   "đậu phụng",
+   "dau phong"
+  ],
+  "jp": "ピーナッツ",
+  "jp_alt": [
+   "落花生"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Đậy kín, nơi khô.",
+  "note_vi": "Là chất gây dị ứng thường gặp: nhớ báo người ăn.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "vung",
+  "vi": "vừng (mè)",
+  "aliases_vi": [
+   "mè",
+   "vung",
+   "me trang"
+  ],
+  "jp": "ごま",
+  "jp_alt": [
+   "白ごま"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Đậy kín, nơi khô.",
+  "note_vi": "Là chất gây dị ứng thường gặp.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "thit-ba-chi",
+  "vi": "thịt ba chỉ (ba rọi)",
+  "aliases_vi": [
+   "ba rọi",
+   "ba chỉ",
+   "thit ba chi"
+  ],
+  "jp": "豚バラ肉",
+  "jp_alt": [
+   "豚バラスライス",
+   "豚バラブロック"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Tủ lạnh 2–3 ngày, hoặc cấp đông.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "thit-bo",
+  "vi": "thịt bò",
+  "aliases_vi": [
+   "bò",
+   "thit bo"
+  ],
+  "jp": "牛肉",
+  "jp_alt": [
+   "牛薄切り",
+   "牛切り落とし"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Tủ lạnh 1–2 ngày, hoặc cấp đông.",
+  "note_vi": "Nhúng phở/bún: 牛薄切り; hầm: 牛すね肉/牛バラ.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "gan-bo",
+  "vi": "gân bò",
+  "aliases_vi": [
+   "gan bo"
+  ],
+  "jp": "牛すじ",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Cấp đông.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "bap-bo",
+  "vi": "bắp bò (nạm)",
+  "aliases_vi": [
+   "nạm bò",
+   "bap bo",
+   "nam bo"
+  ],
+  "jp": "牛すね肉",
+  "jp_alt": [
+   "牛バラ肉"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Tủ lạnh 2 ngày, hoặc cấp đông.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "xuong-bo",
+  "vi": "xương bò",
+  "aliases_vi": [
+   "xuong bo"
+  ],
+  "jp": "牛骨",
+  "jp_alt": [
+   "牛ゲンコツ"
+  ],
+  "where": [
+   "supermarket",
+   "asian_store"
+  ],
+  "storage_vi": "Cấp đông.",
+  "note_vi": "Hỏi quầy thịt / siêu thị lớn; có thể phải đặt trước.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "xuong-heo",
+  "vi": "xương ống heo",
+  "aliases_vi": [
+   "xương heo",
+   "xương ống",
+   "xuong heo"
+  ],
+  "jp": "豚骨(げんこつ)",
+  "jp_alt": [
+   "豚ゲンコツ"
+  ],
+  "where": [
+   "supermarket",
+   "asian_store"
+  ],
+  "storage_vi": "Cấp đông.",
+  "note_vi": "Hỏi quầy thịt; có thể phải đặt trước.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "gio-heo",
+  "vi": "giò heo (chân giò)",
+  "aliases_vi": [
+   "chân giò",
+   "giò heo",
+   "gio heo"
+  ],
+  "jp": "豚足",
+  "jp_alt": [
+   "豚すね肉",
+   "豚の足"
+  ],
+  "where": [
+   "supermarket",
+   "asian_store"
+  ],
+  "storage_vi": "Cấp đông.",
+  "note_vi": "豚足 là móng; phần giò bắp (豚すね) hiếm: nhờ quầy thịt.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "suon-heo",
+  "vi": "sườn heo",
+  "aliases_vi": [
+   "sườn",
+   "sườn non",
+   "suon heo"
+  ],
+  "jp": "スペアリブ",
+  "jp_alt": [
+   "豚骨付きばら肉"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Tủ lạnh 2 ngày, hoặc cấp đông.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "thit-xay",
+  "vi": "thịt xay (heo)",
+  "aliases_vi": [
+   "thịt băm",
+   "thit xay"
+  ],
+  "jp": "豚ひき肉",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Dùng trong ngày hoặc cấp đông.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "ga",
+  "vi": "gà",
+  "aliases_vi": [
+   "thịt gà",
+   "ga"
+  ],
+  "jp": "鶏肉",
+  "jp_alt": [
+   "鶏もも肉",
+   "鶏むね肉",
+   "手羽元",
+   "丸鶏"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Tủ lạnh 1–2 ngày, hoặc cấp đông.",
+  "note_vi": "Phở gà: 丸鶏 hoặc 手羽元 + 鶏ガラ.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "tom",
+  "vi": "tôm",
+  "aliases_vi": [
+   "tom"
+  ],
+  "jp": "えび",
+  "jp_alt": [
+   "有頭えび",
+   "むきえび"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Cấp đông.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "muc",
+  "vi": "mực",
+  "aliases_vi": [
+   "muc"
+  ],
+  "jp": "イカ",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Dùng trong ngày hoặc cấp đông.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "ca-basa",
+  "vi": "cá basa",
+  "aliases_vi": [
+   "ca basa",
+   "cá tra"
+  ],
+  "jp": "バサ (パンガシウス)",
+  "jp_alt": [
+   "パンガシウス"
+  ],
+  "where": [
+   "asian_store",
+   "online"
+  ],
+  "storage_vi": "Cấp đông.",
+  "note_vi": "Hiếm; thay bằng cá trắng (タラ…).",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "ca-thu",
+  "vi": "cá thu",
+  "aliases_vi": [
+   "ca thu"
+  ],
+  "jp": "サバ",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Tủ lạnh 1 ngày, hoặc cấp đông.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "ca-hoi",
+  "vi": "cá hồi",
+  "aliases_vi": [
+   "ca hoi"
+  ],
+  "jp": "サケ(鮭)",
+  "jp_alt": [
+   "サーモン"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Tủ lạnh 1–2 ngày.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "trung",
+  "vi": "trứng gà",
+  "aliases_vi": [
+   "trứng",
+   "trung ga",
+   "trung"
+  ],
+  "jp": "卵",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Tủ lạnh.",
+  "note_vi": "Là chất gây dị ứng thường gặp.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "dau-hu",
+  "vi": "đậu hũ (đậu phụ)",
+  "aliases_vi": [
+   "đậu phụ",
+   "dau hu",
+   "dau phu"
+  ],
+  "jp": "豆腐",
+  "jp_alt": [
+   "木綿豆腐"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Tủ lạnh, ngâm nước nếu đã mở.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "dau-hu-chien",
+  "vi": "đậu hũ chiên",
+  "aliases_vi": [
+   "dau hu chien",
+   "đậu phụ chiên"
+  ],
+  "jp": "厚揚げ",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Tủ lạnh.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "cha-lua",
+  "vi": "chả lụa (giò lụa)",
+  "aliases_vi": [
+   "giò lụa",
+   "cha lua",
+   "gio lua"
+  ],
+  "jp": "ベトナムハム(チャールア)",
+  "jp_alt": [],
+  "where": [
+   "vn_store",
+   "online"
+  ],
+  "storage_vi": "Tủ lạnh/cấp đông.",
+  "note_vi": "Ở siêu thị khó tìm đúng loại.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "tom-kho",
+  "vi": "tôm khô",
+  "aliases_vi": [
+   "tom kho"
+  ],
+  "jp": "干しえび",
+  "jp_alt": [],
+  "where": [
+   "supermarket",
+   "asian_store"
+  ],
+  "storage_vi": "Tủ lạnh sau khi mở.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "lap-xuong",
+  "vi": "lạp xưởng",
+  "aliases_vi": [
+   "lap xuong"
+  ],
+  "jp": "腊腸 (中華ソーセージ)",
+  "jp_alt": [],
+  "where": [
+   "asian_store",
+   "vn_store",
+   "online"
+  ],
+  "storage_vi": "Tủ lạnh.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "mam-tom",
+  "vi": "mắm tôm",
+  "aliases_vi": [
+   "mam tom"
+  ],
+  "jp": "マムトム (エビ発酵調味料)",
+  "jp_alt": [],
+  "where": [
+   "vn_store",
+   "online"
+  ],
+  "storage_vi": "Đậy kín, tủ lạnh.",
+  "note_vi": "Mùi rất nặng; ít nơi bán.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "nuoc-mam",
+  "vi": "nước mắm",
+  "aliases_vi": [
+   "nuoc mam"
+  ],
+  "jp": "ヌクマム",
+  "jp_alt": [
+   "ナンプラー"
+  ],
+  "where": [
+   "supermarket",
+   "asian_store",
+   "vn_store"
+  ],
+  "storage_vi": "Nơi mát, đậy kín.",
+  "note_vi": "Siêu thị thường có ナンプラー (Thái) hoặc ヌクマム; vị Việt rõ hơn ở tiệm Á/Việt.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "tuong-ot",
+  "vi": "tương ớt",
+  "aliases_vi": [
+   "tuong ot",
+   "sriracha"
+  ],
+  "jp": "スイートチリソース",
+  "jp_alt": [
+   "スリラチャ"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Tủ lạnh sau khi mở.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "tuong-hoisin",
+  "vi": "tương đen (hoisin)",
+  "aliases_vi": [
+   "tương hột",
+   "hoisin",
+   "tuong den"
+  ],
+  "jp": "ホイシンソース",
+  "jp_alt": [
+   "甜麺醤(近い)"
+  ],
+  "where": [
+   "supermarket",
+   "asian_store"
+  ],
+  "storage_vi": "Tủ lạnh sau khi mở.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "dau-hao",
+  "vi": "dầu hào",
+  "aliases_vi": [
+   "dau hao"
+  ],
+  "jp": "オイスターソース",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Tủ lạnh sau khi mở.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "duong-phen",
+  "vi": "đường phèn",
+  "aliases_vi": [
+   "duong phen"
+  ],
+  "jp": "氷砂糖",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Nơi khô.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "hat-nem",
+  "vi": "hạt nêm",
+  "aliases_vi": [
+   "hat nem"
+  ],
+  "jp": "鶏がらスープの素(顆粒)",
+  "jp_alt": [
+   "顆粒だし"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Đậy kín.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "bot-nghe",
+  "vi": "bột nghệ",
+  "aliases_vi": [
+   "bot nghe"
+  ],
+  "jp": "ターメリックパウダー",
+  "jp_alt": [
+   "ウコン粉"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Đậy kín.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "hoa-hoi",
+  "vi": "hoa hồi",
+  "aliases_vi": [
+   "hoi",
+   "hoa hoi",
+   "đại hồi"
+  ],
+  "jp": "八角",
+  "jp_alt": [
+   "スターアニス"
+  ],
+  "where": [
+   "supermarket",
+   "asian_store"
+  ],
+  "storage_vi": "Đậy kín.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "que",
+  "vi": "quế",
+  "aliases_vi": [
+   "que",
+   "vỏ quế"
+  ],
+  "jp": "シナモン(スティック)",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Đậy kín.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "thao-qua",
+  "vi": "thảo quả",
+  "aliases_vi": [
+   "thao qua"
+  ],
+  "jp": "草果",
+  "jp_alt": [],
+  "where": [
+   "asian_store",
+   "vn_store",
+   "online"
+  ],
+  "storage_vi": "Đậy kín.",
+  "note_vi": "Hiếm; có thể bỏ nếu không có.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "hat-dieu-mau",
+  "vi": "hạt điều màu",
+  "aliases_vi": [
+   "dầu điều",
+   "hat dieu mau"
+  ],
+  "jp": "アナトー(ベニノキ)",
+  "jp_alt": [
+   "アチオーテ"
+  ],
+  "where": [
+   "asian_store",
+   "vn_store",
+   "online"
+  ],
+  "storage_vi": "Đậy kín.",
+  "note_vi": "Chỉ để tạo màu đỏ cam; xem phần thay thế.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "sa-te",
+  "vi": "sa tế",
+  "aliases_vi": [
+   "sate"
+  ],
+  "jp": "サテソース(ベトナム式)",
+  "jp_alt": [
+   "チリサテ"
+  ],
+  "where": [
+   "asian_store",
+   "vn_store",
+   "online"
+  ],
+  "storage_vi": "Tủ lạnh sau khi mở.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "bun",
+  "vi": "bún",
+  "aliases_vi": [
+   "bun",
+   "bún tươi",
+   "bún khô",
+   "bún gạo"
+  ],
+  "jp": "ブン (米粉の麺)",
+  "jp_alt": [
+   "ビーフン(細め)"
+  ],
+  "where": [
+   "vn_store",
+   "asian_store",
+   "online"
+  ],
+  "storage_vi": "Bún tươi dùng trong ngày; bún khô để nơi khô.",
+  "note_vi": "Siêu thị có ビーフン (sợi mảnh hơn bún Việt): xem phần thay thế.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "banh-pho",
+  "vi": "bánh phở",
+  "aliases_vi": [
+   "banh pho",
+   "phở khô",
+   "bánh phở khô"
+  ],
+  "jp": "フォー(乾麺)",
+  "jp_alt": [
+   "フォー(生麺)"
+  ],
+  "where": [
+   "asian_store",
+   "vn_store",
+   "online"
+  ],
+  "storage_vi": "Khô: nơi khô ráo.",
+  "note_vi": "Một số siêu thị lớn có フォー khô ở khu đồ châu Á.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "banh-trang",
+  "vi": "bánh tráng",
+  "aliases_vi": [
+   "bánh tráng gạo",
+   "ライスペーパー",
+   "banh trang"
+  ],
+  "jp": "ライスペーパー",
+  "jp_alt": [],
+  "where": [
+   "supermarket",
+   "asian_store",
+   "vn_store"
+  ],
+  "storage_vi": "Nơi khô; đậy kín.",
+  "note_vi": "Siêu thị có ライスペーパー (để làm gỏi cuốn).",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "gao",
+  "vi": "gạo tẻ",
+  "aliases_vi": [
+   "gạo",
+   "gao"
+  ],
+  "jp": "タイ米",
+  "jp_alt": [
+   "インディカ米",
+   "ジャスミンライス"
+  ],
+  "where": [
+   "asian_store",
+   "online"
+  ],
+  "storage_vi": "Nơi khô.",
+  "note_vi": "Gạo tẻ Việt dài và ít dẻo; 日本米 dẻo hơn.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "gao-nep",
+  "vi": "gạo nếp",
+  "aliases_vi": [
+   "nếp",
+   "gao nep"
+  ],
+  "jp": "もち米",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Nơi khô.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "bot-nang",
+  "vi": "bột năng",
+  "aliases_vi": [
+   "bot nang",
+   "bột báng"
+  ],
+  "jp": "タピオカ粉",
+  "jp_alt": [
+   "タピオカスターチ"
+  ],
+  "where": [
+   "supermarket",
+   "asian_store"
+  ],
+  "storage_vi": "Nơi khô.",
+  "note_vi": "片栗粉 gần nhưng không giống hoàn toàn.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "bot-gao",
+  "vi": "bột gạo",
+  "aliases_vi": [
+   "bot gao"
+  ],
+  "jp": "上新粉",
+  "jp_alt": [
+   "米粉"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Nơi khô.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "bot-chien-gion",
+  "vi": "bột chiên giòn",
+  "aliases_vi": [
+   "bot chien gion"
+  ],
+  "jp": "天ぷら粉",
+  "jp_alt": [
+   "から揚げ粉"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Nơi khô.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "bot-ca-ri",
+  "vi": "bột cà ri",
+  "aliases_vi": [
+   "bot ca ri",
+   "curry"
+  ],
+  "jp": "カレー粉",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Nơi khô.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "banh-mi",
+  "vi": "bánh mì",
+  "aliases_vi": [
+   "banh mi",
+   "bánh mì que"
+  ],
+  "jp": "バゲット",
+  "jp_alt": [
+   "フランスパン"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Dùng trong ngày, hoặc cấp đông.",
+  "note_vi": "Ổ nhỏ kiểu Việt: tiệm Việt hoặc tiệm bánh; siêu thị có バゲット.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "mien",
+  "vi": "miến",
+  "aliases_vi": [
+   "miến dong",
+   "mien"
+  ],
+  "jp": "春雨 (緑豆春雨)",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Nơi khô.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "cot-dua",
+  "vi": "nước cốt dừa",
+  "aliases_vi": [
+   "cốt dừa",
+   "nuoc cot dua"
+  ],
+  "jp": "ココナッツミルク",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Tủ lạnh sau khi mở.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "nuoc-dua",
+  "vi": "nước dừa tươi",
+  "aliases_vi": [
+   "nuoc dua"
+  ],
+  "jp": "ココナッツウォーター",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Tủ lạnh sau khi mở.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "sua-dac",
+  "vi": "sữa đặc",
+  "aliases_vi": [
+   "sua dac",
+   "sữa đặc có đường"
+  ],
+  "jp": "コンデンスミルク",
+  "jp_alt": [
+   "加糖練乳",
+   "練乳"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Tủ lạnh sau khi mở.",
+  "note_vi": "",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "ca-phe",
+  "vi": "cà phê (phin)",
+  "aliases_vi": [
+   "ca phe",
+   "cà phê phin",
+   "cà phê Việt"
+  ],
+  "jp": "ベトナムコーヒー",
+  "jp_alt": [
+   "深煎り粗挽き"
+  ],
+  "where": [
+   "vn_store",
+   "online",
+   "asian_store"
+  ],
+  "storage_vi": "Đậy kín, nơi mát.",
+  "note_vi": "Siêu thị: cà phê rang đậm xay thô gần giống.",
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "giam",
+  "vi": "giấm",
+  "aliases_vi": [
+   "dấm",
+   "giam",
+   "giấm gạo"
+  ],
+  "jp": "米酢",
+  "jp_alt": [
+   "酢"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "Nơi mát.",
+  "note_vi": "",
+  "pantry": true,
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "duong",
+  "vi": "đường",
+  "aliases_vi": [
+   "duong"
+  ],
+  "jp": "砂糖",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "",
+  "note_vi": "",
+  "pantry": true,
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "muoi",
+  "vi": "muối",
+  "aliases_vi": [
+   "muoi"
+  ],
+  "jp": "塩",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "",
+  "note_vi": "",
+  "pantry": true,
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "tieu",
+  "vi": "tiêu",
+  "aliases_vi": [
+   "hạt tiêu",
+   "tieu"
+  ],
+  "jp": "胡椒",
+  "jp_alt": [
+   "ブラックペッパー"
+  ],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "",
+  "note_vi": "",
+  "pantry": true,
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "xi-dau",
+  "vi": "xì dầu (nước tương)",
+  "aliases_vi": [
+   "nước tương",
+   "xi dau",
+   "nuoc tuong"
+  ],
+  "jp": "しょうゆ",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "",
+  "note_vi": "",
+  "pantry": true,
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "bot-ngot",
+  "vi": "bột ngọt (mì chính)",
+  "aliases_vi": [
+   "mì chính",
+   "bot ngot"
+  ],
+  "jp": "味の素(うま味調味料)",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "",
+  "note_vi": "",
+  "pantry": true,
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "dau-an",
+  "vi": "dầu ăn",
+  "aliases_vi": [
+   "dau an"
+  ],
+  "jp": "サラダ油",
+  "jp_alt": [],
+  "where": [
+   "supermarket"
+  ],
+  "storage_vi": "",
+  "note_vi": "",
+  "pantry": true,
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ }
+]

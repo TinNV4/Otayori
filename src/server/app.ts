@@ -27,6 +27,7 @@ export interface AppDeps {
   verifyIdToken: IdTokenVerifier | null;
   gomi?: BotDeps['gomi'];
   cities?: BotDeps['cities'];
+  grocery?: BotDeps['grocery'];
   geocoder?: BotDeps['geocoder'];
 }
 
@@ -45,7 +46,7 @@ function adminFamily(f: Family) {
 export function createApp(deps: AppDeps) {
   const { cfg, repo, line } = deps;
   const translator = deps.translator || new MockTranslator();
-  const bot = new Bot({ repo, line, extractor: deps.extractor, composer: deps.composer, translator, cfg, gomi: deps.gomi, cities: deps.cities, geocoder: deps.geocoder });
+  const bot = new Bot({ repo, line, extractor: deps.extractor, composer: deps.composer, translator, cfg, gomi: deps.gomi, cities: deps.cities, geocoder: deps.geocoder, grocery: deps.grocery });
   const services = bot.services;
   const app = express();
   app.disable('x-powered-by');

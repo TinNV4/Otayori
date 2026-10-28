@@ -15,6 +15,7 @@
     "admin": "tsx scripts/admin.ts",
     "data": "tsx scripts/data.ts",
     "lens": "tsx scripts/lens.ts",
+    "grocery": "tsx scripts/grocery.ts",
     "line:setup": "tsx scripts/line-setup.ts",
     "deploy": "bash scripts/deploy.sh",
     "clean": "rm -rf dist .data",

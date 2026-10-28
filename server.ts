@@ -15,6 +15,8 @@ import { loadSources } from './src/server/lens/masterdata/registry.ts';
 import { FileMasterStore } from './src/server/lens/masterdata/store.ts';
 import { loadCities, gsiGeocoder } from './src/server/lens/regions.ts';
 import { loadCityInfo } from './src/server/lens/cityinfo.ts';
+import { EMPTY_GROCERY, loadGrocery } from './src/server/lens/grocery/data.ts';
+import { ClaudeLabelRecognizer, MockLabelRecognizer } from './src/server/lens/grocery/recognize.ts';
 import { scheduleFromStore } from './src/server/lens/gomi/schedule.ts';
 
 const cfg = loadConfig();
@@ -45,8 +47,19 @@ const gomi = {
   cityInfo: (code: string) => cityInfo[code] ?? {},
 };
 
+let groceryData = EMPTY_GROCERY;
+try {
+  groceryData = loadGrocery(cfg.groceryDir);
+} catch (err) {
+  console.error('[grocery] tables failed to load, "đi chợ" will answer without data:', (err as Error).message);
+}
+const grocery = {
+  data: groceryData,
+  recognizer: cfg.anthropicApiKey ? new ClaudeLabelRecognizer(cfg.anthropicApiKey) : new MockLabelRecognizer(),
+};
+
 const { app, bot } = createApp({
-  cfg, repo, line, extractor, composer, translator, verifyIdToken, gomi, cities,
+  cfg, repo, line, extractor, composer, translator, verifyIdToken, gomi, cities, grocery,
   geocoder: cfg.regionGeocoder === 'gsi' ? gsiGeocoder : undefined,
 });
 

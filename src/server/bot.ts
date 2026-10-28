@@ -14,6 +14,10 @@ import { ExtractedDocument, Family, FamilyRegion, Translation } from '../types/i
 import { answerGomi, GomiDeps } from './lens/gomi/core.ts';
 import { GomiInput, MockRecognizer } from './lens/gomi/recognize.ts';
 import { areaRows } from './lens/gomi/schedule.ts';
+import { answerGrocery } from './lens/grocery/core.ts';
+import { EMPTY_GROCERY } from './lens/grocery/data.ts';
+import { LabelRecognizer, MockLabelRecognizer } from './lens/grocery/recognize.ts';
+import { GroceryData } from './lens/grocery/types.ts';
 import { chomeAfterCity, cityByMuniCd, cityFromAddress, cityNameFromAddress, City, describeRegion, findCities, Geocoder, regionFor } from './lens/regions.ts';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -129,6 +133,8 @@ export interface BotDeps {
   now?: () => Date;
   /** Waste-sorting module (recognizer + city dictionary). Offline mock with an empty dictionary when omitted. */
   gomi?: Omit<GomiDeps, 'repo' | 'now'>;
+  /** "Đi chợ" tables + label reader. Empty tables and an offline mock when omitted. */
+  grocery?: { data: GroceryData; recognizer?: LabelRecognizer };
   /** Cities a family can pick (data/cities.json). */
   cities?: City[];
   /** Fallback for a location pin without a usable address (see REGION_GEOCODER). */
@@ -143,11 +149,14 @@ export class Bot {
   private translateUntil = new Map<string, number>();
   /** Chats in "rác" mode: photos and plain text are waste-sorting questions until it expires or "hủy". */
   private gomiUntil = new Map<string, number>();
+  /** Same for "đi chợ": typed questions are answered from the tables, photos are product labels. */
+  private groceryUntil = new Map<string, number>();
   /** Last translated pages per chat (RAM only, 10 min) so "Đọc & thêm lịch" doesn't need a re-send. */
   private lastPages = new Map<string, { pages: Page[]; at: number }>();
   private translator: Translator;
   private gomi: Omit<GomiDeps, 'repo' | 'now'>;
   private cities: City[];
+  private grocery: { data: GroceryData; recognizer: LabelRecognizer };
   private repo: Repo;
   private line: LineApi;
   private cfg: AppConfig;
@@ -157,6 +166,7 @@ export class Bot {
     this.translator = deps.translator || new MockTranslator();
     this.gomi = deps.gomi || { recognizer: new MockRecognizer(), dictionary: { rows: () => [] } };
     this.cities = deps.cities || [];
+    this.grocery = { data: deps.grocery?.data || EMPTY_GROCERY, recognizer: deps.grocery?.recognizer || new MockLabelRecognizer() };
     this.repo = deps.repo;
     this.line = deps.line;
     this.cfg = deps.cfg;
@@ -431,6 +441,7 @@ export class Bot {
       { label: '📅 Lịch', data: 'action=calendar', text: 'Lịch' },
       { label: '🌐 Chỉ dịch', data: 'action=translate_mode', text: 'dịch' },
       { label: '🗑️ Phân loại rác', data: 'action=gomi_mode', text: 'rác' },
+      { label: '🛒 Đi chợ', data: 'action=grocery_mode', text: 'đi chợ' },
       { label: '📍 Khu vực', text: 'khu vực' },
       { label: '📅 Lịch rác', text: 'lịch rác' },
       { label: '📊 Hạn mức', text: 'trạng thái' },
@@ -450,6 +461,7 @@ export class Bot {
         '• "dịch" rồi gửi ảnh → chỉ dịch từng dòng (không lưu, không thêm lịch)\n' +
         '• "dịch <chữ tiếng Nhật>" → dịch đoạn chữ đó\n' +
         '• "rác" rồi gửi ảnh/gõ tên đồ → loại rác & cách bỏ (vd: "rác pin sạc")\n' +
+        '• "đi chợ" rồi chụp nhãn sản phẩm / gõ tên món (vd: "đi chợ phở bò") / gõ "thay rau răm"\n' +
         '• "lịch rác" → thêm lịch đổ rác của khu bạn vào lịch điện thoại (nhắc 20:00 tối hôm trước)\n' +
         '• "khu vực" → đặt thành phố/khu để tra rác đúng nơi (gửi vị trí LINE hoặc gõ tên)\n' +
         '• "trạng thái" → hạn mức tháng này\n' +
@@ -528,16 +540,23 @@ export class Bot {
       this.gomiUntil.delete(family.line_chat_id);
       return this.reply(ev, [text('Đã tắt chế độ phân loại rác. Ảnh gửi tiếp sẽ được đọc như giấy tờ.')]);
     }
+    if ((t === 'huy' || t === '/huy') && this.groceryActive(family)) {
+      this.groceryUntil.delete(family.line_chat_id);
+      return this.reply(ev, [text('Đã tắt chế độ đi chợ. Ảnh gửi tiếp sẽ được đọc như giấy tờ.')]);
+    }
     if (t === 'trang thai' || t === '/trangthai') {
       return this.reply(ev, [text(`📊 Tháng ${family.quota_month}: đã dùng ${family.quota_used}/${family.quota_limit} giấy.\nMã mời: ${family.invite_code}`)]);
     }
     const rac = commandArg(raw, ['phan loai rac', 'phan loai', 'rac']);
     if (rac) return rac.arg ? this.gomiText(ev, family, rac.arg) : this.startGomiMode(ev, family);
+    const cho = raw.trim().startsWith('/') ? commandArg(raw, ['di cho', 'cho']) : commandArg(raw, ['di cho']);
+    if (cho) return cho.arg ? this.groceryText(ev, family, cho.arg) : this.startGroceryMode(ev, family);
     const kv = commandArg(raw, ['khu vuc', 'khuvuc']);
     if (kv) return this.regionCommand(ev, family, kv.arg);
     if (t.startsWith('/soan')) return this.compose(ev, family, raw.replace(/^\/\S+\s*/, ''));
 
     if (this.gomiActive(family)) return this.gomiText(ev, family, raw); // follow-up question while in "rác" mode
+    if (this.groceryActive(family)) return this.groceryText(ev, family, raw); // follow-up while in "đi chợ" mode
 
     // Unknown text: stay quiet in groups; hint in 1:1.
     if (family.chat_type === 'user') return this.reply(ev, [text('Gửi ảnh giấy tờ để mình đọc, hoặc gõ "hướng dẫn".')]);
@@ -583,6 +602,7 @@ export class Bot {
     if (action === 'calendar' && family.status === 'active') return this.reply(ev, [this.calendarMessage(family)]);
     if (action === 'translate_mode' && family.status === 'active') return this.startTranslateMode(ev, family);
     if (action === 'gomi_mode' && family.status === 'active') return this.startGomiMode(ev, family);
+    if (action === 'grocery_mode' && family.status === 'active') return this.startGroceryMode(ev, family);
     if (action === 'region_cancel') {
       return this.reply(ev, [text('Ok, chưa đổi khu vực. Gõ: khu vực <tên thành phố> (vd: khu vực Yokohama), hoặc gửi vị trí.', this.regionQuick())]);
     }
@@ -632,13 +652,14 @@ export class Bot {
     const msg = ev.message;
     const translating = (this.translateUntil.get(family.line_chat_id) || 0) > Date.now();
     const gomi = !translating && this.gomiActive(family);
-    const blocker = translating ? await this.translateBlocker(family) : gomi ? await this.gomiBlocker(family) : await this.intakeBlocker(family);
+    const grocery = !translating && !gomi && this.groceryActive(family);
+    const blocker = translating ? await this.translateBlocker(family) : gomi || grocery ? await this.gomiBlocker(family) : await this.intakeBlocker(family);
     if (blocker) {
       // In groups, don't nag on every photo of a pending family — only active/suspended/quota cases.
       if (family.chat_type === 'user' || family.status !== 'pending_terms') await this.reply(ev, [text(blocker)]);
       return;
     }
-    if (gomi && msg.type === 'file') return this.reply(ev, [text('Phân loại rác chỉ nhận ảnh. Bạn chụp món đồ rồi gửi lại nhé.')]);
+    if ((gomi || grocery) && msg.type === 'file') return this.reply(ev, [text('Chế độ này chỉ nhận ảnh. Bạn chụp rồi gửi lại nhé.')]);
     if (msg.type === 'file' && !/\.pdf$/i.test(msg.fileName || '')) {
       return this.reply(ev, [text('Hiện mình chỉ đọc được ảnh và file PDF.')]);
     }
@@ -662,7 +683,7 @@ export class Bot {
     await this.line.showLoading(family.line_chat_id, 30);
     const page: Page = { data: content.data, mediaType, hint: content.hint };
     const res = this.aggregator.add({
-      mode: translating ? 'translate' : gomi ? 'gomi' : 'read',
+      mode: translating ? 'translate' : gomi ? 'gomi' : grocery ? 'grocery' : 'read',
       chatId: family.line_chat_id,
       familyId: family.family_id,
       page,
@@ -674,7 +695,7 @@ export class Bot {
       await this.services.logError(family.family_id, 'TOO_MANY_PAGES', `Bỏ trang vượt quá ${this.cfg.maxPagesPerDoc}`);
     }
     // A PDF is a complete document on its own; one photo of an item is one question (no 15s wait).
-    if (mediaType === 'application/pdf' || gomi) await this.aggregator.flush(family.line_chat_id);
+    if (mediaType === 'application/pdf' || gomi || grocery) await this.aggregator.flush(family.line_chat_id);
   }
 
   private async send(batch: PageBatch, messages: LineMessage[]) {
@@ -828,6 +849,7 @@ export class Bot {
   async processBatch(batch: PageBatch) {
     if (batch.mode === 'translate') return this.translateBatch(batch);
     if (batch.mode === 'gomi') return this.gomiBatch(batch);
+    if (batch.mode === 'grocery') return this.groceryBatch(batch);
     const r = await this.ingest(batch.familyId, batch.pages);
     if (r.kind === 'blocked' || r.kind === 'error') return this.send(batch, [text(r.message)]);
     if (r.kind === 'duplicate') return this.send(batch, [this.duplicateMessage(r.doc, r.added)]);
@@ -860,7 +882,7 @@ export class Bot {
   private async gomiBlocker(family: Family): Promise<string | null> {
     if (family.status !== 'active') return '⚠️ Gia đình chưa kích hoạt hoặc đang tạm dừng.';
     if ((family.lookup_used || 0) >= this.cfg.lookupQuota) {
-      return `⚠️ Gia đình đã hỏi hết ${this.cfg.lookupQuota} lượt phân loại rác của tháng này (tính riêng với giấy tờ). Lượt hỏi làm mới vào ngày 1 tháng sau.`;
+      return `⚠️ Gia đình đã hỏi hết ${this.cfg.lookupQuota} lượt tra cứu (rác, nhãn sản phẩm) của tháng này (tính riêng với giấy tờ). Lượt hỏi làm mới vào ngày 1 tháng sau.`;
     }
     if (!(await this.withinBudget())) return '⚠️ Hệ thống tạm dừng do đã hết ngân sách Beta tháng này. Xin lỗi gia đình!';
     return null;
@@ -906,6 +928,7 @@ export class Bot {
   }
 
   private async startGomiMode(ev: LineEvent, family: Family) {
+    this.groceryUntil.delete(family.line_chat_id);
     this.gomiUntil.set(family.line_chat_id, Date.now() + GOMI_MODE_MS);
     const where = family.region ? `📍 Khu vực: ${describeRegion(family.region)}` : '📍 Chưa đặt khu vực — gõ "khu vực" hoặc gửi vị trí để tra theo thành phố.';
     return this.reply(ev, [text(
@@ -1042,5 +1065,54 @@ export class Bot {
         { label: 'Không phải', data: 'action=region_cancel', text: 'Không phải' },
       ],
     )]);
+  }
+
+  // ---------- grocery (đi chợ) ----------
+
+  private groceryActive(family: Family) {
+    return (this.groceryUntil.get(family.line_chat_id) || 0) > Date.now();
+  }
+
+  private async startGroceryMode(ev: LineEvent, family: Family) {
+    if (family.status !== 'active') return;
+    this.gomiUntil.delete(family.line_chat_id);
+    this.groceryUntil.set(family.line_chat_id, Date.now() + GOMI_MODE_MS);
+    return this.reply(ev, [text(
+      '🛒 ĐI CHỢ NHẬT (5 phút tới):\n• Chụp NHÃN sản phẩm → đọc nhãn, hạn dùng, cách bảo quản.\n• Gõ tên MÓN (vd: phở bò, bún bò và canh chua) → danh sách đồ cần mua + nơi mua.\n• Gõ "thay rau răm" → đồ thay thế.\n• Gõ tên nguyên liệu → tên tiếng Nhật & nơi bán.',
+      [{ label: '📷 Chụp nhãn', camera: true }, { label: '🖼️ Chọn ảnh', cameraRoll: true }, { label: 'Hủy', text: 'hủy' }],
+    )]);
+  }
+
+  /** Typed questions are answered from the tables: no model, no quota. */
+  private async groceryText(ev: LineEvent, family: Family, input: string) {
+    if (family.status !== 'active') return;
+    this.groceryUntil.set(family.line_chat_id, Date.now() + GOMI_MODE_MS);
+    const a = await answerGrocery({ text: input }, { data: this.grocery.data, repo: this.repo, now: this.now });
+    return this.reply(ev, a.messages);
+  }
+
+  /** A label photo: Claude transcribes it; counts as one lookup. */
+  private async groceryBatch(batch: PageBatch) {
+    const family = await this.repo.getFamily(batch.familyId);
+    if (!family) return;
+    rollQuotaMonth(family, this.now());
+    const blocker = await this.gomiBlocker(family);
+    if (blocker) return this.send(batch, [text(blocker)]);
+    const now = this.now();
+    try {
+      const a = await answerGrocery({ pages: batch.pages.slice(0, 3) }, { data: this.grocery.data, recognizer: this.grocery.recognizer, repo: this.repo, now: () => now });
+      if (a.cost_usd) {
+        await this.recordUsage(jstMonth(now), { cost_usd: a.cost_usd });
+        family.lookup_used = (family.lookup_used || 0) + 1;
+        family.lookup_month = jstMonth(now);
+        family.last_active = now.toISOString();
+        await this.repo.saveFamily(family);
+      }
+      this.groceryUntil.set(batch.chatId, Date.now() + GOMI_MODE_MS);
+      return this.send(batch, a.messages);
+    } catch (err) {
+      await this.services.logError(family.family_id, 'GROCERY_LABEL', String((err as Error)?.message || err));
+      return this.send(batch, [text('😥 Chưa đọc được nhãn này. Bạn thử chụp lại gần hơn, đủ sáng, rõ cả mặt sau (chỗ ghi thành phần và hạn dùng) nhé.')]);
+    }
   }
 }

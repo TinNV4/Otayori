@@ -233,9 +233,9 @@ describe('asking about rubbish', () => {
     await b.say('rác ヨガ1');
     await b.say('rác ヨガ2');
     const t = await b.say('rác ヨガ3');
-    expect(t).toMatch(/hết 2 lượt phân loại rác/);
+    expect(t).toMatch(/hết 2 lượt tra cứu/);
     expect(b.spy.calls).toHaveLength(2);
-    expect(await b.say('rác 割り箸')).toMatch(/hết 2 lượt/); // even free ones: simple, predictable rule
+    expect(await b.say('rác 割り箸')).toMatch(/hết 2 lượt tra cứu/); // even free ones: simple, predictable rule
   });
 
   it('stops when the monthly Claude budget is spent', async () => {
