@@ -1,18 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Navigation, ActiveTab } from './components/Navigation.tsx';
-import { FamilyLIFFView } from './components/FamilyLIFFView.tsx';
-import { DocumentHistoryView } from './components/DocumentHistoryView.tsx';
+import { FamilyApp } from './components/mobile/FamilyApp.tsx';
 import { LineSimulatorView } from './components/LineSimulatorView.tsx';
 import { AdminLIFFView } from './components/AdminLIFFView.tsx';
 import { PrivacyAndGuideView } from './components/PrivacyAndGuideView.tsx';
 import { ExtractedDocument, Family, AdminMetrics, InviteCode, AuditLog, MeResponse } from './types/index.ts';
 import { apiFetch, initAuth } from './lib/api.ts';
+import { ChevronLeft } from 'lucide-react';
+
+type Screen = 'family' | 'admin' | 'simulator' | 'privacy';
+
+const SubPage: React.FC<{ title: string; onBack: () => void; children: React.ReactNode }> = ({ title, onBack, children }) => (
+  <div className="min-h-[100dvh] bg-slate-50">
+    <header className="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-slate-200 h-14 flex items-center px-2">
+      <button onClick={onBack} className="h-11 px-2 flex items-center gap-1 text-[16px] text-emerald-700 font-medium">
+        <ChevronLeft className="w-6 h-6" /> Quay lại
+      </button>
+      <div className="flex-1 text-center text-[16px] font-semibold text-slate-900 pr-20">{title}</div>
+    </header>
+    {children}
+  </div>
+);
 
 export default function App() {
   const params = new URLSearchParams(window.location.search);
   const deepDocId = params.get('doc');
   const deepTab = params.get('tab');
-  const [activeTab, setActiveTab] = useState<ActiveTab>(deepTab === 'privacy' ? 'privacy_guide' : 'family_liff');
+  // 'family' = mobile app; the others are full-screen sub-pages with a back button.
+  const [screen, setScreen] = useState<Screen>('family');
   const [me, setMe] = useState<MeResponse | null>(null);
   const [authError, setAuthError] = useState<string | null>(null);
   const [currentFamilyId, setCurrentFamilyId] = useState<string | null>(params.get('familyId'));
@@ -35,7 +49,7 @@ export default function App() {
       const data: MeResponse = await res.json();
       setMe(data);
       if (!currentFamilyId && data.families[0]) setCurrentFamilyId(data.families[0].family_id);
-      if (!data.families.length && data.is_admin && !deepTab) setActiveTab('admin_dashboard');
+      if (!data.families.length && data.is_admin) setScreen('admin');
     } catch (err) {
       setAuthError(String((err as Error).message || err));
     } finally {
@@ -103,7 +117,7 @@ export default function App() {
     const res = await apiFetch('/api/family/ics-token/rotate', { method: 'POST', body: withFamily() });
     if (res.ok) {
       const data = await res.json();
-      if (family && data.ics_token) setFamily({ ...family, ics_token: data.ics_token, ics_url: data.ics_url });
+      if (data.ics_token) loadAppData(); // refresh ics_url + calendar_page_url
     }
   };
 
@@ -115,131 +129,86 @@ export default function App() {
     }
   };
 
-  const handleToggleUrgent = async (docId: string, reason?: string) => {
-    const res = await apiFetch(`/api/documents/${docId}/toggle-urgent`, { method: 'POST', body: withFamily({ reason }) });
-    if (!res.ok) return null;
-    const data = await res.json();
-    setDocuments((prev) => prev.map((d) => (d.id === docId ? { ...d, is_urgent: data.is_urgent, urgent_notified_at: data.notified_at } : d)));
-    return data;
+  const handleDeleteDocument = async (docId: string) => {
+    const res = await apiFetch(`/api/documents/${docId}${famQs}`, { method: 'DELETE' });
+    if (res.ok) setDocuments((prev) => prev.filter((d) => d.id !== docId));
+  };
+
+  const handleRename = async (name: string) => {
+    const res = await apiFetch(`/api/family${famQs}`, { method: 'PATCH', body: withFamily({ family_name: name }) });
+    if (res.ok) setFamily((await res.json()).family);
   };
 
   if (isLoading) {
-    return <div className="min-h-screen flex items-center justify-center text-sm text-slate-500">Đang tải…</div>;
+    return <div className="min-h-[100dvh] flex items-center justify-center text-[15px] text-slate-500">Đang tải…</div>;
   }
   if (authError || !me) {
     return (
-      <div className="min-h-screen flex items-center justify-center p-6 text-center text-sm text-slate-600">
-        Không đăng nhập được. Vui lòng mở trang này từ LINE.{authError && <div className="mt-2 text-xs text-slate-400">{authError}</div>}
+      <div className="min-h-[100dvh] flex flex-col items-center justify-center p-6 text-center text-[16px] text-slate-600">
+        Không đăng nhập được. Vui lòng mở trang này từ LINE.
+        {authError && <div className="mt-2 text-xs text-slate-400">{authError}</div>}
+      </div>
+    );
+  }
+
+  if (screen === 'privacy') {
+    return <SubPage title="Quyền riêng tư" onBack={() => setScreen('family')}><PrivacyAndGuideView /></SubPage>;
+  }
+  if (screen === 'admin' && me.is_admin) {
+    return (
+      <SubPage title="Quản trị" onBack={() => setScreen('family')}>
+        {metrics ? <AdminLIFFView metrics={metrics} families={allFamilies} inviteCodes={inviteCodes} auditLogs={auditLogs} onRefresh={loadAppData} /> : <p className="p-6 text-slate-500">Đang tải…</p>}
+      </SubPage>
+    );
+  }
+  if (screen === 'simulator' && me.dev_mode) {
+    return (
+      <SubPage title="LINE Test Lab" onBack={() => { setScreen('family'); loadAppData(); }}>
+        <LineSimulatorView
+          onRefreshData={async () => {
+            const res = await apiFetch('/api/me');
+            if (!res.ok) return;
+            const data: MeResponse = await res.json();
+            if (!currentFamilyId && data.families[0]) setCurrentFamilyId(data.families[0].family_id);
+            setMe(data);
+          }}
+        />
+      </SubPage>
+    );
+  }
+
+  if (!family) {
+    return (
+      <div className="min-h-[100dvh] max-w-md mx-auto flex flex-col items-center justify-center px-8 text-center">
+        <div className="text-5xl">📮</div>
+        <p className="mt-4 text-[18px] font-semibold text-slate-900">Chưa tìm thấy gia đình của bạn</p>
+        <p className="mt-2 text-[15px] text-slate-500">
+          Thêm bot vào nhóm LINE gia đình, bấm “Đồng ý”, nhập mã mời và gửi ít nhất 1 tin nhắn trong nhóm. Sau đó mở lại trang này.
+        </p>
+        {me.dev_mode && <button onClick={() => setScreen('simulator')} className="mt-6 h-12 px-5 rounded-2xl bg-emerald-600 text-white font-semibold">Mở LINE Test Lab</button>}
+        {me.is_admin && <button onClick={() => setScreen('admin')} className="mt-3 h-12 px-5 rounded-2xl border border-slate-200 font-semibold">Quản trị</button>}
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col justify-between text-slate-900">
-      <div>
-        <Navigation
-          activeTab={activeTab}
-          onSelectTab={setActiveTab}
-          familyName={family?.family_name}
-          quotaUsed={family?.quota_used}
-          quotaLimit={family?.quota_limit}
-          totalDocs={documents.length}
-          showSimulator={me.dev_mode}
-          showAdmin={me.is_admin}
-        />
-
-        <main className="pb-16">
-          {activeTab === 'family_liff' && family && (
-            <FamilyLIFFView
-              family={family}
-              documents={documents}
-              onToggleAction={handleToggleAction}
-              onSubmitFeedback={handleSubmitFeedback}
-              onToggleUrgent={handleToggleUrgent}
-              onRotateIcsToken={handleRotateIcsToken}
-              onDeleteFamilyData={handleDeleteFamilyData}
-              onOpenPrivacy={() => setActiveTab('privacy_guide')}
-              onEditDate={handleEditDate}
-              initialDocId={deepDocId}
-              initialSubTab={deepTab === 'calendar' ? 'ics' : undefined}
-            />
-          )}
-
-          {(activeTab === 'family_liff' || activeTab === 'doc_history') && !family && (
-            <div className="max-w-xl mx-auto px-4 py-16 text-center text-sm text-slate-600 space-y-3">
-              <div className="text-3xl">📮</div>
-              <p className="font-semibold text-slate-900">Chưa tìm thấy gia đình của bạn</p>
-              <p>Thêm bot vào nhóm LINE gia đình, bấm "Đồng ý", nhập mã mời và gửi ít nhất một tin nhắn trong nhóm. Sau đó mở lại trang này từ LINE.</p>
-              {me.families.length > 1 && <p>Bạn đang ở nhiều nhóm — chọn nhóm trong link bot gửi.</p>}
-            </div>
-          )}
-
-          {activeTab === 'doc_history' && family && (
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-              <DocumentHistoryView
-                documents={documents}
-                onToggleAction={handleToggleAction}
-                onSubmitFeedback={handleSubmitFeedback}
-                onToggleUrgent={handleToggleUrgent}
-                onOpenCalendar={() => setActiveTab('family_liff')}
-                onOpenIcs={() => setActiveTab('family_liff')}
-                onEditDate={handleEditDate}
-              />
-            </div>
-          )}
-
-          {activeTab === 'line_simulator' && me.dev_mode && (
-            <LineSimulatorView
-              onRefreshData={async () => {
-                const res = await apiFetch('/api/me');
-                if (res.ok) {
-                  const data: MeResponse = await res.json();
-                  if (!currentFamilyId && data.families[0]) setCurrentFamilyId(data.families[0].family_id);
-                  setMe(data);
-                }
-              }}
-            />
-          )}
-
-          {activeTab === 'admin_dashboard' && me.is_admin && metrics && (
-            <AdminLIFFView
-              metrics={metrics}
-              families={allFamilies}
-              inviteCodes={inviteCodes}
-              auditLogs={auditLogs}
-              onRefresh={loadAppData}
-            />
-          )}
-
-          {activeTab === 'privacy_guide' && <PrivacyAndGuideView />}
-        </main>
-      </div>
-
-      {/* Footer conforming to Section 1.B & 1.D (quiet, unboxed metadata, zero pill, no decorative dots) */}
-      <footer className="border-t border-slate-200 bg-white py-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <div className="flex items-center gap-2">
-            <span className="font-semibold text-slate-800">Giấy Tờ Nhật</span>
-            <span aria-hidden="true">·</span>
-            <span>Bản thử nghiệm Beta 2026</span>
-            <span aria-hidden="true">·</span>
-            <span>Khu vực asia-northeast1 (Tokyo)</span>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => setActiveTab('privacy_guide')}
-              className="hover:text-slate-800 transition-colors"
-            >
-              Chính sách bảo mật & Điều khoản
-            </button>
-            <span aria-hidden="true">·</span>
-            <span>Beta: tối đa {metrics?.max_beta_families ?? 20} gia đình</span>
-            <span aria-hidden="true">·</span>
-            <span>Thời gian giữ dữ liệu: 90 ngày</span>
-          </div>
-        </div>
-      </footer>
-    </div>
+    <FamilyApp
+      family={family}
+      documents={documents}
+      isAdmin={me.is_admin}
+      devMode={me.dev_mode}
+      initialDocId={deepDocId}
+      initialTab={deepTab === 'calendar' ? 'calendar' : undefined}
+      onToggleAction={handleToggleAction}
+      onFeedback={(id, v) => handleSubmitFeedback(id, v)}
+      onEditDate={handleEditDate}
+      onDeleteDocument={handleDeleteDocument}
+      onRename={handleRename}
+      onRotateIcsToken={handleRotateIcsToken}
+      onDeleteFamilyData={handleDeleteFamilyData}
+      onOpenPrivacy={() => setScreen('privacy')}
+      onOpenAdmin={() => setScreen('admin')}
+      onOpenSimulator={() => setScreen('simulator')}
+    />
   );
 }

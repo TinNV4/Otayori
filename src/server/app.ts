@@ -395,7 +395,7 @@ export function createApp(deps: AppDeps) {
         const n = Math.min(Number(pages) || 1, cfg.maxPagesPerDoc);
         for (let i = 0; i < n; i++) {
           const id = `img${Date.now()}${seq++}`;
-          const data = imageBase64 ? Buffer.from(imageBase64, 'base64') : Buffer.from('preset');
+          const data = imageBase64 ? Buffer.from(imageBase64, 'base64') : Buffer.from(`preset:${presetId}:${Date.now()}:${i}`);
           rec.contents.set(id, { data, contentType: mimeType, hint: presetId });
           events.push(mk({ type: 'message', message: { id, type: mimeType === 'application/pdf' ? 'file' : 'image', fileName: mimeType === 'application/pdf' ? 'doc.pdf' : undefined, imageSet: n > 1 ? { id: 'set', index: i + 1, total: n } : undefined } }));
         }
