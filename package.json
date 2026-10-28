@@ -13,6 +13,7 @@
     "check": "tsc --noEmit && vitest run && vite build",
     "try-extract": "tsx scripts/try-extract.ts",
     "admin": "tsx scripts/admin.ts",
+    "data": "tsx scripts/data.ts",
     "line:setup": "tsx scripts/line-setup.ts",
     "deploy": "bash scripts/deploy.sh",
     "clean": "rm -rf dist .data",

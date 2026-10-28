@@ -89,6 +89,7 @@ Cài đặt → **LINE Test Lab**: Join → Đồng ý → `BETA2026` → gửi 
 | `PROJECT_ID=... bash scripts/deploy.sh --deploy-only` | Cập nhật code; giữ nguyên LIFF_ID/ADMIN_USER_IDS đã đặt; tạo lại job Scheduler |
 | `npx tsx scripts/line-setup.ts <url>` | Gắn webhook, test chữ ký, kiểm tra chế độ Bot, quota push |
 | `npx tsx scripts/richmenu.ts` | Cài rich menu (cần `LINE_CHANNEL_ACCESS_TOKEN`, `LIFF_ID`) |
+| `npm run data -- inspect <id> [--file x.csv]` · `sync <id>\|--all [--dry-run]` · `diff` · `publish` · `reject` · `rollback` · `status` · `check-links` | Master data (từ điển rác từ dữ liệu mở): xem file nguồn, đồng bộ, duyệt/rollback — xem `docs/design-lens-garbage-grocery.md` §5 |
 | `npm run admin -- invite:create DOT1 --max 5` | Tạo mã mời (`invite:list`, `invite:disable`) |
 | `npm run admin -- usage` | Biểu đồ chi phí / push / loại giấy / độ chính xác |
 | `npm run admin -- families` · `quota <id> <n>` · `cleanup` | Vận hành |

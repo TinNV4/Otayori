@@ -1,6 +1,6 @@
 # Thiết kế: bộ "đọc ảnh" dùng chung (Lens) + 2 module Phân loại rác / Đi chợ Nhật
 
-> Trạng thái: **thiết kế, chưa code**. Ngày: 2026-10-28.
+> Trạng thái: thiết kế; **đã cài đặt**: CLI `scripts/data.ts` + adapter `ckan_csv_v1` (`src/server/lens/masterdata/`, test `tests/masterdata.test.ts`). Chưa cài: Lens lõi, lịch đổ rác/ICS, `unknown_items`, bảng đi chợ, adapter Excel, store Firestore (hiện lưu file JSON ở `.data/masterdata/`). Ngày: 2026-10-28.
 > Phần "đã kiểm chứng" / "chưa kiểm chứng" ghi rõ ở mục 8. Những gì thuộc buổi thảo luận trước ("schema chung như đã bàn", "bản tin chính sách") **không có trong repo** nên được thiết kế lại từ đầu ở đây — cần đối chiếu.
 
 ## 1. Nguyên tắc
@@ -257,35 +257,41 @@ flowchart TD
   OK --> RB[rollback về version n khi cần]
 ```
 
-**Kiểm tra (V)**: đủ cột bắt buộc · số dòng lệch > 20% so với bản trước → dừng · tên loại rác lạ chưa có trong bản đồ `common_class` → dừng · lịch có `area_key` không tồn tại trong danh sách 町丁目 → cảnh báo · URL nguồn còn sống · mọi hạng mục `kaden4`/`hazardous` không bị đổi sang loại thường (luật an toàn).
+**Kiểm tra (V)** — đã cài đặt trong `src/server/lens/masterdata/sync.ts`:
 
-**Registry nguồn** (một file một nguồn, thêm thành phố = thêm file, không sửa code lõi):
+| Kết quả | Điều kiện |
+|---|---|
+| **Dừng, giữ bản cũ** (`failed`) | thiếu cột · tên loại rác chưa có trong `category_map` · không có dòng nào · không xác định được ngày cập nhật của nguồn · số dòng lệch > 20% (bỏ qua bằng `--force`) |
+| **Chuyển `draft`, không bao giờ tự publish** (kể cả `--force`) | import lần đầu · hạng mục `kaden4`/`hazardous` bị xóa hoặc bị đổi sang loại thường · > 5% dòng đổi |
+| **Tự publish** (`verified_by: auto`) | còn lại |
 
-```yaml
-# data/sources/<city_code>-<dataset>.yml
-id: city-xxxxx-items
-city_code: "xxxxx"
-kind: gomi_items          # gomi_items | gomi_schedule | sodai_fee
-url: https://…            # trang dataset (CKAN) hoặc file trực tiếp
-format: csv               # csv | xlsx | zip | ckan
-encoding: shift_jis       # nhiều CSV của thành phố là Shift_JIS
-license: CC-BY-4.0
-attribution: "…"
-cadence: monthly          # hoặc weekly_jan_apr
-adapter: ckan_csv_v1      # adapter dùng lại cho nhiều thành phố cùng định dạng
-columns: { name_jp: 品目, category: 区分, note: 備考 }
-category_map: { 燃やすごみ: burnable, … }
+Chưa cài: kiểm tra `area_key` với danh sách 町丁目 (cần lịch đổ rác), cảnh báo LINE cho admin (scheduler đọc exit code 1 để báo).
+
+**Registry nguồn** (một file JSON một nguồn trong `data/sources/<id>.json`, thêm thành phố = thêm file, không sửa code lõi; mẫu: `data/sources/_template.json`):
+
+```json
+{
+  "id": "city-xxxxx-items", "city_code": "xxxxx", "kind": "gomi_items", "enabled": true,
+  "adapter": "ckan_csv_v1",
+  "ckan": { "api": "https://ckan.example.jp/api/3/action", "dataset": "dataset-id", "resource_match": "r5" },
+  "url": "https://…",
+  "encoding": "shift_jis",
+  "license": "CC-BY-4.0", "attribution": "…",
+  "columns": { "name_jp": "品目名", "category": "区分", "kana": "カナ表記", "note": "摘要", "city_code": "市区町村コード" },
+  "category_map": { "燃やすごみ": "burnable", "…": "…" },
+  "cadence": "monthly"
+}
 ```
 
 **CLI dùng lại** (đặt ở `scripts/data.ts`, giống phong cách `admin.ts`):
 
 | Lệnh | Việc |
 |---|---|
-| `npm run data -- sync <source-id>\|--all [--dry-run]` | Chạy pipeline; `--dry-run` chỉ in diff |
+| `npm run data -- sync <source-id>\|--all [--dry-run] [--force] [--file x.csv --updated YYYY-MM-DD]` | Chạy pipeline; `--all` chỉ chạy nguồn đến hạn; `--file` dùng file tải tay (Excel→CSV, offline) |
 | `npm run data -- diff <source-id>` | Xem thay đổi đang chờ duyệt |
 | `npm run data -- publish <source-id>` · `reject` · `rollback` | Duyệt / từ chối / quay lại version trước |
 | `npm run data -- status` | Biểu đồ chữ: nguồn nào mới/cũ/lỗi, số dòng verified vs draft |
-| `npm run data -- unknown [--top 30]` | Đồ hay bị hỏi mà chưa có dữ liệu (đầu vào cho admin) |
+| `npm run data -- inspect <source-id> [--file x.csv]` | Xem header, vài dòng đầu và các giá trị `区分` đã/chưa map — dùng để viết `columns` và `category_map` |
 | `npm run data -- check-links` | Kiểm tra URL nguồn và link đặt lịch 粗大ごみ |
 
 - **Chạy ở đâu**: Cloud Run job/Scheduler (như `/tasks/cleanup`), không chạy trong request của người dùng.

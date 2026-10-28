@@ -1,0 +1,30 @@
+{
+  "id": "template",
+  "note": "Copy to data/sources/<city-dataset>.json (id must equal the file name; files starting with _ are ignored). Run `npm run data -- inspect <id>` first to see real headers and category labels, then fill columns/category_map. Set enabled:true only after an admin has checked license and columns on the dataset page.",
+  "enabled": false,
+  "city_code": "00000",
+  "kind": "gomi_items",
+  "adapter": "ckan_csv_v1",
+  "url": "https://example.jp/direct/file.csv",
+  "ckan": { "api": "https://ckan.example.jp/api/3/action", "dataset": "dataset-id", "resource_match": "csv" },
+  "encoding": "utf-8",
+  "license": "CC-BY-4.0",
+  "attribution": "◯◯市 ごみ分別品目一覧 (CC BY 4.0)",
+  "columns": { "name_jp": "品目名", "kana": "カナ表記", "category": "区分", "note": "摘要", "city_code": "市区町村コード" },
+  "category_map": {
+    "燃えるごみ": "burnable",
+    "燃えないごみ": "non_burnable",
+    "プラスチック製容器包装": "plastic",
+    "ペットボトル": "pet",
+    "缶": "can",
+    "びん": "glass",
+    "古紙": "paper",
+    "古布": "cloth",
+    "有害ごみ": "hazardous",
+    "粗大ごみ": "sodai",
+    "家電リサイクル対象": "kaden4",
+    "収集しない": "not_collected"
+  },
+  "cadence": "monthly",
+  "thresholds": { "max_row_delta_pct": 20, "auto_publish_max_change_pct": 5 }
+}
