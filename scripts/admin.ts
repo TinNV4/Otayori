@@ -7,6 +7,7 @@
  *   npx tsx scripts/admin.ts families
  *   npx tsx scripts/admin.ts usage [YYYY-MM]          # cost/docs + bar chart by doc type
  *   npx tsx scripts/admin.ts quota <familyId> <n>
+ *   npx tsx scripts/admin.ts unknown [--top 30]        # items asked about but missing from city dictionaries
  *   npx tsx scripts/admin.ts cleanup                   # purge left families (>7d) + expired docs
  *
  * Firestore: run with STORAGE=firestore and Application Default Credentials
@@ -95,11 +96,20 @@ async function main() {
       console.log(`\n  Feedback 👍 ${up} · 👎 ${down}${up + down ? ` · accuracy ${Math.round((up / (up + down)) * 100)}%` : ''}\n`);
       break;
     }
+    case 'unknown': {
+      const list = await repo.listUnknownItems(Number(flag('top', '30')));
+      if (!list.length) { console.log('Nothing missing — every question matched a dictionary entry.'); break; }
+      const max = Math.max(...list.map(u => u.count));
+      console.log('\nAsked, but not in the city dictionary (most asked first)\n');
+      for (const u of list) console.log(`  ${u.city_code}  ${(u.name_jp + (u.name_vi ? ` (${u.name_vi})` : '')).padEnd(34)} ${bar(u.count, max, 20)} ${u.count}  last ${u.last_seen.slice(0, 10)}`);
+      console.log();
+      break;
+    }
     case 'cleanup':
       console.log(await services.runCleanup());
       break;
     default:
-      console.log('Commands: invite:create invite:list invite:disable families usage quota cleanup (see header of scripts/admin.ts)');
+      console.log('Commands: invite:create invite:list invite:disable families usage quota unknown cleanup (see header of scripts/admin.ts)');
   }
   if ('flushSync' in repo) (repo as { flushSync(): void }).flushSync();
 }

@@ -102,4 +102,19 @@ describe.each(impls)('Repo contract: %s', (_name, make) => {
     await repo.addError({ id: 'e1', timestamp: '2026-10-01T00:00:00Z', family_id: 'f', error_type: 'T', message: 'm' });
     expect((await repo.listErrors(10))[0].id).toBe('e1');
   });
+
+  it('unknown items: counted per city + normalized name, most-asked first', async () => {
+    const repo = await make();
+    const t = (m: number) => new Date(Date.UTC(2026, 9, 1, 0, m));
+    await repo.logUnknownItem('12345', 'モバイルバッテリー', '', t(0));
+    await repo.logUnknownItem('12345', 'ｍｏｂｉｌｅ', 'pin dự phòng', t(1));
+    await repo.logUnknownItem('12345', 'モバイルバッテリー', 'pin sạc', t(2));
+    await repo.logUnknownItem('99999', 'モバイルバッテリー', '', t(3));
+    await repo.logUnknownItem('12345', 'MOBILE', '', t(4));
+    const list = await repo.listUnknownItems(10);
+    expect(list.map(u => [u.city_code, u.count])).toEqual([['12345', 2], ['12345', 2], ['99999', 1]]);
+    const batt = list.find(u => u.name_jp === 'モバイルバッテリー' && u.city_code === '12345')!;
+    expect(batt).toMatchObject({ name_vi: 'pin sạc', first_seen: t(0).toISOString(), last_seen: t(2).toISOString() });
+    expect(await repo.listUnknownItems(1)).toHaveLength(1);
+  });
 });

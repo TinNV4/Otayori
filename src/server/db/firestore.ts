@@ -1,10 +1,10 @@
 import { FieldValue, Firestore, Timestamp } from '@google-cloud/firestore';
-import { AuditLog, ErrorLog, ExtractedDocument, Family, InviteCode, MonthlyUsage } from '../../types/index.ts';
-import { emptyUsage, RedeemResult, Repo, UsageDelta } from './repo.ts';
+import { AuditLog, ErrorLog, ExtractedDocument, Family, InviteCode, MonthlyUsage, UnknownItem } from '../../types/index.ts';
+import { emptyUsage, RedeemResult, Repo, UsageDelta, unknownItemId } from './repo.ts';
 
 /**
  * Firestore Native (asia-northeast1).
- * Collections: families, documents (TTL on `expire_at`), invite_codes, usage, audit_logs, error_logs (TTL on `expire_at`).
+ * Collections: families, documents (TTL on `expire_at`), invite_codes, usage, audit_logs, error_logs (TTL on `expire_at`), unknown_items (TTL on `expire_at`, refreshed on every ask).
  */
 export class FirestoreRepo implements Repo {
   private db: Firestore;
@@ -143,5 +143,23 @@ export class FirestoreRepo implements Repo {
   async listErrors(limit: number) {
     const q = await this.db.collection('error_logs').orderBy('timestamp', 'desc').limit(limit).get();
     return q.docs.map(d => { const { expire_at, ...rest } = d.data(); return rest as ErrorLog; });
+  }
+
+  async logUnknownItem(cityCode: string, nameJp: string, nameVi: string, now: Date) {
+    const ref = this.db.collection('unknown_items').doc(unknownItemId(cityCode, nameJp));
+    const expire_at = Timestamp.fromDate(new Date(now.getTime() + 180 * 86400_000));
+    await this.db.runTransaction(async tx => {
+      const snap = await tx.get(ref);
+      if (snap.exists) {
+        const cur = snap.data() as UnknownItem;
+        tx.update(ref, { count: FieldValue.increment(1), last_seen: now.toISOString(), expire_at, ...(nameVi && !cur.name_vi ? { name_vi: nameVi } : {}) });
+      } else {
+        tx.set(ref, { id: ref.id, city_code: cityCode, name_jp: nameJp, name_vi: nameVi, count: 1, first_seen: now.toISOString(), last_seen: now.toISOString(), expire_at });
+      }
+    });
+  }
+  async listUnknownItems(limit: number) {
+    const q = await this.db.collection('unknown_items').orderBy('count', 'desc').limit(limit).get();
+    return q.docs.map(d => { const { expire_at, ...rest } = d.data(); return rest as UnknownItem; });
   }
 }

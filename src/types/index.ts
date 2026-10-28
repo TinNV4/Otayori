@@ -180,3 +180,14 @@ export interface MeResponse {
   liff_id: string | null;
   families: Array<{ family_id: string; family_name: string }>;
 }
+
+/** An item people asked about that the city's master data doesn't have. Name + city only: no user, no photo. */
+export interface UnknownItem {
+  id: string;
+  city_code: string;
+  name_jp: string;
+  name_vi: string;
+  count: number;
+  first_seen: string;
+  last_seen: string;
+}

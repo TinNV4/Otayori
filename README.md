@@ -90,6 +90,8 @@ Cài đặt → **LINE Test Lab**: Join → Đồng ý → `BETA2026` → gửi 
 | `npx tsx scripts/line-setup.ts <url>` | Gắn webhook, test chữ ký, kiểm tra chế độ Bot, quota push |
 | `npx tsx scripts/richmenu.ts` | Cài rich menu (cần `LINE_CHANNEL_ACCESS_TOKEN`, `LIFF_ID`) |
 | `npm run data -- inspect <id> [--file x.csv]` · `sync <id>\|--all [--dry-run]` · `diff` · `publish` · `reject` · `rollback` · `status` · `check-links` | Master data (từ điển rác từ dữ liệu mở): xem file nguồn, đồng bộ, duyệt/rollback — xem `docs/design-lens-garbage-grocery.md` §5 |
+| `npm run lens -- "pin sạc" --city 12345` · `--file anh.jpg` | Thử module phân loại rác từ terminal (dùng Claude nếu có `ANTHROPIC_API_KEY`, không thì mock); đọc master data đã `publish` |
+| `npm run admin -- unknown [--top 30]` | Đồ người dùng hỏi mà từ điển thành phố chưa có (admin bổ sung) |
 | `npm run admin -- invite:create DOT1 --max 5` | Tạo mã mời (`invite:list`, `invite:disable`) |
 | `npm run admin -- usage` | Biểu đồ chi phí / push / loại giấy / độ chính xác |
 | `npm run admin -- families` · `quota <id> <n>` · `cleanup` | Vận hành |

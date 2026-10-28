@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import { AuditLog, ErrorLog, ExtractedDocument, Family, InviteCode, MonthlyUsage } from '../../types/index.ts';
-import { emptyUsage, RedeemResult, Repo, UsageDelta } from './repo.ts';
+import { AuditLog, ErrorLog, ExtractedDocument, Family, InviteCode, MonthlyUsage, UnknownItem } from '../../types/index.ts';
+import { emptyUsage, RedeemResult, Repo, UsageDelta, unknownItemId } from './repo.ts';
 
 interface Snapshot {
   families: Family[];
@@ -10,6 +10,7 @@ interface Snapshot {
   usage: MonthlyUsage[];
   audit: AuditLog[];
   errors: ErrorLog[];
+  unknown?: UnknownItem[];
 }
 
 const clone = <T>(v: T): T => structuredClone(v);
@@ -22,6 +23,7 @@ export class MemoryRepo implements Repo {
   private usage = new Map<string, MonthlyUsage>();
   private audit: AuditLog[] = [];
   private errors: ErrorLog[] = [];
+  private unknown = new Map<string, UnknownItem>();
   private flushTimer: NodeJS.Timeout | null = null;
 
   constructor(private readonly filePath?: string) {
@@ -33,6 +35,7 @@ export class MemoryRepo implements Repo {
       snap.usage.forEach(u => this.usage.set(u.month, u));
       this.audit = snap.audit || [];
       this.errors = snap.errors || [];
+      (snap.unknown || []).forEach(u => this.unknown.set(u.id, u));
     }
   }
 
@@ -53,6 +56,7 @@ export class MemoryRepo implements Repo {
       usage: [...this.usage.values()],
       audit: this.audit,
       errors: this.errors,
+      unknown: [...this.unknown.values()],
     };
     fs.mkdirSync(path.dirname(this.filePath), { recursive: true });
     fs.writeFileSync(this.filePath, JSON.stringify(snap, null, 2));
@@ -153,4 +157,20 @@ export class MemoryRepo implements Repo {
   async listAudit(limit: number) { return this.audit.slice(-limit).reverse(); }
   async addError(e: ErrorLog) { this.errors.push(e); if (this.errors.length > 500) this.errors.shift(); this.touch(); }
   async listErrors(limit: number) { return this.errors.slice(-limit).reverse(); }
+
+  async logUnknownItem(cityCode: string, nameJp: string, nameVi: string, now: Date) {
+    const id = unknownItemId(cityCode, nameJp);
+    const u = this.unknown.get(id);
+    if (u) {
+      u.count += 1;
+      u.last_seen = now.toISOString();
+      if (nameVi && !u.name_vi) u.name_vi = nameVi;
+    } else {
+      this.unknown.set(id, { id, city_code: cityCode, name_jp: nameJp, name_vi: nameVi, count: 1, first_seen: now.toISOString(), last_seen: now.toISOString() });
+    }
+    this.touch();
+  }
+  async listUnknownItems(limit: number) {
+    return [...this.unknown.values()].sort((a, b) => b.count - a.count || b.last_seen.localeCompare(a.last_seen)).slice(0, limit).map(clone);
+  }
 }

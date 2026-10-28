@@ -1,6 +1,6 @@
 # Thiết kế: bộ "đọc ảnh" dùng chung (Lens) + 2 module Phân loại rác / Đi chợ Nhật
 
-> Trạng thái: thiết kế; **đã cài đặt**: CLI `scripts/data.ts` + adapter `ckan_csv_v1` (`src/server/lens/masterdata/`, test `tests/masterdata.test.ts`). Chưa cài: Lens lõi, lịch đổ rác/ICS, `unknown_items`, bảng đi chợ, adapter Excel, store Firestore (hiện lưu file JSON ở `.data/masterdata/`). Ngày: 2026-10-28.
+> Trạng thái: thiết kế + đã cài đặt một phần. **Đã có**: sync master data (`scripts/data.ts`, adapter `ckan_csv_v1`, `src/server/lens/masterdata/`); lõi Lens cho rác (`src/server/lens/gomi/`: nhận diện Claude, luật quốc gia, khớp từ điển, soạn câu trả lời, fallback + `unknown_items`); CLI thử `scripts/lens.ts`; test `tests/masterdata.test.ts`, `tests/lens-gomi.test.ts`. **Chưa có**: nối vào bot LINE (lệnh `rác`, chế độ ảnh), hồ sơ vùng `Family.region` + cách hỏi khu vực, lịch đổ rác/ICS, `cityInfo` (link/phí 粗大ごみ) theo thành phố, bảng đi chợ, adapter Excel, store Firestore cho master data (hiện file JSON ở `.data/masterdata/`). Ngày: 2026-10-28.
 > Phần "đã kiểm chứng" / "chưa kiểm chứng" ghi rõ ở mục 8. Những gì thuộc buổi thảo luận trước ("schema chung như đã bàn", "bản tin chính sách") **không có trong repo** nên được thiết kế lại từ đầu ở đây — cần đối chiếu.
 
 ## 1. Nguyên tắc

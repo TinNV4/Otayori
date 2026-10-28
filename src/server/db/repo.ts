@@ -1,4 +1,5 @@
-import { AuditLog, ErrorLog, ExtractedDocument, Family, InviteCode, MonthlyUsage } from '../../types/index.ts';
+import crypto from 'crypto';
+import { AuditLog, ErrorLog, ExtractedDocument, Family, InviteCode, MonthlyUsage, UnknownItem } from '../../types/index.ts';
 
 export type RedeemResult =
   | { ok: true; invite: InviteCode }
@@ -49,6 +50,15 @@ export interface Repo {
   listAudit(limit: number): Promise<AuditLog[]>;
   addError(err: ErrorLog): Promise<void>;
   listErrors(limit: number): Promise<ErrorLog[]>;
+
+  /** Count one more ask for an item missing from the city's master data (upsert by city + normalized name). */
+  logUnknownItem(cityCode: string, nameJp: string, nameVi: string, now: Date): Promise<void>;
+  /** Most-asked first: the admin's to-do list for the dictionary. */
+  listUnknownItems(limit: number): Promise<UnknownItem[]>;
+}
+
+export function unknownItemId(cityCode: string, nameJp: string): string {
+  return `${cityCode}-${crypto.createHash('sha1').update(nameJp.normalize('NFKC').trim().toLowerCase()).digest('hex').slice(0, 16)}`;
 }
 
 export function emptyUsage(month: string): MonthlyUsage {
