@@ -13,7 +13,8 @@ import { jstDate, jstMonth } from './time.ts';
 import { ExtractedDocument, Family, FamilyRegion, Translation } from '../types/index.ts';
 import { answerGomi, GomiDeps } from './lens/gomi/core.ts';
 import { GomiInput, MockRecognizer } from './lens/gomi/recognize.ts';
-import { cityByMuniCd, cityFromAddress, cityNameFromAddress, City, describeRegion, findCities, Geocoder, regionFor } from './lens/regions.ts';
+import { areaRows } from './lens/gomi/schedule.ts';
+import { chomeAfterCity, cityByMuniCd, cityFromAddress, cityNameFromAddress, City, describeRegion, findCities, Geocoder, regionFor } from './lens/regions.ts';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type LineEvent = any;
@@ -431,6 +432,7 @@ export class Bot {
       { label: '🌐 Chỉ dịch', data: 'action=translate_mode', text: 'dịch' },
       { label: '🗑️ Phân loại rác', data: 'action=gomi_mode', text: 'rác' },
       { label: '📍 Khu vực', text: 'khu vực' },
+      { label: '📅 Lịch rác', text: 'lịch rác' },
       { label: '📊 Hạn mức', text: 'trạng thái' },
       { label: '✍️ Soạn tin cô', text: '/soạn' },
     ];
@@ -448,6 +450,7 @@ export class Bot {
         '• "dịch" rồi gửi ảnh → chỉ dịch từng dòng (không lưu, không thêm lịch)\n' +
         '• "dịch <chữ tiếng Nhật>" → dịch đoạn chữ đó\n' +
         '• "rác" rồi gửi ảnh/gõ tên đồ → loại rác & cách bỏ (vd: "rác pin sạc")\n' +
+        '• "lịch rác" → thêm lịch đổ rác của khu bạn vào lịch điện thoại (nhắc 20:00 tối hôm trước)\n' +
         '• "khu vực" → đặt thành phố/khu để tra rác đúng nơi (gửi vị trí LINE hoặc gõ tên)\n' +
         '• "trạng thái" → hạn mức tháng này\n' +
         '• "đặt tên <tên>" → đổi tên gia đình\n' +
@@ -497,6 +500,7 @@ export class Bot {
     }
 
     if (t === 'lich' || t === '/lich') return this.reply(ev, [this.calendarMessage(family)]);
+    if (t === 'lich rac' || t === '/lichrac') return this.gomiCalendar(ev, family);
     if (t === 'nhac sang bat' || t === 'nhac sang tat' || t === 'nhac sang') {
       if (t !== 'nhac sang') {
         family.daily_digest = t.endsWith('bat');
@@ -876,6 +880,31 @@ export class Bot {
     );
   }
 
+  private scheduleFor(family: Family) {
+    const book = this.gomi.schedule;
+    if (!book || !family.region) return { rows: [], ambiguous: false };
+    return areaRows(book.rows(family.region.city_code), family.region.chome_label);
+  }
+
+  private async gomiCalendar(ev: LineEvent, family: Family) {
+    if (family.status !== 'active') return;
+    if (!family.region) return this.reply(ev, [this.regionPrompt()]);
+    const { rows, ambiguous } = this.scheduleFor(family);
+    if (!rows.length) {
+      return this.reply(ev, [text(
+        ambiguous
+          ? '📅 Lịch đổ rác khác nhau theo từng 丁目. Gõ "khu vực" kèm số 丁目 (vd: khu vực 荒川区 西日暮里2丁目) để mình lấy đúng lịch.'
+          : `📅 Mình chưa có lịch đổ rác của ${describeRegion(family.region)}. Bạn vẫn hỏi từng món được: gõ "rác".`,
+        this.regionQuick(false),
+      )]);
+    }
+    return this.reply(ev, [text(
+      `🗑️ Lịch đổ rác — ${describeRegion(family.region)}\n` + calendarPageUrl(this.cfg, family) + '\n\n' +
+        'Mở link → kéo xuống thẻ "Lịch đổ rác" → bấm thêm vào lịch iPhone / Google. App lịch tự nhắc 20:00 tối hôm trước (không tốn tin nhắn LINE).\n🔒 Link riêng của gia đình, đừng chia sẻ ra ngoài.',
+      this.regionQuick(false),
+    )]);
+  }
+
   private async startGomiMode(ev: LineEvent, family: Family) {
     this.gomiUntil.set(family.line_chat_id, Date.now() + GOMI_MODE_MS);
     const where = family.region ? `📍 Khu vực: ${describeRegion(family.region)}` : '📍 Chưa đặt khu vực — gõ "khu vực" hoặc gửi vị trí để tra theo thành phố.';
@@ -891,7 +920,7 @@ export class Bot {
     if (blocker) return [text(blocker)];
     const now = this.now();
     try {
-      const a = await answerGomi(input, family.region ? { city_code: family.region.city_code } : undefined, { ...this.gomi, repo: this.repo, now: () => now });
+      const a = await answerGomi(input, family.region ? { city_code: family.region.city_code, chome_label: family.region.chome_label } : undefined, { ...this.gomi, repo: this.repo, now: () => now });
       if (a.cost_usd) await this.recordUsage(jstMonth(now), { cost_usd: a.cost_usd });
       if (a.cost_usd && a.outcome !== 'no_region') { // an answer was given: count it (free typed lookups and "where do you live?" prompts don't count)
         family.lookup_used = (family.lookup_used || 0) + 1;
@@ -930,11 +959,11 @@ export class Bot {
       )]);
     }
     const hits = findCities(this.cities, arg);
-    if (hits.length === 1) return this.setRegion(ev, family, hits[0], arg, undefined, 'text');
+    if (hits.length === 1) return this.setRegion(ev, family, hits[0], arg, chomeAfterCity(hits[0], arg), 'text');
     if (hits.length > 1) {
       return this.reply(ev, [text(
         `Bạn ở thành phố nào?`,
-        hits.slice(0, 8).map(c => ({ label: c.name_jp, data: new URLSearchParams({ action: 'region_set', c: c.code, v: 'text' }).toString(), text: c.name_jp })),
+        hits.slice(0, 8).map(c => ({ label: c.name_jp, data: new URLSearchParams({ action: 'region_set', c: c.code, v: 'text', ...(chomeAfterCity(c, arg) ? { t: chomeAfterCity(c, arg)! } : {}) }).toString(), text: c.name_jp })),
       )]);
     }
     return this.offerUnsupported(ev, arg.slice(0, 30), undefined, 'text');
@@ -971,11 +1000,14 @@ export class Bot {
     // Demand signal for which cities to add next (name only, no user).
     if (!city) await this.repo.logUnknownItem('region', name, '', this.now());
     const rows = city ? this.gomi.dictionary.rows(city.code).length : 0;
+    const sched = this.scheduleFor(family);
     return this.reply(ev, [text(
       `✅ Đã đặt khu vực: ${describeRegion(family.region)}\n` +
         (rows
           ? `Dữ liệu phân loại rác của thành phố: ${rows} mục.`
           : 'Thành phố này chưa có dữ liệu riêng: mình trả lời theo quy tắc chung và ghi rõ "chưa chắc".') +
+        (sched.rows.length ? '\n📅 Có lịch đổ rác của khu bạn — gõ "lịch rác" để thêm vào lịch điện thoại (nhắc 20:00 tối hôm trước).' : '') +
+        (sched.ambiguous ? '\n📅 Lịch đổ rác khác nhau theo từng 丁目: gõ "khu vực" kèm số 丁目 (vd: khu vực 荒川区 西日暮里2丁目) để có lịch đúng.' : '') +
         '\n🔒 Chỉ lưu tên thành phố và khu (町丁目), không lưu tọa độ hay số nhà. Đổi: gõ "khu vực <tên>". Xóa: "xóa dữ liệu".\n\nHỏi thử: gõ "rác" rồi gửi ảnh hoặc tên món.',
       [{ label: '🗑️ Hỏi rác', data: 'action=gomi_mode', text: 'rác' }, { label: '☰ Menu', text: 'menu' }],
     )]);

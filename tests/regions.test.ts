@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { chomeFrom, City, cityByMuniCd, cityFromAddress, cityNameFromAddress, findCities, loadCities } from '../src/server/lens/regions.ts';
+import { chomeAfterCity, chomeFrom, City, cityByMuniCd, cityFromAddress, cityNameFromAddress, findCities, loadCities } from '../src/server/lens/regions.ts';
 
 const CITIES: City[] = [
   { code: '13118', prefecture_jp: '東京都', name_jp: '荒川区', name_vi: 'quận Arakawa (Tokyo)', aliases: ['arakawa'] },
@@ -37,6 +37,17 @@ describe('chomeFrom (never keeps the street number)', () => {
     expect(chomeFrom('')).toBeUndefined();
     expect(chomeFrom('123')).toBeUndefined();
   });
+});
+
+describe('chomeAfterCity (typed "khu vực <city> <town>")', () => {
+  const [arakawa, , yokohama] = CITIES;
+  it.each([
+    [arakawa, '荒川区 西日暮里2丁目', '西日暮里2丁目'],
+    [arakawa, '東京都荒川区西日暮里二丁目', '西日暮里二丁目'],
+    [arakawa, 'arakawa 西日暮里', '西日暮里'],
+    [arakawa, '荒川区', undefined],
+    [yokohama, '横浜市港北区新横浜2丁目', '新横浜2丁目'],
+  ])('%s %s → %s', (city, q, out) => expect(chomeAfterCity(city, q)).toBe(out));
 });
 
 describe('cityFromAddress (LINE location address)', () => {

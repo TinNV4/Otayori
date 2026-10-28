@@ -30,6 +30,9 @@ export interface CityInfo {
   sodai_fee_note?: string;
   /** City's own waste-separation page, linked from fallback answers. */
   official_url?: string;
+  /** Where these facts were read and when (YYYY-MM-DD); required, and shown to users. */
+  source_url?: string;
+  updated_at?: string;
 }
 
 /** Read access to the live master data of a city. */

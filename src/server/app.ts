@@ -8,6 +8,9 @@ import { MockTranslator, TranslationError, Translator } from './translate.ts';
 import { LineApi, RecordingLineApi, verifyLineSignature } from './line.ts';
 import { AuthedRequest, authMiddleware, IdTokenVerifier, requireAdmin } from './auth.ts';
 import { generateIcsCalendar } from './ics.ts';
+import { generateGomiIcs } from './lens/gomi/gomiIcs.ts';
+import { areaRows } from './lens/gomi/schedule.ts';
+import { jstDate } from './time.ts';
 import { calendarLinks, renderCalendarPage } from './calendarPage.ts';
 import { calendarPageUrl, icsUrl, makeInvite, normalizeCode, rollQuotaMonth } from './service.ts';
 import { isValidHm, isValidIsoDate, jstMonth } from './time.ts';
@@ -52,12 +55,34 @@ export function createApp(deps: AppDeps) {
   // Cloud Run reserves paths ending in "z" (e.g. /healthz), so expose /health.
   app.get('/health', (_req, res) => res.json({ ok: true }));
 
+  /** Waste-collection feed for the family's area, or null when there is no region / no schedule data for it. */
+  const gomiFeed = (family: Family): string | null => {
+    const book = deps.gomi?.schedule;
+    if (!book || !family.region) return null;
+    const { rows } = areaRows(book.rows(family.region.city_code), family.region.chome_label);
+    if (!rows.length) return null;
+    return generateGomiIcs(family.region, rows, book.suspensions(family.region.city_code), jstDate());
+  };
+
   // ---------- ICS feed (secret token in URL) ----------
   app.get('/ics/:file', async (req, res) => {
-    const token = req.params.file.replace(/\.ics$/, '');
+    const isGomi = /\.gomi\.ics$/.test(req.params.file);
+    const token = req.params.file.replace(/(\.gomi)?\.ics$/, '');
     const family = token.length >= 16 ? await repo.getFamilyByIcsToken(token) : null;
     if (!family || family.status === 'left') {
       res.status(404).type('text/plain').send('Calendar not found.');
+      return;
+    }
+    if (isGomi) {
+      const feed = gomiFeed(family);
+      if (!feed) {
+        res.status(404).type('text/plain').send('No waste schedule for this family yet.');
+        return;
+      }
+      res.setHeader('Content-Type', 'text/calendar; charset=utf-8');
+      res.setHeader('Cache-Control', 'private, max-age=3600');
+      res.setHeader('Content-Disposition', 'inline; filename="lich-do-rac.ics"');
+      res.send(feed);
       return;
     }
     const docs = await repo.listDocuments(family.family_id);
@@ -78,7 +103,8 @@ export function createApp(deps: AppDeps) {
       return;
     }
     const docs = await repo.listDocuments(family.family_id);
-    res.type('html').send(renderCalendarPage(family, docs, calendarLinks(cfg.publicBaseUrl, token), req.headers['user-agent']));
+    const gomiLinks = gomiFeed(family) ? calendarLinks(cfg.publicBaseUrl, token, '.gomi.ics') : undefined;
+    res.type('html').send(renderCalendarPage(family, docs, calendarLinks(cfg.publicBaseUrl, token), req.headers['user-agent'], gomiLinks));
   });
 
   // ---------- LINE webhook ----------

@@ -14,6 +14,8 @@ import { dictionaryFromStore } from './src/server/lens/gomi/dictionary.ts';
 import { loadSources } from './src/server/lens/masterdata/registry.ts';
 import { FileMasterStore } from './src/server/lens/masterdata/store.ts';
 import { loadCities, gsiGeocoder } from './src/server/lens/regions.ts';
+import { loadCityInfo } from './src/server/lens/cityinfo.ts';
+import { scheduleFromStore } from './src/server/lens/gomi/schedule.ts';
 
 const cfg = loadConfig();
 const repo = createRepo(cfg);
@@ -27,15 +29,20 @@ const verifyIdToken = cfg.liffChannelId ? lineIdTokenVerifier(cfg.liffChannelId)
 // A broken registry must not take the bot down: log it loudly and fall back to national rules + generic answers.
 let sources: ReturnType<typeof loadSources> = [];
 let cities: ReturnType<typeof loadCities> = [];
+let cityInfo: ReturnType<typeof loadCityInfo> = {};
 try {
   sources = loadSources(cfg.masterdataSources);
   cities = loadCities(cfg.citiesFile);
+  cityInfo = loadCityInfo(cfg.cityInfoFile);
 } catch (err) {
   console.error('[gomi] master data registry failed to load, serving generic answers only:', (err as Error).message);
 }
+const masterStore = new FileMasterStore(cfg.masterdataDir);
 const gomi = {
   recognizer: cfg.anthropicApiKey ? new ClaudeRecognizer(cfg.anthropicApiKey) : new MockRecognizer(),
-  dictionary: dictionaryFromStore(new FileMasterStore(cfg.masterdataDir), sources),
+  dictionary: dictionaryFromStore(masterStore, sources),
+  schedule: scheduleFromStore(masterStore, sources),
+  cityInfo: (code: string) => cityInfo[code] ?? {},
 };
 
 const { app, bot } = createApp({

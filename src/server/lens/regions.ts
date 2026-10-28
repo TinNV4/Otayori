@@ -44,6 +44,21 @@ export function chomeFrom(rest: string): string | undefined {
   return m?.[2] ? `${town}${m[2]}丁目` : town;
 }
 
+/** "荒川区 西日暮里2丁目" typed after the city name → "西日暮里2丁目" (the town/chome part, if any). */
+export function chomeAfterCity(city: City, query: string): string | undefined {
+  const q = query.normalize('NFKC');
+  const lower = q.toLowerCase();
+  for (const key of [`${city.prefecture_jp}${city.name_jp}`, `${bare(city.prefecture_jp)}${city.name_jp}`, city.name_jp, ...(city.aliases ?? [])]) {
+    const k = key.normalize('NFKC').toLowerCase();
+    const i = lower.indexOf(k);
+    if (i < 0) continue;
+    let rest = q.slice(i + k.length);
+    if (city.name_jp.endsWith('市')) rest = rest.replace(/^[,、\s]*[^\d\s,、]{1,4}区/, '');
+    return chomeFrom(rest);
+  }
+  return undefined;
+}
+
 /** Match LINE's `address` string ("日本、〒116-0013 東京都荒川区西日暮里2-3-4") to a known city. Longest name wins. */
 export function cityFromAddress(cities: City[], address: string): { city: City; chome_label?: string } | null {
   const a = address.normalize('NFKC');

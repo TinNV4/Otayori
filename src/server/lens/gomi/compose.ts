@@ -2,6 +2,7 @@ import { LineMessage, QuickItem, text } from '../../line.ts';
 import { CommonClass, GomiItem } from '../masterdata/types.ts';
 import { isStale } from '../masterdata/sync.ts';
 import { Match } from './match.ts';
+import { NextInfo } from './schedule.ts';
 import { Guard } from './rules.ts';
 import { Appliance, CityInfo, GomiQuery, Hazard } from './types.ts';
 
@@ -112,9 +113,7 @@ export function hazardMessage(hazard: Exclude<Hazard, 'none'>, matched: Match[] 
   return [text(lines.join('\n'), QUICK_MORE)];
 }
 
-export interface NextCollection { date: string; label: string }
-
-export function matchedMessage(q: GomiQuery, matches: Match[], city: CityInfo, now: Date, next?: NextCollection | null): LineMessage[] {
+export function matchedMessage(q: GomiQuery, matches: Match[], city: CityInfo, now: Date, next?: NextInfo | null): LineMessage[] {
   const rows = matches.map(m => m.item);
   const exact = matches[0].score >= 0.9;
   const classes = [...new Set(rows.map(r => r.common_class))];
@@ -142,10 +141,13 @@ export function matchedMessage(q: GomiQuery, matches: Match[], city: CityInfo, n
     lines.push(city.sodai_booking_url ? `🔗 Đặt lịch: ${city.sodai_booking_url}` : '🔗 Xem trang đặt lịch 粗大ごみ của thành phố bạn.');
     if (city.sodai_phone) lines.push(`☎️ ${city.sodai_phone}`);
     lines.push(city.sodai_fee_note ? `💴 Phí: ${city.sodai_fee_note}` : '💴 Mức phí tùy kích cỡ/loại đồ — xem bảng phí của thành phố.');
+    if (city.source_url && city.updated_at) lines.push(`(Thông tin 粗大ごみ: ${city.source_url}, kiểm tra ngày ${dateVi(city.updated_at)})`);
   } else if (classes.includes('not_collected')) {
     lines.push('', 'Hãy hỏi cửa hàng bán đồ đó, hoặc công ty xử lý được thành phố giới thiệu.');
+  } else if (next && 'date' in next) {
+    lines.push('', `📅 Ngày đổ gần nhất tại khu bạn: ${next.label} (${dateVi(next.date)})`, '   (Dịp lễ/cuối năm có thể khác — xem thông báo của thành phố.)');
   } else if (next) {
-    lines.push('', `📅 Ngày đổ gần nhất tại khu bạn: ${next.label} (${dateVi(next.date)})`);
+    lines.push('', `📅 ${next.hint}`);
   }
 
   lines.push('', sourceLine(rows, now));

@@ -2,7 +2,9 @@ import { LineMessage } from '../../line.ts';
 import { Repo } from '../../db/repo.ts';
 import { EXACT, matchItems } from './match.ts';
 import { CityInfo, GomiDictionary, GomiQuery } from './types.ts';
-import { fallbackMessage, hazardMessage, kaden4Message, matchedMessage, NextCollection, noRegionMessage, notAnItemMessage, pcMessage } from './compose.ts';
+import { fallbackMessage, hazardMessage, kaden4Message, matchedMessage, noRegionMessage, notAnItemMessage, pcMessage } from './compose.ts';
+import { NextInfo, nextCollectionFor, ScheduleBook } from './schedule.ts';
+import { jstDate } from '../../time.ts';
 import { nationalGuard } from './rules.ts';
 import { EMPTY_QUERY, GomiInput, Recognizer } from './recognize.ts';
 import { GomiItem } from '../masterdata/types.ts';
@@ -15,8 +17,10 @@ export interface GomiDeps {
   /** Missing-from-dictionary log (name + city only). */
   repo?: Pick<Repo, 'logUnknownItem'>;
   cityInfo?: (cityCode: string) => CityInfo;
-  /** Next collection day of the family's area for a common class (wired up once schedule data exists). */
-  nextCollection?: (cityCode: string, area: string | undefined, rows: GomiItem[]) => NextCollection | null;
+  /** Collection days from published schedule data. */
+  schedule?: ScheduleBook;
+  /** Override of the "next collection" line (tests). */
+  nextCollection?: (cityCode: string, area: string | undefined, rows: GomiItem[]) => NextInfo | null;
   now?: () => Date;
 }
 
@@ -35,7 +39,7 @@ export interface GomiAnswer {
  */
 export async function answerGomi(
   input: GomiInput,
-  region: { city_code: string; chome_code?: string } | undefined,
+  region: { city_code: string; chome_label?: string } | undefined,
   deps: GomiDeps,
 ): Promise<GomiAnswer> {
   const now = deps.now?.() ?? new Date();
@@ -56,7 +60,10 @@ export async function answerGomi(
 
     // 2. City dictionary.
     if (matches.length) {
-      const next = deps.nextCollection?.(region.city_code, region.chome_code, matches.map(m => m.item)) ?? null;
+      const found = matches.map(m => m.item);
+      const next = deps.nextCollection
+        ? deps.nextCollection(region.city_code, region.chome_label, found)
+        : deps.schedule ? nextCollectionFor(deps.schedule, region.city_code, region.chome_label, found.map(i => i.common_class), jstDate(now)) : null;
       return done(matches[0].score >= EXACT ? 'matched' : 'similar', matchedMessage(q, matches, city, now, next));
     }
     return done('fallback', fallbackMessage(q, city));

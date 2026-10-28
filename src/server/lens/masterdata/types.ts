@@ -8,7 +8,7 @@ export type CommonClass = (typeof COMMON_CLASSES)[number];
 /** Classes where a wrong answer is dangerous or illegal: never silently downgraded by a sync. */
 export const SAFETY_CLASSES: CommonClass[] = ['hazardous', 'kaden4'];
 
-export type SourceKind = 'gomi_items';
+export type SourceKind = 'gomi_items' | 'gomi_schedule';
 export type Cadence = 'monthly' | 'weekly_jan_apr';
 
 /** One registry file: data/sources/<id>.json. Adding a city = adding a file, not code. */
@@ -31,10 +31,20 @@ export interface SourceConfig {
   encoding: 'utf-8' | 'shift_jis';
   license: string;
   attribution: string;
-  /** Header names in the source file. `city_code` filters rows when the file covers several cities. */
-  columns: { name_jp: string; category: string; kana?: string; note?: string; city_code?: string };
-  /** Local category label → common class. A label missing here stops the sync. */
-  category_map: Record<string, CommonClass>;
+  /** gomi_items: header names in the source file. `city_code` filters rows when the file covers several cities. */
+  columns?: { name_jp: string; category: string; kana?: string; note?: string; city_code?: string };
+  /** gomi_items: local category label → common class. A label missing here stops the sync. */
+  category_map?: Record<string, CommonClass>;
+  /** gomi_schedule: a wide table, one row per area (町丁目) and one column per waste category holding "月・木" / "第2・4水". */
+  schedule?: {
+    /** Header of the area column. Omit when the file is city-wide (every area collects the same days). */
+    area_column?: string;
+    /** `city_code_column` filters rows when the file covers several cities. */
+    city_code_column?: string;
+    categories: Array<{ column: string; local_category: string; common_class: CommonClass }>;
+    /** No collection on these dates every year, as the city publishes them (e.g. year-end). MM-DD, inclusive; may wrap the new year. */
+    suspensions?: Array<{ from: string; to: string }>;
+  };
   cadence: Cadence;
   /** YYYY-MM-DD fallback when the portal/HTTP headers give no date (e.g. prose "令和5年3月現在"). */
   source_updated_at?: string;
@@ -50,15 +60,8 @@ export interface SourceConfig {
 
 export type RowStatus = 'draft' | 'verified' | 'stale' | 'retired';
 
-export interface GomiItem {
-  id: string;
-  city_code: string;
-  name_jp: string;
-  kana: string;
-  /** The city's own label ("燃やすごみ"); shown to users so it matches what they see on the bin. */
-  local_category: string;
-  common_class: CommonClass;
-  note: string;
+/** Carried by every master-data row: where it came from, when that was updated, and the terms of reuse. */
+export interface Provenance {
   source_id: string;
   source_url: string;
   source_updated_at: string; // YYYY-MM-DD
@@ -67,6 +70,41 @@ export interface GomiItem {
   attribution: string;
   status: RowStatus;
 }
+export const PROVENANCE_KEYS: Array<keyof Provenance | 'id'> = ['id', 'source_id', 'source_url', 'source_updated_at', 'fetched_at', 'license', 'attribution', 'status'];
+
+export interface GomiItem extends Provenance {
+  id: string;
+  city_code: string;
+  name_jp: string;
+  kana: string;
+  /** The city's own label ("燃やすごみ"); shown to users so it matches what they see on the bin. */
+  local_category: string;
+  common_class: CommonClass;
+  note: string;
+}
+
+/** ISO weekdays: 1 = Monday … 7 = Sunday. */
+export type ScheduleRule =
+  | { type: 'weekly'; days: number[] }
+  /** Every month, on these weekdays of these weeks (第2・4水曜 → days [3], nths [2, 4]). */
+  | { type: 'nth'; days: number[]; nths: number[] };
+
+export interface ScheduleRow extends Provenance {
+  id: string;
+  city_code: string;
+  /** 町丁目 as the city writes it, or '*' for a city-wide rule. */
+  area_key: string;
+  local_category: string;
+  common_class: CommonClass;
+  rule: ScheduleRule;
+  /** The cell as published, kept for admins and diffs. */
+  rule_text: string;
+}
+
+export type MasterRow = GomiItem | ScheduleRow;
+export const isGomiItem = (r: MasterRow): r is GomiItem => 'name_jp' in r;
+export const isScheduleRow = (r: MasterRow): r is ScheduleRow => 'rule' in r;
+export const rowLabel = (r: MasterRow): string => (isGomiItem(r) ? r.name_jp : `${r.area_key} / ${r.local_category}`);
 
 export interface SnapshotMeta {
   source_id: string;
@@ -87,7 +125,7 @@ export interface SnapshotMeta {
 
 export interface Snapshot {
   meta: SnapshotMeta;
-  rows: GomiItem[];
+  rows: MasterRow[];
 }
 
 export type SyncStatus = 'unchanged' | 'staged' | 'published' | 'failed' | 'dry_run';
@@ -102,8 +140,8 @@ export interface SourceState {
 }
 
 export interface Diff {
-  added: GomiItem[];
-  removed: GomiItem[];
-  changed: Array<{ before: GomiItem; after: GomiItem; fields: string[] }>;
+  added: MasterRow[];
+  removed: MasterRow[];
+  changed: Array<{ before: MasterRow; after: MasterRow; fields: string[] }>;
   unchanged: number;
 }

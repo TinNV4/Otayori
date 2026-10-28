@@ -71,6 +71,13 @@ describe('region by typing', () => {
     expect((await b.fam())!.region!.city_code).toBe('14100');
   });
 
+  it('keeps the town/chome typed after the city name', async () => {
+    const b = await boot();
+    const t = await b.say('khu vực 荒川区 西日暮里2丁目');
+    expect(t).toContain('荒川区 (quận Arakawa (Tokyo)) · 西日暮里2丁目');
+    expect((await b.fam())!.region).toMatchObject({ city_code: '13118', chome_label: '西日暮里2丁目', via: 'text' });
+  });
+
   it('shows the current region and how to change it', async () => {
     const b = await boot();
     expect(await b.say('khu vực')).toMatch(/Chưa đặt khu vực/);

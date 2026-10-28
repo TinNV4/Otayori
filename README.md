@@ -50,7 +50,8 @@ flowchart LR
 | Lịch ICS (RFC 5545) + trang "Thêm vào lịch" | `src/server/ics.ts`, `src/server/calendarPage.ts` |
 | Phân loại rác: nhận diện, luật quốc gia, khớp từ điển, soạn câu trả lời | `src/server/lens/gomi/*` |
 | Master data rác: sync dữ liệu mở, duyệt, rollback | `src/server/lens/masterdata/*`, `scripts/data.ts`, `data/sources/*.json` |
-| Khu vực (thành phố + 町丁目), danh sách thành phố | `src/server/lens/regions.ts`, `data/cities.json` |
+| Khu vực (thành phố + 町丁目), danh sách thành phố, thông tin 粗大ごみ | `src/server/lens/regions.ts`, `data/cities.json`, `data/city-info.json` |
+| Lịch đổ rác: đọc "月・木 / 第2・4水", ngày kế tiếp, ICS | `src/server/lens/masterdata/scheduleRule.ts`, `src/server/lens/gomi/schedule.ts`, `gomiIcs.ts` |
 | HTTP routes | `src/server/app.ts` |
 | Lưu trữ: Firestore / file JSON (dev) / memory (test) | `src/server/db/*` |
 | App LIFF (mobile) | `src/components/mobile/FamilyApp.tsx`, `src/App.tsx` |
@@ -62,7 +63,8 @@ flowchart LR
 |---|---|
 | *(gửi ảnh/PDF)* | Đọc & thêm lịch. Nhiều ảnh gửi liền nhau = 1 giấy |
 | `rác` rồi gửi ảnh / gõ tên · `rác pin sạc` | Phân loại rác: loại, cách bỏ, cảnh báo 家電4品目/pin/bình xịt. Chế độ 5 phút, hỏi nhiều món liên tiếp; `hủy` để thoát. Tính lượt riêng (`LOOKUP_QUOTA`, mặc định 60/tháng), không trừ quota giấy |
-| *(gửi vị trí LINE)* · `khu vực` · `khu vực <tên thành phố>` | Đặt thành phố + khu (町丁目) để tra rác đúng nơi. Từ vị trí LINE bot **đề xuất** thành phố để bạn bấm xác nhận; không lưu tọa độ/số nhà |
+| `lịch rác` | Link thêm lịch đổ rác của khu vào lịch điện thoại (feed riêng `/ics/<token>.gomi.ics`, nhắc 20:00 tối hôm trước) |
+| *(gửi vị trí LINE)* · `khu vực` · `khu vực <tên thành phố> [町丁目]` | Đặt thành phố + khu (町丁目) để tra rác đúng nơi. Từ vị trí LINE bot **đề xuất** thành phố để bạn bấm xác nhận; không lưu tọa độ/số nhà |
 | `dịch` rồi gửi ảnh · `dịch <chữ Nhật>` | Chỉ dịch từng dòng (không lưu, không tính quota) |
 | `lịch` | Trang "Thêm vào lịch iPhone / Google" |
 | `menu`, `?`, `@tên bot` | Hiện các nút bấm (trong group không có rich menu) |

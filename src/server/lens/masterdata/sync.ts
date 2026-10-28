@@ -2,7 +2,7 @@ import crypto from 'crypto';
 import { Fetcher, fetchSource, getAdapter, SyncError } from './adapters.ts';
 import { changeCount, diffRows } from './diff.ts';
 import { MasterStore } from './store.ts';
-import { Diff, SAFETY_CLASSES, Snapshot, SourceConfig, SyncStatus } from './types.ts';
+import { Diff, rowLabel, SAFETY_CLASSES, Snapshot, SourceConfig, SyncStatus } from './types.ts';
 
 export const DEFAULT_MAX_ROW_DELTA_PCT = 20;
 export const DEFAULT_AUTO_PUBLISH_MAX_CHANGE_PCT = 5;
@@ -56,8 +56,8 @@ export function safetyIssues(before: Snapshot | null, after: Snapshot): string[]
   for (const b of before.rows) {
     if (!SAFETY_CLASSES.includes(b.common_class)) continue;
     const a = next.get(b.id);
-    if (!a) out.push(`safety item removed: "${b.name_jp}" (${b.common_class})`);
-    else if (!SAFETY_CLASSES.includes(a.common_class)) out.push(`safety item downgraded: "${b.name_jp}" ${b.common_class} → ${a.common_class}`);
+    if (!a) out.push(`safety item removed: "${rowLabel(b)}" (${b.common_class})`);
+    else if (!SAFETY_CLASSES.includes(a.common_class)) out.push(`safety item downgraded: "${rowLabel(b)}" ${b.common_class} → ${a.common_class}`);
   }
   return out;
 }

@@ -5,7 +5,7 @@ import { validateSourceConfig } from '../src/server/lens/masterdata/registry.ts'
 import { renderInspect, renderStatus } from '../src/server/lens/masterdata/report.ts';
 import { MemoryMasterStore } from '../src/server/lens/masterdata/store.ts';
 import { isDue, isStale, publishStaged, rejectStaged, rollback, syncSource } from '../src/server/lens/masterdata/sync.ts';
-import { SourceConfig } from '../src/server/lens/masterdata/types.ts';
+import { GomiItem, SourceConfig } from '../src/server/lens/masterdata/types.ts';
 
 const src: SourceConfig = {
   id: 'city-12345-items', city_code: '12345', kind: 'gomi_items', adapter: 'ckan_csv_v1', enabled: true,
@@ -55,7 +55,7 @@ describe('ckan_csv_v1 adapter', () => {
   });
   it('filters other cities and skips blank rows with warnings', () => {
     const { rows, warnings } = parse(csv(['99999,他市,ホカ,燃えるごみ,', '12345,,,燃えるごみ,', '12345,紙くず,カミ,燃えるごみ,']));
-    expect(rows.map(r => r.name_jp)).toEqual(['紙くず']);
+    expect((rows as GomiItem[]).map(r => r.name_jp)).toEqual(['紙くず']);
     expect(warnings.join()).toMatch(/other city_code/);
     expect(warnings.join()).toMatch(/blank/);
   });
@@ -203,7 +203,7 @@ describe('syncSource', () => {
     }
     const removed = bigCsv(40, [TV]);
     expect((await run(store, removed, { force: true })).review_reasons.join()).toMatch(/removed: "モバイルバッテリー"/);
-    expect(store.getLive(src.id)!.rows.find(r => r.name_jp === 'モバイルバッテリー')!.common_class).toBe('hazardous');
+    expect((store.getLive(src.id)!.rows as GomiItem[]).find(r => r.name_jp === 'モバイルバッテリー')!.common_class).toBe('hazardous');
   });
 
   it('refuses a source whose date it cannot determine', async () => {

@@ -18,6 +18,7 @@ import fs from 'fs';
 import path from 'path';
 import { fetchSource, httpFetcher } from '../src/server/lens/masterdata/adapters.ts';
 import { diffRows, formatDiff } from '../src/server/lens/masterdata/diff.ts';
+import { loadCityInfo } from '../src/server/lens/cityinfo.ts';
 import { loadSources } from '../src/server/lens/masterdata/registry.ts';
 import { renderInspect, renderStatus } from '../src/server/lens/masterdata/report.ts';
 import { FileMasterStore } from '../src/server/lens/masterdata/store.ts';
@@ -115,6 +116,19 @@ async function main() {
         } catch (err) {
           bad++;
           console.log(`❌ ${src.id}  ${(err as Error).message}`);
+        }
+      }
+      // City facts shown to users as fact (粗大ごみ booking page, official page): a dead link there is worse than a dead dataset.
+      const info = loadCityInfo(process.env.CITY_INFO_FILE || 'data/city-info.json');
+      for (const [code, i] of Object.entries(info)) {
+        for (const url of [i.sodai_booking_url, i.official_url, i.source_url].filter((u): u is string => !!u)) {
+          try {
+            await httpFetcher.get(url);
+            console.log(`✅ city ${code}  ${url}`);
+          } catch (err) {
+            bad++;
+            console.log(`❌ city ${code}  ${(err as Error).message}`);
+          }
         }
       }
       if (bad) process.exitCode = 1;

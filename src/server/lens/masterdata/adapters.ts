@@ -1,9 +1,10 @@
 import crypto from 'crypto';
 import { csvToRecords, decodeText } from './csv.ts';
-import { COMMON_CLASSES, GomiItem, SourceConfig } from './types.ts';
+import { parseRuleText } from './scheduleRule.ts';
+import { COMMON_CLASSES, GomiItem, MasterRow, ScheduleRow, SourceConfig } from './types.ts';
 
 export class SyncError extends Error {
-  constructor(public readonly code: 'fetch' | 'columns' | 'unknown_category' | 'empty' | 'no_date' | 'delta' | 'config', message: string) {
+  constructor(public readonly code: 'fetch' | 'columns' | 'unknown_category' | 'unreadable_rule' | 'empty' | 'no_date' | 'delta' | 'config', message: string) {
     super(message);
   }
 }
@@ -82,7 +83,7 @@ export async function fetchSource(src: SourceConfig, fetcher: Fetcher): Promise<
 }
 
 export interface ParseContext { fetchedAt: string; sourceUrl: string; sourceUpdatedAt: string }
-export interface ParseResult { rows: GomiItem[]; warnings: string[] }
+export interface ParseResult { rows: MasterRow[]; warnings: string[] }
 
 export interface Adapter {
   parse(bytes: Buffer, src: SourceConfig, ctx: ParseContext): ParseResult;
@@ -95,12 +96,14 @@ export const ckanCsvV1: Adapter = {
   parse(bytes, src, ctx) {
     const { headers, records } = csvToRecords(decodeText(bytes, src.encoding));
     const c = src.columns;
+    const categoryMap = src.category_map;
+    if (!c || !categoryMap) throw new SyncError('config', `${src.id}: adapter ckan_csv_v1 needs "columns" and "category_map"`);
     const required = [c.name_jp, c.category, ...(c.city_code ? [c.city_code] : [])];
     const missing = required.filter(h => !headers.includes(h));
     if (missing.length) {
       throw new SyncError('columns', `missing column(s) ${missing.map(m => `"${m}"`).join(', ')}; file has: ${headers.join(' | ') || '(no header)'}. Fix "columns" in ${src.id}.json (try: data inspect ${src.id}).`);
     }
-    for (const [label, cls] of Object.entries(src.category_map)) {
+    for (const [label, cls] of Object.entries(categoryMap)) {
       if (!COMMON_CLASSES.includes(cls)) throw new SyncError('config', `category_map["${label}"] = "${cls}" is not a common class`);
     }
 
@@ -116,7 +119,7 @@ export const ckanCsvV1: Adapter = {
       const name = norm(r[c.name_jp] || '');
       const label = norm(r[c.category] || '');
       if (!name || !label) { skipped++; continue; }
-      const cls = src.category_map[label];
+      const cls = categoryMap[label];
       if (!cls) { unknown.add(label); continue; }
       const note = norm(c.note ? r[c.note] || '' : '');
       const base = crypto.createHash('sha1').update(`${src.city_code}|${name}|${note}`).digest('hex').slice(0, 12);
@@ -151,7 +154,61 @@ export const ckanCsvV1: Adapter = {
   },
 };
 
-export const ADAPTERS: Record<string, Adapter> = { ckan_csv_v1: ckanCsvV1 };
+/** Wide schedule table: one row per area, one column per category holding "月・木" / "第2・4水". */
+export const scheduleCsvV1: Adapter = {
+  parse(bytes, src, ctx) {
+    const sc = src.schedule;
+    if (!sc?.categories?.length) throw new SyncError('config', `${src.id}: adapter schedule_csv_v1 needs "schedule.categories"`);
+    const { headers, records } = csvToRecords(decodeText(bytes, src.encoding));
+    const required = [...(sc.area_column ? [sc.area_column] : []), ...(sc.city_code_column ? [sc.city_code_column] : []), ...sc.categories.map(k => k.column)];
+    const missing = required.filter(h => !headers.includes(h));
+    if (missing.length) {
+      throw new SyncError('columns', `missing column(s) ${missing.map(m => `"${m}"`).join(', ')}; file has: ${headers.join(' | ') || '(no header)'}. Fix "schedule" in ${src.id}.json (try: data inspect ${src.id}).`);
+    }
+    for (const k of sc.categories) {
+      if (!COMMON_CLASSES.includes(k.common_class)) throw new SyncError('config', `schedule category "${k.column}": "${k.common_class}" is not a common class`);
+    }
+
+    const rows: ScheduleRow[] = [];
+    const unreadable = new Map<string, number>();
+    const warnings: string[] = [];
+    const seen = new Set<string>();
+    let otherCities = 0;
+    let blankAreas = 0;
+
+    for (const r of records) {
+      if (sc.city_code_column && r[sc.city_code_column] !== src.city_code) { otherCities++; continue; }
+      const area = sc.area_column ? norm(r[sc.area_column] || '') : '*';
+      if (!area) { blankAreas++; continue; }
+      for (const k of sc.categories) {
+        const text = (r[k.column] || '').trim();
+        const rule = parseRuleText(text);
+        if (rule === 'none') continue;
+        if (!rule) { unreadable.set(text, (unreadable.get(text) || 0) + 1); continue; }
+        const id = `${src.city_code}-${crypto.createHash('sha1').update(`${area}|${k.common_class}|${k.local_category}`).digest('hex').slice(0, 12)}`;
+        if (seen.has(id)) { warnings.push(`duplicate schedule row for ${area} / ${k.local_category}`); continue; }
+        seen.add(id);
+        rows.push({
+          id, city_code: src.city_code, area_key: area, local_category: k.local_category, common_class: k.common_class,
+          rule, rule_text: norm(text),
+          source_id: src.id, source_url: ctx.sourceUrl, source_updated_at: ctx.sourceUpdatedAt, fetched_at: ctx.fetchedAt,
+          license: src.license, attribution: src.attribution, status: 'draft',
+        });
+      }
+    }
+
+    if (unreadable.size) {
+      const sample = [...unreadable].slice(0, 8).map(([t, n]) => `"${t}" ×${n}`).join(', ');
+      throw new SyncError('unreadable_rule', `${unreadable.size} schedule text(s) not understood: ${sample}. Teach src/server/lens/masterdata/scheduleRule.ts, or fix the file. Not guessing: a wrong day is worse than no day.`);
+    }
+    if (!rows.length) throw new SyncError('empty', `no schedule rows (${records.length} records, ${otherCities} other city, ${blankAreas} without area)`);
+    if (otherCities) warnings.push(`${otherCities} row(s) skipped: other city_code`);
+    if (blankAreas) warnings.push(`${blankAreas} row(s) skipped: blank area`);
+    return { rows, warnings };
+  },
+};
+
+export const ADAPTERS: Record<string, Adapter> = { ckan_csv_v1: ckanCsvV1, schedule_csv_v1: scheduleCsvV1 };
 
 export function getAdapter(name: string): Adapter {
   const a = ADAPTERS[name];

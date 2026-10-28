@@ -1,6 +1,6 @@
 # Thiết kế: bộ "đọc ảnh" dùng chung (Lens) + 2 module Phân loại rác / Đi chợ Nhật
 
-> Trạng thái: thiết kế + đã cài đặt phần rác. **Đã có**: sync master data (`scripts/data.ts`, adapter `ckan_csv_v1`); lõi Lens cho rác (`src/server/lens/gomi/`); **nối bot LINE** (lệnh `rác`, chế độ ảnh, `khu vực`, vị trí LINE → đề xuất thành phố → xác nhận); `Family.region`; lượt hỏi riêng (`LOOKUP_QUOTA`); log món chưa có; test `tests/masterdata.test.ts`, `lens-gomi`, `bot-gomi`, `regions`. **Chưa có**: lịch đổ rác/ICS (hook `nextCollection` sẵn), `cityInfo` (link/phí 粗大ごみ), nguồn dữ liệu thật đã bật (`data/sources/` mới có `_template.json`), bảng đi chợ, adapter Excel, store Firestore cho master data. Dữ liệu đã `publish` nằm ở `data/masterdata/<nguồn>/live.json`, commit vào git và đi cùng image (đổi dữ liệu = một PR xem được diff). Ngày: 2026-10-28.
+> Trạng thái: thiết kế + đã cài đặt phần rác. **Đã có**: sync master data cho cả 2 loại (`gomi_items` qua `ckan_csv_v1`, `gomi_schedule` qua `schedule_csv_v1`; `scripts/data.ts`); lõi Lens cho rác (`src/server/lens/gomi/`); bot LINE (`rác`, chế độ ảnh, `khu vực [町丁目]`, vị trí LINE → đề xuất → xác nhận, `lịch rác`); `Family.region`; lượt hỏi riêng (`LOOKUP_QUOTA`); log món chưa có; **lịch đổ rác**: đọc "月・木 / 第2・4水", ngày đổ gần nhất trong câu trả lời, feed ICS riêng có nhắc 20:00 tối hôm trước, EXDATE theo ngày nghỉ thành phố công bố; `data/city-info.json` (link/phí 粗大ごみ, bắt buộc có nguồn + ngày). **Chưa có**: nguồn dữ liệu thật đã bật (`data/sources/` mới có `_template.json`, `data/city-info.json` đang rỗng), bảng đi chợ, adapter Excel, lịch dạng liệt kê ngày (`dates`), store Firestore cho master data. Dữ liệu đã `publish` nằm ở `data/masterdata/<nguồn>/live.json`, commit vào git và đi cùng image. Ngày: 2026-10-28.
 > Phần "đã kiểm chứng" / "chưa kiểm chứng" ghi rõ ở mục 8. Những gì thuộc buổi thảo luận trước ("schema chung như đã bàn", "bản tin chính sách") **không có trong repo** nên được thiết kế lại từ đầu ở đây — cần đối chiếu.
 
 ## 1. Nguyên tắc
@@ -136,7 +136,7 @@ Quy tắc đặt tên: danh sách "luật quốc gia" (家電4品目, hazard chu
 |---|---|---|
 | `weekly` (thứ 2, 5 hàng tuần) | bảng "収集曜日" theo 町丁目 | `RRULE:FREQ=WEEKLY;BYDAY=MO,TH` |
 | `nth` (thứ 4 tuần 2 & 4) | thành phố ghi "第2・4水曜" | `RRULE:FREQ=MONTHLY;BYDAY=2WE,4WE` |
-| `dates` (liệt kê ngày) | lịch Excel theo từng 町丁目 | `RDATE;VALUE=DATE:…` |
+| `dates` (liệt kê ngày) — **chưa cài** | lịch Excel theo từng 町丁目 | `RDATE;VALUE=DATE:…` |
 
 - Ngày nghỉ (năm mới…) → `EXDATE` theo dữ liệu thành phố.
 - **Nhắc tối hôm trước**: sự kiện cả ngày + `VALARM TRIGGER:-PT4H` (≈20:00 hôm trước). iPhone nhận VALARM; Google dùng nhắc mặc định (đã ghi ở README mục Lịch ICS).

@@ -2,7 +2,7 @@
  * Try the garbage-sorting module from the terminal, with the same code the bot will call.
  *
  *   npx tsx scripts/lens.ts "pin sạc" --city 12345
- *   npx tsx scripts/lens.ts --file photo.jpg --city 12345 [--json]
+ *   npx tsx scripts/lens.ts --file photo.jpg --city 12345 [--chome 西日暮里2丁目] [--json]
  *
  * Reads the live master data written by `npm run data` ($MASTERDATA_DIR, default data/masterdata).
  * Uses Claude when ANTHROPIC_API_KEY is set; otherwise an offline mock that treats your text as the
@@ -18,6 +18,8 @@ import { Page } from '../src/server/extract.ts';
 import { answerGomi } from '../src/server/lens/gomi/core.ts';
 import { dictionaryFromStore } from '../src/server/lens/gomi/dictionary.ts';
 import { ClaudeRecognizer, MockRecognizer } from '../src/server/lens/gomi/recognize.ts';
+import { scheduleFromStore } from '../src/server/lens/gomi/schedule.ts';
+import { loadCityInfo } from '../src/server/lens/cityinfo.ts';
 import { loadSources } from '../src/server/lens/masterdata/registry.ts';
 import { FileMasterStore } from '../src/server/lens/masterdata/store.ts';
 
@@ -41,13 +43,16 @@ async function main() {
   const live = !!process.env.ANTHROPIC_API_KEY;
   const store = new FileMasterStore(process.env.MASTERDATA_DIR || 'data/masterdata');
   const sources = loadSources(process.env.MASTERDATA_SOURCES || 'data/sources');
+  const cityInfo = loadCityInfo(process.env.CITY_INFO_FILE || 'data/city-info.json');
   const cfg = { ...loadConfig({ ...process.env, NODE_ENV: 'development' }), storage: 'file' as const };
   const repo = createRepo(cfg);
 
   const started = Date.now();
-  const answer = await answerGomi({ pages, text: pages ? undefined : query }, { city_code: city, chome_code: flag('chome') }, {
+  const answer = await answerGomi({ pages, text: pages ? undefined : query }, { city_code: city, chome_label: flag('chome') }, {
     recognizer: live ? new ClaudeRecognizer(process.env.ANTHROPIC_API_KEY) : new MockRecognizer(),
     dictionary: dictionaryFromStore(store, sources),
+    schedule: scheduleFromStore(store, sources),
+    cityInfo: code => cityInfo[code] ?? {},
     repo,
   });
   if ('flushSync' in repo) (repo as { flushSync(): void }).flushSync();

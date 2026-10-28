@@ -10,8 +10,8 @@ export interface CalendarLinks {
   google: string; // Google Calendar "add by URL" dialog
 }
 
-export function calendarLinks(publicBaseUrl: string, token: string): CalendarLinks {
-  const https = `${publicBaseUrl}/ics/${token}.ics`;
+export function calendarLinks(publicBaseUrl: string, token: string, suffix = '.ics'): CalendarLinks {
+  const https = `${publicBaseUrl}/ics/${token}${suffix}`;
   const webcal = https.replace(/^https?:/, 'webcal:');
   return { https, webcal, google: `https://calendar.google.com/calendar/r?cid=${encodeURIComponent(webcal)}` };
 }
@@ -30,7 +30,7 @@ function upcoming(docs: ExtractedDocument[], today: string) {
  * Human page behind the link the bot sends. A raw .ics opens as a blank page in browsers,
  * so this page offers one-tap subscribe buttons instead.
  */
-export function renderCalendarPage(family: Family, docs: ExtractedDocument[], links: CalendarLinks, userAgent = ''): string {
+export function renderCalendarPage(family: Family, docs: ExtractedDocument[], links: CalendarLinks, userAgent = '', gomi?: CalendarLinks): string {
   const inLine = / Line\//i.test(userAgent);
   const isAndroid = /Android/i.test(userAgent);
   const isMobile = isAndroid || /iPhone|iPad|Mobile/i.test(userAgent);
@@ -85,6 +85,14 @@ ${inLine ? `<div class="warn">Bạn đang mở trong LINE. Bấm <b>⋯</b> (gó
     <li>Google tự làm mới vài giờ/lần và dùng giờ nhắc mặc định của bạn (không dùng nhắc trước 1 ngày như iPhone).</li>
   </ol>
 </div>
+
+${gomi ? `<div class="card">
+  <h2>🗑️ Lịch đổ rác${family.region ? ` · ${esc(family.region.city_name_jp)}${family.region.chome_label ? ' ' + esc(family.region.chome_label) : ''}` : ''}</h2>
+  <div class="muted">Lịch riêng (tách khỏi lịch giấy tờ). App lịch tự nhắc <b>20:00 tối hôm trước</b> — không tốn tin nhắn LINE. Làm như hướng dẫn ở trên (iPhone: Đăng ký; Google: giao diện máy tính).</div>
+  <a class="btn primary" href="${esc(gomi.webcal)}">Thêm lịch đổ rác vào iPhone</a>
+  <a class="btn" href="${esc(gomi.google)}" target="_blank" rel="noopener">Thêm lịch đổ rác vào Google Calendar</a>
+  <a class="btn" href="#" onclick="navigator.clipboard.writeText('${esc(gomi.https)}').then(()=>{this.textContent='Đã sao chép ✓'});return false;">Sao chép link lịch đổ rác</a>
+</div>` : ''}
 
 <div class="card">
   <h2>Sắp tới</h2>
