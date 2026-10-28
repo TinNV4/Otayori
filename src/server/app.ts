@@ -10,9 +10,12 @@ import { AuthedRequest, authMiddleware, IdTokenVerifier, requireAdmin } from './
 import { generateIcsCalendar } from './ics.ts';
 import { calendarLinks, renderCalendarPage } from './calendarPage.ts';
 import { calendarPageUrl, icsUrl, makeInvite, normalizeCode, rollQuotaMonth } from './service.ts';
-import { isValidHm, isValidIsoDate, jstMonth } from './time.ts';
+import { isValidHm, isValidIsoDate, jstDate, jstMonth } from './time.ts';
 import { AdminMetrics, DOC_TYPES, DocType, ExtractedDocument, Family, MeResponse } from '../types/index.ts';
 import { text } from './line.ts';
+import { PolicyAnalyzer } from './policy/analyzer.ts';
+import { validateProfileInput } from './policy/service.ts';
+import { SEVERITY_ICON, Severity } from '../types/policy.ts';
 
 export interface AppDeps {
   cfg: AppConfig;
@@ -21,6 +24,7 @@ export interface AppDeps {
   extractor: Extractor;
   composer: Composer;
   translator?: Translator;
+  policyAnalyzer?: PolicyAnalyzer;
   verifyIdToken: IdTokenVerifier | null;
 }
 
@@ -39,7 +43,7 @@ function adminFamily(f: Family) {
 export function createApp(deps: AppDeps) {
   const { cfg, repo, line } = deps;
   const translator = deps.translator || new MockTranslator();
-  const bot = new Bot({ repo, line, extractor: deps.extractor, composer: deps.composer, translator, cfg });
+  const bot = new Bot({ repo, line, extractor: deps.extractor, composer: deps.composer, translator, policyAnalyzer: deps.policyAnalyzer, cfg });
   const services = bot.services;
   const app = express();
   app.disable('x-powered-by');
@@ -115,6 +119,15 @@ export function createApp(deps: AppDeps) {
       return;
     }
     res.json(await bot.sendDailyDigests());
+  });
+
+  /** Daily: read official sources → AI drafts for admin review, send approved 🔴 items, remind visa expiry. */
+  app.post('/tasks/policy', async (req, res) => {
+    if (!cfg.cronSecret || req.headers['x-cron-secret'] !== cfg.cronSecret) {
+      res.status(403).json({ error: 'forbidden' });
+      return;
+    }
+    res.json(await bot.policy.runDaily());
   });
 
   // Public: lets the SPA decide between LIFF login and dev auth.
@@ -337,6 +350,43 @@ export function createApp(deps: AppDeps) {
     res.json(result);
   });
 
+  // ---------- Policy newsletter (per user, not per family) ----------
+  /** Beta gate: only members of an active family may use it. */
+  async function policyUser(req: AuthedRequest, res: Response): Promise<string | null> {
+    const ok = (await repo.findFamiliesByMember(req.userId!)).some(f => f.status === 'active');
+    if (!ok) {
+      res.status(403).json({ error: 'Cần là thành viên một gia đình đã kích hoạt.' });
+      return null;
+    }
+    return req.userId!;
+  }
+
+  api.get('/policy/feed', async (req: AuthedRequest, res) => {
+    const uid = await policyUser(req, res);
+    if (uid) res.json(await bot.policy.feed(uid));
+  });
+
+  api.put('/policy/profile', async (req: AuthedRequest, res) => {
+    const uid = await policyUser(req, res);
+    if (!uid) return;
+    const v = validateProfileInput(req.body || {}, jstDate());
+    if (!v.ok) { res.status(400).json({ error: v.error }); return; }
+    await bot.policy.saveProfile(uid, v.value);
+    res.json(await bot.policy.feed(uid));
+  });
+
+  api.delete('/policy/profile', async (req: AuthedRequest, res) => {
+    const uid = await policyUser(req, res);
+    if (uid) res.json({ success: await repo.deletePolicyProfile(uid) });
+  });
+
+  api.post('/policy/seen', async (req: AuthedRequest, res) => {
+    const uid = await policyUser(req, res);
+    if (!uid) return;
+    await bot.policy.markSeen(uid);
+    res.json({ success: true });
+  });
+
   // ---------- Admin (metadata only — never document content) ----------
   const admin = express.Router();
   admin.use(requireAdmin);
@@ -422,6 +472,25 @@ export function createApp(deps: AppDeps) {
     await repo.saveFamily(fam);
     await services.audit(req.userId!, 'TOGGLE_SUSPEND', `Trạng thái → ${fam.status}`, fam.family_id);
     res.json({ success: true, status: fam.status });
+  });
+
+  // Policy drafts are public official-source summaries (no user data) — admins review them here before anything is sent.
+  admin.get('/policy', async (req, res) => {
+    const status = ['pending', 'approved', 'rejected', 'ignored'].includes(String(req.query.status)) ? (req.query.status as 'pending') : undefined;
+    res.json({ items: await repo.listPolicyItems(status) });
+  });
+
+  admin.post('/policy/:id/approve', async (req: AuthedRequest, res) => {
+    const sev = ['red', 'yellow', 'green'].includes(req.body?.severity) ? (req.body.severity as Severity) : undefined;
+    const r = await bot.policy.approve(req.params.id, req.userId!, sev);
+    if (!r) { res.status(404).json({ error: 'not_found_or_not_pending' }); return; }
+    res.json({ item: r.item, dispatch: r.dispatch, icon: SEVERITY_ICON[r.item.severity] });
+  });
+
+  admin.post('/policy/:id/reject', async (req: AuthedRequest, res) => {
+    const item = await bot.policy.reject(req.params.id, req.userId!);
+    if (!item) { res.status(404).json({ error: 'not_found' }); return; }
+    res.json({ item });
   });
 
   admin.get('/audit-logs', async (_req, res) => {

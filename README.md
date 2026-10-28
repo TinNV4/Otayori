@@ -13,6 +13,7 @@ Chụp お便り, giấy 役所, form… gửi vào group LINE gia đình → bo
 | App trong LINE (LIFF): việc sắp tới, giấy tờ, sửa ngày, chụp giấy | CLI: mã mời, gia đình, chi phí (biểu đồ), dọn dữ liệu |
 | `/soạn`: soạn tin kính ngữ gửi cô giáo | Test đầy đủ + script deploy/setup chạy lại được |
 | Nhắc sáng 7:00 qua LINE (tự chọn bật) | |
+| **Bản tin chính sách cá nhân hóa**: tab "Chính sách" + `có gì mới` + push 🔴 + nhắc hạn visa ([chi tiết](docs/policy-newsletter.md)) | Đọc 5 nguồn chính thức → AI soạn nháp → **admin duyệt** mới gửi (`npm run policy`) |
 
 ## Kiến trúc
 
@@ -89,6 +90,7 @@ Cài đặt → **LINE Test Lab**: Join → Đồng ý → `BETA2026` → gửi 
 | `PROJECT_ID=... bash scripts/deploy.sh --deploy-only` | Cập nhật code; giữ nguyên LIFF_ID/ADMIN_USER_IDS đã đặt; tạo lại job Scheduler |
 | `npx tsx scripts/line-setup.ts <url>` | Gắn webhook, test chữ ký, kiểm tra chế độ Bot, quota push |
 | `npx tsx scripts/richmenu.ts` | Cài rich menu (cần `LINE_CHANNEL_ACCESS_TOKEN`, `LIFF_ID`) |
+| `npm run policy -- fetch --dry` · `fetch` · `list` · `show <id>` · `approve <id>` · `reject <id>` · `stats` | Bản tin chính sách: xem nguồn, tạo bản nháp, duyệt, biểu đồ ([docs](docs/policy-newsletter.md)) |
 | `npm run admin -- invite:create DOT1 --max 5` | Tạo mã mời (`invite:list`, `invite:disable`) |
 | `npm run admin -- usage` | Biểu đồ chi phí / push / loại giấy / độ chính xác |
 | `npm run admin -- families` · `quota <id> <n>` · `cleanup` | Vận hành |
@@ -130,7 +132,7 @@ xychart-beta
 
 ## Riêng tư
 
-Ảnh không lưu (chỉ RAM; "chỉ dịch" giữ tối đa 10 phút) · nội dung tự xóa sau 90 ngày · `xóa dữ liệu` xóa ngay + đổi link lịch · bot bị xóa khỏi group → xóa sau 7 ngày · mọi truy vấn lọc theo `family_id`, LIFF chỉ cho thành viên group · admin chỉ thấy số liệu. Trang công khai cho gia đình: `/?tab=privacy`.
+Ảnh không lưu (chỉ RAM; "chỉ dịch" giữ tối đa 10 phút) · nội dung tự xóa sau 90 ngày · `xóa dữ liệu` xóa ngay + đổi link lịch · bot bị xóa khỏi group → xóa sau 7 ngày · mọi truy vấn lọc theo `family_id`, LIFF chỉ cho thành viên group · admin chỉ thấy số liệu. Hồ sơ chính sách (visa, ngày hết hạn, nơi ở, có con) là dữ liệu **theo người dùng**, tự nhập, xóa được trong tab "Chính sách"; lệnh `xóa dữ liệu` của gia đình không xóa hồ sơ này. Trang công khai cho gia đình: `/?tab=privacy`.
 
 ## Test
 

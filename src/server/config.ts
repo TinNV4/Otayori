@@ -34,6 +34,10 @@ export interface AppConfig {
   monthlyBudgetUsd: number;
   pushLimit: number;
   maxPagesPerDoc: number;
+  /** Policy newsletter: max new official pages analysed per source per run (caps Claude cost). */
+  policyMaxNewPerRun: number;
+  /** Policy newsletter: ignore list entries dated older than this many days. */
+  policyMaxAgeDays: number;
   /** Wait window to group consecutive images (without LINE imageSet) into one document. */
   aggregationWindowMs: number;
   retentionDays: number;
@@ -64,6 +68,8 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
     monthlyBudgetUsd: num('MONTHLY_BUDGET_USD', 20),
     pushLimit: num('PUSH_LIMIT', 200),
     maxPagesPerDoc: num('MAX_PAGES_PER_DOC', 6),
+    policyMaxNewPerRun: num('POLICY_MAX_NEW_PER_RUN', 10),
+    policyMaxAgeDays: num('POLICY_MAX_AGE_DAYS', 45),
     aggregationWindowMs: num('AGGREGATION_WINDOW_MS', 15000),
     retentionDays: num('RETENTION_DAYS', 90),
     leftGroupPurgeDays: num('LEFT_GROUP_PURGE_DAYS', 7),

@@ -231,7 +231,7 @@ export default function App() {
       isAdmin={me.is_admin}
       devMode={me.dev_mode}
       initialDocId={deepDocId}
-      initialTab={deepTab === 'calendar' ? 'calendar' : undefined}
+      initialTab={deepTab === 'calendar' ? 'calendar' : deepTab === 'policy' ? 'policy' : undefined}
       onToggleAction={handleToggleAction}
       onFeedback={(id, v) => handleSubmitFeedback(id, v)}
       onEditDate={handleEditDate}

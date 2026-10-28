@@ -2,11 +2,12 @@ import React, { useEffect, useMemo, useState } from 'react';
 import liff from '@line/liff';
 import {
   ListTodo, FileText, CalendarDays, Settings, ChevronLeft, ChevronRight, Check, ThumbsUp, ThumbsDown,
-  Trash2, MapPin, Clock, AlertTriangle, Search, RefreshCw, Shield, Pencil, Wrench, BarChart3, Camera, Plus, X, Loader2, Languages, Copy,
+  Trash2, MapPin, Clock, AlertTriangle, Search, RefreshCw, Shield, Pencil, Wrench, BarChart3, Camera, Plus, X, Loader2, Languages, Copy, Newspaper,
 } from 'lucide-react';
 import { DocAction, DocEvent, DocType, ExtractedDocument, Family, Translation } from '../../types/index.ts';
+import { PolicyTab, usePolicyUnread } from './PolicyTab.tsx';
 
-type Tab = 'upcoming' | 'docs' | 'calendar' | 'settings';
+type Tab = 'upcoming' | 'docs' | 'policy' | 'calendar' | 'settings';
 
 export interface FamilyAppProps {
   family: Family;
@@ -546,6 +547,7 @@ const TranslationSheet: React.FC<{ t: Translation; onBack: () => void; onRead: (
 const TABS: Array<{ id: Tab; label: string; icon: React.FC<{ className?: string }> }> = [
   { id: 'upcoming', label: 'Sắp tới', icon: ListTodo },
   { id: 'docs', label: 'Giấy tờ', icon: FileText },
+  { id: 'policy', label: 'Chính sách', icon: Newspaper },
   { id: 'calendar', label: 'Lịch', icon: CalendarDays },
   { id: 'settings', label: 'Cài đặt', icon: Settings },
 ];
@@ -562,6 +564,7 @@ export const FamilyApp: React.FC<FamilyAppProps> = (props) => {
   const [translation, setTranslation] = useState<Translation | null>(null);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
+  const [policyUnread, setPolicyUnread] = usePolicyUnread();
 
   const pickFiles = () => fileInput.current?.click();
   const onPicked = (list: FileList | null) => {
@@ -612,16 +615,20 @@ export const FamilyApp: React.FC<FamilyAppProps> = (props) => {
 
         {tab === 'upcoming' && <UpcomingTab documents={documents} onToggle={props.onToggleAction} onOpenDoc={setOpenDocId} />}
         {tab === 'docs' && <DocsTab documents={documents} onOpenDoc={setOpenDocId} />}
+        {tab === 'policy' && <PolicyTab onSeen={() => setPolicyUnread(0)} />}
         {tab === 'calendar' && <CalendarTab family={family} onRotate={props.onRotateIcsToken} />}
         {tab === 'settings' && <SettingsTab {...props} />}
       </div>
 
       <nav className="fixed bottom-0 inset-x-0 z-30 bg-white border-t border-slate-200" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
-        <div className="max-w-md mx-auto grid grid-cols-4">
+        <div className="max-w-md mx-auto grid grid-cols-5">
           {TABS.map(({ id, label, icon: Icon }) => (
             <button key={id} onClick={() => setTab(id)} className={`h-16 flex flex-col items-center justify-center gap-1 relative ${tab === id ? 'text-emerald-700' : 'text-slate-400'}`}>
               <Icon className="w-6 h-6" />
               <span className="text-[12px] font-semibold">{label}</span>
+              {id === 'policy' && policyUnread > 0 && tab !== 'policy' && (
+                <span className="absolute top-2 left-1/2 ml-2 min-w-5 h-5 px-1 rounded-full bg-rose-500 text-white text-[11px] font-bold flex items-center justify-center">{policyUnread}</span>
+              )}
               {id === 'upcoming' && openCount > 0 && (
                 <span className="absolute top-2 left-1/2 ml-2 min-w-5 h-5 px-1 rounded-full bg-rose-500 text-white text-[11px] font-bold flex items-center justify-center">{openCount}</span>
               )}

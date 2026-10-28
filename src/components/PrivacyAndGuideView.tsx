@@ -28,6 +28,7 @@ const Vi: React.FC = () => (
         <li>Nội dung đã đọc: tóm tắt, việc cần làm, hạn, sự kiện, đồ cần chuẩn bị.</li>
         <li>Mã nhóm LINE và mã người dùng LINE của thành viên đã nhắn trong nhóm — để chỉ người trong nhóm mới xem được trang gia đình.</li>
         <li>Đánh giá 👍/👎 và số giấy đã dùng trong tháng.</li>
+        <li>Chỉ khi bạn tự điền ở tab “Chính sách”: loại visa, ngày hết hạn visa, nơi ở, có con nhỏ hay không — dùng để chọn tin phù hợp và nhắc hạn. Chỉ bạn xem được, không hiện trong nhóm. Xóa bất cứ lúc nào ngay trong tab đó.</li>
       </ul>
       <p><b>Bản dịch</b> (“Chỉ dịch”) <b>không được lưu</b>.</p>
       <p>Không thu thập tên thật, số điện thoại, địa chỉ hay danh bạ.</p>

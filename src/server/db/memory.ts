@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { AuditLog, ErrorLog, ExtractedDocument, Family, InviteCode, MonthlyUsage } from '../../types/index.ts';
+import { PolicyItem, PolicyProfile, PolicyStatus } from '../../types/policy.ts';
 import { emptyUsage, RedeemResult, Repo, UsageDelta } from './repo.ts';
 
 interface Snapshot {
@@ -10,6 +11,8 @@ interface Snapshot {
   usage: MonthlyUsage[];
   audit: AuditLog[];
   errors: ErrorLog[];
+  policyProfiles?: PolicyProfile[];
+  policyItems?: PolicyItem[];
 }
 
 const clone = <T>(v: T): T => structuredClone(v);
@@ -22,6 +25,8 @@ export class MemoryRepo implements Repo {
   private usage = new Map<string, MonthlyUsage>();
   private audit: AuditLog[] = [];
   private errors: ErrorLog[] = [];
+  private policyProfiles = new Map<string, PolicyProfile>();
+  private policyItems = new Map<string, PolicyItem>();
   private flushTimer: NodeJS.Timeout | null = null;
 
   constructor(private readonly filePath?: string) {
@@ -33,6 +38,8 @@ export class MemoryRepo implements Repo {
       snap.usage.forEach(u => this.usage.set(u.month, u));
       this.audit = snap.audit || [];
       this.errors = snap.errors || [];
+      (snap.policyProfiles || []).forEach(p => this.policyProfiles.set(p.user_id, p));
+      (snap.policyItems || []).forEach(i => this.policyItems.set(i.id, i));
     }
   }
 
@@ -53,6 +60,8 @@ export class MemoryRepo implements Repo {
       usage: [...this.usage.values()],
       audit: this.audit,
       errors: this.errors,
+      policyProfiles: [...this.policyProfiles.values()],
+      policyItems: [...this.policyItems.values()],
     };
     fs.mkdirSync(path.dirname(this.filePath), { recursive: true });
     fs.writeFileSync(this.filePath, JSON.stringify(snap, null, 2));
@@ -147,6 +156,23 @@ export class MemoryRepo implements Repo {
     this.usage.set(month, u);
     this.touch();
     return true;
+  }
+
+  async getPolicyProfile(userId: string) { const p = this.policyProfiles.get(userId); return p ? clone(p) : null; }
+  async savePolicyProfile(p: PolicyProfile) { this.policyProfiles.set(p.user_id, clone(p)); this.touch(); }
+  async deletePolicyProfile(userId: string) {
+    const had = this.policyProfiles.delete(userId);
+    if (had) this.touch();
+    return had;
+  }
+  async listPolicyProfiles() { return [...this.policyProfiles.values()].map(clone); }
+  async getPolicyItem(id: string) { const i = this.policyItems.get(id); return i ? clone(i) : null; }
+  async savePolicyItem(i: PolicyItem) { this.policyItems.set(i.id, clone(i)); this.touch(); }
+  async listPolicyItems(status?: PolicyStatus) {
+    return [...this.policyItems.values()]
+      .filter(i => !status || i.status === status)
+      .sort((a, b) => b.created_at.localeCompare(a.created_at))
+      .map(clone);
   }
 
   async addAudit(log: AuditLog) { this.audit.push(log); if (this.audit.length > 1000) this.audit.shift(); this.touch(); }
