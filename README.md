@@ -13,7 +13,7 @@ Chụp お便り, giấy 役所, form… gửi vào group LINE gia đình → bo
 | App trong LINE (LIFF): việc sắp tới, giấy tờ, sửa ngày, chụp giấy | CLI: mã mời, gia đình, chi phí (biểu đồ), dọn dữ liệu |
 | `/soạn`: soạn tin kính ngữ gửi cô giáo | Test đầy đủ + script deploy/setup chạy lại được |
 | Nhắc sáng 7:00 qua LINE (tự chọn bật) | |
-| **Bản tin chính sách cá nhân hóa**: tab "Chính sách" + `có gì mới` + push 🔴 + nhắc hạn visa, bằng lái, 住民税 + chấm đỏ rich menu ([chi tiết](docs/policy-newsletter.md)) | Đọc 5 nguồn chính thức → AI soạn nháp → **admin duyệt** mới gửi (`npm run policy`) |
+| **Bản tin chính sách cá nhân hóa**: tab "Chính sách" + `có gì mới` + push 🔴 + nhắc hạn visa, bằng lái, 住民税 + chấm đỏ rich menu ([chi tiết](docs/policy-newsletter.md)) | Đọc 8 nguồn chính thức → AI soạn nháp → **admin duyệt** mới gửi (`npm run policy`) |
 
 ## Kiến trúc
 

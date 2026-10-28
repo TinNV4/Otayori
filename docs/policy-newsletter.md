@@ -83,6 +83,12 @@ Cần `ANTHROPIC_API_KEY` để có bản tóm tắt thật (không có thì dù
 
 Đổi/thêm nguồn: sửa `src/server/policy/sources.ts` (URL trang "tin mới", `keywords`, `exclude`). Nguồn thành phố: đặt `city` và thêm vào `POLICY_CITIES`.
 
+## Địa phương
+
+Người dùng chọn 1 trong: Tokyo (東京都), Yokohama (横浜市), Kanagawa ngoài Yokohama (神奈川県), Nagoya, hoặc "Nơi khác" (chỉ nhận tin toàn quốc). Người ở **Yokohama nhận cả tin của tỉnh Kanagawa** (Yokohama nằm trong Kanagawa); người chọn Kanagawa không nhận tin riêng của Yokohama. Tin của Tokyo là của **東京都** (cấp thủ đô), chưa gồm tin riêng của từng quận (区).
+
+Nguồn địa phương đọc danh sách thông cáo báo chí (Tokyo, Yokohama) hoặc "tin mới" (Kanagawa, Nagoya), lọc bằng từ khóa trước khi gọi Claude nên mỗi ngày chỉ có vài tin lọt qua — nới `keywords` trong `src/server/policy/sources.ts` nếu thấy ít. Thêm thành phố: thêm vào `POLICY_CITIES` + một nguồn có `city`.
+
 ## Hồ sơ và nhắc hạn riêng
 
 3 trường bắt buộc (visa + ngày hết hạn, nơi ở, có con) và các trường **không bắt buộc**. Bỏ trống một trường = người đó **không bị loại** khỏi tin liên quan tới trường đó (thà báo thừa còn hơn bỏ sót).
@@ -120,7 +126,7 @@ Admin mở app → Quản trị → "Duyệt bản tin chính sách": thấy nh�
 
 | Đã có | Chưa làm |
 |---|---|
-| 5 nguồn: 入管庁, 厚労省, 国税庁, 警察庁, Nagoya | Thanh toán Premium tự động (chuyển gói là thao tác tay của admin) |
+| 8 nguồn: 入管庁, 厚労省, 国税庁, 警察庁 + Tokyo, Kanagawa, Yokohama, Nagoya | Thanh toán Premium tự động (chuyển gói là thao tác tay của admin) |
 | Hồ sơ 3 trường + 6 trường thêm, sửa/xóa trong LIFF | |
 | 🔴 push · 🟡🟢 trong app · `có gì mới` | |
 | Nhắc hạn: visa (90 ngày), bằng lái (60), 住民税 (7) | |
@@ -130,6 +136,6 @@ Admin mở app → Quản trị → "Duyệt bản tin chính sách": thấy nh�
 
 ## Lưu ý đã kiểm chứng (2026-10-28)
 
-- Danh sách "tin mới" của 5 nguồn đã được đối chiếu với trang thật. 国税庁 trả 0 mục khi không có thông cáo nào trong 45 ngày — bình thường, vì nguồn này ít tin dành cho cư dân.
+- Danh sách "tin mới" của các nguồn (cả Tokyo, Kanagawa, Yokohama) đã được đối chiếu với trang thật. 国税庁 trả 0 mục khi không có thông cáo nào trong 45 ngày — bình thường, vì nguồn này ít tin dành cho cư dân.
 - Trang ISA chặn User-Agent mặc định của `curl` (403) nhưng chấp nhận bot khai báo đúng tên (`GiayToNhat-PolicyReader`). Không giả User-Agent trình duyệt.
 - Bản tóm tắt bằng Claude **chưa được chạy với dữ liệu thật** (thiếu API key trong môi trường phát triển): hãy chạy `fetch` với 10–20 trang thật và đối chiếu ngày/đối tượng trước khi mời người dùng.

@@ -31,9 +31,17 @@ export interface PolicySource {
 }
 
 export const POLICY_CITIES: PolicyCity[] = [
+  { id: 'tokyo', name_vi: 'Tokyo (東京都)' },
+  { id: 'yokohama', name_vi: 'Yokohama (横浜市)' },
+  { id: 'kanagawa', name_vi: 'Kanagawa, ngoài Yokohama — Kawasaki, Sagamihara… (神奈川県)' },
   { id: 'nagoya', name_vi: 'Nagoya (Aichi)' },
   { id: 'other', name_vi: 'Nơi khác (chỉ nhận tin toàn quốc)' },
 ];
+
+/** Areas whose news concerns a resident of `city`: a Yokohama resident is also a Kanagawa resident. */
+export function cityScope(city: string): string[] {
+  return city === 'yokohama' ? ['yokohama', 'kanagawa'] : [city];
+}
 
 /** This and the previous month (JST), so the first days of a month still see late items from the month before. */
 const mhlwMonths = (now: Date) =>
@@ -83,6 +91,37 @@ export const POLICY_SOURCES: PolicySource[] = [
     city: 'nagoya',
     keywords: /外国|在留|多文化|国際|ベトナム|子ども|子育て|保育|手当|給付|助成|国民健康保険|保険料|住民税|予防接種|マイナ|ごみ|引っ越し|転入|転出/,
     exclude: /開催結果|協議会|懇談会|審議会|委員会|部会|入札|募集要項|採用|新設等届出書|展示場|イベント|デジタルチラシ/,
+  },
+  {
+    id: 'pref_tokyo',
+    issuer: '東京都 (Thủ đô Tokyo)',
+    listUrl: 'https://www.metro.tokyo.lg.jp/information/press',
+    hosts: ['www.metro.tokyo.lg.jp'],
+    city: 'tokyo',
+    keywords: /外国|在留|多文化|子ども|子育て|保育|児童|教育|給付|手当|助成|補助|支援金|支援|医療|予防接種|感染|住宅|家賃|税|マイナ|東京アプリ|相談/,
+    exclude: /人事異動|入札|審議会|委員会|懇談会|協議会|イベント|フェス|まつり|展示|ふるさと市|個人情報の紛失|薬物/,
+  },
+  {
+    id: 'pref_kanagawa',
+    issuer: '神奈川県 (Tỉnh Kanagawa)',
+    listUrl: 'https://www.pref.kanagawa.jp/news/index.html',
+    hosts: ['www.pref.kanagawa.jp'],
+    // Articles only: press (prs), content (cnt), publications (pub), notices. Department index pages in the footer are not news.
+    linkPattern: /^\/(docs\/[^/]+\/(prs|cnt|pub)\/|osirase\/)/,
+    city: 'kanagawa',
+    keywords: /外国|在留|多文化|子ども|子育て|保育|児童|教育|給付|手当|助成|補助|支援金|医療|予防接種|感染|住宅|税|マイナ|相談|災害/,
+    exclude: /人事|入札|審議会|委員会|懇談会|協議会|イベント|フェス|まつり|展示|起業|虐待|豚熱|動物愛護/,
+  },
+  {
+    id: 'city_yokohama',
+    issuer: '横浜市 (Thành phố Yokohama)',
+    // 報道発表 list: the city's own "新着情報" page is script-rendered.
+    listUrl: 'https://www.city.yokohama.lg.jp/city-info/koho-kocho/press/',
+    hosts: ['www.city.yokohama.lg.jp'],
+    linkPattern: /\/press\/[^/]+\/\d{4}\//, // press/<topic>/<year>/… (department index pages are not news)
+    city: 'yokohama',
+    keywords: /外国|在留|多文化|国際|子ども|子育て|保育|児童|教育|給付|手当|助成|補助|支援金|国民健康保険|保険料|予防接種|感染|住宅|税|マイナ|ごみ|相談/,
+    exclude: /人事異動|入札|審議会|委員会|懇談会|協議会|イベント|フェス|まつり|展示|公演|講演会|募金|契約/,
   },
 ];
 

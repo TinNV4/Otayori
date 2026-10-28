@@ -11,7 +11,7 @@ import { MockPolicyAnalyzer, toPolicyItem } from '../src/server/policy/analyzer.
 import { candidateLinks, decodeBody, extractLinks, htmlToText, parseJaDate } from '../src/server/policy/fetch.ts';
 import { addMonths, formatPolicyMessage, matchItem, remindersDue, renewalWindowOpens, suggestSeverity } from '../src/server/policy/match.ts';
 import { PolicyService, validateProfileInput } from '../src/server/policy/service.ts';
-import { PolicySource } from '../src/server/policy/sources.ts';
+import { POLICY_CITIES, POLICY_SOURCES, PolicySource } from '../src/server/policy/sources.ts';
 import { PolicyItem, PolicyProfile } from '../src/types/policy.ts';
 import { activate, group, lastText, setup, testConfig, textEv } from './helpers.ts';
 
@@ -76,11 +76,35 @@ describe('matching', () => {
   });
 });
 
+describe('cities', () => {
+  const at = (cities: string[]) => item({ audience: { visa_types: [], cities, children_only: false, renewal_related: false } });
+
+  it('a Yokohama resident also gets Kanagawa prefecture news, but not the other way round', () => {
+    expect(matchItem(profile({ city: 'yokohama' }), at(['kanagawa']))!.reason_vi).toContain('Kanagawa');
+    expect(matchItem(profile({ city: 'yokohama' }), at(['yokohama']))!.reason_vi).toContain('Yokohama');
+    expect(matchItem(profile({ city: 'kanagawa' }), at(['yokohama']))).toBeNull();
+    expect(matchItem(profile({ city: 'tokyo' }), at(['kanagawa']))).toBeNull();
+    expect(matchItem(profile({ city: 'tokyo' }), at(['tokyo']))).not.toBeNull();
+    expect(matchItem(profile({ city: 'other' }), at(['tokyo', 'yokohama']))).toBeNull();
+  });
+
+  it('every city source maps to a selectable city, and every source is well-formed', () => {
+    const ids = POLICY_SOURCES.map(s => s.id);
+    expect(new Set(ids).size).toBe(ids.length);
+    for (const s of POLICY_SOURCES) {
+      expect(new URL(s.listUrl).hostname).toBe(s.hosts[0]);
+      if (s.city) expect(POLICY_CITIES.map(c => c.id)).toContain(s.city);
+    }
+    for (const c of ['tokyo', 'yokohama', 'kanagawa']) expect(POLICY_SOURCES.some(s => s.city === c)).toBe(true);
+    expect(validateProfileInput({ visa_type: 'student', city: 'yokohama' }, '2026-09-20').ok).toBe(true);
+  });
+});
+
 describe('profile validation', () => {
   it('accepts a valid profile and rejects bad input', () => {
     expect(validateProfileInput({ visa_type: 'gijinkoku', city: 'nagoya', visa_expiry: '2027-03-15', has_children: true }, '2026-09-20').ok).toBe(true);
     expect(validateProfileInput({ visa_type: 'nope', city: 'nagoya' }, '2026-09-20').ok).toBe(false);
-    expect(validateProfileInput({ visa_type: 'student', city: 'tokyo' }, '2026-09-20').ok).toBe(false);
+    expect(validateProfileInput({ visa_type: 'student', city: 'osaka' }, '2026-09-20').ok).toBe(false);
     expect(validateProfileInput({ visa_type: 'student', city: 'other', visa_expiry: '2026-02-30' }, '2026-09-20').ok).toBe(false);
     expect(validateProfileInput({ visa_type: 'student', city: 'other', visa_expiry: '2099-01-01' }, '2026-09-20').ok).toBe(false);
   });

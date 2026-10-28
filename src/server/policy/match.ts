@@ -1,7 +1,7 @@
 import {
   CONTRACT_TYPES, FUTURE_PLANS, PolicyFeedEntry, PolicyItem, PolicyProfile, PolicyStage, SEVERITY_ICON, Severity, TOKUTEI_SECTORS, VISA_TYPES,
 } from '../../types/policy.ts';
-import { POLICY_CITIES } from './sources.ts';
+import { cityScope, POLICY_CITIES } from './sources.ts';
 
 /** Everything here is deterministic on purpose: who gets which message is never decided by the model. */
 
@@ -25,7 +25,8 @@ export const fmtMonth = (iso: string) => `${Number(iso.slice(5, 7))}/${iso.slice
 
 const labelOf = (list: Array<{ id: string; label: string }>, id: string) => (list.find(x => x.id === id)?.label ?? id).replace(/\s*\(.*$/, '');
 export const visaLabel = (id: string) => VISA_TYPES.find(v => v.id === id)?.label ?? id;
-export const cityLabel = (id: string) => POLICY_CITIES.find(c => c.id === id)?.name_vi ?? id;
+/** Short name for sentences ('Kanagawa', not the long picker label). */
+export const cityLabel = (id: string) => (POLICY_CITIES.find(c => c.id === id)?.name_vi ?? id).replace(/\s*[,—(].*$/, '').trim();
 
 /**
  * Suggested colour (admin can override on approval):
@@ -48,7 +49,8 @@ export interface Match {
 /** null = this item is not for this user. */
 export function matchItem(profile: PolicyProfile, item: PolicyItem): Match | null {
   const a = item.audience;
-  if (a.cities.length && !a.cities.includes(profile.city)) return null;
+  const matchedCity = a.cities.find(c => cityScope(profile.city).includes(c));
+  if (a.cities.length && !matchedCity) return null;
   if (a.visa_types.length && !a.visa_types.includes(profile.visa_type)) return null;
   if (a.children_only && !profile.has_children) return null;
   // Optional profile answers only ever exclude when the user actually answered; unknown = still informed.
@@ -63,7 +65,7 @@ export function matchItem(profile: PolicyProfile, item: PolicyItem): Match | nul
   if (a.renewal_related && item.effective_date && profile.visa_expiry && profile.visa_expiry < item.effective_date) return null;
 
   const why: string[] = [];
-  if (a.cities.length) why.push(`bạn sống ở ${cityLabel(profile.city)}`);
+  if (matchedCity) why.push(`bạn sống ở ${cityLabel(matchedCity)}`);
   if (a.visa_types.length) why.push(`visa của bạn là ${visaLabel(profile.visa_type)}`);
   if (a.children_only) why.push('nhà bạn có con nhỏ');
   if (a.sectors?.length && profile.sector) why.push(`bạn làm ngành ${labelOf(TOKUTEI_SECTORS, profile.sector)}`);
