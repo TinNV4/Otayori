@@ -4,8 +4,8 @@ import { chomeAfterCity, chomeFrom, City, cityByMuniCd, cityFromAddress, cityNam
 const CITIES: City[] = [
   { code: '13118', prefecture_jp: '東京都', name_jp: '荒川区', name_vi: 'quận Arakawa (Tokyo)', aliases: ['arakawa'] },
   { code: '13114', prefecture_jp: '東京都', name_jp: '中野区', name_vi: 'quận Nakano (Tokyo)', aliases: ['nakano'] },
-  { code: '14100', prefecture_jp: '神奈川県', name_jp: '横浜市', name_vi: 'thành phố Yokohama', aliases: ['yokohama'] },
-  { code: '28100', prefecture_jp: '兵庫県', name_jp: '神戸市', name_vi: 'thành phố Kobe', aliases: ['kobe'] },
+  { code: '14100', prefecture_jp: '神奈川県', name_jp: '横浜市', name_vi: 'thành phố Yokohama', aliases: ['yokohama'], designated: true },
+  { code: '28100', prefecture_jp: '兵庫県', name_jp: '神戸市', name_vi: 'thành phố Kobe', aliases: ['kobe'], designated: true },
   { code: '27103', prefecture_jp: '大阪府', name_jp: '大阪市北区', name_vi: 'quận Kita (Osaka)', aliases: [] },
   { code: '26101', prefecture_jp: '京都府', name_jp: '京都市北区', name_vi: 'quận Kita (Kyoto)', aliases: [] },
 ];
@@ -83,10 +83,23 @@ describe('cityByMuniCd (GSI geocoder)', () => {
   });
 });
 
-describe('data/cities.json', () => {
+describe('data/cities.json (MVP cities)', () => {
+  const cities = loadCities('data/cities.json');
   it('is valid and has unique codes', () => {
-    const cities = loadCities('data/cities.json');
-    expect(cities.length).toBeGreaterThan(0);
+    expect(cities.map(c => c.name_jp)).toEqual(['川口市', '船橋市', '松戸市', '江戸川区', '足立区', '名古屋市', '大阪市']);
     expect(new Set(cities.map(c => c.code)).size).toBe(cities.length);
+  });
+  it('finds every MVP city by Japanese, romaji, or a LINE address', () => {
+    for (const c of cities) {
+      expect(findCities(cities, c.name_jp).map(x => x.code)).toEqual([c.code]);
+      expect(findCities(cities, c.aliases![0]).map(x => x.code)).toEqual([c.code]);
+      expect(cityFromAddress(cities, `日本、${c.prefecture_jp}${c.name_jp}テスト町1-2-3`)?.city.code).toBe(c.code);
+    }
+  });
+  it('reads the town past a ward in Nagoya and Osaka (designated cities)', () => {
+    expect(cityFromAddress(cities, '日本、〒460-0008 愛知県名古屋市中区栄3-1-1')).toMatchObject({ city: { code: '23100' }, chome_label: '栄' });
+    expect(cityFromAddress(cities, '日本、大阪府大阪市浪速区日本橋4丁目1-1')).toMatchObject({ city: { code: '27100' }, chome_label: '日本橋4丁目' });
+    expect(cityFromAddress(cities, '日本、東京都足立区綾瀬3-1-1')).toMatchObject({ city: { code: '13121' }, chome_label: '綾瀬' });
+    expect(cityFromAddress(cities, '日本、埼玉県川口市並木1-1')?.chome_label).toBe('並木');
   });
 });

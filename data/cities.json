@@ -1,8 +1,9 @@
 [
-  { "code": "13118", "prefecture_jp": "東京都", "name_jp": "荒川区", "name_vi": "quận Arakawa (Tokyo)", "aliases": ["arakawa"] },
-  { "code": "13114", "prefecture_jp": "東京都", "name_jp": "中野区", "name_vi": "quận Nakano (Tokyo)", "aliases": ["nakano"] },
-  { "code": "13213", "prefecture_jp": "東京都", "name_jp": "東村山市", "name_vi": "thành phố Higashimurayama (Tokyo)", "aliases": ["higashimurayama"] },
-  { "code": "13229", "prefecture_jp": "東京都", "name_jp": "西東京市", "name_vi": "thành phố Nishitokyo (Tokyo)", "aliases": ["nishitokyo", "nishi tokyo"] },
-  { "code": "14100", "prefecture_jp": "神奈川県", "name_jp": "横浜市", "name_vi": "thành phố Yokohama", "aliases": ["yokohama"] },
-  { "code": "28100", "prefecture_jp": "兵庫県", "name_jp": "神戸市", "name_vi": "thành phố Kobe", "aliases": ["kobe"] }
+  { "code": "11203", "prefecture_jp": "埼玉県", "name_jp": "川口市", "name_vi": "thành phố Kawaguchi (Saitama)", "aliases": ["kawaguchi"] },
+  { "code": "12204", "prefecture_jp": "千葉県", "name_jp": "船橋市", "name_vi": "thành phố Funabashi (Chiba)", "aliases": ["funabashi"] },
+  { "code": "12207", "prefecture_jp": "千葉県", "name_jp": "松戸市", "name_vi": "thành phố Matsudo (Chiba)", "aliases": ["matsudo"] },
+  { "code": "13123", "prefecture_jp": "東京都", "name_jp": "江戸川区", "name_vi": "quận Edogawa (Tokyo)", "aliases": ["edogawa"] },
+  { "code": "13121", "prefecture_jp": "東京都", "name_jp": "足立区", "name_vi": "quận Adachi (Tokyo)", "aliases": ["adachi"] },
+  { "code": "23100", "prefecture_jp": "愛知県", "name_jp": "名古屋市", "name_vi": "thành phố Nagoya", "aliases": ["nagoya"], "designated": true },
+  { "code": "27100", "prefecture_jp": "大阪府", "name_jp": "大阪市", "name_vi": "thành phố Osaka", "aliases": ["osaka"], "designated": true }
 ]

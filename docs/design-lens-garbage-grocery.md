@@ -406,6 +406,28 @@ Rác làm trước vì dữ liệu có sẵn từ nguồn mở, rủi ro pháp l
 4. **Luật 家電4品目** là luật quốc gia, các thành phố đều hướng dẫn giống nhau: 4 loại (エアコン, テレビ, 冷蔵庫・冷凍庫, 洗濯機・衣類乾燥機), không thu gom như rác thường, 4 cách xử lý, trả phí tại bưu điện bằng 家電リサイクル券. Phí phụ thuộc hãng/kích cỡ → không đưa số tiền vào dữ liệu, chỉ trả link tra phí.
 5. Toàn quốc 2025: ~4,125 triệu người nước ngoài, người Việt ~681 nghìn (đứng thứ 2) theo báo chí/ISA.
 
+### Thành phố MVP đã chọn (28/10/2026)
+
+Chọn theo số người Việt (cuối 2025, số theo bài tổng hợp từ thống kê của Bộ Tư pháp; ranking ở cấp 区/市, thứ hạng toàn quốc) cộng thêm Nagoya và Osaka theo yêu cầu. `data/cities.json` đã cập nhật.
+
+| Thành phố | Mã JIS | Người Việt | Dữ liệu rác dạng máy đọc được (theo tìm kiếm) | Ghi chú |
+|---|---|---|---|---|
+| 川口市 (Saitama) | 11203 | 7.264 (#1) | **không thấy** | Có app/ hướng dẫn phân loại rác đa ngôn ngữ, gồm tiếng Việt |
+| 船橋市 (Chiba) | 12204 | 5.459 (#3) | **không thấy** | Có [bảng phân loại theo 50 âm](https://www.city.funabashi.lg.jp/kurashi/gomi/001/bunnbetu.html) (trang HTML) và [tờ hướng dẫn tiếng Việt](https://www.city.funabashi.lg.jp/kurashi/gomi/005/p029559.html) |
+| 松戸市 (Chiba) | 12207 | 4.470 (#8) | **không thấy** | Ngày đổ theo **từng điểm tập kết** (12 kiểu), không suy ra được từ 町丁目 → chưa làm được lịch theo khu |
+| 江戸川区 (Tokyo) | 13123 | 4.823 (#5) | **không thấy** (đã tìm ở catalog Tokyo, chưa mở được) | |
+| 足立区 (Tokyo) | 13121 | 4.685 (#6) | **không thấy** (cùng ghi chú) | |
+| 名古屋市 (Aichi) | 23100 | 14.768 (toàn thành phố, 12/2025) | **không thấy** | 5 nhóm 9 loại; rác cháy/không cháy thu **tận nhà**, còn lại ở trạm |
+| 大阪市 (Osaka) | 27100 | chưa có tổng; ví dụ 浪速区 2.606 | **không thấy** ([trang quy tắc & lịch](https://www.city.osaka.lg.jp/kankyo/category/3016-1-2-0-0-0-0-0-0-0.html)) | 4 nhóm 11 loại (theo trang tổng hợp bên thứ ba) |
+
+Nguồn số liệu: [bài tổng hợp 12/2025](https://akimajimusho.com/easy-to-read-statistics/december-2025-ranking-vietnamese-nationals-in-japan-by-prefecture-and-municipality/), [Nagoya](https://www.city.nagoya.jp/shisei/kokusai/1017227/1017235.html), [Osaka theo quận](https://www.city.osaka.lg.jp/shimin/cmsfiles/contents/0000431/431477/r7kubetsu2.pdf). Số liệu là nguồn thứ cấp, nên đối chiếu với bảng gốc 在留外国人統計 trước khi dùng cho báo cáo.
+
+**Hệ quả quan trọng**: các thành phố đông người Việt nhất **không** công bố danh mục/lịch rác dạng CSV mà tôi tìm thấy (kết luận từ tìm kiếm, chưa mở được trang vì mạng bị chặn, nên cần xác nhận). Ba hướng, không loại trừ nhau:
+
+1. **Hỏi lại cổng dữ liệu** khi được mở mạng (catalog Tokyo, các trang open data của Saitama/Chiba/Aichi/Osaka) và hỏi trực tiếp phòng môi trường của thành phố.
+2. **Nhập từ tài liệu chính thức bằng chính bộ đọc ảnh/PDF của KamiViet**: PDF/trang hướng dẫn → hàng `draft` → admin duyệt → publish (cùng pipeline `draft → verified`). Cần **xác nhận điều khoản dùng lại** của từng thành phố trước.
+3. **Tạm thời** đặt `official_url` (trang hướng dẫn chính thức) trong `data/city-info.json` để câu trả lời "chưa chắc" có link đáng tin. Đã thêm cho Funabashi và Osaka từ kết quả tìm kiếm (chưa mở trang).
+
 ### Việc cần bạn quyết / chưa kiểm chứng
 
 | # | Việc | Ai |

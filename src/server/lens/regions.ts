@@ -10,6 +10,8 @@ export interface City {
   name_jp: string;
   name_vi: string;
   aliases?: string[];
+  /** 政令指定都市: addresses carry a ward (名古屋市中区栄…) that is skipped when reading the town. */
+  designated?: boolean;
 }
 
 export function loadCities(file: string): City[] {
@@ -53,7 +55,7 @@ export function chomeAfterCity(city: City, query: string): string | undefined {
     const i = lower.indexOf(k);
     if (i < 0) continue;
     let rest = q.slice(i + k.length);
-    if (city.name_jp.endsWith('市')) rest = rest.replace(/^[,、\s]*[^\d\s,、]{1,4}区/, '');
+    if (city.designated) rest = rest.replace(/^[,、\s]*[^\d\s,、]{1,4}区/, '');
     return chomeFrom(rest);
   }
   return undefined;
@@ -74,7 +76,7 @@ export function cityFromAddress(cities: City[], address: string): { city: City; 
     .find(Boolean);
   if (!hit) return null;
   let rest = a.slice(hit.end);
-  if (hit.c.name_jp.endsWith('市')) rest = rest.replace(/^[^\d\s,、]{1,4}区/, ''); // ward of a designated city
+  if (hit.c.designated) rest = rest.replace(/^[,、\s]*[^\d\s,、]{1,4}区/, ''); // ward of a designated city
   return { city: hit.c, chome_label: chomeFrom(rest) };
 }
 
