@@ -1,0 +1,6246 @@
+{
+ "meta": {
+  "source_id": "nakano-schedule",
+  "version": 1,
+  "content_hash": "8de7037c2f45f456ea3e946b9fec8044261a496ae49ed405058cfec6c8b32d1d",
+  "row_count": 280,
+  "created_at": "2026-10-29T01:02:51.824Z",
+  "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+  "source_updated_at": "2025-02-28",
+  "warnings": [],
+  "verified_by": "tinnv4",
+  "published_at": "2026-10-29T01:10:47.600Z"
+ },
+ "rows": [
+  {
+   "id": "13114-8af0aa807c0a",
+   "city_code": "13114",
+   "area_key": "新井1丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-f4f8d9d8b7dc",
+   "city_code": "13114",
+   "area_key": "新井2丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-7d2cec9d1e78",
+   "city_code": "13114",
+   "area_key": "新井4丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-998c3e45af69",
+   "city_code": "13114",
+   "area_key": "新井5丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-e4cc43f07cb6",
+   "city_code": "13114",
+   "area_key": "新井1丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-3633273ac3a1",
+   "city_code": "13114",
+   "area_key": "新井2丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-f6a0eac70bbe",
+   "city_code": "13114",
+   "area_key": "新井4丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-6f5fd7fa6df5",
+   "city_code": "13114",
+   "area_key": "新井5丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-f1b4ef3f137d",
+   "city_code": "13114",
+   "area_key": "新井1丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-085036bf7c81",
+   "city_code": "13114",
+   "area_key": "新井2丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-cb26510bdc1e",
+   "city_code": "13114",
+   "area_key": "新井4丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-b3d947844f15",
+   "city_code": "13114",
+   "area_key": "新井5丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-27d526e8b632",
+   "city_code": "13114",
+   "area_key": "新井1丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-7f72e28115f9",
+   "city_code": "13114",
+   "area_key": "新井2丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-baf35c8a4ed5",
+   "city_code": "13114",
+   "area_key": "新井4丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-51869530ba01",
+   "city_code": "13114",
+   "area_key": "新井5丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-2fe3c89cca35",
+   "city_code": "13114",
+   "area_key": "新井3丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-9f1f11b17659",
+   "city_code": "13114",
+   "area_key": "新井3丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-ec07c1a6882d",
+   "city_code": "13114",
+   "area_key": "新井3丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-f3ecfbc4530a",
+   "city_code": "13114",
+   "area_key": "新井3丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-c52422969960",
+   "city_code": "13114",
+   "area_key": "江古田1丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-5e28bed49328",
+   "city_code": "13114",
+   "area_key": "江古田3丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-802e77db177d",
+   "city_code": "13114",
+   "area_key": "江古田1丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-742fb505da8e",
+   "city_code": "13114",
+   "area_key": "江古田3丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-2bed6bbac47d",
+   "city_code": "13114",
+   "area_key": "江古田1丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日;土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-67898ff5d9bd",
+   "city_code": "13114",
+   "area_key": "江古田3丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日;土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-1110a3702b03",
+   "city_code": "13114",
+   "area_key": "江古田1丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-5485e1e178ff",
+   "city_code": "13114",
+   "area_key": "江古田3丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-82814a0cb34a",
+   "city_code": "13114",
+   "area_key": "江古田2丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-f6ac5e0dace3",
+   "city_code": "13114",
+   "area_key": "江古田4丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-4ea93b534eb6",
+   "city_code": "13114",
+   "area_key": "江古田2丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-5fa2dbd9032c",
+   "city_code": "13114",
+   "area_key": "江古田4丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-43d55f063b00",
+   "city_code": "13114",
+   "area_key": "江古田2丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日;土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-91cc98a31e4f",
+   "city_code": "13114",
+   "area_key": "江古田4丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日;土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-d6a642435988",
+   "city_code": "13114",
+   "area_key": "江古田2丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3月曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-c2eb6630b67b",
+   "city_code": "13114",
+   "area_key": "江古田4丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3月曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-890e7a70daf1",
+   "city_code": "13114",
+   "area_key": "江原町",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-0b197cca49ed",
+   "city_code": "13114",
+   "area_key": "江原町",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-cb50e0b31920",
+   "city_code": "13114",
+   "area_key": "江原町",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日;土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-ff4533622e21",
+   "city_code": "13114",
+   "area_key": "江原町",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-119ac660ec22",
+   "city_code": "13114",
+   "area_key": "上鷺宮",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-36da69f5aecd",
+   "city_code": "13114",
+   "area_key": "上鷺宮",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-3d7adf1009f5",
+   "city_code": "13114",
+   "area_key": "上鷺宮",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-cec7ca11e7e2",
+   "city_code": "13114",
+   "area_key": "上鷺宮",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     3
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-18f485fbc757",
+   "city_code": "13114",
+   "area_key": "上高田1丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-e48ce88c1362",
+   "city_code": "13114",
+   "area_key": "上高田1丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-e66cbbb88682",
+   "city_code": "13114",
+   "area_key": "上高田1丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日;木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-805852f799d1",
+   "city_code": "13114",
+   "area_key": "上高田1丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     5
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-e3297da6b108",
+   "city_code": "13114",
+   "area_key": "上高田2丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-e703aef25eab",
+   "city_code": "13114",
+   "area_key": "上高田2丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-c3473cb4a05d",
+   "city_code": "13114",
+   "area_key": "上高田2丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-03ad5999f02a",
+   "city_code": "13114",
+   "area_key": "上高田2丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-a49ee2d1d468",
+   "city_code": "13114",
+   "area_key": "上高田3丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-f28eb974ea53",
+   "city_code": "13114",
+   "area_key": "上高田4丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-9a880c0ba3b0",
+   "city_code": "13114",
+   "area_key": "上高田5丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-cda734db98df",
+   "city_code": "13114",
+   "area_key": "上高田3丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-d8d5be57e5f3",
+   "city_code": "13114",
+   "area_key": "上高田4丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-b22b37ae4a3e",
+   "city_code": "13114",
+   "area_key": "上高田5丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-b791731d7554",
+   "city_code": "13114",
+   "area_key": "上高田3丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-68267ee5add1",
+   "city_code": "13114",
+   "area_key": "上高田4丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-58f7b8582561",
+   "city_code": "13114",
+   "area_key": "上高田5丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-33f73b5940d9",
+   "city_code": "13114",
+   "area_key": "上高田3丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-608c5a54cb00",
+   "city_code": "13114",
+   "area_key": "上高田4丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-a1de8a8b7083",
+   "city_code": "13114",
+   "area_key": "上高田5丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-38b31690ace1",
+   "city_code": "13114",
+   "area_key": "鷺宮1丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-7a459101fe95",
+   "city_code": "13114",
+   "area_key": "鷺宮3丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-6517aa05bcd2",
+   "city_code": "13114",
+   "area_key": "鷺宮1丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-b236a24ecdb9",
+   "city_code": "13114",
+   "area_key": "鷺宮3丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-bca9bfef8e5f",
+   "city_code": "13114",
+   "area_key": "鷺宮1丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-5c692989e881",
+   "city_code": "13114",
+   "area_key": "鷺宮3丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-4e2c7bb20d33",
+   "city_code": "13114",
+   "area_key": "鷺宮1丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     3
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-3cfd608896fb",
+   "city_code": "13114",
+   "area_key": "鷺宮3丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     3
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-b22af83e2a7d",
+   "city_code": "13114",
+   "area_key": "鷺宮2丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-dd287cd4b723",
+   "city_code": "13114",
+   "area_key": "鷺宮2丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-5519d40ccfc3",
+   "city_code": "13114",
+   "area_key": "鷺宮2丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日;土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-de0fdcffad56",
+   "city_code": "13114",
+   "area_key": "鷺宮2丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3月曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-adda801f1266",
+   "city_code": "13114",
+   "area_key": "鷺宮4丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-351f456141ae",
+   "city_code": "13114",
+   "area_key": "鷺宮5丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-acc4677be1f3",
+   "city_code": "13114",
+   "area_key": "鷺宮6丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-21d1e59c0134",
+   "city_code": "13114",
+   "area_key": "鷺宮4丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-a81d3a4f06af",
+   "city_code": "13114",
+   "area_key": "鷺宮5丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-d48f496840fa",
+   "city_code": "13114",
+   "area_key": "鷺宮6丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-cabaf43a06eb",
+   "city_code": "13114",
+   "area_key": "鷺宮4丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-a45b9dbe20d7",
+   "city_code": "13114",
+   "area_key": "鷺宮5丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-b5b9b2fee6e2",
+   "city_code": "13114",
+   "area_key": "鷺宮6丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-b548c6d70340",
+   "city_code": "13114",
+   "area_key": "鷺宮4丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     3
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-a60785f37467",
+   "city_code": "13114",
+   "area_key": "鷺宮5丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     3
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-8ea8e206beaf",
+   "city_code": "13114",
+   "area_key": "鷺宮6丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     3
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-490322e27a30",
+   "city_code": "13114",
+   "area_key": "白鷺1丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-0727808e7913",
+   "city_code": "13114",
+   "area_key": "白鷺2丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-272c314af22d",
+   "city_code": "13114",
+   "area_key": "白鷺1丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-2ed72ae007c2",
+   "city_code": "13114",
+   "area_key": "白鷺2丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-9d9116def64a",
+   "city_code": "13114",
+   "area_key": "白鷺1丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-878676646726",
+   "city_code": "13114",
+   "area_key": "白鷺2丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-db9bcec2319e",
+   "city_code": "13114",
+   "area_key": "白鷺1丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     3
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-d0006632c275",
+   "city_code": "13114",
+   "area_key": "白鷺2丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     3
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-ede2a4086dba",
+   "city_code": "13114",
+   "area_key": "白鷺3丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-3e8154b14bf6",
+   "city_code": "13114",
+   "area_key": "白鷺3丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-87243b169f7e",
+   "city_code": "13114",
+   "area_key": "白鷺3丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-3209966df313",
+   "city_code": "13114",
+   "area_key": "白鷺3丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     3
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-c3a1e383a2da",
+   "city_code": "13114",
+   "area_key": "中央1丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-b6c47ec0cf7e",
+   "city_code": "13114",
+   "area_key": "中央2丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-85b47e9b9545",
+   "city_code": "13114",
+   "area_key": "中央1丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-1d54d92192c6",
+   "city_code": "13114",
+   "area_key": "中央2丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-48eb5baa12c9",
+   "city_code": "13114",
+   "area_key": "中央1丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日;木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-e8505f8aa887",
+   "city_code": "13114",
+   "area_key": "中央2丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日;木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-9bdd8ce564d0",
+   "city_code": "13114",
+   "area_key": "中央1丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     2
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-bd7568db31b6",
+   "city_code": "13114",
+   "area_key": "中央2丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     2
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-99f18c6b43c6",
+   "city_code": "13114",
+   "area_key": "中央3丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-b84d8f8604f0",
+   "city_code": "13114",
+   "area_key": "中央4丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-d9588c444928",
+   "city_code": "13114",
+   "area_key": "中央5丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-34c70d9e09b9",
+   "city_code": "13114",
+   "area_key": "中央3丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-67e8eb431579",
+   "city_code": "13114",
+   "area_key": "中央4丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-cdb6e962f521",
+   "city_code": "13114",
+   "area_key": "中央5丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-d01a594966d3",
+   "city_code": "13114",
+   "area_key": "中央3丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日;木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-42ec32998d7a",
+   "city_code": "13114",
+   "area_key": "中央4丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日;木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-f0bf9978eef1",
+   "city_code": "13114",
+   "area_key": "中央5丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日;木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-6d931d241731",
+   "city_code": "13114",
+   "area_key": "中央3丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     5
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-7696dcdf212e",
+   "city_code": "13114",
+   "area_key": "中央4丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     5
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-38f42ee7b2e9",
+   "city_code": "13114",
+   "area_key": "中央5丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     5
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-a557725d2688",
+   "city_code": "13114",
+   "area_key": "中野1丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-64fbc5236dc0",
+   "city_code": "13114",
+   "area_key": "中野1丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-651b9fd55b09",
+   "city_code": "13114",
+   "area_key": "中野1丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日;木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-aaa74a20b695",
+   "city_code": "13114",
+   "area_key": "中野1丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     5
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-a237537fbc1f",
+   "city_code": "13114",
+   "area_key": "中野2;3;5(毎日収集地域は除く)",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-0c7bff0dfad1",
+   "city_code": "13114",
+   "area_key": "中野2;3;5(毎日収集地域は除く)",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-8aa98cd4edf7",
+   "city_code": "13114",
+   "area_key": "中野2;3;5(毎日収集地域は除く)",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日;木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-0884b62fed78",
+   "city_code": "13114",
+   "area_key": "中野2;3;5(毎日収集地域は除く)",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     5
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-e387f679ea85",
+   "city_code": "13114",
+   "area_key": "中野4丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-1e867f67f8d7",
+   "city_code": "13114",
+   "area_key": "中野4丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-a5aa529ac5c7",
+   "city_code": "13114",
+   "area_key": "中野4丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日;木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-706c893b4952",
+   "city_code": "13114",
+   "area_key": "中野4丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-2524db7656ea",
+   "city_code": "13114",
+   "area_key": "中野6丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-0b67854dfe07",
+   "city_code": "13114",
+   "area_key": "中野6丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-be1ce653710a",
+   "city_code": "13114",
+   "area_key": "中野6丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日;木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-b405d5f05db8",
+   "city_code": "13114",
+   "area_key": "中野6丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     5
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-463f19cb014b",
+   "city_code": "13114",
+   "area_key": "沼袋",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-3b7d3d81b659",
+   "city_code": "13114",
+   "area_key": "沼袋",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-dff609af5bca",
+   "city_code": "13114",
+   "area_key": "沼袋",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日;土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-1db83e7053a5",
+   "city_code": "13114",
+   "area_key": "沼袋",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4月曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-7906903add18",
+   "city_code": "13114",
+   "area_key": "野方1丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-8003b9ea0d67",
+   "city_code": "13114",
+   "area_key": "野方2丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-f3d606cf12dd",
+   "city_code": "13114",
+   "area_key": "野方1丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-2a74e17dbdaf",
+   "city_code": "13114",
+   "area_key": "野方2丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-d1fb1f935575",
+   "city_code": "13114",
+   "area_key": "野方1丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-7bd834d11e37",
+   "city_code": "13114",
+   "area_key": "野方2丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-4179ec269032",
+   "city_code": "13114",
+   "area_key": "野方1丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-784a4abdbca2",
+   "city_code": "13114",
+   "area_key": "野方2丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-d80ea3f64c74",
+   "city_code": "13114",
+   "area_key": "野方3丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-90b9c7cf7515",
+   "city_code": "13114",
+   "area_key": "野方3丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-2f860991ba88",
+   "city_code": "13114",
+   "area_key": "野方3丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-44321f68a326",
+   "city_code": "13114",
+   "area_key": "野方3丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-dfd2db9c744c",
+   "city_code": "13114",
+   "area_key": "野方4丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-ec2229d237aa",
+   "city_code": "13114",
+   "area_key": "野方4丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-b94cc29e5d88",
+   "city_code": "13114",
+   "area_key": "野方4丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日;土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-14fa66ff198e",
+   "city_code": "13114",
+   "area_key": "野方4丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4月曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-f625cf946618",
+   "city_code": "13114",
+   "area_key": "野方5丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-824e445e54a3",
+   "city_code": "13114",
+   "area_key": "野方6丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-6b5e785b1481",
+   "city_code": "13114",
+   "area_key": "野方5丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-45cd4d25376b",
+   "city_code": "13114",
+   "area_key": "野方6丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-ff44600c8a80",
+   "city_code": "13114",
+   "area_key": "野方5丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日;土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-2a9617780d12",
+   "city_code": "13114",
+   "area_key": "野方6丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日;土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-e2c7cafddbcb",
+   "city_code": "13114",
+   "area_key": "野方5丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3月曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-6b66e1bf995d",
+   "city_code": "13114",
+   "area_key": "野方6丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3月曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-4d7244af0626",
+   "city_code": "13114",
+   "area_key": "東中野1丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-757fcb1b2223",
+   "city_code": "13114",
+   "area_key": "東中野2丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-e0f43d42c0c0",
+   "city_code": "13114",
+   "area_key": "東中野4丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-64bdfb5b6585",
+   "city_code": "13114",
+   "area_key": "東中野5丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-459d20cd0e0c",
+   "city_code": "13114",
+   "area_key": "東中野1丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-0b446a4ef6f7",
+   "city_code": "13114",
+   "area_key": "東中野2丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-978a4e0be04a",
+   "city_code": "13114",
+   "area_key": "東中野4丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-408c660aa1a5",
+   "city_code": "13114",
+   "area_key": "東中野5丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-010938da0596",
+   "city_code": "13114",
+   "area_key": "東中野1丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日;木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-e8ecadec4a11",
+   "city_code": "13114",
+   "area_key": "東中野2丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日;木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-aa14670454c2",
+   "city_code": "13114",
+   "area_key": "東中野4丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日;木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-6cca7f0c6517",
+   "city_code": "13114",
+   "area_key": "東中野5丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日;木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-b9c798ddf559",
+   "city_code": "13114",
+   "area_key": "東中野1丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     2
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-bf5cf4a8f4c0",
+   "city_code": "13114",
+   "area_key": "東中野2丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     2
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-f17caf705b8a",
+   "city_code": "13114",
+   "area_key": "東中野4丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     2
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-11dbbf9aea70",
+   "city_code": "13114",
+   "area_key": "東中野5丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     2
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-01ccbbfb1486",
+   "city_code": "13114",
+   "area_key": "東中野3丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-13757d39e683",
+   "city_code": "13114",
+   "area_key": "東中野3丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-0083df6d636e",
+   "city_code": "13114",
+   "area_key": "東中野3丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日;木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-ebe47e923f98",
+   "city_code": "13114",
+   "area_key": "東中野3丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     5
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-a7e6bc15b757",
+   "city_code": "13114",
+   "area_key": "本町1丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-54d0b031c2b3",
+   "city_code": "13114",
+   "area_key": "本町2丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-49d65897d8e1",
+   "city_code": "13114",
+   "area_key": "本町1丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-cb39b1d8543b",
+   "city_code": "13114",
+   "area_key": "本町2丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-ea10b694ec9f",
+   "city_code": "13114",
+   "area_key": "本町1丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日;木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-7866e5b3f728",
+   "city_code": "13114",
+   "area_key": "本町2丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日;木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-a738b1f597c4",
+   "city_code": "13114",
+   "area_key": "本町1丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     2
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-5cf3de64b9be",
+   "city_code": "13114",
+   "area_key": "本町2丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     2
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-3a9ff9640e2b",
+   "city_code": "13114",
+   "area_key": "本町3丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-98d7c66ce197",
+   "city_code": "13114",
+   "area_key": "本町3丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-114b6b5008b7",
+   "city_code": "13114",
+   "area_key": "本町3丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日;土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-1c36e4662336",
+   "city_code": "13114",
+   "area_key": "本町3丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-a371342baee0",
+   "city_code": "13114",
+   "area_key": "本町4丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-99e3a6c454a1",
+   "city_code": "13114",
+   "area_key": "本町5丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-acc59dc92317",
+   "city_code": "13114",
+   "area_key": "本町6丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-41fffe0adb16",
+   "city_code": "13114",
+   "area_key": "本町4丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-4984b16fa8b3",
+   "city_code": "13114",
+   "area_key": "本町5丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-4b8313c89526",
+   "city_code": "13114",
+   "area_key": "本町6丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-ab47e571f215",
+   "city_code": "13114",
+   "area_key": "本町4丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日;木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-056340b14f18",
+   "city_code": "13114",
+   "area_key": "本町5丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日;木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-cf19f5a17959",
+   "city_code": "13114",
+   "area_key": "本町6丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日;木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-914ec7808cc8",
+   "city_code": "13114",
+   "area_key": "本町4丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     5
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-829ced661283",
+   "city_code": "13114",
+   "area_key": "本町5丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     5
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-e4a2c710a330",
+   "city_code": "13114",
+   "area_key": "本町6丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     5
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-c1cedeca6760",
+   "city_code": "13114",
+   "area_key": "松が丘1丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-1f6eaaef727f",
+   "city_code": "13114",
+   "area_key": "松が丘1丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-b1c7c2872129",
+   "city_code": "13114",
+   "area_key": "松が丘1丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-ae7fa24c1e0c",
+   "city_code": "13114",
+   "area_key": "松が丘1丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-246e877d1273",
+   "city_code": "13114",
+   "area_key": "松が丘2丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-de79b1ffe25b",
+   "city_code": "13114",
+   "area_key": "松が丘2丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-6425a5c65ad7",
+   "city_code": "13114",
+   "area_key": "松が丘2丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日;土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-0491fb7fc289",
+   "city_code": "13114",
+   "area_key": "松が丘2丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4月曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-102cf34374e6",
+   "city_code": "13114",
+   "area_key": "丸山1丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-28236e3fe3eb",
+   "city_code": "13114",
+   "area_key": "丸山1丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-53c0d246a252",
+   "city_code": "13114",
+   "area_key": "丸山1丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日;土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-1ba0fe6bbec4",
+   "city_code": "13114",
+   "area_key": "丸山1丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3月曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-a313030f24da",
+   "city_code": "13114",
+   "area_key": "丸山2丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-e294c9cb131b",
+   "city_code": "13114",
+   "area_key": "丸山2丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-866c3c8bb96f",
+   "city_code": "13114",
+   "area_key": "丸山2丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日;土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-84b475554cd7",
+   "city_code": "13114",
+   "area_key": "丸山2丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3月曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-a4fe69635418",
+   "city_code": "13114",
+   "area_key": "南台",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-9724de00d36c",
+   "city_code": "13114",
+   "area_key": "南台",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-3a8bd2c7afea",
+   "city_code": "13114",
+   "area_key": "南台",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日;土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-518dcd425e27",
+   "city_code": "13114",
+   "area_key": "南台",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-d825018318b6",
+   "city_code": "13114",
+   "area_key": "大和町1丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-3bf129836374",
+   "city_code": "13114",
+   "area_key": "大和町2丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-cd73ee8a20d0",
+   "city_code": "13114",
+   "area_key": "大和町1丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-4a79369d6a3d",
+   "city_code": "13114",
+   "area_key": "大和町2丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-664bb159a523",
+   "city_code": "13114",
+   "area_key": "大和町1丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-2354289d95fe",
+   "city_code": "13114",
+   "area_key": "大和町2丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-81b825b5cf4d",
+   "city_code": "13114",
+   "area_key": "大和町1丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-24c001bf256a",
+   "city_code": "13114",
+   "area_key": "大和町2丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-46cc8d20d066",
+   "city_code": "13114",
+   "area_key": "大和町3丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-6fa138ba33ac",
+   "city_code": "13114",
+   "area_key": "大和町4丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-185521cf7920",
+   "city_code": "13114",
+   "area_key": "大和町3丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-1cffd1452bc9",
+   "city_code": "13114",
+   "area_key": "大和町4丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-ea218e2c5008",
+   "city_code": "13114",
+   "area_key": "大和町3丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-bdfdbf0b3319",
+   "city_code": "13114",
+   "area_key": "大和町4丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-6e0f92f4fa71",
+   "city_code": "13114",
+   "area_key": "大和町3丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-e573ee37707f",
+   "city_code": "13114",
+   "area_key": "大和町4丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-db076769b12c",
+   "city_code": "13114",
+   "area_key": "弥生町1丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-e5fd7191466b",
+   "city_code": "13114",
+   "area_key": "弥生町1丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-f34a9eb3ecb7",
+   "city_code": "13114",
+   "area_key": "弥生町1丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日;土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-c68c9b253919",
+   "city_code": "13114",
+   "area_key": "弥生町1丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-cbf14bd045ef",
+   "city_code": "13114",
+   "area_key": "弥生町2丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-f1c1e71ae938",
+   "city_code": "13114",
+   "area_key": "弥生町2丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-ed6dad1f1864",
+   "city_code": "13114",
+   "area_key": "弥生町2丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日;土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-3a577895f643",
+   "city_code": "13114",
+   "area_key": "弥生町2丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2;第4木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-5f12208aa13f",
+   "city_code": "13114",
+   "area_key": "弥生町3丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-f310fbdfa559",
+   "city_code": "13114",
+   "area_key": "弥生町4丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-53e014b687eb",
+   "city_code": "13114",
+   "area_key": "弥生町5丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-68d90876218b",
+   "city_code": "13114",
+   "area_key": "弥生町6丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-b9b6293d80d6",
+   "city_code": "13114",
+   "area_key": "弥生町3丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-af268368dc1d",
+   "city_code": "13114",
+   "area_key": "弥生町4丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-666cdc937156",
+   "city_code": "13114",
+   "area_key": "弥生町5丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-1c6a3a61ca54",
+   "city_code": "13114",
+   "area_key": "弥生町6丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-8dee54764964",
+   "city_code": "13114",
+   "area_key": "弥生町3丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日;土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-e8e961da373b",
+   "city_code": "13114",
+   "area_key": "弥生町4丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日;土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-4cac6f38447a",
+   "city_code": "13114",
+   "area_key": "弥生町5丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日;土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-1e5efa2b8d44",
+   "city_code": "13114",
+   "area_key": "弥生町6丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日;土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-c71a10f38164",
+   "city_code": "13114",
+   "area_key": "弥生町3丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-da6c76910532",
+   "city_code": "13114",
+   "area_key": "弥生町4丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-0fd7529b48a6",
+   "city_code": "13114",
+   "area_key": "弥生町5丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-e5c9c2238133",
+   "city_code": "13114",
+   "area_key": "弥生町6丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3木曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-bae5f2f0a0a0",
+   "city_code": "13114",
+   "area_key": "若宮1丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-7c66840356d6",
+   "city_code": "13114",
+   "area_key": "若宮1丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-ce28f150efee",
+   "city_code": "13114",
+   "area_key": "若宮1丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日;土曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-882e77eb61bf",
+   "city_code": "13114",
+   "area_key": "若宮1丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3月曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-eabde61f4b88",
+   "city_code": "13114",
+   "area_key": "若宮2丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-edf79c3babdf",
+   "city_code": "13114",
+   "area_key": "若宮3丁目",
+   "local_category": "資源プラスチック",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-4751fbe94004",
+   "city_code": "13114",
+   "area_key": "若宮2丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-7f5b85799ad5",
+   "city_code": "13114",
+   "area_key": "若宮3丁目",
+   "local_category": "びん,ペットボトル",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-9680a605b2b3",
+   "city_code": "13114",
+   "area_key": "若宮2丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-e2d32b78267f",
+   "city_code": "13114",
+   "area_key": "若宮3丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日;金曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-6b24b23ac88b",
+   "city_code": "13114",
+   "area_key": "若宮2丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     3
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13114-3692403e266d",
+   "city_code": "13114",
+   "area_key": "若宮3丁目",
+   "local_category": "陶器,ガラス,金属ごみ",
+   "common_class": "other",
+   "rule": {
+    "type": "nth",
+    "days": [
+     3
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1;第3水曜日",
+   "source_id": "nakano-schedule",
+   "source_url": "https://www2.wagmap.jp/nakanodatamap/nakanodatamap/opendatafile/map_1/CSV/opendata_550239.csv",
+   "source_updated_at": "2025-02-28",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中野区 「資源とごみの収集曜日一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  }
+ ]
+}

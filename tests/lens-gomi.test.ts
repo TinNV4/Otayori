@@ -105,6 +105,9 @@ describe('dictionary matching', () => {
     expect(matchItems(rows, q({ name_jp: '缶' })).map(m => m.item.name_jp).sort()).toEqual(['缶／飲食缶 缶詰の缶', '缶／菓子の缶'].sort());
     expect(matchItems(rows, q({ name_jp: '牛乳' }))[0].item.name_jp).toBe('紙パック／牛乳');
     expect(matchItems(rows, q({ name_jp: '缶' }))[0].score).toBeGreaterThanOrEqual(0.9);
+    // synonyms listed in one name: "生ごみ、台所ごみ"
+    expect(matchItems([item('生ごみ、台所ごみ', 'burnable')], q({ name_jp: '生ごみ' }))[0].score).toBeGreaterThanOrEqual(0.9);
+    expect(matchItems([item('生ごみ、台所ごみ', 'burnable')], q({ name_jp: '台所ごみ' }))[0].score).toBeGreaterThanOrEqual(0.9);
   });
   it('skips retired rows', () => {
     expect(m('古い辞書')).toEqual([]);

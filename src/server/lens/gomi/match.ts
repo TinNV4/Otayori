@@ -16,7 +16,7 @@ export function scoreName(query: string, item: GomiItem): number {
   if (q === name) return 1;
   if (kana && q === kana) return 0.95;
   // Cities write "缶／飲食缶 缶詰の缶", "紙パック／牛乳" or "傘(金属製)": a part names the thing ("缶", "傘").
-  const parts = item.name_jp.split(/[／/\s（）()]+/).map(fold).filter(Boolean);
+  const parts = item.name_jp.split(/[／/、,，・\s（）()]+/).map(fold).filter(Boolean);
   if (parts.length > 1 && parts.includes(q)) return 0.92;
   // A short query inside a long item name ("電池" in "ボタン電池") is only a loose hint.
   const [short, long] = q.length <= name.length ? [q, name] : [name, q];

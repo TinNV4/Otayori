@@ -1,6 +1,6 @@
 # Thiết kế: bộ "đọc ảnh" dùng chung (Lens) + 2 module Phân loại rác / Đi chợ Nhật
 
-> Trạng thái: thiết kế + đã cài đặt phần rác. **Đã có**: sync master data cho cả 2 loại (`gomi_items` qua `ckan_csv_v1`, `gomi_schedule` qua `schedule_csv_v1`; `scripts/data.ts`); lõi Lens cho rác (`src/server/lens/gomi/`); bot LINE (`rác`, chế độ ảnh, `khu vực [町丁目]`, vị trí LINE → đề xuất → xác nhận, `lịch rác`); `Family.region`; lượt hỏi riêng (`LOOKUP_QUOTA`); log món chưa có; **lịch đổ rác**: đọc "月・木 / 第2・4水", ngày đổ gần nhất trong câu trả lời, feed ICS riêng có nhắc 20:00 tối hôm trước, EXDATE theo ngày nghỉ thành phố công bố; `data/city-info.json` (link/phí 粗大ごみ, bắt buộc có nguồn + ngày). **Đi chợ (MVP) đã có**: `src/server/lens/grocery/*`, bảng `data/grocery/*.json` (109 nguyên liệu, 20 món, 43 nhóm đồ thay thế — **Claude soạn, tất cả còn `draft` chờ admin duyệt**), đọc nhãn bằng Claude, `scripts/grocery.ts`, lệnh `đi chợ`. **Chưa có**: nguồn dữ liệu thật đã bật (`data/sources/` mới có `_template.json`, `data/city-info.json` đang rỗng), adapter Excel, nút "gợi ý món thay thế khác" của cộng đồng, quảng cáo/affiliate, lịch dạng liệt kê ngày (`dates`), store Firestore cho master data. Dữ liệu đã `publish` nằm ở `data/masterdata/<nguồn>/live.json`, commit vào git và đi cùng image. Ngày: 2026-10-28.
+> Trạng thái: thiết kế + đã cài đặt phần rác. **Đã có**: sync master data cho cả 2 loại (`gomi_items` qua `ckan_csv_v1`, `gomi_schedule` qua `schedule_csv_v1`; `scripts/data.ts`); lõi Lens cho rác (`src/server/lens/gomi/`); bot LINE (`rác`, chế độ ảnh, `khu vực [町丁目]`, vị trí LINE → đề xuất → xác nhận, `lịch rác`); `Family.region`; lượt hỏi riêng (`LOOKUP_QUOTA`); log món chưa có; **lịch đổ rác**: đọc "月・木 / 第2・4水", ngày đổ gần nhất trong câu trả lời, feed ICS riêng có nhắc 20:00 tối hôm trước, EXDATE theo ngày nghỉ thành phố công bố; `data/city-info.json` (link/phí 粗大ごみ, bắt buộc có nguồn + ngày). **Đi chợ (MVP) đã có**: `src/server/lens/grocery/*`, bảng `data/grocery/*.json` (109 nguyên liệu, 20 món, 43 nhóm đồ thay thế — **Claude soạn, tất cả còn `draft` chờ admin duyệt**), đọc nhãn bằng Claude, `scripts/grocery.ts`, lệnh `đi chợ`. **Dữ liệu thật đã publish** cho 9 thành phố/quận Tokyo + Kanagawa (12 nguồn, mục 5); còn thiếu 足立区, 江戸川区, 大和市, Nagoya, Osaka, Kawaguchi, Funabashi, Matsudo; `data/city-info.json` mới có 2 link, adapter Excel, nút "gợi ý món thay thế khác" của cộng đồng, quảng cáo/affiliate, lịch dạng liệt kê ngày (`dates`), store Firestore cho master data. Dữ liệu đã `publish` nằm ở `data/masterdata/<nguồn>/live.json`, commit vào git và đi cùng image. Ngày: 2026-10-28.
 > Phần "đã kiểm chứng" / "chưa kiểm chứng" ghi rõ ở mục 8. Những gì thuộc buổi thảo luận trước ("schema chung như đã bàn", "bản tin chính sách") **không có trong repo** nên được thiết kế lại từ đầu ở đây — cần đối chiếu.
 
 ## 1. Nguyên tắc
@@ -382,7 +382,7 @@ flowchart LR
 
 `discover` chạy được trên cổng Tokyo ([catalog.data.metro.tokyo.lg.jp](https://catalog.data.metro.tokyo.lg.jp/), 203 dataset khớp "ごみ分別", đều CC BY). Cổng quốc gia data.go.jp **không** có dữ liệu rác của các thành phố Kanagawa; Yokohama, Sagamihara có cổng CKAN riêng (`data.city.yokohama.lg.jp`, `opendata.city.sagamihara.kanagawa.jp`), Kawasaki công bố CSV trực tiếp trên [trang của thành phố](https://www.city.kawasaki.jp/300/page/0000075059.html). **Chưa tìm thấy dataset** cho 足立区, 江戸川区 (MVP Tokyo), 大和市.
 
-Đã `scaffold` + `sync` 12 nguồn, **đang ở hàng chờ duyệt (staged), chưa publish** (lần nhập đầu luôn cần admin):
+Đã `scaffold` + `sync` 12 nguồn; admin (`tinnv4`) duyệt và **đã publish v1 ngày 29/10/2026** (`data/masterdata/<id>/live.json`, đi cùng image):
 
 | Nguồn | Mã | Dòng | Ngày dữ liệu |
 |---|---|---|---|
@@ -396,7 +396,7 @@ flowchart LR
 | `kawasaki-items` 川崎市 | 14130 | 3718 | 2026-09-17 |
 | `sagamihara-items` 相模原市 | 14150 | 2771 | 2025-04-07 |
 
-Dữ liệu cũ hơn 13 tháng (中央区, 中野区, 東村山, 西東京, 相模原…) vẫn dùng được nhưng câu trả lời tự kèm "dữ liệu đã cũ". Sau khi duyệt, đặt lệnh: `npm run data -- review <id>` → `publish <id> --by <tên>` → commit `data/masterdata/<id>/live.json`.
+Dữ liệu cũ hơn 13 tháng (中央区, 中野区, 東村山, 西東京, 相模原…) vẫn dùng được nhưng câu trả lời tự kèm "dữ liệu đã cũ". Lần cập nhật sau: `npm run data -- sync --all` → `review <id>` → `publish <id> --by <tên>` → commit `data/masterdata/<id>/live.json`.
 
 **Điều dữ liệu thật dạy cho thiết kế** (đã sửa trong code):
 - Cột mã thành phố có 6 chữ số (có số kiểm tra: `131181` → `13118`); chỉ so 5 chữ số đầu.
