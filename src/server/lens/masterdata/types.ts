@@ -35,6 +35,12 @@ export interface SourceConfig {
     columns?: string[];
     /** Header rows to skip in every table when `columns` is given (default 1). */
     header_rows?: number;
+    /** Columns added to every row with a fixed value, for pages that never print them (e.g. 種別 = 粗大ごみ on a fee list). */
+    constants?: Record<string, string>;
+    /** 0-based indexes of the tables to read on each page; the others (size-based fee rows, notes) are ignored. */
+    tables?: number[];
+    /** With several `urls`, how many tables one page holds, so `tables` indexes repeat per page. Default: all pages as one list. */
+    tables_per_page?: number;
   };
   ckan?: {
     /** e.g. https://ckan.example.jp/api/3/action */

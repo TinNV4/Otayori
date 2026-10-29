@@ -43,9 +43,9 @@ export function parseTables(html: string): string[][][] {
   });
 }
 
-/** "更新日：2026年1月28日" printed on city pages. Latest one wins. */
+/** "更新日：2026年1月28日" (or Osaka's "2026年10月29日 ページ番号：…") printed on city pages. Latest one wins. */
 export function pageUpdateDate(html: string): string | undefined {
-  const dates = [...html.matchAll(/更新日[:：]\s*(\d{4})年\s*(\d{1,2})月\s*(\d{1,2})日/g)]
+  const dates = [...html.matchAll(/(?:更新日[:：]\s*|(?=\d{4}年\s*\d{1,2}月\s*\d{1,2}日\s*(?:<[^>]*>\s*)*ページ番号))(\d{4})年\s*(\d{1,2})月\s*(\d{1,2})日/g)]
     .map(m => `${m[1]}-${m[2].padStart(2, '0')}-${m[3].padStart(2, '0')}`);
   return dates.sort().at(-1);
 }

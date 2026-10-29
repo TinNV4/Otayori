@@ -144,10 +144,15 @@ function htmlTable(bytes: Buffer, src: SourceConfig, required: string[]): Table 
   const records: Array<Record<string, string>> = [];
   const cols = src.html?.columns;
   let seen: string[] = grids[0]?.[0] ?? [];
+  const consts = Object.entries(src.html?.constants ?? {});
+  const only = src.html?.tables;
+  let t = -1;
   for (const g of grids) {
+    t++;
+    if (only && !only.includes(t % (src.html?.tables_per_page ?? grids.length))) continue;
     if (cols) {
       for (const row of g.slice(src.html?.header_rows ?? 1)) {
-        if (row.length === cols.length) records.push(Object.fromEntries(cols.map((h, i) => [h, row[i]])));
+        if (row.length === cols.length) records.push({ ...Object.fromEntries(cols.map((h, i) => [h, row[i]])), ...Object.fromEntries(consts) });
       }
       continue;
     }
@@ -158,7 +163,7 @@ function htmlTable(bytes: Buffer, src: SourceConfig, required: string[]): Table 
       if (row.length === g[h].length) records.push(Object.fromEntries(g[h].map((c, i) => [c, row[i]])));
     }
   }
-  return { headers: cols ?? seen, records };
+  return { headers: cols ? [...cols, ...consts.map(([k]) => k)] : seen, records };
 }
 
 export const readTable = (bytes: Buffer, src: SourceConfig, required: string[]): Table =>

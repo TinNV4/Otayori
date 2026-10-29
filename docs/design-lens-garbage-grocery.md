@@ -377,7 +377,7 @@ flowchart LR
 | 江戸川区 | 13123 | danh mục (HTML, 9 trang あ〜ん) + lịch (HTML) | [hinmoku](https://www.city.edogawa.tokyo.jp/kurashi/gomi_recycle/kategomi/hinmoku/index.html), [yobihyo](https://www.city.edogawa.tokyo.jp/kurashi/gomi_recycle/kategomi/yobihyo.html) — CC BY, không có CSV |
 | 足立区 | 13121 | **chỉ PDF** | xem mục “Adachi” bên dưới |
 | 名古屋市 | 23100 | danh mục 50 âm (BODIK, CC BY 4.0) | `231002_1109010000_sagyo_01` ở [data.bodik.jp](https://data.bodik.jp/); lịch thu gom theo 町: không có dữ liệu mở (chỉ có công cụ tra trên web) |
-| 大阪市 | 27100 | — | không có dataset trên BODIK; trang `city.osaka.lg.jp` và cổng dữ liệu mở không truy cập được từ sandbox (408 / bị chặn) |
+| 大阪市 | 27100 | bảng phí 粗大ごみ (HTML, CC BY 4.0) | [0000384507.html](https://www.city.osaka.lg.jp/kankyo/page/0000384507.html); không có dataset 分別 trên BODIK; cổng `data.city.osaka.lg.jp` bị proxy chặn (xem mục 名古屋市 và 大阪市) |
 | 横浜市 | 14100 | trang open data | [gomi.html](https://www.city.yokohama.lg.jp/city-info/yokohamashi/tokei-chosa/portal/opendata/gomi.html) |
 | 川崎市, 相模原市, 大和市 | 14130, 14150, 14213 | — | chưa tìm |
 
@@ -417,7 +417,7 @@ Hạn chế: không có phí 粗大ごみ trong dữ liệu (đã link trang ch�
 ### 名古屋市 và 大阪市 (29/10/2026)
 
 - **Nagoya** `nagoya-items`: 1227 dòng, ngày 2025-06-05, CC BY 4.0, **đã publish v1** (29/10/2026, `tinnv4`). File CSV có dòng tiêu đề ở hàng 3 (hàng 1 là "50音順,,"): `csvToRecords` giờ tự tìm hàng tiêu đề. Nhãn "その他" (105 dòng: quần áo, 家電4品目, xe máy…) → `other`: câu trả lời hiện nhãn và ghi chú của thành phố; luật quốc gia vẫn ưu tiên. "小型家電" → `drop_off`, "食用油" → `drop_off`, "充電式家電" → `other`. Chưa có lịch thu gom và phí 粗大ごみ.
-- **Osaka**: chưa nhập. Không có dataset trên BODIK; mục tra phân loại của thành phố là công cụ hỏi–đáp động, không phải bảng dữ liệu; các trang `city.osaka.lg.jp` trả 408 và `data.city.osaka.lg.jp` bị ngắt kết nối từ sandbox. Cần mở domain `*.city.osaka.lg.jp` hoặc cung cấp file.
+- **Osaka** `osaka-items` (**staged, chưa publish**): 147 dòng 粗大ごみ, **tất cả có `fee_yen`** (200/400/700/1.000円), ngày 2026-10-29 (ngày in trên trang), giấy phép **CC BY** ghi ngay trên trang ("本ページに掲載の各種データについては…CC-BY", PDF kèm CC-BY 4.0). Nguồn: `city.osaka.lg.jp/kankyo/page/0000384507.html` (đọc được bình thường, không bị WAF). Đọc bằng `html_items_v1` với 3 tùy chọn mới trong `html`: `constants` (cột cố định: 種別 = 粗大ごみ vì trang không có cột loại), `tables` (chỉ đọc bảng 1–3; bảng 4–5 là phí theo kích cỡ, không phải món), `tables_per_page`; `pageUpdateDate` nhận thêm dạng "2026年10月29日 … ページ番号". Món có nhiều cỡ thành nhiều dòng (`たんす(幅・奥行・高さの合計が2メートル未満)` 400円…). Hạn chế: chỉ có 粗大ごみ — món thường (ペットボトル…) vẫn ra "phân loại chung, chưa chắc"; chưa có lịch thu gom. **Cổng dữ liệu mở `data.city.osaka.lg.jp` / `api.data.city.osaka.lg.jp` vẫn không vào được** (kết nối bị reset / proxy CONNECT 502) nên chưa biết cổng có dataset 分別 hay không; cần mở 2 host này hoặc đưa file CSV. Duyệt: `npm run data -- review osaka-items` → `publish osaka-items --by tinnv4` → commit `data/masterdata/osaka-items/live.json`. `data/city-info.json` 27100 đã có link + `sodai_fee_note`.
 
 **Điều dữ liệu thật dạy cho thiết kế** (đã sửa trong code):
 - Cột mã thành phố có 6 chữ số (có số kiểm tra: `131181` → `13118`); chỉ so 5 chữ số đầu.

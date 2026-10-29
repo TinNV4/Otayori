@@ -106,3 +106,30 @@ describe('html_schedule_v1 (江戸川区-style table)', () => {
     expect(store.getLive(sched.id)!.meta.source_updated_at).toBe('2026-01-28'); // from "更新日" on the page
   });
 });
+
+describe('html_items_v1 on a fee list without category column (大阪市 粗大ごみ)', () => {
+  const osaka: SourceConfig = {
+    id: 'osaka-items', city_code: '27100', kind: 'gomi_items', adapter: 'html_items_v1', enabled: true, url: 'https://x/0000384507.html', encoding: 'utf-8',
+    license: 'CC BY 4.0', attribution: '大阪市', cadence: 'monthly',
+    html: { columns: ['五十音', '品名', '手数料'], header_rows: 0, tables: [0, 1, 2], constants: { 種別: '粗大ごみ' } },
+    columns: { name_jp: '品名', category: '種別', fee: '手数料' }, category_map: { 粗大ごみ: 'sodai' },
+  };
+  const bytes = Buffer.from(f('osaka-sodai.html'));
+  const rows = getAdapter('html_items_v1').parse(bytes, osaka, ctx).rows as GomiItem[];
+  it('reads tables 1-3 only (size-based tables 4-5 are not items), with fee_yen and class sodai', () => {
+    expect(rows.length).toBe(147);
+    expect(rows.every(r => r.common_class === 'sodai' && r.fee_yen! > 0)).toBe(true);
+    expect(rows.find(r => r.name_jp === 'ガスオーブンレンジ')!.fee_yen).toBe(1000);
+    expect(rows.find(r => r.name_jp === '掃除機')!.fee_yen).toBe(200);
+    expect(rows.some(r => /^1.5メートル未満のもの|^ごみ袋/.test(r.name_jp))).toBe(false);
+    expect(rows.find(r => r.name_jp === 'たんす(幅・奥行・高さの合計が2メートル未満)')!.fee_yen).toBe(400); // size variants are separate rows
+  });
+  it('page date "2026年10月29日 … ページ番号" is the source date; entry validates and syncs', async () => {
+    expect(pageUpdateDate(bytes.toString('utf8'))).toBe('2026-10-29');
+    expect(validateSourceConfig(osaka, 'data/sources/osaka-items.json').id).toBe('osaka-items');
+    const store = new MemoryMasterStore();
+    const out = await syncSource(osaka, { fetcher: { get: async () => ({ bytes, headers: { 'content-type': 'text/html' } }) }, store, now: NOW });
+    expect(out.status).toBe('staged');
+    expect(store.getStaged('osaka-items')!.meta.source_updated_at).toBe('2026-10-29');
+  });
+});
