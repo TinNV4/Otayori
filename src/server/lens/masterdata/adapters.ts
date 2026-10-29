@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 import { csvToRecords, decodeText } from './csv.ts';
-import { parseRuleText } from './scheduleRule.ts';
+import { expandAreas, parseRuleText } from './scheduleRule.ts';
 import { COMMON_CLASSES, GomiItem, MasterRow, ScheduleRow, SourceConfig } from './types.ts';
 
 export class SyncError extends Error {
@@ -27,16 +27,25 @@ const MAX_BYTES = 20_000_000;
 export const httpFetcher: Fetcher = {
   async get(url, opts) {
     if (!/^https:\/\//i.test(url)) throw new SyncError('fetch', `only https URLs are allowed: ${url}`);
-    let res: Response;
-    try {
-      res = await fetch(url, {
-        redirect: 'follow',
-        signal: AbortSignal.timeout(30_000),
-        headers: { 'user-agent': 'KamiVietDataSync/1.0 (+open-data consumer)', ...(opts?.accept ? { accept: opts.accept } : {}) },
-      });
-    } catch (err) {
-      throw new SyncError('fetch', `${url}: ${(err as Error).message}`);
+    // City servers drop connections now and then: retry network errors and 5xx twice before giving up.
+    let res: Response | undefined;
+    let lastErr = '';
+    for (let attempt = 0; attempt < 3 && !res; attempt++) {
+      if (attempt) await new Promise(r => setTimeout(r, 1500 * attempt));
+      try {
+        const r = await fetch(url, {
+          redirect: 'follow',
+          signal: AbortSignal.timeout(30_000),
+          headers: { 'user-agent': 'KamiVietDataSync/1.0 (+open-data consumer)', ...(opts?.accept ? { accept: opts.accept } : {}) },
+        });
+        if (r.status >= 500) { lastErr = `HTTP ${r.status}`; continue; }
+        res = r;
+      } catch (err) {
+        const e = err as Error & { cause?: { code?: string } };
+        lastErr = `${e.message}${e.cause?.code ? ` (${e.cause.code})` : ''}`;
+      }
     }
+    if (!res) throw new SyncError('fetch', `${url}: ${lastErr}`);
     if (!res.ok) throw new SyncError('fetch', `${url}: HTTP ${res.status}`);
     const declared = Number(res.headers.get('content-length') || 0);
     if (declared > MAX_BYTES) throw new SyncError('fetch', `${url}: file too large (${declared} bytes)`);
@@ -118,7 +127,8 @@ export const ckanCsvV1: Adapter = {
     const c = src.columns;
     const categoryMap = src.category_map;
     if (!c || !categoryMap) throw new SyncError('config', `${src.id}: adapter ckan_csv_v1 needs "columns" and "category_map"`);
-    const required = [c.name_jp, c.category, ...(c.city_code ? [c.city_code] : [])];
+    const noteCols = c.note ? (Array.isArray(c.note) ? c.note : [c.note]) : [];
+    const required = [c.name_jp, c.category, ...noteCols, ...(c.fee ? [c.fee] : []), ...(c.city_code ? [c.city_code] : [])];
     const missing = required.filter(h => !headers.includes(h));
     if (missing.length) {
       throw new SyncError('columns', `missing column(s) ${missing.map(m => `"${m}"`).join(', ')}; file has: ${headers.join(' | ') || '(no header)'}. Fix "columns" in ${src.id}.json (try: data inspect ${src.id}).`);
@@ -126,6 +136,9 @@ export const ckanCsvV1: Adapter = {
     for (const [label, cls] of Object.entries(categoryMap)) {
       if (!COMMON_CLASSES.includes(cls)) throw new SyncError('config', `category_map["${label}"] = "${cls}" is not a common class`);
     }
+    // Labels are compared after the same normalization the file's labels get (width, spaces), so a key copied
+    // from the dataset page matches whether it was written with （ ） or ( ).
+    const classOf = new Map(Object.entries(categoryMap).map(([k, v]) => [norm(k), v]));
 
     const warnings: string[] = [];
     const unknown = new Set<string>();
@@ -135,13 +148,14 @@ export const ckanCsvV1: Adapter = {
     let otherCities = 0;
 
     for (const r of records) {
-      if (c.city_code && r[c.city_code] !== src.city_code) { otherCities++; continue; }
+      if (c.city_code && (r[c.city_code] ?? '').slice(0, 5) !== src.city_code) { otherCities++; continue; }
       const name = norm(r[c.name_jp] || '');
       const label = norm(r[c.category] || '');
       if (!name || !label) { skipped++; continue; }
-      const cls = categoryMap[label];
+      const cls = classOf.get(label);
       if (!cls) { unknown.add(label); continue; }
-      const note = norm(c.note ? r[c.note] || '' : '');
+      const note = norm(noteCols.map(k => r[k] || '').filter(Boolean).join(' / '));
+      const fee = c.fee ? Number((r[c.fee] || '').normalize('NFKC').replace(/[^\d]/g, '')) : 0;
       const base = crypto.createHash('sha1').update(`${src.city_code}|${name}|${note}`).digest('hex').slice(0, 12);
       const n = (seen.get(base) || 0) + 1;
       seen.set(base, n);
@@ -154,6 +168,7 @@ export const ckanCsvV1: Adapter = {
         local_category: label,
         common_class: cls,
         note,
+        ...(fee > 0 ? { fee_yen: fee } : {}),
         source_id: src.id,
         source_url: ctx.sourceUrl,
         source_updated_at: ctx.sourceUpdatedAt,
@@ -180,7 +195,8 @@ export const scheduleCsvV1: Adapter = {
     const sc = src.schedule;
     if (!sc?.categories?.length) throw new SyncError('config', `${src.id}: adapter schedule_csv_v1 needs "schedule.categories"`);
     const { headers, records } = csvToRecords(decodeText(bytes, src.encoding));
-    const required = [...(sc.area_column ? [sc.area_column] : []), ...(sc.city_code_column ? [sc.city_code_column] : []), ...sc.categories.map(k => k.column)];
+    const areaCols = sc.area_columns?.length ? sc.area_columns : sc.area_column ? [sc.area_column] : [];
+    const required = [...areaCols, ...(sc.city_code_column ? [sc.city_code_column] : []), ...sc.categories.map(k => k.column)];
     const missing = required.filter(h => !headers.includes(h));
     if (missing.length) {
       throw new SyncError('columns', `missing column(s) ${missing.map(m => `"${m}"`).join(', ')}; file has: ${headers.join(' | ') || '(no header)'}. Fix "schedule" in ${src.id}.json (try: data inspect ${src.id}).`);
@@ -197,23 +213,27 @@ export const scheduleCsvV1: Adapter = {
     let blankAreas = 0;
 
     for (const r of records) {
-      if (sc.city_code_column && r[sc.city_code_column] !== src.city_code) { otherCities++; continue; }
-      const area = sc.area_column ? norm(r[sc.area_column] || '') : '*';
-      if (!area) { blankAreas++; continue; }
+      if (sc.city_code_column && (r[sc.city_code_column] ?? '').slice(0, 5) !== src.city_code) { otherCities++; continue; }
+      const areas = areaCols.length === 0 ? ['*']
+        : areaCols.length === 1 ? [norm(r[areaCols[0]] || '')].filter(Boolean)
+        : expandAreas(r[areaCols[0]] || '', r[areaCols[1]] || '').map(norm);
+      if (!areas.length) { blankAreas++; continue; }
       for (const k of sc.categories) {
         const text = (r[k.column] || '').trim();
         const rule = parseRuleText(text);
         if (rule === 'none') continue;
         if (!rule) { unreadable.set(text, (unreadable.get(text) || 0) + 1); continue; }
-        const id = `${src.city_code}-${crypto.createHash('sha1').update(`${area}|${k.common_class}|${k.local_category}`).digest('hex').slice(0, 12)}`;
-        if (seen.has(id)) { warnings.push(`duplicate schedule row for ${area} / ${k.local_category}`); continue; }
-        seen.add(id);
-        rows.push({
-          id, city_code: src.city_code, area_key: area, local_category: k.local_category, common_class: k.common_class,
-          rule, rule_text: norm(text),
-          source_id: src.id, source_url: ctx.sourceUrl, source_updated_at: ctx.sourceUpdatedAt, fetched_at: ctx.fetchedAt,
-          license: src.license, attribution: src.attribution, status: 'draft',
-        });
+        for (const area of areas) {
+          const id = `${src.city_code}-${crypto.createHash('sha1').update(`${area}|${k.common_class}|${k.local_category}`).digest('hex').slice(0, 12)}`;
+          if (seen.has(id)) { warnings.push(`duplicate schedule row for ${area} / ${k.local_category}`); continue; }
+          seen.add(id);
+          rows.push({
+            id, city_code: src.city_code, area_key: area, local_category: k.local_category, common_class: k.common_class,
+            rule, rule_text: norm(text),
+            source_id: src.id, source_url: ctx.sourceUrl, source_updated_at: ctx.sourceUpdatedAt, fetched_at: ctx.fetchedAt,
+            license: src.license, attribution: src.attribution, status: 'draft',
+          });
+        }
       }
     }
 

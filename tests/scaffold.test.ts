@@ -5,7 +5,7 @@ import os from 'os';
 import path from 'path';
 import { ckanAction, Fetcher, SyncError } from '../src/server/lens/masterdata/adapters.ts';
 import { validateSourceConfig } from '../src/server/lens/masterdata/registry.ts';
-import { detectEncoding, guessAreaColumn, guessColumns, renderScaffold, scaffoldSource, suggestClass } from '../src/server/lens/masterdata/scaffold.ts';
+import { detectEncoding, guessAreaColumn, guessColumns, pickCategoryColumn, renderScaffold, scaffoldSource, suggestClass } from '../src/server/lens/masterdata/scaffold.ts';
 import { MemoryMasterStore } from '../src/server/lens/masterdata/store.ts';
 import { syncSource } from '../src/server/lens/masterdata/sync.ts';
 import { CommonClass, SourceConfig } from '../src/server/lens/masterdata/types.ts';
@@ -30,10 +30,35 @@ describe('suggestClass (a suggestion, never a decision)', () => {
     ['燃やさないごみ', 'non_burnable'], ['燃やせないごみ', 'non_burnable'], ['不燃ごみ', 'non_burnable'], ['もえないごみ', 'non_burnable'],
     ['ペットボトル', 'pet'], ['プラスチック製容器包装', 'plastic'], ['缶', 'can'], ['びん', 'glass'], ['古紙', 'paper'], ['古布', 'cloth'],
     ['有害ごみ', 'hazardous'], ['乾電池', 'hazardous'], ['粗大ごみ', 'sodai'], ['家電リサイクル法対象品目', 'kaden4'],
-    ['収集しません', 'not_collected'], ['販売店引取', 'not_collected'], ['パソコン', 'pc'],
+    ['収集しません', 'not_collected'], ['収集できないもの', 'not_collected'], ['販売店引取', 'not_collected'], ['パソコン', 'pc'],
+    ['資源', 'resource'], ['資源ごみ', 'resource'], ['拠点回収', 'drop_off'],
   ])('%s → %s', (label, cls) => expect(suggestClass(label)).toBe(cls));
-  it('leaves what it cannot place for a person ("資源" is a bucket, not a class)', () => {
-    for (const l of ['資源', '小型金属類', '']) expect(suggestClass(l)).toBeNull();
+  it('leaves what it cannot place for a person', () => {
+    for (const l of ['その他', '消火器', '']) expect(suggestClass(l)).toBeNull();
+  });
+});
+
+describe('suggestClass on the messy labels real cities write', () => {
+  it.each<[string, CommonClass | null]>([
+    ['不燃ごみ、粗大ごみ', 'non_burnable'], ['プラスチック（資源）、可燃ごみ', 'plastic'], ['不燃ごみ（水銀含有物）', 'non_burnable'], ['不可', 'not_collected'],
+    ['びん・かん', 'resource'], ['古紙・古着', 'resource'], ['古紙・古布類（衣類等）', 'resource'], ['びん・缶・ペットボトル', 'resource'],
+    ['資源プラスチック', 'plastic'], ['古紙（集団回収）', 'paper'], ['使用済小型家電（拠点回収）', 'drop_off'], ['食用油（拠点回収）', 'drop_off'],
+    ['乾電池（拠点回収）', 'hazardous'], ['使用済蛍光管（拠点回収）', 'hazardous'], ['燃やせるごみ', 'burnable'], ['燃やせないごみ', 'non_burnable'],
+    ['区では収集しないもの', 'not_collected'], ['家電リサイクル法対象品目', 'kaden4'], ['パソコンリサイクル', 'pc'],
+    ['スプレー缶', 'hazardous'], ['小さな金属類', 'resource'], ['金物類', 'resource'], ['使用済小型家電', 'drop_off'], ['ミックスペーパー', 'paper'], ['市では処理できないもの', 'not_collected'],
+    ['販売店へ相談', 'not_collected'], ['販売店または缶・びん・ペットボトル', null], ['医療機関・薬局または燃やすごみ', null], // "or": depends on the item
+    ['びん・スプレー缶・ライター', null], // a glass bottle must not become "hazardous" by guesswork
+    ['金属類', 'resource'], ['消火器', null], ['小型家電', 'drop_off'],
+  ])('%s → %s', (label, cls) => expect(suggestClass(label)).toBe(cls));
+});
+
+describe('pickCategoryColumn (several columns look like "the category")', () => {
+  const rows = [
+    { 分類: 'ごみ分別一覧', 種別: '燃やすごみ' }, { 分類: 'ごみ分別一覧', 種別: '粗大ごみ' }, { 分類: 'ごみ分別一覧', 種別: '燃やすごみ' },
+  ];
+  it('skips a constant column and takes the one whose values look like waste classes', () => {
+    expect(pickCategoryColumn(['ごみの品目', '分類', '種別'], rows)).toBe('種別');
+    expect(pickCategoryColumn(['x', '区分'], [{ 区分: 'a' }, { 区分: 'a' }], '区分')).toBe('区分'); // fallback when nothing varies
   });
 });
 
@@ -41,7 +66,7 @@ describe('guessColumns', () => {
   it.each([
     [['品目', '読み', '分別区分', '備考'], { name_jp: '品目', kana: '読み', category: '分別区分', note: '備考' }],
     [['市区町村コード', '品目名', 'カナ表記', '区分', '摘要'], { city_code: '市区町村コード', name_jp: '品目名', kana: 'カナ表記', category: '区分', note: '摘要' }],
-    [['ごみの品目', 'ふりがな', 'ごみの分類', '出し方'], { name_jp: 'ごみの品目', kana: 'ふりがな', category: 'ごみの分類', note: '出し方' }],
+    [['ごみの品目', 'ふりがな', 'ごみの分類', '出し方'], { name_jp: 'ごみの品目', kana: 'ふりがな', category: 'ごみの分類' }],
   ])('%j', (headers, want) => expect(guessColumns(headers)).toEqual(want));
   it('one header serves one role', () => {
     const g = guessColumns(['品目', '分別']);
@@ -65,9 +90,9 @@ describe('scaffoldSource: items', () => {
     expect(r.config.category_map).toMatchObject({ ペットボトル: 'pet', 有害ごみ: 'hazardous', 燃やすごみ: 'burnable', 燃やさないごみ: 'non_burnable', 家電リサイクル法対象品目: 'kaden4', 粗大ごみ: 'sodai', 古紙: 'paper' });
   });
   it('lists exactly what a person must decide', () => {
-    expect(r.todo).toEqual([expect.stringContaining('"小型金属類"')]);
-    expect(r.config.category_map).not.toHaveProperty('小型金属類');
-    expect(renderScaffold(r)).toMatch(/\? 小型金属類\s+1/);
+    expect(r.todo).toEqual([expect.stringContaining('"その他"')]);
+    expect(r.config.category_map).not.toHaveProperty('その他');
+    expect(renderScaffold(r)).toMatch(/\? その他\s+1/);
     expect(renderScaffold(r)).toMatch(/✓ ペットボトル\s+1\s+→ pet/);
   });
   it('is a valid registry entry, and sync stops on the unmapped label until it is added', async () => {
@@ -76,8 +101,8 @@ describe('scaffoldSource: items', () => {
     const store = new MemoryMasterStore();
     const failed = await syncSource(cfg, { fetcher: noNet, store, now: NOW, file: { bytes: ITEMS, source_updated_at: '2026-04-01' } });
     expect(failed.status).toBe('failed');
-    expect(failed.detail).toMatch(/unmapped category label.*小型金属類/);
-    const fixed = { ...cfg, category_map: { ...cfg.category_map, 小型金属類: 'non_burnable' as const } };
+    expect(failed.detail).toMatch(/unmapped category label.*その他/);
+    const fixed = { ...cfg, category_map: { ...cfg.category_map, その他: 'non_burnable' as const } };
     const ok = await syncSource(fixed, { fetcher: noNet, store, now: NOW, file: { bytes: ITEMS, source_updated_at: '2026-04-01' } });
     expect(ok.status).toBe('staged'); // first import always waits for an admin
     expect(ok.diff!.added).toHaveLength(9);
@@ -164,11 +189,11 @@ describe('CLI: scaffold → inspect → sync → publish on real files (no netwo
 
     const sync1 = run(env, 'sync', 'demo-items', '--file', file, '--updated', '2026-04-01');
     expect(sync1.code).toBe(1);
-    expect(sync1.out).toMatch(/unmapped category label.*小型金属類/);
+    expect(sync1.out).toMatch(/unmapped category label.*その他/);
 
     const f = path.join(tmp, 'sources', 'demo-items.json');
     const cfg = JSON.parse(fs.readFileSync(f, 'utf8'));
-    cfg.category_map['小型金属類'] = 'non_burnable';
+    cfg.category_map['その他'] = 'non_burnable';
     cfg.enabled = true;
     fs.writeFileSync(f, JSON.stringify(cfg));
     expect(run(env, 'sync', 'demo-items', '--file', file, '--updated', '2026-04-01').out).toMatch(/staged/);

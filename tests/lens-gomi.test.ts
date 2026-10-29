@@ -54,6 +54,21 @@ describe('national guard', () => {
     expect(nationalGuard(q({ name_jp: name }))?.kind).toBe(kind);
     expect(nationalGuard(EMPTY_QUERY, name)?.kind).toBe(kind); // raw user text alone is enough
   });
+  // names taken from real city dictionaries (Tokyo/Kanagawa open data)
+  it.each([
+    'テレビ(液晶、ブラウン管、プラズマ)', 'チューナーレステレビ', '薄型テレビ', '有機ELテレビ', '冷蔵庫・冷凍庫', 'エアコン(室外機)', '室外機(エアコン)', '乾燥機 衣類乾燥機', '乾燥機(衣類用)', '衣類乾燥機',
+  ])('real name %s IS an appliance-law item', name => expect(nationalGuard(q({ name_jp: name }))?.kind).toBe('kaden4'));
+  it.each([
+    'テレビ台', 'テレビ台 幅1m未満', 'テレビスタンド', 'テレビ回転台', 'テレビアンテナ(屋外用)', 'アンテナ(テレビ用)', 'エアコンカバー・室外機カバー', 'エアコンダクトカバー', 'エアコン用窓枠',
+    'フィルター(エアコン・空気清浄機等)', '洗濯機台', '洗濯機防水パン', '洗濯機カバー', '戸棚・冷蔵庫の仕切り板', '冷蔵庫用脱臭剤',
+    '衣類乾燥機台',
+  ])('real name %s is NOT (an accessory)', name => {
+    expect(nationalGuard(q({ name_jp: name }))).toBeNull();
+    expect(nationalGuard(q({ name_jp: name, appliance: 'washer' }))).toBeNull(); // even if the recognizer over-eagerly says so
+  });
+  it.each(['ふとん乾燥機', '布団乾燥機', '靴乾燥機', '食器乾燥機', '食器洗い乾燥機', '乾燥機台'])('real name %s is not covered by the law', name => {
+    expect(nationalGuard(q({ name_jp: name }))).toBeNull();
+  });
   it.each(['テレビ台', 'テレビボード', 'リモコン', 'ペットボトル', '傘'])('%s is not caught', name => {
     expect(nationalGuard(q({ name_jp: name }))).toBeNull();
   });
@@ -84,6 +99,12 @@ describe('dictionary matching', () => {
     expect(hit.score).toBeLessThan(0.9);
     expect(m('ピアノ')).toEqual([]);
     expect(m('')).toEqual([]);
+  });
+  it('a city writes "缶／飲食缶 缶詰の缶": the part before ／ names the thing', () => {
+    const rows = [item('缶／飲食缶 缶詰の缶', 'can'), item('缶／菓子の缶', 'can'), item('紙パック／牛乳', 'paper')];
+    expect(matchItems(rows, q({ name_jp: '缶' })).map(m => m.item.name_jp).sort()).toEqual(['缶／飲食缶 缶詰の缶', '缶／菓子の缶'].sort());
+    expect(matchItems(rows, q({ name_jp: '牛乳' }))[0].item.name_jp).toBe('紙パック／牛乳');
+    expect(matchItems(rows, q({ name_jp: '缶' }))[0].score).toBeGreaterThanOrEqual(0.9);
   });
   it('skips retired rows', () => {
     expect(m('古い辞書')).toEqual([]);
@@ -146,11 +167,31 @@ describe('answerGomi', () => {
     const a = await setup().ask('電池');
     // 電池 also trips the national hazard rule, which takes precedence
     expect(a.outcome).toBe('hazard');
-    const b = await setup().ask('割り');
+    const s = setup();
+    const b = await s.ask('割り');
     expect(b.outcome).toBe('similar');
-    expect(body(b)).toMatch(/gần giống mục 「割り箸」/);
-    expect(body(b)).toMatch(/Tên không khớp hoàn toàn/);
+    expect(body(b)).toMatch(/phân loại CHUNG, chưa chắc/); // the generic answer, not the close entry's
+    expect(body(b)).toMatch(/Mục gần giống[\s\S]*• 割り箸 → 「区分:burnable」/);
+    expect((await s.repo.listUnknownItems(5))[0].name_jp).toBe('割り'); // still a gap in the dictionary
     expect((await setup().ask('ピアノ')).outcome).toBe('fallback');
+  });
+
+  it('"ペットボトル" is not answered with the entry "ペットボトルカバー"', async () => {
+    const rows = [item('ペットボトルカバー', 'burnable')];
+    const s = setup({}, rows);
+    const a = await s.ask('ペットボトル', fixed({ name_jp: 'ペットボトル', generic_class: 'pet' }));
+    expect(a.outcome).toBe('similar');
+    const t = body(a);
+    expect(t).toMatch(/Có thể là: Chai nhựa PET/);
+    expect(t).toMatch(/có thể KHÔNG phải món bạn hỏi/);
+    expect(t).not.toMatch(/^→ Rác cháy được/m);
+  });
+
+  it('a name with a bracketed qualifier is found by its head noun ("傘(金属製)" for "傘")', async () => {
+    const rows = [item('傘(金属製)', 'sodai'), item('傘(ビニール)', 'burnable')];
+    const a = await setup({}, rows).ask('傘');
+    expect(a.outcome).toBe('matched');
+    expect(body(a)).toMatch(/Tùy loại\/chất liệu/);
   });
 
   it('家電4品目: national rule wins over a wrong city row, in Japanese and Vietnamese', async () => {
@@ -175,6 +216,22 @@ describe('answerGomi', () => {
     const lighter = body(await setup().ask('ライター'));
     expect(lighter).toMatch(/NGUY CƠ CHÁY NỔ/);
     expect(lighter).toMatch(/làm đúng hướng dẫn của thành phố/);
+  });
+
+  it('a city entry that matches exactly and is not "hazardous" gets a safety line instead of an alarm', async () => {
+    const rows = [item('ライター', 'non_burnable', { note: '使い切ってから「危険」と表示' }), item('カビ取りスプレー', 'plastic', { note: '中身を使いきって' })];
+    const s = setup({}, rows);
+    for (const name of ['ライター', 'カビ取りスプレー']) {
+      const a = await s.ask(name);
+      expect(a.outcome).toBe('matched');
+      const t = body(a);
+      expect(t).toMatch(/^🔥 Lưu ý an toàn/);
+      expect(t).toContain('Thành phố gọi là');
+      expect(t).not.toMatch(/NGUY CƠ CHÁY NỔ/);
+    }
+    expect(body(await s.ask('ライター'))).toContain('使い切ってから「危険」と表示');
+    // not an exact entry: the strong warning stays
+    expect((await s.ask('スプレー')).outcome).toBe('hazard');
   });
 
   it('AI traits trigger the guard even if the dictionary has nothing', async () => {

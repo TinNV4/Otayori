@@ -1,0 +1,35 @@
+{
+  "id": "kawasaki-items",
+  "city_code": "14130",
+  "kind": "gomi_items",
+  "enabled": true,
+  "note": "Imported 2026-10-29 with `data scaffold`; category_map entries mapped to \"other\" or by keyword were chosen by Claude and need an admin look before publish (see docs).",
+  "url": "https://www.city.kawasaki.jp/300/cmsfiles/contents/0000075/75059/GarbageSortingList_ja.csv",
+  "encoding": "shift_jis",
+  "license": "クリエイティブ・コモンズ 表示（CC BY）",
+  "attribution": "川崎市「ごみの分別オープンデータ」(CC BY)",
+  "cadence": "monthly",
+  "source_updated_at": "2026-09-18",
+  "adapter": "ckan_csv_v1",
+  "columns": {
+    "name_jp": "品目名",
+    "category": "出し方（一覧）",
+    "kana": "読み",
+    "note": [
+      "出し方（詳細）",
+      "出し方のポイント"
+    ]
+  },
+  "category_map": {
+    "普通ごみ": "burnable",
+    "小物金属": "resource",
+    "プラスチック資源": "plastic",
+    "粗大ごみ": "sodai",
+    "ミックスペーパー": "paper",
+    "資源集団回収": "resource",
+    "空き缶・ペットボトル": "resource",
+    "空きびん": "glass",
+    "使用済み乾電池": "hazardous",
+    "その他": "other"
+  }
+}

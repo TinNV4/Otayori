@@ -2,7 +2,7 @@ import { csvToRecords, decodeText } from './csv.ts';
 import { MasterStore } from './store.ts';
 import { isStale } from './sync.ts';
 import { parseRuleText } from './scheduleRule.ts';
-import { isGomiItem, SourceConfig } from './types.ts';
+import { CommonClass, isGomiItem, isScheduleRow, Snapshot, SourceConfig } from './types.ts';
 
 export function bar(value: number, max: number, width = 30) {
   const n = max ? Math.round((value / max) * width) : 0;
@@ -74,7 +74,7 @@ export function renderInspect(src: SourceConfig, bytes: Buffer, meta: { url: str
         out.push(`  ${(text || '(blank)').padEnd(16)} ${String(n).padStart(5)}  ${rule === 'none' ? '– no collection' : rule ? `→ ${JSON.stringify(rule)}` : '✗ NOT UNDERSTOOD'}`);
       }
     }
-    if (sc.area_column && !headers.includes(sc.area_column)) out.push(`⚠ area column "${sc.area_column}" not found`);
+    for (const a of sc.area_columns ?? (sc.area_column ? [sc.area_column] : [])) if (!headers.includes(a)) out.push(`⚠ area column "${a}" not found`);
     return out.join('\n');
   }
   const cat = src.columns!.category;
@@ -90,5 +90,49 @@ export function renderInspect(src: SourceConfig, bytes: Buffer, meta: { url: str
   } else {
     out.push('', `⚠ column "${cat}" not found — fix "columns.category"`);
   }
+  return out.join('\n');
+}
+
+/** Names that must never end up as ordinary waste. The national rules answer these anyway; the review shows what the city says. */
+const SAFETY_NAMES = ['電池', 'バッテリー', 'スプレー', 'ライター', 'ガスボンベ', 'カセットボンベ', 'テレビ', '冷蔵庫', '冷凍庫', '洗濯機', 'エアコン', '乾燥機', 'パソコン'];
+const SAFE_CLASSES: CommonClass[] = ['hazardous', 'kaden4', 'pc', 'not_collected', 'drop_off', 'other', 'sodai'];
+
+/** What an admin needs before `publish`: size, mix of classes, warnings, and how the city treats the dangerous things. */
+export function renderReview(snap: Snapshot): string {
+  const out: string[] = [];
+  const m = snap.meta;
+  out.push(`${m.source_id} · ${m.row_count} rows · source date ${m.source_updated_at} · ${m.source_url}`);
+  if (m.review_reasons?.length) out.push(`review: ${m.review_reasons.join('; ')}`);
+
+  const mix = new Map<string, number>();
+  for (const r of snap.rows) mix.set(r.common_class, (mix.get(r.common_class) ?? 0) + 1);
+  const top = Math.max(...mix.values());
+  out.push('', 'by common class');
+  for (const [c, n] of [...mix].sort((a, b) => b[1] - a[1])) out.push(`  ${c.padEnd(14)} ${bar(n, top, 24)} ${n}`);
+
+  const labels = new Map<string, Map<string, number>>();
+  for (const r of snap.rows) {
+    const l = labels.get(r.common_class) ?? new Map<string, number>();
+    l.set(r.local_category, (l.get(r.local_category) ?? 0) + 1);
+    labels.set(r.common_class, l);
+  }
+  out.push('', 'city label → class (check these)');
+  for (const [c, l] of labels) out.push(`  ${c.padEnd(14)} ${[...l].sort((a, b) => b[1] - a[1]).map(([k, n]) => `${k}×${n}`).join(' · ')}`);
+
+  const items = snap.rows.filter(isGomiItem);
+  if (items.length) {
+    const hits = items.filter(i => SAFETY_NAMES.some(n => i.name_jp.includes(n)));
+    const odd = hits.filter(i => !SAFE_CLASSES.includes(i.common_class));
+    out.push('', `dangerous / appliance-law names: ${hits.length} rows, ${odd.length} filed as ordinary waste (national rules still override these in answers)`);
+    for (const i of odd.slice(0, 12)) out.push(`  ${i.name_jp} → 「${i.local_category}」 (${i.common_class})${i.note ? ` — ${i.note.slice(0, 50)}` : ''}`);
+    const fees = items.filter(i => i.fee_yen).length;
+    if (fees) out.push('', `${fees} item(s) carry a 粗大ごみ fee`);
+  }
+  const sched = snap.rows.filter(isScheduleRow);
+  if (sched.length) {
+    const areas = new Set(sched.map(r => r.area_key));
+    out.push('', `${areas.size} area(s); sample: ${[...areas].slice(0, 6).join(', ')}`);
+  }
+  if (m.warnings.length) out.push('', `warnings (${m.warnings.length}): ${m.warnings.slice(0, 3).join(' | ')}`);
   return out.join('\n');
 }

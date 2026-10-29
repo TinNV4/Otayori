@@ -41,6 +41,32 @@ describe('csv', () => {
   });
 });
 
+describe('category labels are compared after normalization', () => {
+  it('a map key written with full-width parentheses or spaces matches the file label', () => {
+    const cfg: SourceConfig = { ...src, category_map: { 'プラスチック（資源）、可燃ごみ': 'plastic', 'メーカー回収\n宅配便回収': 'other', 燃えるごみ: 'burnable' } };
+    const csvText = csv(['12345,a,a,"プラスチック（資源）、可燃ごみ",', '12345,b,b,"メーカー回収 宅配便回収",', '12345,c,c,燃えるごみ,']);
+    const { rows } = getAdapter('ckan_csv_v1').parse(csvText, cfg, { fetchedAt: '', sourceUrl: '', sourceUpdatedAt: '2026-04-01' });
+    expect((rows as GomiItem[]).map(r => r.common_class)).toEqual(['plastic', 'other', 'burnable']);
+  });
+});
+
+describe('ckan_csv_v1 adapter: real Tokyo-standard files', () => {
+  const cfg: SourceConfig = { ...src, columns: { name_jp: 'ゴミの品目', kana: 'ゴミの品目_カナ', category: '分別区分', note: ['備考', '注意点'], fee: '粗大ごみ回収料金', city_code: '全国地方公共団体コード' },
+    category_map: { 粗大ごみ: 'sodai', 燃やすごみ: 'burnable' } };
+  const head = '全国地方公共団体コード,ゴミの品目,ゴミの品目_カナ,分別区分,注意点,備考,粗大ごみ回収料金';
+  const parse2 = (rows: string[]) => getAdapter('ckan_csv_v1').parse(Buffer.from([head, ...rows].join('\n')), cfg, { fetchedAt: '2026-10-28T00:00:00Z', sourceUrl: 'https://x', sourceUpdatedAt: '2026-04-01' });
+  it('compares the first 5 digits of the 6-digit national code, joins several note columns, reads the fee', () => {
+    const { rows } = parse2(['123456,ソファ,ソファ,粗大ごみ,二人で運ぶ,大きいもの,"1,200円"', '123456,割り箸,わりばし,燃やすごみ,,,', '999999,他市,ホカ,燃やすごみ,,,']);
+    const items = rows as GomiItem[];
+    expect(items.map(r => r.name_jp)).toEqual(['ソファ', '割り箸']);
+    expect(items[0]).toMatchObject({ note: '大きいもの / 二人で運ぶ', fee_yen: 1200, common_class: 'sodai' });
+    expect(items[1].fee_yen).toBeUndefined();
+  });
+  it('reports a missing note/fee column by name', () => {
+    expect(() => getAdapter('ckan_csv_v1').parse(Buffer.from('全国地方公共団体コード,ゴミの品目,分別区分\n123456,a,粗大ごみ'), cfg, { fetchedAt: '', sourceUrl: '', sourceUpdatedAt: '2026-04-01' })).toThrow(/missing column.*備考/);
+  });
+});
+
 describe('ckan_csv_v1 adapter', () => {
   const ctx = { fetchedAt: T0.toISOString(), sourceUrl: src.url, sourceUpdatedAt: '2026-04-01' };
   const parse = (b: Buffer, s = src) => getAdapter('ckan_csv_v1').parse(b, s, ctx);

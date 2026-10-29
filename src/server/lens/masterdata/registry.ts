@@ -26,6 +26,7 @@ export function validateSourceConfig(raw: unknown, file: string): SourceConfig {
       if (!k.column || !k.local_category) throw bad('each schedule category needs "column" and "local_category"');
       if (!COMMON_CLASSES.includes(k.common_class)) throw bad(`schedule category "${k.column}": "${k.common_class}" is not one of ${COMMON_CLASSES.join(', ')}`);
     }
+    if (s.schedule.area_columns && (s.schedule.area_columns.length !== 2 || s.schedule.area_columns.some(c => !c))) throw bad('"schedule.area_columns" must be [town column, chome column]');
     for (const w of s.schedule.suspensions ?? []) {
       if (!/^\d{2}-\d{2}$/.test(w.from) || !/^\d{2}-\d{2}$/.test(w.to)) throw bad('"schedule.suspensions" entries need MM-DD "from" and "to"');
     }

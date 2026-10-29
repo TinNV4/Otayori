@@ -2,6 +2,12 @@
 export const COMMON_CLASSES = [
   'burnable', 'non_burnable', 'plastic', 'pet', 'can', 'glass', 'paper', 'cloth',
   'hazardous', 'sodai', 'kaden4', 'pc', 'not_collected',
+  /** 資源: a recycling bucket the city doesn't break down further. */
+  'resource',
+  /** 拠点回収: taken at dedicated collection points, not at the curb. */
+  'drop_off',
+  /** Needs its own handling (e.g. 消火器, 金属類 with local rules): the answer shows the city's label and note. */
+  'other',
 ] as const;
 export type CommonClass = (typeof COMMON_CLASSES)[number];
 
@@ -32,13 +38,25 @@ export interface SourceConfig {
   license: string;
   attribution: string;
   /** gomi_items: header names in the source file. `city_code` filters rows when the file covers several cities. */
-  columns?: { name_jp: string; category: string; kana?: string; note?: string; city_code?: string };
+  columns?: {
+    name_jp: string;
+    category: string;
+    kana?: string;
+    /** One or several columns; their texts are joined (e.g. 備考 + 注意点). */
+    note?: string | string[];
+    /** Per-item 粗大ごみ fee in yen (digits are read, text is ignored). */
+    fee?: string;
+    /** Compared on its first 5 digits: 全国地方公共団体コード has a 6th check digit (131181 → 13118). */
+    city_code?: string;
+  };
   /** gomi_items: local category label → common class. A label missing here stops the sync. */
   category_map?: Record<string, CommonClass>;
   /** gomi_schedule: a wide table, one row per area (町丁目) and one column per waste category holding "月・木" / "第2・4水". */
   schedule?: {
     /** Header of the area column. Omit when the file is city-wide (every area collects the same days). */
     area_column?: string;
+    /** Town + chome in two columns (e.g. ["町名", "丁目"]); the chome cell may be 全域, a list, or a range. Overrides area_column. */
+    area_columns?: string[];
     /** `city_code_column` filters rows when the file covers several cities. */
     city_code_column?: string;
     categories: Array<{ column: string; local_category: string; common_class: CommonClass }>;
@@ -81,6 +99,8 @@ export interface GomiItem extends Provenance {
   local_category: string;
   common_class: CommonClass;
   note: string;
+  /** 粗大ごみ fee in yen when the city lists one per item. */
+  fee_yen?: number;
 }
 
 /** ISO weekdays: 1 = Monday … 7 = Sunday. */

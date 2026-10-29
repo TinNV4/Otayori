@@ -13,7 +13,7 @@
     "check": "tsc --noEmit && vitest run && vite build",
     "try-extract": "tsx scripts/try-extract.ts",
     "admin": "tsx scripts/admin.ts",
-    "data": "tsx scripts/data.ts",
+    "data": "NODE_USE_ENV_PROXY=1 tsx scripts/data.ts",
     "lens": "tsx scripts/lens.ts",
     "grocery": "tsx scripts/grocery.ts",
     "line:setup": "tsx scripts/line-setup.ts",

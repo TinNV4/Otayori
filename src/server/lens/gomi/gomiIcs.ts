@@ -39,7 +39,8 @@ export function generateGomiIcs(
     'X-PUBLISHED-TTL:PT12H',
   ];
 
-  for (const r of rows) {
+  // 粗大ごみ is by appointment: a weekly all-day event would send people to the curb with nothing booked.
+  for (const r of rows.filter(x => x.common_class !== 'sodai')) {
     const start = firstDate(r.rule, today);
     if (!start) continue;
     const label = `${CLASS_VI[r.common_class]} (${r.local_category})`;

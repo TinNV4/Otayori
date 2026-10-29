@@ -5,12 +5,13 @@
  *   npx tsx scripts/data.ts status
  *   npx tsx scripts/data.ts inspect <source-id> [--file x.csv] [--updated YYYY-MM-DD]
  *   npx tsx scripts/data.ts sync <source-id>|--all [--dry-run] [--force] [--file x.csv] [--updated YYYY-MM-DD]
+ *   npx tsx scripts/data.ts review <source-id>                # staged: class mix, city labels, how dangerous items are filed
  *   npx tsx scripts/data.ts diff <source-id>                  # staged vs live
  *   npx tsx scripts/data.ts publish <source-id> [--by name]   # staged → live
  *   npx tsx scripts/data.ts reject <source-id>                # drop staged
  *   npx tsx scripts/data.ts rollback <source-id> [--to N] [--by name]
  *   npx tsx scripts/data.ts check-links
- *   npx tsx scripts/data.ts discover <ckan-api> [--query ごみ分別] [--rows 30] [--json]   # find datasets on a CKAN portal
+ *   npx tsx scripts/data.ts discover <ckan-api> [--query ごみ分別] [--rows 30] [--start 0] [--org 神奈川|川崎] [--json]   # find datasets on a CKAN portal
  *   npx tsx scripts/data.ts scaffold <source-id> --city <JIS> [--kind gomi_items|gomi_schedule]
  *        (--ckan <api> --dataset <name> [--resource-match r] | --file x.csv --url <dataset page>)
  *        [--license ...] [--attribution ...] [--updated YYYY-MM-DD] [--write] [--force]   # draft a registry entry from a real file
@@ -25,7 +26,7 @@ import { renderScaffold, scaffoldSource } from '../src/server/lens/masterdata/sc
 import { diffRows, formatDiff } from '../src/server/lens/masterdata/diff.ts';
 import { loadCityInfo } from '../src/server/lens/cityinfo.ts';
 import { loadSources, validateSourceConfig } from '../src/server/lens/masterdata/registry.ts';
-import { renderInspect, renderStatus } from '../src/server/lens/masterdata/report.ts';
+import { renderInspect, renderReview, renderStatus } from '../src/server/lens/masterdata/report.ts';
 import { FileMasterStore } from '../src/server/lens/masterdata/store.ts';
 import { isDue, publishStaged, rejectStaged, rollback, syncSource } from '../src/server/lens/masterdata/sync.ts';
 import { SourceConfig } from '../src/server/lens/masterdata/types.ts';
@@ -84,6 +85,14 @@ async function main() {
       break;
     }
 
+    case 'review': {
+      const id = pick(positional[0]).id;
+      const snap = store.getStaged(id) ?? store.getLive(id);
+      if (!snap) throw new Error('nothing staged or live: run sync first');
+      console.log(renderReview(snap));
+      break;
+    }
+
     case 'diff': {
       const id = pick(positional[0]).id;
       const staged = store.getStaged(id);
@@ -115,10 +124,13 @@ async function main() {
     case 'discover': {
       const api = positional[0];
       if (!api) throw new Error('usage: discover <ckan-api-base>, e.g. https://catalog.data.metro.tokyo.lg.jp/api/3/action');
-      const res = await ckanAction<{ count: number; results: CkanPackage[] }>(httpFetcher, api, 'package_search', { q: flag('query') || 'ごみ 分別', rows: flag('rows') || '30' });
-      if (has('json')) { console.log(JSON.stringify(res.results, null, 1)); break; }
-      console.log(`${res.count} dataset(s) match; showing ${res.results.length}\n`);
-      for (const p of res.results) {
+      const res = await ckanAction<{ count: number; results: CkanPackage[] }>(httpFetcher, api, 'package_search', { q: flag('query') || 'ごみ分別', rows: flag('rows') || '30', start: flag('start') || '0' });
+      // --org filters on publisher and title (portals like data.go.jp hold every municipality)
+      const org = flag('org') ? new RegExp(flag('org')!) : null;
+      const shown = org ? res.results.filter(p => org.test(`${p.organization?.title ?? ''} ${p.title ?? ''}`)) : res.results;
+      if (has('json')) { console.log(JSON.stringify(shown, null, 1)); break; }
+      console.log(`${res.count} dataset(s) match; fetched ${res.results.length} from ${flag('start') || 0}${org ? `, ${shown.length} match --org` : ''}\n`);
+      for (const p of shown) {
         const csv = (p.resources ?? []).filter(isCsvResource).length;
         const formats = [...new Set((p.resources ?? []).map(r => (r.format || '?').toUpperCase()))].join('/');
         console.log(`${(p.name ?? p.id ?? '').padEnd(24)} ${(p.organization?.title ?? '').padEnd(12)} ${(p.license_title || p.license_id || 'license?').padEnd(18)} ${`csv×${csv} (${formats})`.padEnd(16)} ${(p.metadata_modified ?? '').slice(0, 10)}  ${p.title ?? ''}`);
@@ -201,7 +213,7 @@ async function main() {
     }
 
     default:
-      console.log('Commands: status inspect sync diff publish reject rollback check-links (see header of scripts/data.ts)');
+      console.log('Commands: status inspect sync review diff publish reject rollback check-links (see header of scripts/data.ts)');
   }
 }
 

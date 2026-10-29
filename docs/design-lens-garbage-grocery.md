@@ -364,7 +364,7 @@ flowchart LR
 4. **Thử**: `data inspect <id>` → `data sync <id> --dry-run` → `data sync <id>` (lần đầu luôn vào hàng chờ duyệt) → `data diff <id>` → `data publish <id> --by <tên>`.
 5. **Đưa vào sản phẩm**: đặt `enabled:true`, commit `data/sources/<id>.json` và `data/masterdata/<id>/live.json` (diff của dữ liệu xem được trong PR), rồi thử `npm run lens -- "ペットボトル" --city 13118`.
 
-**Tokyo + Kanagawa: dataset ứng viên từ kết quả tìm kiếm** (chưa mở được trang nên chưa biết cột/giấy phép thật; mã dataset của 東村山/西東京 đã sửa theo mã JIS, cần `discover` để xác nhận):
+**Tokyo + Kanagawa: dataset ứng viên (từ kết quả tìm kiếm trước khi mở mạng; kết quả nhập thực tế ở mục dưới):**
 
 | Thành phố | Mã | Loại | Dataset / trang |
 |---|---|---|---|
@@ -377,6 +377,36 @@ flowchart LR
 | 江戸川区, 足立区 (MVP) | 13123, 13121 | — | chưa thấy dataset: tìm bằng `discover --query 江戸川区` |
 | 横浜市 | 14100 | trang open data | [gomi.html](https://www.city.yokohama.lg.jp/city-info/yokohamashi/tokei-chosa/portal/opendata/gomi.html) |
 | 川崎市, 相模原市, 大和市 | 14130, 14150, 14213 | — | chưa tìm |
+
+### Kết quả nhập thực tế (29/10/2026): Tokyo + Kanagawa
+
+`discover` chạy được trên cổng Tokyo ([catalog.data.metro.tokyo.lg.jp](https://catalog.data.metro.tokyo.lg.jp/), 203 dataset khớp "ごみ分別", đều CC BY). Cổng quốc gia data.go.jp **không** có dữ liệu rác của các thành phố Kanagawa; Yokohama, Sagamihara có cổng CKAN riêng (`data.city.yokohama.lg.jp`, `opendata.city.sagamihara.kanagawa.jp`), Kawasaki công bố CSV trực tiếp trên [trang của thành phố](https://www.city.kawasaki.jp/300/page/0000075059.html). **Chưa tìm thấy dataset** cho 足立区, 江戸川区 (MVP Tokyo), 大和市.
+
+Đã `scaffold` + `sync` 12 nguồn, **đang ở hàng chờ duyệt (staged), chưa publish** (lần nhập đầu luôn cần admin):
+
+| Nguồn | Mã | Dòng | Ngày dữ liệu |
+|---|---|---|---|
+| `arakawa-items` 荒川区 | 13118 | 265 | 2026-01-30 |
+| `bunkyo-items` / `bunkyo-schedule` 文京区 | 13105 | 979 / 280 | 2026-01-30 |
+| `chuo-items` / `chuo-schedule` 中央区 | 13102 | 382 / 320 | 2024-03-05 / **2017-04-02** |
+| `nakano-items` / `nakano-schedule` 中野区 | 13114 | 942 / 280 | 2025-02-28 |
+| `higashimurayama-items` 東村山市 | 13213 | 829 | 2023-03-26 |
+| `nishitokyo-items` 西東京市 | 13229 | 1258 | 2024-03-11 |
+| `yokohama-items` 横浜市 | 14100 | 3413 | 2026-08-27 |
+| `kawasaki-items` 川崎市 | 14130 | 3718 | 2026-09-17 |
+| `sagamihara-items` 相模原市 | 14150 | 2771 | 2025-04-07 |
+
+Dữ liệu cũ hơn 13 tháng (中央区, 中野区, 東村山, 西東京, 相模原…) vẫn dùng được nhưng câu trả lời tự kèm "dữ liệu đã cũ". Sau khi duyệt, đặt lệnh: `npm run data -- review <id>` → `publish <id> --by <tên>` → commit `data/masterdata/<id>/live.json`.
+
+**Điều dữ liệu thật dạy cho thiết kế** (đã sửa trong code):
+- Cột mã thành phố có 6 chữ số (có số kiểm tra: `131181` → `13118`); chỉ so 5 chữ số đầu.
+- Nhãn loại rác phức tạp: `不燃ごみ、粗大ごみ` (tùy kích cỡ), `びん・かん`, `乾電池（拠点回収）`, `医療機関・薬局または燃やすごみ`. Quy tắc `suggestClass` xử lý, nhãn nào không chắc thì để người quyết; thêm 3 nhóm chung: `resource` (資源), `drop_off` (拠点回収), `other` (cách bỏ riêng, xem ghi chú).
+- Nhiều cột ghi chú (備考 + 注意点), cột phí 粗大ごみ theo từng món (`fee_yen`, hiển thị khi trả lời) và nhiều cột "trông giống cột loại" (中野区: 分類 là hằng số, 種別 mới đúng) → chọn cột bằng chính dữ liệu.
+- Tên món dạng `缶／飲食缶 缶詰の缶`, `傘(金属製)`: khớp theo từng phần. Tên gần giống ("ペットボトルカバー" cho "ペットボトル") **không** còn được trả lời như đáp án, chỉ liệt kê là gợi ý kèm câu trả lời chung.
+- Lịch: ô `水曜日;土曜日`, `月曜日～土曜日`, `第1;第3土曜日`; khu = `町名` + `丁目` với `全域`, danh sách (`1;2;4;5`), khoảng (`1～2丁目`), khối (`1丁目1～16番`).
+- Luật quốc gia 家電4品目 từng khớp nhầm `靴乾燥機`, `テレビ台`, `エアコンカバー`, `洗濯機防水パン` (từ danh sách thật): đã thêm quy tắc phụ kiện; chỉ 衣類乾燥機 thuộc luật.
+- Mục dễ nguy hiểm mà thành phố xếp "燃やさないごみ" kèm ghi chú 危険 (荒川区: ライター, スプレー缶, 乾電池): hiển thị câu trả lời của thành phố kèm một dòng cảnh báo an toàn; không có mục chính xác thì giữ cảnh báo mạnh.
+- Lỗi mạng tạm thời của máy chủ thành phố: thử lại 2 lần.
 
 ### Quy trình Claude tạo bản đầu + admin duyệt (cho Đi chợ và alias rác)
 

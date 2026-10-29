@@ -13,7 +13,7 @@ import {
 } from '../src/server/lens/gomi/schedule.ts';
 import { getAdapter, SyncError } from '../src/server/lens/masterdata/adapters.ts';
 import { validateSourceConfig } from '../src/server/lens/masterdata/registry.ts';
-import { parseRuleText } from '../src/server/lens/masterdata/scheduleRule.ts';
+import { expandAreas, parseRuleText } from '../src/server/lens/masterdata/scheduleRule.ts';
 import { MemoryMasterStore } from '../src/server/lens/masterdata/store.ts';
 import { publishStaged, syncSource } from '../src/server/lens/masterdata/sync.ts';
 import { CommonClass, GomiItem, ScheduleRow, ScheduleRule, SourceConfig } from '../src/server/lens/masterdata/types.ts';
@@ -30,6 +30,8 @@ describe('parseRuleText', () => {
   it.each([
     ['月・木', w(1, 4)], ['月木', w(1, 4)], ['毎週月曜日', w(1)], ['毎週 火・金 曜日', w(2, 5)], ['月、水、金', w(1, 3, 5)],
     ['月曜日（祝日も収集）', w(1)], ['日', w(7)],
+    ['水曜日;土曜日', w(3, 6)], ['月曜日～土曜日', w(1, 2, 3, 4, 5, 6)], ['月曜日・火曜日・水曜日\n金曜日・土曜日', w(1, 2, 3, 5, 6)], ['金曜日～月曜日', w(1, 5, 6, 7)],
+    ['第1;第3土曜日', n([1, 3], 6)], ['第1・第3木曜日', n([1, 3], 4)],
     ['第2・4水曜日', n([2, 4], 3)], ['第1,3火', n([1, 3], 2)], ['第2第4水', n([2, 4], 3)], ['第１・３木曜', n([1, 3], 4)], ['第2週 金曜日', n([2], 5)],
   ])('%s', (text, rule) => expect(parseRuleText(text)).toEqual(rule));
   it.each(['', 'なし', '－', '-', '収集なし', '×'])('"%s" = no collection', t => expect(parseRuleText(t)).toBe('none'));
@@ -60,6 +62,16 @@ const SCHED = csv([
   '99999,他区,月,月,月',
 ]);
 
+describe('expandAreas (town + 丁目 cell as real cities write it)', () => {
+  it.each([
+    ['江原町', '全域', ['江原町']], ['江原町', '', ['江原町']],
+    ['野方', '3', ['野方3丁目']], ['野方', '3丁目', ['野方3丁目']],
+    ['新井', '1;2;4;5', ['新井1丁目', '新井2丁目', '新井4丁目', '新井5丁目']], ['小石川', '2・3丁目', ['小石川2丁目', '小石川3丁目']],
+    ['銀座', '1～2丁目', ['銀座1丁目', '銀座2丁目']], ['白山', '３～５丁目', ['白山3丁目', '白山4丁目', '白山5丁目']],
+    ['小石川', '1丁目1～16番', ['小石川1丁目1~16番']], // a block inside a chome stays literal (～ is normalized to ~)
+  ])('%s | %s', (town, cell, want) => expect(expandAreas(town, cell)).toEqual(want));
+});
+
 describe('schedule_csv_v1 adapter', () => {
   it('reads one rule per area × category, skips "none" cells and other cities, keeps provenance', () => {
     const { rows, warnings } = parse(SCHED);
@@ -71,6 +83,23 @@ describe('schedule_csv_v1 adapter', () => {
     });
     expect(warnings.join()).toMatch(/other city_code/);
     expect(new Set(sr.map(r => r.id)).size).toBe(sr.length);
+  });
+  it('two area columns, 6-digit city codes (check digit), and ICS skips 粗大ごみ', () => {
+    const cfg: SourceConfig = { ...src, schedule: { ...src.schedule!, area_column: undefined, area_columns: ['町名', '丁目'], city_code_column: 'コード', categories: [
+      { column: '燃やすごみ', local_category: '燃やすごみ', common_class: 'burnable' }, { column: '粗大ごみ', local_category: '粗大ごみ', common_class: 'sodai' }] } };
+    const bytes = Buffer.from('コード,町名,丁目,燃やすごみ,粗大ごみ\n131181,野方,1;2,月曜日;木曜日,金曜日\n131181,江原町,全域,火曜日～土曜日,\n131181,野方,3,水曜日;土曜日,\n999999,他,全域,月曜日,月曜日\n');
+    const { rows, warnings } = parse(bytes, cfg);
+    const sr = rows as ScheduleRow[];
+    expect(sr.map(r => `${r.area_key}/${r.common_class}`).sort()).toEqual(['江原町/burnable', '野方1丁目/burnable', '野方1丁目/sodai', '野方2丁目/burnable', '野方2丁目/sodai', '野方3丁目/burnable'].sort());
+    expect(warnings.join()).toMatch(/other city_code/);
+    const region = { city_code: '13118', city_name_jp: '荒川区', label_vi: 'x', set_at: '', via: 'text' as const };
+    const ics = generateGomiIcs(region, sr.filter(r => r.area_key === '野方1丁目'), [], '2026-10-28', NOW);
+    expect(ics).toContain('RRULE:FREQ=WEEKLY;BYDAY=MO,TH');
+    expect(ics).not.toContain('Rác cồng kềnh'); // appointment-only: never a weekly reminder
+    // a family in 江原町2丁目 is covered by the whole-town row
+    expect(areaRows(sr, '江原町2丁目').rows.map(r => r.area_key)).toEqual(['江原町']);
+    expect(areaRows(sr, '野方1丁目').rows.map(r => r.common_class).sort()).toEqual(['burnable', 'sodai']);
+    expect(areaRows(sr, '野方').ambiguous).toBe(true); // 野方3丁目 differs from 1–2丁目
   });
   it('stops on text it cannot read, listing it', () => {
     let err: SyncError | undefined;

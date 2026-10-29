@@ -58,6 +58,13 @@ export function areaRows(rows: ScheduleRow[], chomeLabel: string | undefined): {
   const exact = rows.filter(r => r.area_key !== '*' && normArea(r.area_key) === label);
   if (exact.length) return { rows: exact, ambiguous: false };
 
+  // A whole-town row ("江原町") covers every chome of that town ("江原町2丁目").
+  const wholeTown = rows.filter(r => r.area_key !== '*' && !/丁目|番|号/.test(r.area_key) && label.startsWith(normArea(r.area_key)));
+  if (wholeTown.length) {
+    const longest = Math.max(...wholeTown.map(r => r.area_key.length));
+    return { rows: wholeTown.filter(r => r.area_key.length === longest), ambiguous: false };
+  }
+
   const inTown = rows.filter(r => r.area_key !== '*' && normArea(r.area_key).startsWith(label));
   if (!inTown.length) return { rows: [], ambiguous: false };
   const byArea = new Map<string, Set<string>>();

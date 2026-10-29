@@ -88,7 +88,7 @@ Cài đặt → **LINE Test Lab**: Join → Đồng ý → `BETA2026` → gửi 
 
 ## Scripts
 
-> Windows: chạy trong **Git Bash** (không phải PowerShell).
+> Windows: chạy trong **Git Bash** (không phải PowerShell). `npm run data` đặt `NODE_USE_ENV_PROXY=1` để Node dùng `HTTPS_PROXY` khi chạy sau proxy (vd. môi trường cloud); ở máy thường biến này vô hại.
 
 | Lệnh | Dùng khi |
 |---|---|
@@ -99,6 +99,7 @@ Cài đặt → **LINE Test Lab**: Join → Đồng ý → `BETA2026` → gửi 
 | `npx tsx scripts/line-setup.ts <url>` | Gắn webhook, test chữ ký, kiểm tra chế độ Bot, quota push |
 | `npx tsx scripts/richmenu.ts` | Cài rich menu (cần `LINE_CHANNEL_ACCESS_TOKEN`, `LIFF_ID`) |
 | `npm run data -- discover <ckan-api> --query ごみ` · `scaffold <id> --city <JIS> --kind … (--ckan <api> --dataset <tên> \| --file x.csv --url <trang>) [--write]` | Nhập dữ liệu một thành phố: tìm dataset, tự phác thảo `data/sources/<id>.json` (mã hóa, cột, loại rác, ô lịch) — xem runbook trong `docs/design-lens-garbage-grocery.md` §5 |
+| `npm run data -- review <id>` | Trước khi `publish`: phân bố loại, nhãn của thành phố → loại, cách thành phố xếp pin/bình xịt/bật lửa |
 | `npm run data -- inspect <id> [--file x.csv]` · `sync <id>\|--all [--dry-run]` · `diff` · `publish` · `reject` · `rollback` · `status` · `check-links` | Master data (từ điển rác từ dữ liệu mở): xem file nguồn, đồng bộ, duyệt/rollback — xem `docs/design-lens-garbage-grocery.md` §5 |
 | `npm run lens -- "pin sạc" --city 12345` · `--file anh.jpg` | Thử module phân loại rác từ terminal (dùng Claude nếu có `ANTHROPIC_API_KEY`, không thì mock); đọc master data đã `publish` |
 | `npm run grocery -- check` · `list --status draft` · `verify <id> --table <t> --by <tên>` · `export` · `ask "phở bò"` | Duyệt bảng đi chợ (Claude soạn → admin kiểm → `verified`), xuất CSV để xem bằng bảng tính, thử câu trả lời |

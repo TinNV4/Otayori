@@ -1,0 +1,47 @@
+{
+  "id": "sagamihara-items",
+  "city_code": "14150",
+  "kind": "gomi_items",
+  "enabled": true,
+  "note": "Imported 2026-10-29 with `data scaffold`; category_map entries mapped to \"other\" or by keyword were chosen by Claude and need an admin look before publish (see docs).",
+  "ckan": {
+    "api": "https://opendata.city.sagamihara.kanagawa.jp/api/3/action",
+    "dataset": "bunbetsu"
+  },
+  "url": "",
+  "encoding": "utf-8",
+  "license": "クリエイティブ・コモンズ 表示",
+  "attribution": "資源循環推進課 「ごみと資源の出し方（家庭系）」 (クリエイティブ・コモンズ 表示)",
+  "cadence": "monthly",
+  "adapter": "ckan_csv_v1",
+  "columns": {
+    "name_jp": "質問",
+    "category": "出し方",
+    "kana": "ひらがな",
+    "note": "出し方のポイント",
+    "fee": "粗大ごみ戸別収集手数料"
+  },
+  "category_map": {
+    "一般ごみ": "burnable",
+    "粗大ごみ": "sodai",
+    "金物類": "resource",
+    "使用済小型家電": "drop_off",
+    "プラ製容器包装": "plastic",
+    "布類": "cloth",
+    "紙類(雑誌・雑がみ)": "paper",
+    "かん類": "can",
+    "紙類(紙製容器包装)": "resource",
+    "市では処理できないもの": "not_collected",
+    "びん類": "glass",
+    "家電リサイクル法対象製品": "kaden4",
+    "ペットボトル": "pet",
+    "紙類(ダンボール)": "paper",
+    "小型充電式電池": "hazardous",
+    "蛍光管・水銀体温計": "hazardous",
+    "紙類(紙パック)": "paper",
+    "乾電池": "hazardous",
+    "紙類(新聞)": "paper",
+    "メーカーによる回収 宅配便回収 市による対面回収": "other",
+    "使用済食用油": "other"
+  }
+}

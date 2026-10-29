@@ -1,0 +1,35 @@
+{
+  "id": "chuo-items",
+  "city_code": "13102",
+  "kind": "gomi_items",
+  "enabled": true,
+  "note": "Imported 2026-10-29 with `data scaffold`; category_map entries mapped to \"other\" or by keyword were chosen by Claude and need an admin look before publish (see docs).",
+  "ckan": {
+    "api": "https://catalog.data.metro.tokyo.lg.jp/api/3/action",
+    "dataset": "t131024d0000000038"
+  },
+  "url": "",
+  "encoding": "shift_jis",
+  "license": "クリエイティブ・コモンズ 表示（CC BY）",
+  "attribution": "中央区 「ゴミの分別方法一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+  "cadence": "monthly",
+  "adapter": "ckan_csv_v1",
+  "columns": {
+    "name_jp": "ゴミの品目",
+    "category": "分別区分",
+    "note": [
+      "注意点",
+      "料金備考",
+      "備考"
+    ],
+    "fee": "料金",
+    "city_code": "全国地方公共団体コード"
+  },
+  "category_map": {
+    "粗大ごみ": "sodai",
+    "資源": "resource",
+    "燃やすごみ": "burnable",
+    "燃やさないごみ": "non_burnable",
+    "プラマーク": "plastic"
+  }
+}

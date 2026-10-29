@@ -20,6 +20,9 @@ export const CLASS_VI: Record<CommonClass, string> = {
   kaden4: 'Đồ điện gia dụng thuộc luật tái chế (家電4品目)',
   pc: 'Máy tính (PC)',
   not_collected: 'Thành phố KHÔNG thu gom',
+  resource: 'Tài nguyên tái chế (資源): thu gom riêng',
+  drop_off: 'Mang đến điểm thu gom riêng (拠点回収)',
+  other: 'Có cách bỏ riêng — làm theo ghi chú / hướng dẫn của thành phố',
 };
 
 /** Generic habits, shown as "thường" and always followed by "check your city's rules". */
@@ -97,6 +100,11 @@ export function pcMessage(): LineMessage[] {
   ].join('\n'), QUICK_MORE)];
 }
 
+/** One line for when the city's own entry answers: the item can still be dangerous. */
+export function hazardCaution(hazard: Exclude<Hazard, 'none'>): string {
+  return `🔥 Lưu ý an toàn: ${HAZARD_VI[hazard].name.toLowerCase()} — ${HAZARD_VI[hazard].why}. Làm đúng ghi chú của thành phố bên dưới.`;
+}
+
 export function hazardMessage(hazard: Exclude<Hazard, 'none'>, matched: Match[] | null, now: Date): LineMessage[] {
   const h = HAZARD_VI[hazard];
   const lines = [
@@ -140,7 +148,10 @@ export function matchedMessage(q: GomiQuery, matches: Match[], city: CityInfo, n
     lines.push('', '📅 Rác cồng kềnh (粗大ごみ): phải ĐẶT LỊCH TRƯỚC và mua tem/phiếu thanh toán — không tự mang ra điểm rác.');
     lines.push(city.sodai_booking_url ? `🔗 Đặt lịch: ${city.sodai_booking_url}` : '🔗 Xem trang đặt lịch 粗大ごみ của thành phố bạn.');
     if (city.sodai_phone) lines.push(`☎️ ${city.sodai_phone}`);
-    lines.push(city.sodai_fee_note ? `💴 Phí: ${city.sodai_fee_note}` : '💴 Mức phí tùy kích cỡ/loại đồ — xem bảng phí của thành phố.');
+    const fees = [...new Map(rows.filter(r => r.common_class === 'sodai' && r.fee_yen).map(r => [`${r.name_jp}|${r.fee_yen}`, r])).values()];
+    if (fees.length) lines.push(...fees.slice(0, 4).map(r => `💴 Phí theo bảng của thành phố: ${r.name_jp} ${r.fee_yen!.toLocaleString('en-US')}円`));
+    if (city.sodai_fee_note) lines.push(`💴 Phí: ${city.sodai_fee_note}`);
+    else if (!fees.length) lines.push('💴 Mức phí tùy kích cỡ/loại đồ — xem bảng phí của thành phố.');
     if (city.source_url && city.updated_at) lines.push(`(Thông tin 粗大ごみ: ${city.source_url}, kiểm tra ngày ${dateVi(city.updated_at)})`);
   } else if (classes.includes('not_collected')) {
     lines.push('', 'Hãy hỏi cửa hàng bán đồ đó, hoặc công ty xử lý được thành phố giới thiệu.');
@@ -155,7 +166,7 @@ export function matchedMessage(q: GomiQuery, matches: Match[], city: CityInfo, n
 }
 
 /** No dictionary entry: AI's generic answer, loudly labelled as unsure. */
-export function fallbackMessage(q: GomiQuery, city: CityInfo): LineMessage[] {
+export function fallbackMessage(q: GomiQuery, city: CityInfo, similar: Match[] = []): LineMessage[] {
   const lines = [
     `🗑️ ${name(q) || 'Đồ vật này'}`,
     '⚠️ Chưa có trong dữ liệu của thành phố bạn — đây chỉ là phân loại CHUNG, chưa chắc. Hãy kiểm tra lại quy định của thành phố.',
@@ -164,6 +175,11 @@ export function fallbackMessage(q: GomiQuery, city: CityInfo): LineMessage[] {
   ];
   if (q.generic_how_to_vi) lines.push(`💡 ${q.generic_how_to_vi}`);
   if (q.size_cm_max > 0 && q.size_cm_max >= 30) lines.push('📏 Đồ lớn có thể bị tính là 粗大ごみ (phải đặt lịch trước) — tùy thành phố.');
+  if (similar.length) {
+    // Close names are shown as leads, never as the answer: "ペットボトル" is not "ペットボトルカバー".
+    lines.push('', 'Mục gần giống trong danh sách của thành phố (có thể KHÔNG phải món bạn hỏi):');
+    for (const m of similar.slice(0, 3)) lines.push(`• ${m.item.name_jp} → 「${m.item.local_category}」 (${CLASS_VI[m.item.common_class]})`);
+  }
   if (city.official_url) lines.push('', `🔗 ${city.official_url}`);
   lines.push('', 'Mình đã ghi lại món này để bổ sung vào dữ liệu.');
   return [text(lines.join('\n'), QUICK_MORE)];
