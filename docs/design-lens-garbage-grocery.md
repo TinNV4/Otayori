@@ -1,6 +1,6 @@
 # Thiết kế: bộ "đọc ảnh" dùng chung (Lens) + 2 module Phân loại rác / Đi chợ Nhật
 
-> Trạng thái: thiết kế + đã cài đặt phần rác. **Đã có**: sync master data cho cả 2 loại (`gomi_items` qua `ckan_csv_v1`, `gomi_schedule` qua `schedule_csv_v1`; `scripts/data.ts`); lõi Lens cho rác (`src/server/lens/gomi/`); bot LINE (`rác`, chế độ ảnh, `khu vực [町丁目]`, vị trí LINE → đề xuất → xác nhận, `lịch rác`); `Family.region`; lượt hỏi riêng (`LOOKUP_QUOTA`); log món chưa có; **lịch đổ rác**: đọc "月・木 / 第2・4水", ngày đổ gần nhất trong câu trả lời, feed ICS riêng có nhắc 20:00 tối hôm trước, EXDATE theo ngày nghỉ thành phố công bố; `data/city-info.json` (link/phí 粗大ごみ, bắt buộc có nguồn + ngày). **Đi chợ (MVP) đã có**: `src/server/lens/grocery/*`, bảng `data/grocery/*.json` (109 nguyên liệu, 20 món, 43 nhóm đồ thay thế — **Claude soạn, tất cả còn `draft` chờ admin duyệt**), đọc nhãn bằng Claude, `scripts/grocery.ts`, lệnh `đi chợ`. **Dữ liệu thật đã publish** cho 9 thành phố/quận Tokyo + Kanagawa (12 nguồn, mục 5); còn thiếu 足立区, 江戸川区, 大和市, Nagoya, Osaka, Kawaguchi, Funabashi, Matsudo; `data/city-info.json` mới có 2 link, adapter Excel, nút "gợi ý món thay thế khác" của cộng đồng, quảng cáo/affiliate, lịch dạng liệt kê ngày (`dates`), store Firestore cho master data. Dữ liệu đã `publish` nằm ở `data/masterdata/<nguồn>/live.json`, commit vào git và đi cùng image. Ngày: 2026-10-28.
+> Trạng thái: thiết kế + đã cài đặt phần rác. **Đã có**: sync master data cho cả 2 loại (`gomi_items` qua `ckan_csv_v1`, `gomi_schedule` qua `schedule_csv_v1`; `scripts/data.ts`); lõi Lens cho rác (`src/server/lens/gomi/`); bot LINE (`rác`, chế độ ảnh, `khu vực [町丁目]`, vị trí LINE → đề xuất → xác nhận, `lịch rác`); `Family.region`; lượt hỏi riêng (`LOOKUP_QUOTA`); log món chưa có; **lịch đổ rác**: đọc "月・木 / 第2・4水", ngày đổ gần nhất trong câu trả lời, feed ICS riêng có nhắc 20:00 tối hôm trước, EXDATE theo ngày nghỉ thành phố công bố; `data/city-info.json` (link/phí 粗大ごみ, bắt buộc có nguồn + ngày). **Đi chợ (MVP) đã có**: `src/server/lens/grocery/*`, bảng `data/grocery/*.json` (109 nguyên liệu, 20 món, 43 nhóm đồ thay thế — **Claude soạn, tất cả còn `draft` chờ admin duyệt**), đọc nhãn bằng Claude, `scripts/grocery.ts`, lệnh `đi chợ`. **Dữ liệu thật đã publish** cho 9 thành phố/quận Tokyo + Kanagawa (14 nguồn gồm 江戸川区, mục 5); còn thiếu 足立区 (chỉ có PDF), 大和市, Nagoya, Osaka, Kawaguchi, Funabashi, Matsudo; `data/city-info.json` mới có 2 link, adapter Excel, nút "gợi ý món thay thế khác" của cộng đồng, quảng cáo/affiliate, lịch dạng liệt kê ngày (`dates`), store Firestore cho master data. Dữ liệu đã `publish` nằm ở `data/masterdata/<nguồn>/live.json`, commit vào git và đi cùng image. Ngày: 2026-10-28.
 > Phần "đã kiểm chứng" / "chưa kiểm chứng" ghi rõ ở mục 8. Những gì thuộc buổi thảo luận trước ("schema chung như đã bàn", "bản tin chính sách") **không có trong repo** nên được thiết kế lại từ đầu ở đây — cần đối chiếu.
 
 ## 1. Nguyên tắc
@@ -405,8 +405,8 @@ Không có CSV/CKAN, nên thêm 2 adapter đọc **bảng HTML** (`html_items_v1
 
 | Nguồn | Dòng | Ngày | Trạng thái |
 |---|---|---|---|
-| `edogawa-items` | 1057 | 2026-05-15 (đọc từ "更新日" trên trang) | **staged**, chờ admin duyệt |
-| `edogawa-schedule` | 621 dòng / 207 khu | 2026-01-28 | **staged**, chờ admin duyệt |
+| `edogawa-items` | 1057 | 2026-05-15 (đọc từ "更新日" trên trang) | **đã publish v1** (29/10/2026, `tinnv4`) |
+| `edogawa-schedule` | 621 dòng / 207 khu | 2026-01-28 | **đã publish v1** (29/10/2026, `tinnv4`) |
 
 Hạn chế: không có phí 粗大ごみ trong dữ liệu (đã link trang chính thức trong `city-info.json`); vài khu chia theo khối số nhà (`南篠崎町3丁目(26、27)`) với ngày khác nhau → bot hỏi lại khối nhà.
 
