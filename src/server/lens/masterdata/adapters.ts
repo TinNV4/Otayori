@@ -162,7 +162,7 @@ function htmlTable(bytes: Buffer, src: SourceConfig, required: string[]): Table 
 }
 
 export const readTable = (bytes: Buffer, src: SourceConfig, required: string[]): Table =>
-  src.adapter.startsWith('html_') ? htmlTable(bytes, src, required) : csvToRecords(decodeText(bytes, src.encoding));
+  src.adapter.startsWith('html_') ? htmlTable(bytes, src, required) : csvToRecords(decodeText(bytes, src.encoding), required);
 
 export const ckanCsvV1: Adapter = {
   parse(bytes, src, ctx) {

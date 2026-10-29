@@ -376,6 +376,8 @@ flowchart LR
 | 文京区 | 13105 | lịch | `t131059d0110060001` |
 | 江戸川区 | 13123 | danh mục (HTML, 9 trang あ〜ん) + lịch (HTML) | [hinmoku](https://www.city.edogawa.tokyo.jp/kurashi/gomi_recycle/kategomi/hinmoku/index.html), [yobihyo](https://www.city.edogawa.tokyo.jp/kurashi/gomi_recycle/kategomi/yobihyo.html) — CC BY, không có CSV |
 | 足立区 | 13121 | **chỉ PDF** | xem mục “Adachi” bên dưới |
+| 名古屋市 | 23100 | danh mục 50 âm (BODIK, CC BY 4.0) | `231002_1109010000_sagyo_01` ở [data.bodik.jp](https://data.bodik.jp/); lịch thu gom theo 町: không có dữ liệu mở (chỉ có công cụ tra trên web) |
+| 大阪市 | 27100 | — | không có dataset trên BODIK; trang `city.osaka.lg.jp` và cổng dữ liệu mở không truy cập được từ sandbox (408 / bị chặn) |
 | 横浜市 | 14100 | trang open data | [gomi.html](https://www.city.yokohama.lg.jp/city-info/yokohamashi/tokei-chosa/portal/opendata/gomi.html) |
 | 川崎市, 相模原市, 大和市 | 14130, 14150, 14213 | — | chưa tìm |
 
@@ -411,6 +413,11 @@ Không có CSV/CKAN, nên thêm 2 adapter đọc **bảng HTML** (`html_items_v1
 Hạn chế: không có phí 粗大ごみ trong dữ liệu (đã link trang chính thức trong `city-info.json`); vài khu chia theo khối số nhà (`南篠崎町3丁目(26、27)`) với ngày khác nhau → bot hỏi lại khối nhà.
 
 **足立区**: chỉ có PDF. Bảng phân loại có lớp chữ nhưng phải dựng lại bảng theo tọa độ; lịch theo khu là PDF ảnh (cần OCR/LLM). Điều khoản trang web cấm sao chép trái phép ngoài các ngoại lệ của luật bản quyền, và danh mục dữ liệu mở của quận không có mục rác (các bộ có là CC BY nhưng không liên quan). Vì vậy **chưa nhập**; hiện chỉ có link trang chính thức trong `data/city-info.json`. Cần quyết định: xin phép quận / chờ OCR / chấp nhận chỉ link.
+
+### 名古屋市 và 大阪市 (29/10/2026)
+
+- **Nagoya** `nagoya-items`: 1227 dòng, ngày 2025-06-05, CC BY 4.0, **staged** chờ duyệt. File CSV có dòng tiêu đề ở hàng 3 (hàng 1 là "50音順,,"): `csvToRecords` giờ tự tìm hàng tiêu đề. Nhãn "その他" (105 dòng: quần áo, 家電4品目, xe máy…) → `other`: câu trả lời hiện nhãn và ghi chú của thành phố; luật quốc gia vẫn ưu tiên. "小型家電" → `drop_off`, "食用油" → `drop_off`, "充電式家電" → `other`. Chưa có lịch thu gom và phí 粗大ごみ.
+- **Osaka**: chưa nhập. Không có dataset trên BODIK; mục tra phân loại của thành phố là công cụ hỏi–đáp động, không phải bảng dữ liệu; các trang `city.osaka.lg.jp` trả 408 và `data.city.osaka.lg.jp` bị ngắt kết nối từ sandbox. Cần mở domain `*.city.osaka.lg.jp` hoặc cung cấp file.
 
 **Điều dữ liệu thật dạy cho thiết kế** (đã sửa trong code):
 - Cột mã thành phố có 6 chữ số (có số kiểm tra: `131181` → `13118`); chỉ so 5 chữ số đầu.

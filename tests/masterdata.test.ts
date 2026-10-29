@@ -39,6 +39,14 @@ describe('csv', () => {
   it('keys records by trimmed header and pads short rows', () => {
     expect(csvToRecords(' a , b\n1').records).toEqual([{ a: '1', b: '' }]);
   });
+  it('skips a title row and blank rows above the header (名古屋市: "50音順,,")', () => {
+    const text = '50音順,,\n,,\n具体例,分別区分,備考\nアイロン,小型家電,\n';
+    expect(csvToRecords(text).headers).toEqual(['具体例', '分別区分', '備考']);
+    expect(csvToRecords(text, ['具体例', '分別区分']).records).toEqual([{ 具体例: 'アイロン', 分別区分: '小型家電', 備考: '' }]);
+    // the configured names win even when an earlier row has two filled cells
+    expect(csvToRecords('注,意\nx,y\n品名,種別\na,b', ['品名', '種別']).records).toEqual([{ 品名: 'a', 種別: 'b' }]);
+    expect(csvToRecords('a,b\n1,2').headers).toEqual(['a', 'b']);
+  });
 });
 
 describe('category labels are compared after normalization', () => {

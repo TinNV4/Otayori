@@ -30,10 +30,23 @@ export function parseCsv(text: string): string[][] {
   return rows.filter(r => r.some(v => v.trim() !== ''));
 }
 
+/**
+ * Some portals put a title row above the header (名古屋市: "50音順,," then a blank row). The header is the first of the first
+ * 10 rows that holds every required name; without names, the first row that has at least two filled cells.
+ */
+function headerIndex(rows: string[][], required: string[]): number {
+  const top = rows.slice(0, 10).map(r => r.map(c => c.trim()));
+  const named = required.length ? top.findIndex(r => required.every(c => r.includes(c))) : -1;
+  if (named >= 0) return named;
+  const filled = top.findIndex(r => r.filter(c => c !== '').length >= 2);
+  return filled > 0 ? filled : 0;
+}
+
 /** CSV → objects keyed by (trimmed) header. */
-export function csvToRecords(text: string): { headers: string[]; records: Array<Record<string, string>> } {
-  const [head = [], ...body] = parseCsv(text);
-  const headers = head.map(h => h.trim());
-  const records = body.map(r => Object.fromEntries(headers.map((h, i) => [h, (r[i] ?? '').trim()])));
+export function csvToRecords(text: string, required: string[] = []): { headers: string[]; records: Array<Record<string, string>> } {
+  const rows = parseCsv(text);
+  const h = headerIndex(rows, required);
+  const headers = (rows[h] ?? []).map(c => c.trim());
+  const records = rows.slice(h + 1).map(r => Object.fromEntries(headers.map((c, i) => [c, (r[i] ?? '').trim()])));
   return { headers, records };
 }

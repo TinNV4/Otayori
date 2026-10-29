@@ -1,0 +1,40 @@
+{
+  "id": "nagoya-items",
+  "city_code": "23100",
+  "kind": "gomi_items",
+  "enabled": true,
+  "note": "Nagoya 家庭ごみ・資源の50音順分別早見表 (BODIK). その他 = clothes, 家電4品目, motorbikes etc.: shown with the city note; national rules still override. Header is on row 3 of the CSV.",
+  "ckan": {
+    "api": "https://data.bodik.jp/api/3/action",
+    "dataset": "231002_1109010000_sagyo_01"
+  },
+  "url": "",
+  "encoding": "shift_jis",
+  "license": "CC-BY-4.0",
+  "attribution": "名古屋市",
+  "cadence": "monthly",
+  "adapter": "ckan_csv_v1",
+  "columns": {
+    "name_jp": "具体例",
+    "category": "分別区分",
+    "note": "備考"
+  },
+  "category_map": {
+    "可燃ごみ": "burnable",
+    "粗大ごみ": "sodai",
+    "不燃ごみ": "non_burnable",
+    "プラスチック資源": "plastic",
+    "小型家電": "drop_off",
+    "紙製容器包装・雑がみ": "resource",
+    "発火性危険物": "hazardous",
+    "空きびん": "glass",
+    "空き缶": "can",
+    "電池類": "hazardous",
+    "紙パック": "paper",
+    "蛍光管・水銀体温計・水銀温度計": "hazardous",
+    "ペットボトル": "pet",
+    "その他": "other",
+    "食用油": "drop_off",
+    "充電式家電": "other"
+  }
+}
