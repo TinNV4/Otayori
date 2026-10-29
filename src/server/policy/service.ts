@@ -26,7 +26,8 @@ export interface PolicyDeps {
   sources?: PolicySource[];
   /** Usage writes should go through the bot so budget/push alerts fire; defaults to the repo. */
   recordUsage?: (month: string, delta: UsageDelta) => Promise<void>;
-  notify?: (message: string) => Promise<void>;
+  /** `link` becomes a tap-able button under the message. */
+  notify?: (message: string, link?: { label: string; uri: string }) => Promise<void>;
   now?: () => Date;
 }
 
@@ -216,7 +217,15 @@ export class PolicyService {
         }
       }
     }
-    if (created && this.deps.notify) await this.deps.notify(`📰 ${created} bản tin chính sách mới chờ duyệt. Xem & duyệt: npm run policy -- list`);
+    if (created && this.deps.notify) {
+      const url = liffUrl(this.cfg, { admin: 'policy' });
+      await this.deps.notify(
+        `📰 Có ${created} bản tin chính sách mới chờ bạn duyệt.\n\n` +
+          (url ? `👉 Bấm nút bên dưới (hoặc mở link ${url}), đối chiếu từng tin với trang gốc rồi bấm "Duyệt" hoặc "Loại".\n` : '👉 Mở app → Quản trị → "Duyệt bản tin chính sách".\n') +
+          'Chưa duyệt thì chưa ai nhận được tin. Tin 🔴 sẽ được gửi ngay cho người liên quan sau khi bạn duyệt.',
+        url ? { label: '📰 Duyệt ngay', uri: url } : undefined,
+      );
+    }
     return { sources: reports, cost_usd: Number(cost.toFixed(6)), created };
   }
 

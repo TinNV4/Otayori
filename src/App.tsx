@@ -26,6 +26,7 @@ export default function App() {
   const params = new URLSearchParams(window.location.search);
   const deepDocId = params.get('doc');
   const deepTab = params.get('tab');
+  const deepAdmin = params.get('admin'); // from the admin LINE notification
   // 'family' = mobile app; the others are full-screen sub-pages with a back button.
   const [screen, setScreen] = useState<Screen>('family');
   const [me, setMe] = useState<MeResponse | null>(null);
@@ -50,7 +51,7 @@ export default function App() {
       const data: MeResponse = await res.json();
       setMe(data);
       if (!currentFamilyId && data.families[0]) setCurrentFamilyId(data.families[0].family_id);
-      if (!data.families.length && data.is_admin) setScreen('admin');
+      if (data.is_admin && (deepAdmin || !data.families.length)) setScreen('admin');
     } catch (err) {
       setAuthError(String((err as Error).message || err));
     } finally {
@@ -190,7 +191,7 @@ export default function App() {
   if (screen === 'admin' && me.is_admin) {
     return (
       <SubPage title="Quản trị" onBack={() => setScreen('family')}>
-        {metrics ? <AdminLIFFView metrics={metrics} families={allFamilies} inviteCodes={inviteCodes} auditLogs={auditLogs} onRefresh={loadAppData} /> : <p className="p-6 text-slate-500">Đang tải…</p>}
+        {metrics ? <AdminLIFFView initialTab={deepAdmin === 'policy' ? 'policy' : undefined} metrics={metrics} families={allFamilies} inviteCodes={inviteCodes} auditLogs={auditLogs} onRefresh={loadAppData} /> : <p className="p-6 text-slate-500">Đang tải…</p>}
       </SubPage>
     );
   }

@@ -170,17 +170,18 @@ describe('ingest → review → push', () => {
     const repo = new MemoryRepo();
     const line = new RecordingLineApi();
     const notes: string[] = [];
+    const links: Array<{ label: string; uri: string }> = [];
     const calls: string[] = [];
     const svc = new PolicyService({
       repo, cfg, line, analyzer: new MockPolicyAnalyzer(), sources: [src], now: () => NOW,
       fetchPage: async u => { calls.push(u); if (!(u in pages)) throw new Error('404'); return pages[u]; },
-      notify: async m => { notes.push(m); },
+      notify: async (m, l) => { notes.push(m); if (l) links.push(l); },
     });
-    return { svc, repo, line, notes, calls, cfg };
+    return { svc, repo, line, notes, links, calls, cfg };
   }
 
   it('creates drafts for relevant pages only, never re-reads known pages, and tells the admin', async () => {
-    const { svc, repo, notes, calls } = await build();
+    const { svc, repo, notes, links, calls } = await build();
     const r = await svc.ingest();
     expect(r.created).toBe(1);
     expect(r.sources[0]).toMatchObject({ links: 3, fresh: 3, pending: 1, ignored: 2 });
@@ -190,6 +191,10 @@ describe('ingest → review → push', () => {
     expect(pending[0].audience.renewal_related).toBe(true);
     expect(pending[0].severity).toBe('red');
     expect(notes[0]).toContain('1 bản tin');
+    expect(notes[0]).toContain('admin=policy'); // a tap-able link, not a terminal command
+    expect(notes[0]).not.toContain('npm run');
+    expect(links[0]).toMatchObject({ label: '📰 Duyệt ngay' });
+    expect(links[0].uri).toContain('admin=policy');
     const before = calls.length;
     expect((await svc.ingest()).created).toBe(0);
     expect(calls.length).toBe(before + 1); // only the list page is fetched again

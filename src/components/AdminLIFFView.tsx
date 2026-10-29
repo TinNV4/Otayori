@@ -21,6 +21,7 @@ import { AdminMetrics, AuditLog, Family, InviteCode } from '../types/index.ts';
 import { PolicyAdminPanel } from './PolicyAdminPanel.tsx';
 
 interface AdminLIFFViewProps {
+  initialTab?: 'policy';
   metrics: AdminMetrics;
   families: Family[];
   inviteCodes: InviteCode[];
@@ -29,13 +30,14 @@ interface AdminLIFFViewProps {
 }
 
 export const AdminLIFFView: React.FC<AdminLIFFViewProps> = ({
+  initialTab,
   metrics,
   families,
   inviteCodes,
   auditLogs,
   onRefresh,
 }) => {
-  const [adminTab, setAdminTab] = useState<'metrics' | 'families' | 'invites' | 'policy' | 'audit'>('metrics');
+  const [adminTab, setAdminTab] = useState<'metrics' | 'families' | 'invites' | 'policy' | 'audit'>(initialTab || 'metrics');
   const [newCodeName, setNewCodeName] = useState('');
   const [newCodeQuota, setNewCodeQuota] = useState(50);
   const [newCodeMaxUses, setNewCodeMaxUses] = useState(20);

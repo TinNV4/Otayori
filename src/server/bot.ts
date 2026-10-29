@@ -139,7 +139,7 @@ export class Bot {
     this.services.onError = (_familyId, type) => this.trackError(type);
     this.policy = new PolicyService({
       repo: deps.repo, cfg: deps.cfg, line: deps.line, analyzer: deps.policyAnalyzer || new MockPolicyAnalyzer(), fetchPage: deps.policyFetchPage,
-      recordUsage: (m, d) => this.recordUsage(m, d), notify: msg => this.notifyAdmins(`🔔 [Admin] ${msg}`), now: this.now,
+      recordUsage: (m, d) => this.recordUsage(m, d), notify: (msg, link) => this.notifyAdmins(`🔔 [Admin] ${msg}`, link), now: this.now,
     });
     this.aggregator = new PageAggregator(deps.cfg.aggregationWindowMs, deps.cfg.maxPagesPerDoc, b => this.processBatch(b));
   }
@@ -180,9 +180,9 @@ export class Bot {
   }
 
   /** Push to admins' 1:1 chats (counts against the monthly push quota; admins must have added the bot). */
-  async notifyAdmins(message: string) {
+  async notifyAdmins(message: string, link?: { label: string; uri: string }) {
     for (const id of this.cfg.adminUserIds) {
-      if (await this.line.push(id, [text(message)]).catch(() => false)) {
+      if (await this.line.push(id, [text(message, link ? [{ label: link.label, uri: link.uri }] : undefined)]).catch(() => false)) {
         await this.repo.addUsage(jstMonth(this.now()), { push_messages: 1 });
       }
     }
