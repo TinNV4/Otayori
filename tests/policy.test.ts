@@ -452,6 +452,8 @@ describe('HTTP API', () => {
   const tokens: Record<string, string> = { tokA: 'Ua', tokX: 'Ustranger', tokAdmin: 'U_admin' };
   const { app, bot } = createApp({
     cfg: testConfig(), repo, line, extractor: new MockExtractor(), composer: new TemplateComposer(),
+    // No network in tests: every official page is empty, so each source reports 0 links.
+    policyFetchPage: async () => '<html></html>',
     verifyIdToken: async t => (tokens[t] ? { sub: tokens[t], exp: Date.now() / 1000 + 600 } : null),
   });
   const h = (t: string) => ({ Authorization: `Bearer ${t}`, 'Content-Type': 'application/json' });
@@ -486,6 +488,28 @@ describe('HTTP API', () => {
     expect(feed.unread_count).toBe(1);
     await fetch(`${base}/api/policy/seen`, { method: 'POST', headers: h('tokA') });
     expect((await (await fetch(`${base}/api/policy/feed`, { headers: h('tokA') })).json()).unread_count).toBe(0);
+  });
+
+  it('admin sees counts + last run, and can start a read of the sources (admins only)', async () => {
+    expect((await fetch(`${base}/api/admin/policy-status`, { headers: h('tokA') })).status).toBe(403);
+    expect((await fetch(`${base}/api/admin/policy-ingest`, { method: 'POST', headers: h('tokA'), body: '{}' })).status).toBe(403);
+
+    const before = await (await fetch(`${base}/api/admin/policy-status`, { headers: h('tokAdmin') })).json();
+    expect(before.last).toBeNull();
+    expect(before.llm).toBe('mock');
+    expect(before.counts.approved).toBeGreaterThanOrEqual(1);
+
+    const start = await fetch(`${base}/api/admin/policy-ingest`, { method: 'POST', headers: h('tokAdmin'), body: JSON.stringify({ dry: true }) });
+    expect(start.status).toBe(202);
+    let st = before;
+    for (let i = 0; i < 50 && (st.running || !st.last); i++) {
+      await new Promise(r => setTimeout(r, 20));
+      st = await (await fetch(`${base}/api/admin/policy-status`, { headers: h('tokAdmin') })).json();
+    }
+    expect(st.running).toBe(false);
+    expect(st.last).toMatchObject({ dry: true });
+    expect(st.last.report.sources.length).toBe(POLICY_SOURCES.length);
+    expect(st.last.report.sources.every((s: { links: number; errors: string[] }) => s.links === 0 && s.errors.length === 0)).toBe(true);
   });
 
   it('lets users delete their profile; the cron route needs the secret', async () => {

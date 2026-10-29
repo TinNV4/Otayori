@@ -47,6 +47,18 @@ export interface DispatchReport {
   deferred: number;
 }
 
+export interface IngestReport {
+  sources: SourceReport[];
+  cost_usd: number;
+  created: number;
+}
+
+/** What the admin screen shows about the last read of the official sources. */
+export interface IngestStatus {
+  running: boolean;
+  last: { at: string; dry: boolean; report: IngestReport | null; error?: string } | null;
+}
+
 export type ProfileResult = { ok: true; value: PolicyProfileInput } | { ok: false; error: string };
 
 const oneOf = (list: Array<{ id: string }>, v: unknown) => (typeof v === 'string' && list.some(x => x.id === v) ? v : undefined);
@@ -101,6 +113,7 @@ export class PolicyService {
   private now: () => Date;
   /** Serialises pushes so an approval and the daily job can never double-send. */
   private pushQueue: Promise<unknown> = Promise.resolve();
+  private ingestState: IngestStatus = { running: false, last: null };
 
   constructor(private readonly deps: PolicyDeps) {
     this.repo = deps.repo;
@@ -123,7 +136,31 @@ export class PolicyService {
 
   // ---------- ingest: official pages → AI drafts (never auto-published) ----------
 
-  async ingest(opts: { dry?: boolean; sourceId?: string; maxNew?: number } = {}): Promise<{ sources: SourceReport[]; cost_usd: number; created: number }> {
+  get ingestStatus(): IngestStatus {
+    return this.ingestState;
+  }
+
+  /** Kick off an ingest without waiting (it can take minutes). false = one is already running. */
+  startIngest(opts: { dry?: boolean } = {}): boolean {
+    if (this.ingestState.running) return false;
+    void this.ingest(opts).catch(() => undefined); // failures are recorded in ingestStatus.last
+    return true;
+  }
+
+  async ingest(opts: { dry?: boolean; sourceId?: string; maxNew?: number } = {}): Promise<IngestReport> {
+    this.ingestState.running = true;
+    const at = this.now().toISOString();
+    try {
+      const report = await this.runIngest(opts);
+      this.ingestState = { running: false, last: { at, dry: !!opts.dry, report } };
+      return report;
+    } catch (err) {
+      this.ingestState = { running: false, last: { at, dry: !!opts.dry, report: null, error: String((err as Error).message || err) } };
+      throw err;
+    }
+  }
+
+  private async runIngest(opts: { dry?: boolean; sourceId?: string; maxNew?: number }): Promise<IngestReport> {
     const now = this.now();
     const today = jstDate(now);
     const month = jstMonth(now);

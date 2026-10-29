@@ -14,6 +14,7 @@ import { isValidHm, isValidIsoDate, jstDate, jstMonth } from './time.ts';
 import { AdminMetrics, DOC_TYPES, DocType, ExtractedDocument, Family, MeResponse } from '../types/index.ts';
 import { text } from './line.ts';
 import { PolicyAnalyzer } from './policy/analyzer.ts';
+import { PageFetcher } from './policy/fetch.ts';
 import { validateProfileInput } from './policy/service.ts';
 import { SEVERITY_ICON, Severity } from '../types/policy.ts';
 
@@ -25,6 +26,7 @@ export interface AppDeps {
   composer: Composer;
   translator?: Translator;
   policyAnalyzer?: PolicyAnalyzer;
+  policyFetchPage?: PageFetcher;
   verifyIdToken: IdTokenVerifier | null;
 }
 
@@ -43,7 +45,7 @@ function adminFamily(f: Family) {
 export function createApp(deps: AppDeps) {
   const { cfg, repo, line } = deps;
   const translator = deps.translator || new MockTranslator();
-  const bot = new Bot({ repo, line, extractor: deps.extractor, composer: deps.composer, translator, policyAnalyzer: deps.policyAnalyzer, cfg });
+  const bot = new Bot({ repo, line, extractor: deps.extractor, composer: deps.composer, translator, policyAnalyzer: deps.policyAnalyzer, policyFetchPage: deps.policyFetchPage, cfg });
   const services = bot.services;
   const app = express();
   app.disable('x-powered-by');
@@ -478,6 +480,21 @@ export function createApp(deps: AppDeps) {
   admin.get('/policy', async (req, res) => {
     const status = ['pending', 'approved', 'rejected', 'ignored'].includes(String(req.query.status)) ? (req.query.status as 'pending') : undefined;
     res.json({ items: await repo.listPolicyItems(status) });
+  });
+
+  /** Why is the review list empty? Counts by status + the last read of the official sources (per-source errors). */
+  admin.get('/policy-status', async (_req, res) => {
+    const items = await repo.listPolicyItems();
+    const counts = { pending: 0, approved: 0, rejected: 0, ignored: 0 };
+    for (const i of items) counts[i.status]++;
+    res.json({ counts, llm: cfg.anthropicApiKey ? 'claude' : 'mock', ...bot.policy.ingestStatus });
+  });
+
+  /** Read the official sources now (background; poll /policy-status). `dry` only lists the links. */
+  admin.post('/policy-ingest', async (req: AuthedRequest, res) => {
+    const started = bot.policy.startIngest({ dry: req.body?.dry === true });
+    if (started) await services.audit(req.userId!, 'POLICY_INGEST', req.body?.dry === true ? 'Chạy thử (dry)' : 'Chạy đọc nguồn');
+    res.status(started ? 202 : 409).json({ started });
   });
 
   admin.post('/policy/:id/approve', async (req: AuthedRequest, res) => {

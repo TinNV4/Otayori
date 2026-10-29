@@ -12,6 +12,7 @@ import { calendarPageUrl, familyIdForChat, liffUrl, newFamily, normalizeCode, ro
 import { jstDate, jstMonth } from './time.ts';
 import { MockPolicyAnalyzer, PolicyAnalyzer } from './policy/analyzer.ts';
 import { PolicyService } from './policy/service.ts';
+import { PageFetcher } from './policy/fetch.ts';
 import { ExtractedDocument, Family, Translation } from '../types/index.ts';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -107,6 +108,8 @@ export interface BotDeps {
   composer: Composer;
   translator?: Translator;
   policyAnalyzer?: PolicyAnalyzer;
+  /** Tests only: replaces the real HTTP fetch of official pages. */
+  policyFetchPage?: PageFetcher;
   cfg: AppConfig;
   now?: () => Date;
 }
@@ -135,7 +138,7 @@ export class Bot {
     this.services = new Services(deps.repo, deps.cfg);
     this.services.onError = (_familyId, type) => this.trackError(type);
     this.policy = new PolicyService({
-      repo: deps.repo, cfg: deps.cfg, line: deps.line, analyzer: deps.policyAnalyzer || new MockPolicyAnalyzer(),
+      repo: deps.repo, cfg: deps.cfg, line: deps.line, analyzer: deps.policyAnalyzer || new MockPolicyAnalyzer(), fetchPage: deps.policyFetchPage,
       recordUsage: (m, d) => this.recordUsage(m, d), notify: msg => this.notifyAdmins(`🔔 [Admin] ${msg}`), now: this.now,
     });
     this.aggregator = new PageAggregator(deps.cfg.aggregationWindowMs, deps.cfg.maxPagesPerDoc, b => this.processBatch(b));

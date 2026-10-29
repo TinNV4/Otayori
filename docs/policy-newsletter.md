@@ -120,7 +120,12 @@ Chưa chạy `richmenu.ts` (hoặc người dùng chưa kết bạn với bot) t
 
 ## Duyệt trong LIFF
 
-Admin mở app → Quản trị → "Duyệt bản tin chính sách": thấy nháp, link gốc, đối tượng, chọn 🔴🟡🟢 rồi Duyệt/Loại (🔴 push ngay). CLI `npm run policy` vẫn dùng được.
+Admin mở app → Quản trị → "Duyệt bản tin chính sách":
+- Bảng số liệu (chờ duyệt / đã duyệt / đã loại / AI bỏ qua) và cảnh báo nếu máy chủ chưa có `ANTHROPIC_API_KEY` (khi đó bản tóm tắt chỉ là bản mẫu).
+- Nút **Đọc nguồn ngay** (chạy nền, tự cập nhật) và **Chỉ liệt kê link** (không gọi Claude); báo cáo lần chạy gần nhất theo từng nguồn, kèm lỗi.
+- Nháp: link gốc, đối tượng, chọn 🔴🟡🟢 rồi Duyệt/Loại (🔴 push ngay). Danh sách "AI đã bỏ qua" để kiểm tra có bỏ sót không.
+
+Danh sách trống nghĩa là: chưa ai chạy đọc nguồn (job tự chạy 7:30 sáng giờ Nhật, hoặc bấm nút), hoặc AI cho là mọi trang đều không liên quan, hoặc nguồn lỗi — báo cáo lần chạy gần nhất cho biết đang là trường hợp nào. CLI `npm run policy` vẫn dùng được.
 
 ## Phạm vi
 
