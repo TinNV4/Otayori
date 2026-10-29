@@ -1,4 +1,4 @@
-import { csvToRecords, decodeText } from './csv.ts';
+import { readTable } from './adapters.ts';
 import { MasterStore } from './store.ts';
 import { isStale } from './sync.ts';
 import { parseRuleText } from './scheduleRule.ts';
@@ -51,7 +51,10 @@ export function renderStatus(sources: SourceConfig[], store: MasterStore, now = 
 
 /** What is in the file and how its category labels map: the quickest way to write `columns` / `category_map`. */
 export function renderInspect(src: SourceConfig, bytes: Buffer, meta: { url: string; source_updated_at?: string }): string {
-  const { headers, records } = csvToRecords(decodeText(bytes, src.encoding));
+  const required = src.kind === 'gomi_schedule'
+    ? [...(src.schedule?.area_columns ?? (src.schedule?.area_column ? [src.schedule.area_column] : [])), ...(src.schedule?.categories.map(k => k.column) ?? [])]
+    : [src.columns?.name_jp ?? '', src.columns?.category ?? ''];
+  const { headers, records } = readTable(bytes, src, required);
   const out = [
     `url      ${meta.url}`,
     `date     ${meta.source_updated_at ?? '(none reported)'}`,

@@ -41,7 +41,7 @@ function namesAppliance(name: string, kws: string[]): boolean {
   for (const kw of kws.map(fold)) {
     let i = name.indexOf(kw);
     while (i >= 0) {
-      const after = name.slice(i + kw.length);
+      const after = name.slice(i + kw.length).replace(/^の/, ''); // "テレビのリモコン"
       if (!ACCESSORY_AFTER.some(a => after.startsWith(a))) return true;
       i = name.indexOf(kw, i + 1);
     }

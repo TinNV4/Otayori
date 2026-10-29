@@ -1,5 +1,6 @@
 import crypto from 'crypto';
 import { csvToRecords, decodeText } from './csv.ts';
+import { PAGE_MARKER, pageUpdateDate, parseTables } from './html.ts';
 import { expandAreas, parseRuleText } from './scheduleRule.ts';
 import { COMMON_CLASSES, GomiItem, MasterRow, ScheduleRow, SourceConfig } from './types.ts';
 
@@ -106,9 +107,23 @@ export async function fetchSource(src: SourceConfig, fetcher: Fetcher): Promise<
     url = r.url;
     updated = r.updated;
   }
+  if (src.urls?.length) {
+    // several pages → one buffer; the date printed on the pages ("更新日：…") stands in for HTTP headers
+    const parts: Buffer[] = [];
+    let latest: string | undefined;
+    for (const u of src.urls) {
+      const got = await fetcher.get(u);
+      parts.push(got.bytes);
+      const d = pageUpdateDate(got.bytes.toString('utf8')) || isoDate(got.headers['last-modified']);
+      if (d && (!latest || d > latest)) latest = d;
+      await new Promise(r => setTimeout(r, 300)); // be polite to city servers
+    }
+    return { bytes: Buffer.from(parts.map(p => p.toString('utf8')).join(PAGE_MARKER), 'utf8'), url: src.urls[0], source_updated_at: updated || latest };
+  }
   if (!url) throw new SyncError('config', `${src.id}: no url or ckan block`);
   const { bytes, headers } = await fetcher.get(url);
-  return { bytes, url, source_updated_at: updated || isoDate(headers['last-modified']) };
+  const fromPage = /text\/html/.test(headers['content-type'] || '') ? pageUpdateDate(bytes.toString('utf8')) : undefined;
+  return { bytes, url, source_updated_at: updated || fromPage || isoDate(headers['last-modified']) };
 }
 
 export interface ParseContext { fetchedAt: string; sourceUrl: string; sourceUpdatedAt: string }
@@ -121,12 +136,40 @@ export interface Adapter {
 const norm = (s: string) => s.normalize('NFKC').replace(/\s+/g, ' ').trim();
 
 /** CKAN (or any CSV) list of waste items: one row per item with the city's category label. */
+type Table = { headers: string[]; records: Array<Record<string, string>> };
+
+/** HTML pages → one table: either the configured column names, or the first row of each table that holds the required headers. */
+function htmlTable(bytes: Buffer, src: SourceConfig, required: string[]): Table {
+  const grids = bytes.toString('utf8').split(PAGE_MARKER).flatMap(parseTables);
+  const records: Array<Record<string, string>> = [];
+  const cols = src.html?.columns;
+  let seen: string[] = grids[0]?.[0] ?? [];
+  for (const g of grids) {
+    if (cols) {
+      for (const row of g.slice(src.html?.header_rows ?? 1)) {
+        if (row.length === cols.length) records.push(Object.fromEntries(cols.map((h, i) => [h, row[i]])));
+      }
+      continue;
+    }
+    const h = g.findIndex(r => required.every(c => r.includes(c)));
+    if (h < 0) continue;
+    seen = g[h];
+    for (const row of g.slice(h + 1)) {
+      if (row.length === g[h].length) records.push(Object.fromEntries(g[h].map((c, i) => [c, row[i]])));
+    }
+  }
+  return { headers: cols ?? seen, records };
+}
+
+export const readTable = (bytes: Buffer, src: SourceConfig, required: string[]): Table =>
+  src.adapter.startsWith('html_') ? htmlTable(bytes, src, required) : csvToRecords(decodeText(bytes, src.encoding));
+
 export const ckanCsvV1: Adapter = {
   parse(bytes, src, ctx) {
-    const { headers, records } = csvToRecords(decodeText(bytes, src.encoding));
     const c = src.columns;
     const categoryMap = src.category_map;
-    if (!c || !categoryMap) throw new SyncError('config', `${src.id}: adapter ckan_csv_v1 needs "columns" and "category_map"`);
+    if (!c || !categoryMap) throw new SyncError('config', `${src.id}: adapter ${src.adapter} needs "columns" and "category_map"`);
+    const { headers, records } = readTable(bytes, src, [c.name_jp, c.category]);
     const noteCols = c.note ? (Array.isArray(c.note) ? c.note : [c.note]) : [];
     const required = [c.name_jp, c.category, ...noteCols, ...(c.fee ? [c.fee] : []), ...(c.city_code ? [c.city_code] : [])];
     const missing = required.filter(h => !headers.includes(h));
@@ -194,8 +237,8 @@ export const scheduleCsvV1: Adapter = {
   parse(bytes, src, ctx) {
     const sc = src.schedule;
     if (!sc?.categories?.length) throw new SyncError('config', `${src.id}: adapter schedule_csv_v1 needs "schedule.categories"`);
-    const { headers, records } = csvToRecords(decodeText(bytes, src.encoding));
     const areaCols = sc.area_columns?.length ? sc.area_columns : sc.area_column ? [sc.area_column] : [];
+    const { headers, records } = readTable(bytes, src, [...areaCols, ...sc.categories.map(k => k.column)]);
     const required = [...areaCols, ...(sc.city_code_column ? [sc.city_code_column] : []), ...sc.categories.map(k => k.column)];
     const missing = required.filter(h => !headers.includes(h));
     if (missing.length) {
@@ -219,7 +262,8 @@ export const scheduleCsvV1: Adapter = {
         : expandAreas(r[areaCols[0]] || '', r[areaCols[1]] || '').map(norm);
       if (!areas.length) { blankAreas++; continue; }
       for (const k of sc.categories) {
-        const text = (r[k.column] || '').trim();
+        let text = (r[k.column] || '').trim();
+        if (text.startsWith(k.column)) text = text.slice(k.column.length).trim(); // some pages repeat the category in the cell ("資源 月曜日")
         const rule = parseRuleText(text);
         if (rule === 'none') continue;
         if (!rule) { unreadable.set(text, (unreadable.get(text) || 0) + 1); continue; }
@@ -248,7 +292,7 @@ export const scheduleCsvV1: Adapter = {
   },
 };
 
-export const ADAPTERS: Record<string, Adapter> = { ckan_csv_v1: ckanCsvV1, schedule_csv_v1: scheduleCsvV1 };
+export const ADAPTERS: Record<string, Adapter> = { ckan_csv_v1: ckanCsvV1, schedule_csv_v1: scheduleCsvV1, html_items_v1: ckanCsvV1, html_schedule_v1: scheduleCsvV1 };
 
 export function getAdapter(name: string): Adapter {
   const a = ADAPTERS[name];

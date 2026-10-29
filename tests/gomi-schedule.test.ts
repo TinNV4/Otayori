@@ -69,6 +69,9 @@ describe('expandAreas (town + 丁目 cell as real cities write it)', () => {
     ['新井', '1;2;4;5', ['新井1丁目', '新井2丁目', '新井4丁目', '新井5丁目']], ['小石川', '2・3丁目', ['小石川2丁目', '小石川3丁目']],
     ['銀座', '1～2丁目', ['銀座1丁目', '銀座2丁目']], ['白山', '３～５丁目', ['白山3丁目', '白山4丁目', '白山5丁目']],
     ['小石川', '1丁目1～16番', ['小石川1丁目1~16番']], // a block inside a chome stays literal (～ is normalized to ~)
+    ['一之江', '1から5丁目', ['一之江1丁目', '一之江2丁目', '一之江3丁目', '一之江4丁目', '一之江5丁目']],
+    ['鹿骨', '1・2・3丁目 （1から17）', ['鹿骨1丁目(1から17)', '鹿骨2丁目(1から17)', '鹿骨3丁目(1から17)']], // blocks of several chomes
+    ['鹿骨', '3丁目 （18から20）', ['鹿骨3丁目(18から20)']],
   ])('%s | %s', (town, cell, want) => expect(expandAreas(town, cell)).toEqual(want));
 });
 
@@ -289,7 +292,7 @@ describe('scheduleFromStore + city info file', () => {
     expect(() => loadCityInfo(f)).toThrow(/https/);
     fs.writeFileSync(f, JSON.stringify({ '13118': { sodai_booking_url: 'https://c.example/x', source_url: 'https://c.example', updated_at: '2026-09-01' } }));
     expect(loadCityInfo(f)['13118'].sodai_booking_url).toBe('https://c.example/x');
-    expect(Object.keys(loadCityInfo('data/city-info.json'))).toEqual(['12204', '27100']); // the shipped file passes the same validation
+    expect(Object.keys(loadCityInfo('data/city-info.json'))).toEqual(['12204', '13121', '13123', '27100']); // the shipped file passes the same validation
   });
 });
 

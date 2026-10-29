@@ -1,0 +1,36 @@
+{
+  "id": "edogawa-items",
+  "city_code": "13123",
+  "kind": "gomi_items",
+  "adapter": "html_items_v1",
+  "enabled": true,
+  "url": "",
+  "urls": [
+    "https://www.city.edogawa.tokyo.jp/e025/kurashi/gomi_recycle/kategomi/hinmoku/a.html",
+    "https://www.city.edogawa.tokyo.jp/e025/kurashi/gomi_recycle/kategomi/hinmoku/ka.html",
+    "https://www.city.edogawa.tokyo.jp/e025/kurashi/gomi_recycle/kategomi/hinmoku/sa.html",
+    "https://www.city.edogawa.tokyo.jp/e025/kurashi/gomi_recycle/kategomi/hinmoku/ta.html",
+    "https://www.city.edogawa.tokyo.jp/e025/kurashi/gomi_recycle/kategomi/hinmoku/na.html",
+    "https://www.city.edogawa.tokyo.jp/e025/kurashi/gomi_recycle/kategomi/hinmoku/ha.html",
+    "https://www.city.edogawa.tokyo.jp/e025/kurashi/gomi_recycle/kategomi/hinmoku/ma.html",
+    "https://www.city.edogawa.tokyo.jp/e025/kurashi/gomi_recycle/kategomi/hinmoku/ya.html",
+    "https://www.city.edogawa.tokyo.jp/e025/kurashi/gomi_recycle/kategomi/hinmoku/ra.html"
+  ],
+  "encoding": "utf-8",
+  "license": "クリエイティブ・コモンズ 表示（CC BY）",
+  "attribution": "江戸川区「資源・ごみの分け方・出し方 品目別一覧表」(CC BY)",
+  "columns": {
+    "name_jp": "品名",
+    "category": "種別",
+    "note": "出し方と注意点"
+  },
+  "category_map": {
+    "燃やすごみ": "burnable",
+    "燃やさないごみ": "non_burnable",
+    "資源": "resource",
+    "粗大ごみ": "sodai",
+    "収集できません": "not_collected"
+  },
+  "cadence": "monthly",
+  "note": "Open data of 江戸川区 (環境部清掃課, CC BY) published as HTML tables; read by html_items_v1."
+}

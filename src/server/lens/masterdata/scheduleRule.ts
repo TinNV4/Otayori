@@ -54,8 +54,11 @@ export function expandAreas(town: string, chomeCell: string): string[] {
   const c = chomeCell.normalize('NFKC').replace(/\s+/g, '');
   if (!t) return [];
   if (!c || /^(全域|全て|すべて|全地域)$/.test(c)) return [t];
-  if (/番|号/.test(c)) return [`${t}${c}`]; // a block inside a chome
-  const range = c.match(/^(\d{1,2})[~〜～-](\d{1,2})丁目?$/);
+  // "1・2・3丁目（1から17）": a block (番) of those chomes → "鹿骨1丁目(1から17)" per chome
+  const blocked = c.match(/^([^()（）]+?)\s*[(（]([^()（）]+)[)）]$/);
+  if (blocked) return expandAreas(t, blocked[1]).map(k => `${k}(${blocked[2]})`);
+  if (/番|号|[()（）]/.test(c)) return [`${t}${c}`]; // anything else with a block: kept literally
+  const range = c.match(/^(\d{1,2})(?:[~〜～-]|から)(\d{1,2})丁目?$/);
   if (range) {
     const [a, b] = [Number(range[1]), Number(range[2])];
     if (b >= a && b - a <= 20) return Array.from({ length: b - a + 1 }, (_, i) => `${t}${a + i}丁目`);

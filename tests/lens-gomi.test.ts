@@ -60,7 +60,7 @@ describe('national guard', () => {
   ])('real name %s IS an appliance-law item', name => expect(nationalGuard(q({ name_jp: name }))?.kind).toBe('kaden4'));
   it.each([
     'テレビ台', 'テレビ台 幅1m未満', 'テレビスタンド', 'テレビ回転台', 'テレビアンテナ(屋外用)', 'アンテナ(テレビ用)', 'エアコンカバー・室外機カバー', 'エアコンダクトカバー', 'エアコン用窓枠',
-    'フィルター(エアコン・空気清浄機等)', '洗濯機台', '洗濯機防水パン', '洗濯機カバー', '戸棚・冷蔵庫の仕切り板', '冷蔵庫用脱臭剤',
+    'フィルター(エアコン・空気清浄機等)', 'テレビのリモコン', 'エアコンのリモコン', '洗濯機台', '洗濯機防水パン', '洗濯機カバー', '戸棚・冷蔵庫の仕切り板', '冷蔵庫用脱臭剤',
     '衣類乾燥機台',
   ])('real name %s is NOT (an accessory)', name => {
     expect(nationalGuard(q({ name_jp: name }))).toBeNull();

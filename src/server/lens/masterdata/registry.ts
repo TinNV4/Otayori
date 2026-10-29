@@ -14,7 +14,7 @@ export function validateSourceConfig(raw: unknown, file: string): SourceConfig {
   if (!/^\d{5}$/.test(s.city_code || '')) throw bad('"city_code" must be a 5-digit JIS code');
   if (s.kind !== 'gomi_items' && s.kind !== 'gomi_schedule') throw bad(`unsupported kind "${s.kind}"`);
   if (!s.adapter) throw bad('"adapter" required');
-  if (!s.ckan && !s.url) throw bad('"url" or "ckan" required');
+  if (!s.ckan && !s.url && !s.urls?.length) throw bad('"url", "urls" or "ckan" required');
   if (!s.license || !s.attribution) throw bad('"license" and "attribution" are required (every row must carry its terms)');
   if (s.kind === 'gomi_items') {
     if (!s.columns?.name_jp || !s.columns?.category) throw bad('"columns.name_jp" and "columns.category" required');

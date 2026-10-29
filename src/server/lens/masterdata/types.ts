@@ -27,6 +27,15 @@ export interface SourceConfig {
   enabled: boolean;
   /** Direct file URL; ignored when `ckan` is set (the resource URL is resolved from the CKAN API). */
   url: string;
+  /** Several pages that together make one source (e.g. the あ行…ら行 pages of an item list). Fetched in order. */
+  urls?: string[];
+  /** HTML sources: how to read the tables. */
+  html?: {
+    /** Names for the columns after rowspan/colspan are resolved. Use when the page's header row is irregular. */
+    columns?: string[];
+    /** Header rows to skip in every table when `columns` is given (default 1). */
+    header_rows?: number;
+  };
   ckan?: {
     /** e.g. https://ckan.example.jp/api/3/action */
     api: string;

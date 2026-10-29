@@ -374,13 +374,14 @@ flowchart LR
 | 中野区 | 13114 | lịch (theo khu) | `t131148d0000000135` |
 | 中央区 | 13102 | lịch (thứ) | `t131024d0000000002` |
 | 文京区 | 13105 | lịch | `t131059d0110060001` |
-| 江戸川区, 足立区 (MVP) | 13123, 13121 | — | chưa thấy dataset: tìm bằng `discover --query 江戸川区` |
+| 江戸川区 | 13123 | danh mục (HTML, 9 trang あ〜ん) + lịch (HTML) | [hinmoku](https://www.city.edogawa.tokyo.jp/kurashi/gomi_recycle/kategomi/hinmoku/index.html), [yobihyo](https://www.city.edogawa.tokyo.jp/kurashi/gomi_recycle/kategomi/yobihyo.html) — CC BY, không có CSV |
+| 足立区 | 13121 | **chỉ PDF** | xem mục “Adachi” bên dưới |
 | 横浜市 | 14100 | trang open data | [gomi.html](https://www.city.yokohama.lg.jp/city-info/yokohamashi/tokei-chosa/portal/opendata/gomi.html) |
 | 川崎市, 相模原市, 大和市 | 14130, 14150, 14213 | — | chưa tìm |
 
 ### Kết quả nhập thực tế (29/10/2026): Tokyo + Kanagawa
 
-`discover` chạy được trên cổng Tokyo ([catalog.data.metro.tokyo.lg.jp](https://catalog.data.metro.tokyo.lg.jp/), 203 dataset khớp "ごみ分別", đều CC BY). Cổng quốc gia data.go.jp **không** có dữ liệu rác của các thành phố Kanagawa; Yokohama, Sagamihara có cổng CKAN riêng (`data.city.yokohama.lg.jp`, `opendata.city.sagamihara.kanagawa.jp`), Kawasaki công bố CSV trực tiếp trên [trang của thành phố](https://www.city.kawasaki.jp/300/page/0000075059.html). **Chưa tìm thấy dataset** cho 足立区, 江戸川区 (MVP Tokyo), 大和市.
+`discover` chạy được trên cổng Tokyo ([catalog.data.metro.tokyo.lg.jp](https://catalog.data.metro.tokyo.lg.jp/), 203 dataset khớp "ごみ分別", đều CC BY). Cổng quốc gia data.go.jp **không** có dữ liệu rác của các thành phố Kanagawa; Yokohama, Sagamihara có cổng CKAN riêng (`data.city.yokohama.lg.jp`, `opendata.city.sagamihara.kanagawa.jp`), Kawasaki công bố CSV trực tiếp trên [trang của thành phố](https://www.city.kawasaki.jp/300/page/0000075059.html). **Chưa tìm thấy dataset** cho 大和市. 江戸川区 chỉ có bảng HTML (đã nhập, mục dưới); 足立区 chỉ có PDF.
 
 Đã `scaffold` + `sync` 12 nguồn; admin (`tinnv4`) duyệt và **đã publish v1 ngày 29/10/2026** (`data/masterdata/<id>/live.json`, đi cùng image):
 
@@ -397,6 +398,19 @@ flowchart LR
 | `sagamihara-items` 相模原市 | 14150 | 2771 | 2025-04-07 |
 
 Dữ liệu cũ hơn 13 tháng (中央区, 中野区, 東村山, 西東京, 相模原…) vẫn dùng được nhưng câu trả lời tự kèm "dữ liệu đã cũ". Lần cập nhật sau: `npm run data -- sync --all` → `review <id>` → `publish <id> --by <tên>` → commit `data/masterdata/<id>/live.json`.
+
+### 江戸川区 và 足立区 (29/10/2026)
+
+Không có CSV/CKAN, nên thêm 2 adapter đọc **bảng HTML** (`html_items_v1`, `html_schedule_v1`; dùng chung hàm phân tích với bản CSV, chỉ thêm `html.ts` đọc `<table>` có rowspan/colspan). Registry cho phép `urls` (nhiều trang ghép thành một nguồn) và `html.columns` khi hàng tiêu đề không đều.
+
+| Nguồn | Dòng | Ngày | Trạng thái |
+|---|---|---|---|
+| `edogawa-items` | 1057 | 2026-05-15 (đọc từ "更新日" trên trang) | **staged**, chờ admin duyệt |
+| `edogawa-schedule` | 621 dòng / 207 khu | 2026-01-28 | **staged**, chờ admin duyệt |
+
+Hạn chế: không có phí 粗大ごみ trong dữ liệu (đã link trang chính thức trong `city-info.json`); vài khu chia theo khối số nhà (`南篠崎町3丁目(26、27)`) với ngày khác nhau → bot hỏi lại khối nhà.
+
+**足立区**: chỉ có PDF. Bảng phân loại có lớp chữ nhưng phải dựng lại bảng theo tọa độ; lịch theo khu là PDF ảnh (cần OCR/LLM). Điều khoản trang web cấm sao chép trái phép ngoài các ngoại lệ của luật bản quyền, và danh mục dữ liệu mở của quận không có mục rác (các bộ có là CC BY nhưng không liên quan). Vì vậy **chưa nhập**; hiện chỉ có link trang chính thức trong `data/city-info.json`. Cần quyết định: xin phép quận / chờ OCR / chấp nhận chỉ link.
 
 **Điều dữ liệu thật dạy cho thiết kế** (đã sửa trong code):
 - Cột mã thành phố có 6 chữ số (có số kiểm tra: `131181` → `13118`); chỉ so 5 chữ số đầu.
