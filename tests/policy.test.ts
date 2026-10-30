@@ -423,6 +423,16 @@ describe('model output is validated', () => {
 });
 
 describe('LINE chat', () => {
+  it('tells new families about the policy newsletter on activation and offers a menu button', async () => {
+    const { bot, line } = await setup();
+    await activate(bot, group('CN', 'Unew'));
+    const texts = line.sent.flatMap(s => s.messages.map(m => String(m.text)));
+    expect(texts.some(t => t.includes('Kích hoạt thành công') && t.includes('có gì mới'))).toBe(true);
+    const lastMsgs = line.sent[line.sent.length - 1].messages;
+    const menu = lastMsgs[lastMsgs.length - 1].quickReply as { items: Array<{ action: { label: string; text?: string } }> };
+    expect(menu.items.some(i => i.action.label.includes('Chính sách') && i.action.text === 'có gì mới')).toBe(true);
+  });
+
   it('"có gì mới" in a group never prints personal data; in 1:1 it answers by reply (no push quota)', async () => {
     const { bot, repo, line } = await setup();
     await activate(bot, group('CP', 'Ua'));

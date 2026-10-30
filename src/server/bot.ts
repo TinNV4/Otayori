@@ -383,6 +383,7 @@ export class Bot {
         `🎉 Kích hoạt thành công! Hạn mức: ${family.quota_limit} giấy/tháng.\n\n` +
           '📸 Cách dùng: chụp rõ cả trang giấy, gửi vào đây. Giấy nhiều trang thì gửi liên tiếp, mình sẽ gộp lại.\n' +
           '📅 Gõ "lịch" để thêm hạn & sự kiện vào lịch điện thoại.\n' +
+          '📰 Mới: bản tin chính sách cá nhân hóa — chỉ báo thay đổi về visa, thuế, trợ cấp… ảnh hưởng tới riêng bạn. Gõ "có gì mới" (nhắn riêng với bot) hoặc bấm nút 📰 Chính sách để thiết lập 30 giây.\n' +
           '❓ Gõ "menu" bất cứ lúc nào để hiện các nút bên dưới.',
       ),
       text(
