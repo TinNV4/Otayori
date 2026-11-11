@@ -11,6 +11,8 @@ import { MockPolicyAnalyzer, toPolicyItem } from '../src/server/policy/analyzer.
 import { candidateLinks, decodeBody, extractLinks, htmlToText, parseJaDate } from '../src/server/policy/fetch.ts';
 import { addMonths, formatPolicyMessage, matchItem, remindersDue, renewalWindowOpens, suggestSeverity } from '../src/server/policy/match.ts';
 import { PolicyService, validateProfileInput } from '../src/server/policy/service.ts';
+import { findDuplicate, titleSimilarity } from '../src/server/policy/dedupe.ts';
+import { PolicyAnalyzer } from '../src/server/policy/analyzer.ts';
 import { POLICY_CITIES, POLICY_SOURCES, PolicySource } from '../src/server/policy/sources.ts';
 import { PolicyItem, PolicyProfile } from '../src/types/policy.ts';
 import { activate, group, lastText, setup, testConfig, textEv } from './helpers.ts';
@@ -403,12 +405,106 @@ describe('premium gating, rich-menu dot', () => {
   });
 });
 
+describe('the same notice on several pages = one draft', () => {
+  const at = (id: string, over: Partial<PolicyItem> = {}) => item({ id, status: 'pending', approved_at: undefined, url: `https://www.moj.go.jp/isa/${id}.html`, ...over });
+
+  it('titleSimilarity: repeated notices score high, different ones low', () => {
+    expect(titleSimilarity('【令和8年度】資源各戸収集モデル地域年末年始の資源・ごみ収集日のお知らせ（豊岡学区）', '【令和8年度】資源各戸収集モデル地域年末年始の資源・ごみ収集日のお知らせ（大野学区）')).toBeGreaterThan(0.7);
+    expect(titleSimilarity('永住許可に関するガイドラインを改定しました', '在留手数料の改定について')).toBeLessThan(0.3);
+    expect(titleSimilarity('', 'x')).toBe(0);
+  });
+
+  it('findDuplicate: same source + very similar title, or same key date + similar title; never ignored shells', () => {
+    const a = at('a', { title_jp: '令和８年１０月１日付け永住許可に関するガイドラインを改定しました', title_vi: 'Sửa hướng dẫn cấp vĩnh trú', effective_date: '2026-10-01' });
+    const sibling = at('b', { title_jp: '令和８年１０月１日付け永住者の在留資格の取消しに関するガイドラインを改定しました', title_vi: 'Sửa hướng dẫn hủy tư cách vĩnh trú', effective_date: '2026-10-01' });
+    expect(findDuplicate(sibling, [a])?.id).toBe('a');
+    expect(findDuplicate({ ...sibling, effective_date: '2027-01-01' }, [a])).toBeNull(); // different date, titles only 0.6 alike
+    expect(findDuplicate(sibling, [{ ...a, status: 'ignored' }])).toBeNull();
+    expect(findDuplicate(sibling, [{ ...a, status: 'rejected' }])?.id).toBe('a'); // a rejected story must not come back
+    expect(findDuplicate(a, [a])).toBeNull();
+  });
+
+  const pages = (titles: string[]) => {
+    const list = `<p>2026年9月18日</p>` + titles.map((t, i) => `<a href="/isa/p${i}.html">${t}</a>`).join('');
+    const body = '在留手数料について。'.repeat(40);
+    return async (u: string) => (u.endsWith('index.html') ? list : `<title>${titles[Number(u.match(/p(\d)/)![1])]}</title><p>${body}</p>`);
+  };
+  const build = async (titles: string[], analyzer: PolicyAnalyzer = new MockPolicyAnalyzer()) => {
+    const repo = new MemoryRepo();
+    const src: PolicySource = { id: 'isa', issuer: 'ISA', listUrl: 'https://www.moj.go.jp/isa/index.html', hosts: ['www.moj.go.jp'] };
+    const svc = new PolicyService({ repo, cfg: testConfig(), line: new RecordingLineApi(), analyzer, sources: [src], now: () => NOW, fetchPage: pages(titles) });
+    return { svc, repo };
+  };
+
+  it('district-by-district copies of one notice become a single draft that lists the other pages', async () => {
+    const { svc, repo } = await build([
+      '在留手数料の改定のお知らせ（東京出入国在留管理局）', '在留手数料の改定のお知らせ（福岡出入国在留管理局）', '在留手数料の改定のお知らせ（札幌出入国在留管理局）',
+    ]);
+    const r = await svc.ingest();
+    expect(r.created).toBe(1);
+    expect(r.sources[0]).toMatchObject({ pending: 1, ignored: 2, duplicates: 2 });
+    const [keep] = await repo.listPolicyItems('pending');
+    expect(keep.related_urls).toHaveLength(2);
+    const ignored = await repo.listPolicyItems('ignored');
+    expect(ignored.every(i => i.duplicate_of === keep.id)).toBe(true);
+    // …and they are not fetched/analysed again tomorrow
+    expect((await svc.ingest()).created).toBe(0);
+    expect((await repo.listPolicyItems('pending'))).toHaveLength(1);
+  });
+
+  it('different notices stay separate drafts', async () => {
+    const { svc } = await build(['在留手数料の改定について', '永住許可に関するガイドラインの改定']);
+    expect((await svc.ingest()).created).toBe(2);
+  });
+
+  it('trusts the model when it says a page repeats a known item in other words (even with a different title)', async () => {
+    let first = '';
+    const analyzer: PolicyAnalyzer = {
+      async analyze(input) {
+        const base = await new MockPolicyAnalyzer().analyze(input);
+        const dup = input.url.endsWith('p1.html') ? first : '';
+        if (input.url.endsWith('p0.html')) first = input.recent?.[0]?.id ?? 'set-below';
+        return { ...base, raw: { ...base.raw, duplicate_of: dup } };
+      },
+    };
+    const { svc, repo } = await build(['在留手数料を改定します', 'Revision of residence fees for foreigners'], analyzer);
+    // p0 is saved first; give p1 its id via the second pass
+    await svc.ingest({ maxNew: 1 });
+    const [p0] = await repo.listPolicyItems('pending');
+    first = p0.id;
+    const r = await svc.ingest({ maxNew: 1 });
+    expect(r.sources[0].duplicates).toBe(1);
+    expect(await repo.listPolicyItems('pending')).toHaveLength(1);
+    expect((await repo.getPolicyItem(p0.id))!.related_urls).toHaveLength(1);
+  });
+
+  it('the run also folds duplicates that were already waiting in the queue (older drafts)', async () => {
+    const { svc, repo } = await build([]);
+    const base = { title_jp: '令和８年度 年末年始のごみ収集日のお知らせ（A学区）', title_vi: 'Lịch thu gom rác cuối năm' };
+    await repo.savePolicyItem(at('a', { ...base, created_at: '2026-09-18T00:00:00.000Z' }));
+    await repo.savePolicyItem(at('b', { ...base, title_jp: base.title_jp.replace('A', 'B'), created_at: '2026-09-19T00:00:00.000Z' }));
+    await repo.savePolicyItem(at('c', { ...base, title_jp: base.title_jp.replace('A', 'C'), created_at: '2026-09-19T01:00:00.000Z' }));
+    const r = await svc.ingest();
+    expect(r.merged).toBe(2);
+    expect((await repo.listPolicyItems('pending')).map(i => i.id)).toEqual(['a']);
+    expect((await repo.getPolicyItem('a'))!.related_urls).toHaveLength(2);
+  });
+
+  it('a rejected story does not come back as a new draft under another URL', async () => {
+    const { svc, repo } = await build(['在留手数料の改定のお知らせ（東京）']);
+    await repo.savePolicyItem(at('old', { status: 'rejected', source_id: 'isa', title_jp: '在留手数料の改定のお知らせ（大阪）', title_vi: 'x' }));
+    const r = await svc.ingest();
+    expect(r.created).toBe(0);
+    expect(r.sources[0].duplicates).toBe(1);
+  });
+});
+
 describe('model output is validated', () => {
   const source: PolicySource = { id: 'city_x', issuer: 'X市', listUrl: 'https://x/', hosts: ['x'], city: 'nagoya' };
   it('drops invalid dates / visa types and takes the city from the source, not the model', () => {
     const it0 = toPolicyItem({
       relevant: true, stage: 'decided', title_vi: 't', summary_vi: 's', action_vi: '', effective_date: '2026-13-45', deadline: '2026-11-02',
-      visa_types: ['gijinkoku', 'wizard'], children_only: false, renewal_related: false, license_only: false, sectors: ['kaigo', 'bogus'], contract_types: ['part', 'x'], plans: ['permanent', 'y'], confidence: 7,
+      visa_types: ['gijinkoku', 'wizard'], children_only: false, renewal_related: false, license_only: false, sectors: ['kaigo', 'bogus'], contract_types: ['part', 'x'], plans: ['permanent', 'y'], duplicate_of: '', confidence: 7,
     }, source, { url: 'https://x/a', title: 'a' }, NOW, '2026-09-20');
     expect(it0.effective_date).toBeUndefined();
     expect(it0.deadline).toBe('2026-11-02');

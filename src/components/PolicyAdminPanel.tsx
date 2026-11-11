@@ -4,12 +4,12 @@ import { apiFetch } from '../lib/api.ts';
 import { PolicyItem, SEVERITY_ICON, SEVERITY_LABEL, Severity } from '../types/policy.ts';
 
 const SEVERITIES: Severity[] = ['red', 'yellow', 'green'];
-interface SourceReport { id: string; links: number; fresh: number; pending: number; ignored: number; errors: string[]; sample?: Array<{ text: string; url: string; date?: string }> }
+interface SourceReport { id: string; links: number; fresh: number; pending: number; ignored: number; duplicates?: number; errors: string[]; sample?: Array<{ text: string; url: string; date?: string }> }
 interface Status {
   counts: { pending: number; approved: number; rejected: number; ignored: number };
   llm: 'claude' | 'mock';
   running: boolean;
-  last: { at: string; dry: boolean; error?: string; report: { sources: SourceReport[]; cost_usd: number; created: number } | null } | null;
+  last: { at: string; dry: boolean; error?: string; report: { sources: SourceReport[]; cost_usd: number; created: number; merged?: number } | null } | null;
 }
 
 const fmt = (iso?: string) => (iso ? `${Number(iso.slice(8, 10))}/${Number(iso.slice(5, 7))}/${iso.slice(0, 4)}` : '—');
@@ -107,7 +107,7 @@ export const PolicyAdminPanel: React.FC = () => {
               {status.last.error && <div className="text-rose-700">✗ {status.last.error}</div>}
               {status.last.report?.sources.map((src) => (
                 <div key={src.id}>
-                  <b>{src.id}</b>: {src.links} link · {src.fresh} mới{status.last!.dry ? '' : ` · ${src.pending} chờ duyệt · ${src.ignored} bỏ qua`}
+                  <b>{src.id}</b>: {src.links} link · {src.fresh} mới{status.last!.dry ? '' : ` · ${src.pending} chờ duyệt · ${src.ignored} bỏ qua${src.duplicates ? ` (${src.duplicates} trùng nội dung)` : ''}`}
                   {src.errors.map((e) => <div key={e} className="text-rose-700 break-all">✗ {e}</div>)}
                   {status.last!.dry && src.sample?.map((l) => <div key={l.url} className="text-slate-500 truncate">• {l.date} {l.text}</div>)}
                 </div>
@@ -143,6 +143,12 @@ export const PolicyAdminPanel: React.FC = () => {
             <a href={i.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-[14px] font-semibold text-emerald-700">
               <ExternalLink className="w-4 h-4" /> Mở trang gốc ({i.title_jp.slice(0, 30)})
             </a>
+            {!!i.related_urls?.length && (
+              <div className="text-[13px] text-slate-600">
+                🔗 Cùng nội dung, đã gộp vào tin này ({i.related_urls.length} trang):
+                {i.related_urls.slice(0, 5).map((u) => <div key={u} className="truncate"><a href={u} target="_blank" rel="noopener noreferrer" className="text-emerald-700">{u.replace(/^https?:\/\//, '')}</a></div>)}
+              </div>
+            )}
             <div className="flex flex-wrap items-center gap-2 pt-1">
               {SEVERITIES.map((s) => (
                 <button

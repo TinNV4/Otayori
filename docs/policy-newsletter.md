@@ -21,6 +21,16 @@ flowchart LR
 
 **Nguyên tắc:** AI chỉ *tóm tắt* một trang chính thức. Ai nhận tin nào do **luật cố định** quyết định (`src/server/policy/match.ts`), và không có gì được gửi nếu admin chưa duyệt.
 
+## Chống trùng
+
+Cùng một thông báo thường xuất hiện ở nhiều trang (mỗi học khu / mỗi cục XNC một trang, hai trang "ガイドライン改定" cùng ngày, hoặc đăng ở 2 site). Mỗi lần đọc nguồn, hệ thống gộp chúng thành **một** bản nháp:
+
+1. **Trước khi gọi Claude:** tiêu đề link giống ≥70% (cùng nguồn) với tin đã biết trong 60 ngày → bỏ qua, không tải trang, không tốn phí.
+2. **Sau khi Claude tóm tắt:** Claude được xem danh sách tin đã biết và trả về `duplicate_of` nếu đây là cùng nội dung viết khác đi; thêm luật cố định: cùng ngày áp dụng/hạn chót và tiêu đề giống ≥50%.
+3. **Cuối mỗi lần chạy:** dọn các bản nháp trùng đang chờ duyệt từ trước.
+
+Tin được giữ lại ghi "Cùng nội dung, đã gộp vào tin này (N trang)" kèm link các trang kia để admin đối chiếu. Tin đã bị **Loại** thì không quay lại dưới URL khác. Trang bị gộp nằm trong "AI đã bỏ qua", xem lại được.
+
 ## Ba loại tin
 
 | | Khi nào | Gửi thế nào | Tốn quota push |

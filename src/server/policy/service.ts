@@ -9,6 +9,7 @@ import {
 } from '../../types/policy.ts';
 import { PolicyAnalyzer, toPolicyItem, policyId } from './analyzer.ts';
 import { candidateLinks, fetchHtml, htmlToText, Link, PageFetcher, pageTitle } from './fetch.ts';
+import { findDuplicate, rootId, SAME_SOURCE_TITLE, titleSimilarity } from './dedupe.ts';
 import { buildFeed, fmtDay, formatPolicyMessage, isActive, matchItem, remindersDue } from './match.ts';
 import { POLICY_CITIES, POLICY_SOURCES, PolicySource } from './sources.ts';
 
@@ -37,6 +38,8 @@ export interface SourceReport {
   fresh: number;
   pending: number;
   ignored: number;
+  /** Pages folded into an item that already covers the same notice (included in `ignored`). */
+  duplicates?: number;
   errors: string[];
   /** --dry only: what would be analysed. */
   sample?: Link[];
@@ -52,7 +55,12 @@ export interface IngestReport {
   sources: SourceReport[];
   cost_usd: number;
   created: number;
+  /** Pending drafts that turned out to repeat another one and were folded together after the run. */
+  merged?: number;
 }
+
+/** Only compare against items from the last 60 days. */
+const DEDUPE_WINDOW_MS = 60 * 86400_000;
 
 /** What the admin screen shows about the last read of the official sources. */
 export interface IngestStatus {
@@ -168,10 +176,12 @@ export class PolicyService {
     const maxNew = opts.maxNew ?? this.cfg.policyMaxNewPerRun;
     const reports: SourceReport[] = [];
     let cost = 0;
-    let created = 0;
+    const newIds = new Set<string>();
+    // Everything seen recently (any status): new pages are compared against it so one notice = one draft.
+    const known = (await this.repo.listPolicyItems()).filter(i => now.getTime() - Date.parse(i.created_at) < DEDUPE_WINDOW_MS);
 
     for (const source of this.sources.filter(s => !opts.sourceId || s.id === opts.sourceId)) {
-      const rep: SourceReport = { id: source.id, links: 0, fresh: 0, pending: 0, ignored: 0, errors: [] };
+      const rep: SourceReport = { id: source.id, links: 0, fresh: 0, pending: 0, ignored: 0, duplicates: 0, errors: [] };
       reports.push(rep);
       const links: Link[] = [];
       for (const listUrl of source.listUrlsFor ? source.listUrlsFor(now) : [source.listUrl]) {
@@ -197,6 +207,17 @@ export class PolicyService {
           rep.errors.push('budget: đã hết ngân sách tháng, dừng đọc.');
           break;
         }
+        // Same notice repeated (per district / office): the link text alone gives it away, no need to read or pay for it.
+        const same = known.find(o => o.source_id === source.id && titleSimilarity(link.text, o.title_jp) >= SAME_SOURCE_TITLE);
+        if (same) {
+          const shell = { ...this.shell(source, link, now), duplicate_of: rootId(same) };
+          await this.repo.savePolicyItem(shell);
+          await this.attachRelated(rootId(same), link.url);
+          known.push(shell);
+          rep.ignored++;
+          rep.duplicates!++;
+          continue;
+        }
         try {
           const html = await this.fetchPage(link.url);
           const body = htmlToText(html);
@@ -206,17 +227,32 @@ export class PolicyService {
             rep.ignored++;
             continue;
           }
-          const { raw, cost_usd } = await this.deps.analyzer.analyze({ source, url: link.url, title, text: body, today });
+          const recent = known.filter(o => o.status !== 'ignored').slice(0, 40).map(o => ({ id: o.id, title_vi: o.title_vi }));
+          const { raw, cost_usd } = await this.deps.analyzer.analyze({ source, url: link.url, title, text: body, today, recent });
           cost += cost_usd;
           await this.record(month, { cost_usd });
           const item = toPolicyItem(raw, source, { url: link.url, title }, now, today);
+          if (item.status === 'pending') {
+            // The model's own call ("this is item X in other words") first, then the rule-based check.
+            const dup = (raw.duplicate_of && known.find(o => o.id === raw.duplicate_of && o.status !== 'ignored')) || findDuplicate(item, known);
+            if (dup) {
+              item.status = 'ignored';
+              item.duplicate_of = rootId(dup);
+              await this.attachRelated(rootId(dup), item.url);
+              rep.duplicates!++;
+            }
+          }
           await this.repo.savePolicyItem(item);
-          if (item.status === 'pending') { rep.pending++; created++; } else rep.ignored++;
+          known.push(item);
+          if (item.status === 'pending') { rep.pending++; newIds.add(item.id); } else rep.ignored++;
         } catch (err) {
           rep.errors.push(`${link.url}: ${(err as Error).message}`);
         }
       }
     }
+    // Clean up drafts that were already waiting (e.g. from earlier runs, before this check existed).
+    const merged = opts.dry ? 0 : await this.mergePendingDuplicates();
+    const created = [...newIds].length ? (await this.repo.listPolicyItems('pending')).filter(i => newIds.has(i.id)).length : 0;
     if (created && this.deps.notify) {
       const url = liffUrl(this.cfg, { admin: 'policy' });
       await this.deps.notify(
@@ -226,7 +262,34 @@ export class PolicyService {
         url ? { label: '📰 Duyệt ngay', uri: url } : undefined,
       );
     }
-    return { sources: reports, cost_usd: Number(cost.toFixed(6)), created };
+    return { sources: reports, cost_usd: Number(cost.toFixed(6)), created, merged };
+  }
+
+  /** Record that another page covers the same notice (the admin sees these links on the kept item). */
+  private async attachRelated(id: string, url: string) {
+    const root = await this.repo.getPolicyItem(id);
+    if (!root || root.url === url || root.related_urls?.includes(url)) return;
+    root.related_urls = [...(root.related_urls || []), url].slice(0, 20);
+    await this.repo.savePolicyItem(root);
+  }
+
+  /** Fold pending drafts that repeat an older item (pending, approved or rejected) into it. Returns how many. */
+  async mergePendingDuplicates(): Promise<number> {
+    const now = this.now().getTime();
+    const all = (await this.repo.listPolicyItems()).filter(i => now - Date.parse(i.created_at) < DEDUPE_WINDOW_MS);
+    const pending = all.filter(i => i.status === 'pending').sort((a, b) => a.created_at.localeCompare(b.created_at));
+    const kept = all.filter(i => i.status === 'approved' || i.status === 'rejected');
+    let merged = 0;
+    for (const p of pending) {
+      const dup = findDuplicate(p, kept);
+      if (!dup) { kept.push(p); continue; }
+      p.status = 'ignored';
+      p.duplicate_of = rootId(dup);
+      await this.repo.savePolicyItem(p);
+      await this.attachRelated(rootId(dup), p.url);
+      merged++;
+    }
+    return merged;
   }
 
   /** Remember an unusable page so it isn't downloaded again every day. */

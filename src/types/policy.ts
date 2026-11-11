@@ -132,6 +132,10 @@ export interface PolicyItem {
   created_at: string;
   approved_at?: string;
   approved_by?: string;
+  /** Another page of the same notice (district / office / sibling): this one was folded into that item. */
+  duplicate_of?: string;
+  /** Other pages found for the same notice (shown to the admin, who can compare them with the source). */
+  related_urls?: string[];
   /** Users who got the 🔴 push. */
   pushed_user_ids: string[];
   /** Push attempts that LINE rejected (e.g. user never added the bot) — not retried. */
