@@ -5,6 +5,8 @@ import {
 } from './extract.ts';
 import { Composer } from './renraku.ts';
 import { MockTranslator, Translator } from './translate.ts';
+import { ChatAnalyzer, ChatHistory, ChatLine, ChatSuggestion, MockChatAnalyzer } from './chat.ts';
+import { eventKey, normText } from './dedupe.ts';
 import { LineApi, LineMessage, QuickItem, text } from './line.ts';
 import { PageAggregator, PageBatch } from './aggregator.ts';
 import { findExactDuplicate, findSameDocument, mergeInto, pageHash } from './dedupe.ts';
@@ -23,6 +25,7 @@ const MODEL_LABEL: Record<string, string> = {
 
 const DELETE_CONFIRM_MINUTES = 5;
 const TRANSLATE_MODE_MS = 5 * 60_000;
+const SUGGESTION_TTL_MS = 30 * 60_000;
 /** Push messages kept back from digests for reply-token fallbacks and admin alerts. */
 const PUSH_RESERVE = 20;
 const LAST_PAGES_TTL_MS = 10 * 60_000;
@@ -104,6 +107,7 @@ export interface BotDeps {
   extractor: Extractor;
   composer: Composer;
   translator?: Translator;
+  chatAnalyzer?: ChatAnalyzer;
   cfg: AppConfig;
   now?: () => Date;
 }
@@ -117,6 +121,11 @@ export class Bot {
   /** Last translated pages per chat (RAM only, 10 min) so "Đọc & thêm lịch" doesn't need a re-send. */
   private lastPages = new Map<string, { pages: Page[]; at: number }>();
   private translator: Translator;
+  private chatAnalyzer: ChatAnalyzer;
+  /** Recent group text (RAM only) for context when the bot is tagged. */
+  readonly history = new ChatHistory();
+  /** Calendar suggestions waiting for ✅ (RAM only, 30 min). */
+  private suggestions = new Map<string, { familyId: string; doc: ExtractedDocument; at: number }>();
   private repo: Repo;
   private line: LineApi;
   private cfg: AppConfig;
@@ -124,6 +133,7 @@ export class Bot {
 
   constructor(private readonly deps: BotDeps) {
     this.translator = deps.translator || new MockTranslator();
+    this.chatAnalyzer = deps.chatAnalyzer || new MockChatAnalyzer();
     this.repo = deps.repo;
     this.line = deps.line;
     this.cfg = deps.cfg;
@@ -410,6 +420,7 @@ export class Bot {
       '❓ Hướng dẫn — bấm nút bên dưới, hoặc gõ:\n' +
         '• Gửi ảnh/PDF giấy tờ → mình đọc và tóm tắt\n' +
         '• "lịch" → thêm hạn & sự kiện vào lịch điện thoại\n' +
+        '• Tag @tên bot + lời nhắn (vd: "@bot lưu lịch giúp") → mình đọc ~10 tin gần nhất, đề xuất thêm ngày/hạn vào lịch\n' +
         '• "dịch" rồi gửi ảnh → chỉ dịch từng dòng (không lưu, không thêm lịch)\n' +
         '• "dịch <chữ tiếng Nhật>" → dịch đoạn chữ đó\n' +
         '• "trạng thái" → hạn mức tháng này\n' +
@@ -429,7 +440,14 @@ export class Bot {
       .sort((a: { index: number }, b: { index: number }) => b.index - a.index);
     for (const m of selfMentions) raw = raw.slice(0, m.index) + raw.slice(m.index + m.length);
     raw = raw.trim();
-    if (selfMentions.length && !raw) raw = 'menu';
+    const mentioned = selfMentions.length > 0;
+    const quoted = ev.message.quotedMessageId ? this.history.find(family.line_chat_id, ev.message.quotedMessageId) : undefined;
+    // Context = messages before this one; then remember this one for later questions.
+    const context = this.history.recent(family.line_chat_id, Date.now());
+    if (family.status === 'active' && raw) {
+      this.history.add(family.line_chat_id, { id: ev.message.id, userId, text: raw, at: ev.timestamp || Date.now() });
+    }
+    if (mentioned && !raw && !quoted) raw = 'menu';
     const t = fold(raw);
 
     if (t === '/whoami') {
@@ -488,8 +506,82 @@ export class Bot {
     }
     if (t.startsWith('/soan')) return this.compose(ev, family, raw.replace(/^\/\S+\s*/, ''));
 
-    // Unknown text: stay quiet in groups; hint in 1:1.
-    if (family.chat_type === 'user') return this.reply(ev, [text('Gửi ảnh giấy tờ để mình đọc, hoặc gõ "hướng dẫn".')]);
+    // Tagged in a group (or any text in 1:1): look for dates/deadlines in the conversation and offer to save them.
+    if (mentioned || family.chat_type === 'user') return this.analyzeChat(ev, family, raw, context, quoted);
+    // Otherwise stay quiet in groups.
+  }
+
+  /** Read the recent conversation, propose calendar items, wait for ✅ before saving anything. */
+  private async analyzeChat(ev: LineEvent, family: Family, request: string, context: ChatLine[], quoted?: ChatLine) {
+    if (family.status !== 'active') return;
+    const blocker = await this.translateBlocker(family);
+    if (blocker) return this.reply(ev, [text(blocker)]);
+    const now = this.now();
+    let suggestion: ChatSuggestion;
+    try {
+      const r = await this.chatAnalyzer.analyze({ history: context, request, quoted, today: jstDate(now) });
+      await this.recordUsage(jstMonth(now), { cost_usd: r.cost_usd });
+      suggestion = r.result;
+    } catch (err) {
+      const cost = (err as { cost_usd?: number }).cost_usd;
+      if (cost) await this.recordUsage(jstMonth(now), { cost_usd: cost });
+      await this.services.logError(family.family_id, 'CHAT_ANALYZE', String((err as Error).message || err));
+      return this.reply(ev, [text('😥 Mình chưa hiểu được đoạn chat này. Bạn thử ghi rõ ngày giờ rồi tag mình lại nhé.')]);
+    }
+
+    const doc = toDocument(
+      {
+        raw: {
+          doc_type: 'other', title_jp: '', title_vi: suggestion.title_vi || 'Từ tin nhắn nhóm', issuer: '',
+          summary_vi: suggestion.summary_vi, actions: suggestion.actions || [], items_to_bring: [], events: suggestion.events || [],
+          warnings_vi: [], disclaimer: '', confidence: 0.9,
+        },
+        model: 'claude-haiku-5-5',
+        runs: [],
+      },
+      { familyId: family.family_id, pages: 0, now, retentionDays: this.cfg.retentionDays },
+    );
+    doc.source = 'chat';
+    const dated = doc.events.length + doc.actions.filter(a => a.deadline).length;
+    if (!suggestion.found || !dated) {
+      return this.reply(ev, [text(suggestion.reply_vi || 'Mình không thấy ngày hay hạn nào cần lưu trong đoạn chat này.')]);
+    }
+
+    const id = Math.random().toString(36).slice(2, 10);
+    this.suggestions.set(id, { familyId: family.family_id, doc, at: Date.now() });
+    for (const [k, v] of this.suggestions) if (Date.now() - v.at > SUGGESTION_TTL_MS) this.suggestions.delete(k);
+
+    const today = jstDate(now);
+    const dayLabel = (iso: string) => {
+      const d = new Date(`${iso}T00:00:00Z`);
+      return `${['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'][d.getUTCDay()]} ${iso.slice(8, 10)}/${iso.slice(5, 7)}${iso < today ? ' (đã qua)' : ''}`;
+    };
+    const lines = [
+      ...doc.events.map(e => `• ${dayLabel(e.date)}${e.date_uncertain ? ' (?)' : ''}${e.time ? ` ${e.time}` : ''} — ${e.title_vi}${e.location ? ` @ ${e.location}` : ''}`),
+      ...doc.actions.filter(a => a.deadline).map(a => `• [HẠN] ${dayLabel(a.deadline!)}${a.deadline_uncertain ? ' (?)' : ''} — ${a.todo_vi}`),
+    ];
+    return this.reply(ev, [text(
+      `📅 Mình thấy trong tin nhắn:\n${lines.join('\n')}\n\nThêm vào lịch gia đình?${lines.some(l => l.includes('(?)')) ? '\n(?) = ngày mình đoán, kiểm tra lại nhé.' : ''}`,
+      [{ label: '✅ Thêm vào lịch', data: `action=chat_add&id=${id}`, text: '✅ Thêm vào lịch' }, { label: '✖️ Không', data: `action=chat_skip&id=${id}`, text: 'Không' }],
+    )]);
+  }
+
+  /** Save a confirmed chat suggestion, skipping items already in the family calendar. Not counted in the paper quota. */
+  private async saveSuggestion(ev: LineEvent, family: Family, doc: ExtractedDocument) {
+    const existing = await this.repo.listDocuments(family.family_id);
+    const eventKeys = new Set(existing.flatMap(d => d.events.map(eventKey)));
+    const actionKeys = new Set(existing.flatMap(d => d.actions.map(a => `${a.deadline}|${normText(a.todo_vi)}`)));
+    doc.events = doc.events.filter(e => !eventKeys.has(eventKey(e)));
+    doc.actions = doc.actions.filter(a => !actionKeys.has(`${a.deadline}|${normText(a.todo_vi)}`));
+    if (!doc.events.length && !doc.actions.length) return this.reply(ev, [text('👌 Các mục này đã có trong lịch rồi.')]);
+    doc.created_at = this.now().toISOString();
+    await this.repo.addDocument(doc);
+    const n = doc.events.length + doc.actions.length;
+    const edit = liffUrl(this.cfg, { doc: doc.id });
+    return this.reply(ev, [text(
+      `✅ Đã thêm ${n} mục vào lịch gia đình.`,
+      edit ? [{ label: '✏️ Xem / sửa', uri: edit }, { label: '📅 Link lịch', data: 'action=calendar', text: 'Lịch' }] : undefined,
+    )]);
   }
 
   private async confirmDelete(ev: LineEvent, family: Family, userId?: string) {
@@ -497,6 +589,7 @@ export class Bot {
       return this.reply(ev, [text('Yêu cầu xóa đã hết hạn. Gõ "xóa dữ liệu" để bắt đầu lại.')]);
     }
     const n = await this.services.purgeFamilyData(family.family_id, userId || 'user');
+    this.history.clear(family.line_chat_id);
     return this.reply(ev, [text(`✅ Đã xóa ${n} giấy tờ và vô hiệu link lịch cũ.\nNếu muốn dùng lại: bấm Đồng ý và nhập lại mã mời.`,
       [{ label: '✅ Đồng ý', data: 'action=accept_terms', text: 'Đồng ý điều khoản' }])]);
   }
@@ -531,6 +624,16 @@ export class Bot {
     }
     if (action === 'calendar' && family.status === 'active') return this.reply(ev, [this.calendarMessage(family)]);
     if (action === 'translate_mode' && family.status === 'active') return this.startTranslateMode(ev, family);
+    if (action === 'chat_add' || action === 'chat_skip') {
+      const id = params.get('id') || '';
+      const s = this.suggestions.get(id);
+      this.suggestions.delete(id);
+      if (!s || s.familyId !== family.family_id || Date.now() - s.at > SUGGESTION_TTL_MS) {
+        return this.reply(ev, [text(action === 'chat_add' ? 'Đề xuất này đã hết hạn. Tag mình lại để xem lại nhé.' : 'OK.')]);
+      }
+      if (action === 'chat_skip') return this.reply(ev, [text('OK, không lưu.')]);
+      return this.saveSuggestion(ev, family, s.doc);
+    }
     if (action === 'read_last' && family.status === 'active') {
       const last = this.lastPages.get(family.line_chat_id);
       if (!last || Date.now() - last.at > LAST_PAGES_TTL_MS) {

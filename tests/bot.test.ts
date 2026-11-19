@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { activate, ev, group, lastText, setup, textEv } from './helpers.ts';
 import { familyIdForChat } from '../src/server/service.ts';
-import { formatTranslation } from '../src/server/bot.ts';
+import { Bot, formatTranslation } from '../src/server/bot.ts';
+import { ChatAnalyzer, ChatLine } from '../src/server/chat.ts';
+import { MockExtractor } from '../src/server/extract.ts';
+import { TemplateComposer } from '../src/server/renraku.ts';
 import { jstMonth } from '../src/server/time.ts';
 
 const image = (source: object, id: string, imageSet?: object) =>
@@ -364,5 +367,85 @@ describe('family name + morning digest', () => {
     await bot.aggregator.flushAll();
     await repo.addUsage(jstMonth(new Date('2026-11-01T22:00:00Z')), { push_messages: cfg.pushLimit - 5 });
     expect(await bot.sendDailyDigests(new Date('2026-11-01T22:00:00Z'))).toEqual({ sent: 0, skippedQuota: 1 });
+  });
+});
+
+describe('tag the bot → suggest calendar items from the chat', () => {
+  const mention = (src: object, body: string, extra: object = {}) =>
+    ev(src, { type: 'message', message: { id: `mt${Math.random()}`, type: 'text', text: `@Kami Việt ${body}`.trim(), mention: { mentionees: [{ index: 0, length: 10, isSelf: true }] }, ...extra } });
+
+  it('reads recent chat only when tagged, proposes, saves on ✅ (no quota)', async () => {
+    const { bot, repo, line } = await setup();
+    await activate(bot);
+    const fid = familyIdForChat('Cgroup1');
+    const before = line.sent.length;
+    await bot.handleWebhook({ events: [textEv(group('Cgroup1', 'Umom'), 'Họp phụ huynh 21/11 lúc 14:00 ở trường nhé')] });
+    expect(line.sent.length).toBe(before); // untagged: silent
+
+    await bot.handleWebhook({ events: [mention(group('Cgroup1', 'Udad'), 'lưu lịch giúp')] });
+    expect(lastText(line)).toContain('Mình thấy trong tin nhắn');
+    expect(lastText(line)).toContain('21/11');
+    const qr = JSON.stringify(line.sent[line.sent.length - 1].messages[0].quickReply);
+    const id = qr.match(/action=chat_add&id=(\w+)/)![1];
+    expect(await repo.listDocuments(fid)).toHaveLength(0); // nothing saved before confirmation
+
+    await bot.handleWebhook({ events: [ev(group(), { type: 'postback', postback: { data: `action=chat_add&id=${id}` } })] });
+    const docs = await repo.listDocuments(fid);
+    expect(docs).toHaveLength(1);
+    expect(docs[0].source).toBe('chat');
+    expect(docs[0].events[0].date.slice(5)).toBe('11-21');
+    expect(docs[0].events[0].start_time).toBe('14:00');
+    expect((await repo.getFamily(fid))!.quota_used).toBe(0);
+    expect(lastText(line)).toContain('Đã thêm 1 mục');
+
+    // same suggestion confirmed again → already in calendar / expired
+    await bot.handleWebhook({ events: [ev(group(), { type: 'postback', postback: { data: `action=chat_add&id=${id}` } })] });
+    expect(await repo.listDocuments(fid)).toHaveLength(1);
+  });
+
+  it('answers when nothing date-like is found, and ✖️ saves nothing', async () => {
+    const { bot, repo, line } = await setup();
+    await activate(bot);
+    await bot.handleWebhook({ events: [textEv(group(), 'tối nay ăn gì')] });
+    await bot.handleWebhook({ events: [mention(group(), 'có gì cần lưu không?')] });
+    expect(lastText(line)).toContain('không thấy');
+
+    await bot.handleWebhook({ events: [mention(group(), 'đi khám răng 3/12 9:30')] });
+    const id = JSON.stringify(line.sent[line.sent.length - 1].messages[0].quickReply).match(/chat_skip&id=(\w+)/)![1];
+    await bot.handleWebhook({ events: [ev(group(), { type: 'postback', postback: { data: `action=chat_skip&id=${id}` } })] });
+    expect(await repo.listDocuments(familyIdForChat('Cgroup1'))).toHaveLength(0);
+  });
+
+  it('a bare tag on a quoted (replied-to) message analyses that message', async () => {
+    const { bot, line } = await setup();
+    await activate(bot);
+    await bot.handleWebhook({ events: [ev(group(), { type: 'message', message: { id: 'q1', type: 'text', text: 'Nộp tiền xe buýt trước 28/11 nha' } })] });
+    await bot.handleWebhook({ events: [mention(group(), '', { quotedMessageId: 'q1' })] });
+    expect(lastText(line)).toContain('28/11');
+  });
+
+  it('suggestions cannot be confirmed from another family', async () => {
+    const { bot, repo, line } = await setup();
+    await activate(bot, group('CA', 'Ua'));
+    await activate(bot, group('CB', 'Ub'));
+    await bot.handleWebhook({ events: [mention(group('CA', 'Ua'), 'tiệc 5/12 18:00')] });
+    const id = JSON.stringify(line.sent[line.sent.length - 1].messages[0].quickReply).match(/chat_add&id=(\w+)/)![1];
+    await bot.handleWebhook({ events: [ev(group('CB', 'Ub'), { type: 'postback', postback: { data: `action=chat_add&id=${id}` } })] });
+    expect(await repo.listDocuments(familyIdForChat('CB'))).toHaveLength(0);
+    expect(await repo.listDocuments(familyIdForChat('CA'))).toHaveLength(0);
+  });
+
+  it('sends at most the last 10 messages as context, labelled without LINE ids', async () => {
+    const seen: Array<{ history: ChatLine[] }> = [];
+    const spy: ChatAnalyzer = { analyze: async (i) => { seen.push(i); return { result: { found: false, title_vi: '', summary_vi: '', events: [], actions: [], reply_vi: 'ok' }, cost_usd: 0 }; } };
+    const { repo, line, cfg } = await setup();
+    const bot = new Bot({ repo, line, extractor: new MockExtractor(), composer: new TemplateComposer(), chatAnalyzer: spy, cfg });
+    await activate(bot);
+    for (let i = 0; i < 12; i++) await bot.handleWebhook({ events: [textEv(group('Cgroup1', `U${i % 2}`), `tin ${i}`)] });
+    await bot.handleWebhook({ events: [mention(group(), 'xem giúp')] });
+    expect(seen[0].history).toHaveLength(10);
+    expect(seen[0].history[9].text).toBe('tin 11');
+    expect(JSON.stringify(seen[0].history)).not.toMatch(/U\d/);
+    expect(seen[0].history[0].speaker).toMatch(/^Người [A-Z]$/);
   });
 });

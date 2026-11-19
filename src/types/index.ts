@@ -65,6 +65,8 @@ export interface ExtractedDocument {
   is_urgent?: boolean;
   urgent_notified_at?: string;
   urgent_reason?: string;
+  /** Where it came from: a photo/PDF (default) or a conversation the bot was tagged in. */
+  source?: 'photo' | 'chat';
   /** sha256 prefixes of the source pages (photos are not stored) — for duplicate detection. */
   source_hashes?: string[];
 }

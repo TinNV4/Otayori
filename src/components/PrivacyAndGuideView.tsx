@@ -4,7 +4,7 @@ import React, { useState } from 'react';
  * Public privacy & terms page (linked from the bot's welcome message, no login).
  * Written for families: plain language, describes what the app actually does — no operator/infra details.
  */
-const UPDATED = '28/10/2026';
+const UPDATED = '19/11/2026';
 
 const Section: React.FC<{ icon: string; title: string; children: React.ReactNode }> = ({ icon, title, children }) => (
   <section className="bg-white rounded-2xl border border-slate-200 p-5">
@@ -23,6 +23,11 @@ const Vi: React.FC = () => (
       <p>Khi dùng “Chỉ dịch”, ảnh được giữ tạm tối đa 10 phút (chỉ trong bộ nhớ) để bạn bấm “Đọc &amp; thêm lịch” mà không phải gửi lại.</p>
     </Section>
 
+    <Section icon="💬" title="Tin nhắn trong nhóm">
+      <p>Bot chỉ phân tích tin nhắn khi bạn <b>tag tên bot</b> (hoặc nhắn riêng với bot). Để hiểu ngữ cảnh, bot giữ tạm <b>khoảng 10 tin gần nhất</b> của nhóm trong bộ nhớ (không ghi xuống ổ đĩa, tự mất sau 24 giờ hoặc khi máy chủ khởi động lại).</p>
+      <p>Khi được tag, các tin đó được gửi cho AI <b>không kèm tên hay tài khoản LINE</b> (chỉ ghi “Người A”, “Người B”…). Chỉ những mục bạn bấm <b>✅ Thêm vào lịch</b> mới được lưu.</p>
+    </Section>
+
     <Section icon="🗂️" title="Thông tin được lưu">
       <ul className="list-disc pl-5 space-y-1">
         <li>Nội dung đã đọc: tóm tắt, việc cần làm, hạn, sự kiện, đồ cần chuẩn bị.</li>
@@ -30,6 +35,7 @@ const Vi: React.FC = () => (
         <li>Đánh giá 👍/👎 và số giấy đã dùng trong tháng.</li>
       </ul>
       <p><b>Bản dịch</b> (“Chỉ dịch”) <b>không được lưu</b>.</p>
+      <p>Nội dung tin nhắn trong nhóm <b>không được lưu</b>, trừ các mục lịch bạn đã xác nhận.</p>
       <p>Không thu thập tên thật, số điện thoại, địa chỉ hay danh bạ.</p>
     </Section>
 
@@ -75,6 +81,9 @@ const Ja: React.FC = () => (
   <>
     <Section icon="📸" title="画像について">
       <p>送信された画像は内容の読み取りにのみ使用し、<b>保存しません</b>。「翻訳のみ」では、再送不要で読み取りに切り替えられるよう最大10分間メモリ上に一時保持します。</p>
+    </Section>
+    <Section icon="💬" title="グループのメッセージ">
+      <p>ボットがメッセージを解析するのは、ボットをメンション（タグ）した時、または1対1のトークのみです。文脈把握のため、直近約10件をメモリ上に一時保持します（ディスクには保存せず、24時間で消去）。AIには名前やLINEアカウントを含めずに送信し、「✅ カレンダーに追加」を押した項目のみ保存します。</p>
     </Section>
     <Section icon="🗂️" title="保存する情報と期間">
       <p>読み取り結果（要約・やること・期限・予定）、LINEのグループID・ユーザーID、評価（👍/👎）、月間利用数を保存します。翻訳結果は保存しません。</p>

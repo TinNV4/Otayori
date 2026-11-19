@@ -9,6 +9,7 @@ Chụp お便り, giấy 役所, form… gửi vào group LINE gia đình → bo
 | Đọc ảnh/PDF (1–6 trang) → tóm tắt, việc cần làm, hạn, đồ cần mang | Mã mời + giới hạn số gia đình, quota giấy/tháng |
 | Lịch điện thoại (iPhone / Google) tự cập nhật, nhắc trước 1 ngày | Ngân sách Claude/tháng, tự dừng khi chạm trần |
 | **Chỉ dịch**: dịch từng dòng Nhật → Việt, không lưu | Cảnh báo LINE cho admin: ngân sách 80%/100%, quota push 80%, lỗi tăng đột biến |
+| Tag bot trong chat → đề xuất lưu lịch từ ~10 tin gần nhất |
 | Chống trùng khi nhiều người gửi cùng một giấy | Dashboard admin chỉ có số liệu, **không xem được nội dung** |
 | App trong LINE (LIFF): việc sắp tới, giấy tờ, sửa ngày, chụp giấy | CLI: mã mời, gia đình, chi phí (biểu đồ), dọn dữ liệu |
 | `/soạn`: soạn tin kính ngữ gửi cô giáo | Test đầy đủ + script deploy/setup chạy lại được |
@@ -45,6 +46,7 @@ flowchart LR
 | Lệnh LINE, onboarding, quota/ngân sách, cảnh báo admin, nhắc sáng | `src/server/bot.ts` |
 | Đọc giấy bằng Claude, routing Haiku→Sonnet, chi phí | `src/server/extract.ts` |
 | Chỉ dịch | `src/server/translate.ts` |
+| Tag bot → đề xuất lịch từ chat (lịch sử 10 tin trong RAM) | `src/server/chat.ts` |
 | Chống trùng (hash ảnh · cùng giấy · lịch) | `src/server/dedupe.ts` |
 | Gộp ảnh nhiều trang | `src/server/aggregator.ts` |
 | Lịch ICS (RFC 5545) + trang "Thêm vào lịch" | `src/server/ics.ts`, `src/server/calendarPage.ts` |
@@ -58,6 +60,7 @@ flowchart LR
 | Gõ / bấm | Tác dụng |
 |---|---|
 | *(gửi ảnh/PDF)* | Đọc & thêm lịch. Nhiều ảnh gửi liền nhau = 1 giấy |
+| `@tên bot` + lời nhắn (vd: `@Kami Việt lưu lịch giúp`), hoặc tag khi trả lời 1 tin | Đọc ~10 tin gần nhất (chỉ RAM), đề xuất ngày/hạn → **✅ Thêm vào lịch** mới lưu |
 | `dịch` rồi gửi ảnh · `dịch <chữ Nhật>` | Chỉ dịch từng dòng (không lưu, không tính quota) |
 | `lịch` | Trang "Thêm vào lịch iPhone / Google" |
 | `menu`, `?`, `@tên bot` | Hiện các nút bấm (trong group không có rich menu) |

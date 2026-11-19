@@ -60,6 +60,10 @@ const TYPE: Record<DocType, { icon: string; label: string }> = {
   other: { icon: '📄', label: 'Khác' },
 };
 
+/** Chat-sourced items get their own label instead of the generic "Khác". */
+const typeOf = (d: Pick<ExtractedDocument, 'doc_type' | 'source'>) =>
+  d.source === 'chat' ? { icon: '💬', label: 'Từ tin nhắn' } : TYPE[d.doc_type] || TYPE.other;
+
 function openExternal(url: string) {
   try {
     if (liff.isInClient()) return liff.openWindow({ url, external: true });
@@ -113,7 +117,7 @@ const UpcomingTab: React.FC<{ documents: ExtractedDocument[]; onToggle: FamilyAp
         <CheckCircle done={r.action.completed} onClick={() => onToggle(r.doc.id, r.action.id)} />
         <div className="min-w-0 flex-1">
           <div className="text-[16px] font-medium text-slate-900 leading-snug">{r.action.todo_vi}</div>
-          <div className="text-[13px] text-slate-500 mt-0.5 truncate">{TYPE[r.doc.doc_type]?.icon} {r.doc.title_vi}</div>
+          <div className="text-[13px] text-slate-500 mt-0.5 truncate">{typeOf(r.doc)?.icon} {r.doc.title_vi}</div>
           {r.action.deadline_uncertain && <div className="text-[13px] text-amber-700 mt-0.5">⚠️ Hạn chưa chắc — xem giấy gốc</div>}
         </div>
       </div>
@@ -184,11 +188,11 @@ const DocsTab: React.FC<{ documents: ExtractedDocument[]; onOpenDoc: (id: string
         return (
           <button key={d.id} onClick={() => onOpenDoc(d.id)} className="w-full text-left">
             <Card className="p-4 flex items-start gap-3 active:bg-slate-50">
-              <div className="text-2xl leading-none mt-0.5">{TYPE[d.doc_type]?.icon || '📄'}</div>
+              <div className="text-2xl leading-none mt-0.5">{typeOf(d).icon}</div>
               <div className="min-w-0 flex-1">
                 <div className="text-[16px] font-semibold text-slate-900 leading-snug line-clamp-2">{d.title_vi}</div>
                 <div className="text-[13px] text-slate-500 mt-1">
-                  {new Date(d.created_at).toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' })} · {TYPE[d.doc_type]?.label}
+                  {new Date(d.created_at).toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit' })} · {typeOf(d)?.label}
                 </div>
                 <div className="flex flex-wrap gap-1.5 mt-2">
                   {open > 0 && <span className="text-[12px] font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">{open} việc chưa làm</span>}
@@ -232,7 +236,7 @@ const DocSheet: React.FC<{
 
         <div className="px-4 pt-4 space-y-4">
           <div>
-            <div className="text-[13px] text-slate-500">{TYPE[doc.doc_type]?.icon} {TYPE[doc.doc_type]?.label}</div>
+            <div className="text-[13px] text-slate-500">{typeOf(doc)?.icon} {typeOf(doc)?.label}</div>
             <h1 className="text-[22px] font-bold text-slate-900 leading-tight mt-1">{doc.title_vi}</h1>
             {doc.title_jp && <div className="text-[14px] text-slate-500 mt-1">{doc.title_jp}</div>}
             {doc.issuer && <div className="text-[14px] text-slate-500">{doc.issuer}</div>}

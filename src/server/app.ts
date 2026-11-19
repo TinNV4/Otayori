@@ -5,6 +5,7 @@ import { Bot } from './bot.ts';
 import { Extractor, MAX_IMAGE_BYTES, MAX_PDF_BYTES, Page, SUPPORTED_IMAGE_TYPES } from './extract.ts';
 import { Composer } from './renraku.ts';
 import { MockTranslator, TranslationError, Translator } from './translate.ts';
+import { ChatAnalyzer } from './chat.ts';
 import { LineApi, RecordingLineApi, verifyLineSignature } from './line.ts';
 import { AuthedRequest, authMiddleware, IdTokenVerifier, requireAdmin } from './auth.ts';
 import { generateIcsCalendar } from './ics.ts';
@@ -21,6 +22,7 @@ export interface AppDeps {
   extractor: Extractor;
   composer: Composer;
   translator?: Translator;
+  chatAnalyzer?: ChatAnalyzer;
   verifyIdToken: IdTokenVerifier | null;
 }
 
@@ -39,7 +41,7 @@ function adminFamily(f: Family) {
 export function createApp(deps: AppDeps) {
   const { cfg, repo, line } = deps;
   const translator = deps.translator || new MockTranslator();
-  const bot = new Bot({ repo, line, extractor: deps.extractor, composer: deps.composer, translator, cfg });
+  const bot = new Bot({ repo, line, extractor: deps.extractor, composer: deps.composer, translator, chatAnalyzer: deps.chatAnalyzer, cfg });
   const services = bot.services;
   const app = express();
   app.disable('x-powered-by');
