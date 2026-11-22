@@ -249,6 +249,23 @@ export const DocIcon: React.FC<{ doc: Pick<ExtractedDocument, 'doc_type' | 'sour
   );
 };
 
+/** iOS-style segmented control. */
+export const Segmented = <T extends string>({ items, value, onChange }: { items: Array<{ id: T; label: string }>; value: T; onChange: (v: T) => void }) => (
+  <div className="grid rounded-control bg-line/60 p-0.5" style={{ gridTemplateColumns: `repeat(${items.length}, minmax(0, 1fr))` }} role="tablist">
+    {items.map((it) => (
+      <button
+        key={it.id}
+        role="tab"
+        aria-selected={value === it.id}
+        onClick={() => onChange(it.id)}
+        className={`h-9 rounded-[8px] text-footnote font-semibold ${value === it.id ? 'bg-surface text-ink shadow-sm' : 'text-ink-2'}`}
+      >
+        {it.label}
+      </button>
+    ))}
+  </div>
+);
+
 /** Bottom tab bar (4 items max). */
 export const TabBar = <T extends string>({ items, active, onChange }: { items: Array<{ id: T; label: string; icon: LucideIcon; badge?: number }>; active: T; onChange: (id: T) => void }) => (
   <nav className="fixed inset-x-0 bottom-0 z-30 bg-surface/95 shadow-bar backdrop-blur" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>

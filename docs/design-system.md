@@ -72,7 +72,7 @@ Sentence case everywhere — no ALL-CAPS headers.
 | Explain with a short footnote under a section | Long paragraphs above the content |
 
 ## Known gaps
-- Dev-only LINE Test Lab still uses the old styles.
+- None: family app, admin dashboard, privacy page, calendar page and the dev LINE Test Lab all use the kit.
 
 ## Admin dashboard patterns (`AdminLIFFView`)
 - Segmented control (4 tabs max) under the bar instead of a second tab bar.

@@ -437,15 +437,26 @@ export function createApp(deps: AppDeps) {
     const rec = line;
     let seq = 0;
     api.post('/dev/simulate', async (req: AuthedRequest, res) => {
-      const { chatType = 'group', kind = 'text', textMessage, imageBase64, mimeType = 'image/jpeg', presetId, postbackData, pages = 1 } = req.body;
+      const { chatType = 'group', kind = 'text', textMessage, imageBase64, mimeType = 'image/jpeg', presetId, postbackData, pages = 1, mention = false, asUserId } = req.body;
+      const sender = typeof asUserId === 'string' && asUserId ? asUserId : req.userId;
       const source = chatType === 'group'
-        ? { type: 'group', groupId: 'Cdev_group_0001', userId: req.userId }
+        ? { type: 'group', groupId: 'Cdev_group_0001', userId: sender }
         : { type: 'user', userId: req.userId };
       const before = rec.sent.length;
       const events: unknown[] = [];
       const mk = (extra: object) => ({ webhookEventId: `dev${Date.now()}${seq++}`, timestamp: Date.now(), source, replyToken: `rt_${seq}`, ...extra });
       if (kind === 'join') events.push(mk({ type: chatType === 'group' ? 'join' : 'follow' }));
-      if (kind === 'text') events.push(mk({ type: 'message', message: { id: `m${seq}`, type: 'text', text: String(textMessage || '') } }));
+      if (kind === 'text') {
+        // `mention`: simulate tagging the bot ("@Kami Việt …") like LINE does.
+        const tag = '@Kami Việt';
+        const body = String(textMessage || '');
+        events.push(mk({
+          type: 'message',
+          message: mention
+            ? { id: `m${seq}`, type: 'text', text: `${tag} ${body}`.trim(), mention: { mentionees: [{ index: 0, length: tag.length, isSelf: true, type: 'user' }] } }
+            : { id: `m${seq}`, type: 'text', text: body },
+        }));
+      }
       if (kind === 'postback') events.push(mk({ type: 'postback', postback: { data: String(postbackData || '') } }));
       if (kind === 'image') {
         const n = Math.min(Number(pages) || 1, cfg.maxPagesPerDoc);
