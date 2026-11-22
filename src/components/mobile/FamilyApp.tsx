@@ -3,14 +3,15 @@ import liff from '@line/liff';
 import {
   ListTodo, FileText, CalendarDays, Settings, ThumbsUp, ThumbsDown, Trash2, MapPin, AlertTriangle, Search,
   RefreshCw, Shield, BarChart3, Wrench, Camera, Plus, X, Languages, Copy, CalendarPlus, Smartphone, Globe,
-  CheckCircle2, Info, Package,
+  CheckCircle2, Info, Package, Newspaper,
 } from 'lucide-react';
 import { DocAction, DocEvent, ExtractedDocument, Family, Translation } from '../../types/index.ts';
 import {
   AppBar, Button, CheckButton, Chip, DocIcon, docKind, EmptyState, Group, Notice, Row, Screen, Section, Switch, TabBar, TextField, Toast,
 } from '../ui/kit.tsx';
+import { PolicyTab, usePolicyUnread } from './PolicyTab.tsx';
 
-type Tab = 'upcoming' | 'docs' | 'calendar' | 'settings';
+type Tab = 'upcoming' | 'docs' | 'policy' | 'calendar' | 'settings';
 
 export interface FamilyAppProps {
   family: Family;
@@ -529,6 +530,7 @@ export const FamilyApp: React.FC<FamilyAppProps> = (props) => {
   const [translation, setTranslation] = useState<Translation | null>(null);
   const [uploadError, setUploadError] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
+  const [policyUnread, setPolicyUnread] = usePolicyUnread();
 
   const pickFiles = () => fileInput.current?.click();
   const onPicked = (list: FileList | null) => {
@@ -572,6 +574,7 @@ export const FamilyApp: React.FC<FamilyAppProps> = (props) => {
       <div className="mx-auto max-w-md pb-28">
         {tab === 'upcoming' && <UpcomingTab family={family} documents={documents} onToggle={props.onToggleAction} onOpenDoc={setOpenDocId} onCapture={pickFiles} />}
         {tab === 'docs' && <DocsTab documents={documents} onOpenDoc={setOpenDocId} onCapture={pickFiles} />}
+        {tab === 'policy' && <PolicyTab onSeen={() => setPolicyUnread(0)} />}
         {tab === 'calendar' && <CalendarTab family={family} onRotate={props.onRotateIcsToken} />}
         {tab === 'settings' && <SettingsTab {...props} />}
       </div>
@@ -582,6 +585,7 @@ export const FamilyApp: React.FC<FamilyAppProps> = (props) => {
         items={[
           { id: 'upcoming', label: 'Sắp tới', icon: ListTodo, badge: openCount },
           { id: 'docs', label: 'Giấy tờ', icon: FileText },
+          { id: 'policy', label: 'Chính sách', icon: Newspaper, badge: tab === 'policy' ? 0 : policyUnread },
           { id: 'calendar', label: 'Lịch', icon: CalendarDays },
           { id: 'settings', label: 'Cài đặt', icon: Settings },
         ]}

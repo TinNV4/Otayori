@@ -7,6 +7,7 @@ import { ClaudeExtractor, MockExtractor } from './src/server/extract.ts';
 import { ClaudeComposer, TemplateComposer } from './src/server/renraku.ts';
 import { ClaudeTranslator, MockTranslator } from './src/server/translate.ts';
 import { ClaudeChatAnalyzer, MockChatAnalyzer } from './src/server/chat.ts';
+import { ClaudePolicyAnalyzer, MockPolicyAnalyzer } from './src/server/policy/analyzer.ts';
 import { LineClient, RecordingLineApi } from './src/server/line.ts';
 import { lineIdTokenVerifier } from './src/server/auth.ts';
 import { makeInvite } from './src/server/service.ts';
@@ -18,9 +19,10 @@ const extractor = cfg.anthropicApiKey ? new ClaudeExtractor(cfg.anthropicApiKey)
 const composer = cfg.anthropicApiKey ? new ClaudeComposer(cfg.anthropicApiKey) : new TemplateComposer();
 const translator = cfg.anthropicApiKey ? new ClaudeTranslator(cfg.anthropicApiKey) : new MockTranslator();
 const chatAnalyzer = cfg.anthropicApiKey ? new ClaudeChatAnalyzer(cfg.anthropicApiKey) : new MockChatAnalyzer();
+const policyAnalyzer = cfg.anthropicApiKey ? new ClaudePolicyAnalyzer(cfg.anthropicApiKey) : new MockPolicyAnalyzer();
 const verifyIdToken = cfg.liffChannelId ? lineIdTokenVerifier(cfg.liffChannelId) : null;
 
-const { app, bot } = createApp({ cfg, repo, line, extractor, composer, translator, chatAnalyzer, verifyIdToken });
+const { app, bot } = createApp({ cfg, repo, line, extractor, composer, translator, chatAnalyzer, policyAnalyzer, verifyIdToken });
 
 async function start() {
   if (cfg.devMode && (await repo.listInviteCodes()).length === 0) {

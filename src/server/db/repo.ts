@@ -1,4 +1,5 @@
 import { AuditLog, ErrorLog, ExtractedDocument, Family, InviteCode, MonthlyUsage } from '../../types/index.ts';
+import { PolicyItem, PolicyProfile, PolicyStatus } from '../../types/policy.ts';
 
 export type RedeemResult =
   | { ok: true; invite: InviteCode }
@@ -44,6 +45,16 @@ export interface Repo {
   addUsage(month: string, delta: UsageDelta): Promise<void>;
   /** Record that an alert was sent this month; returns false if it already was (send once). */
   markUsageAlert(month: string, key: string): Promise<boolean>;
+
+  /** Policy newsletter: profiles are per LINE user (not per family) and only the owner may read/delete theirs. */
+  getPolicyProfile(userId: string): Promise<PolicyProfile | null>;
+  savePolicyProfile(profile: PolicyProfile): Promise<void>;
+  deletePolicyProfile(userId: string): Promise<boolean>;
+  listPolicyProfiles(): Promise<PolicyProfile[]>;
+  getPolicyItem(id: string): Promise<PolicyItem | null>;
+  /** Upsert. */
+  savePolicyItem(item: PolicyItem): Promise<void>;
+  listPolicyItems(status?: PolicyStatus): Promise<PolicyItem[]>;
 
   addAudit(log: AuditLog): Promise<void>;
   listAudit(limit: number): Promise<AuditLog[]>;

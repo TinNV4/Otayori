@@ -37,7 +37,7 @@ export const group = (groupId = 'Cgroup1', userId = 'Uuser1') => ({ type: 'group
 export const textEv = (source: object, t: string) => ev(source, { type: 'message', message: { id: `m${n}`, type: 'text', text: t } });
 
 /** Join + consent + invite → active family. */
-export async function activate(bot: Bot, source = group()) {
+export async function activate(bot: Bot, source: object = group()) {
   await bot.handleWebhook({ events: [ev(source, { type: 'join' })] });
   await bot.handleWebhook({ events: [textEv(source, 'Đồng ý điều khoản')] });
   await bot.handleWebhook({ events: [textEv(source, 'BETA2026')] });

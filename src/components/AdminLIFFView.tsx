@@ -5,12 +5,14 @@ import {
 import { apiFetch } from '../lib/api.ts';
 import { AdminMetrics, AuditLog, DOC_TYPES, DocType, Family, InviteCode, MonthlyUsage } from '../types/index.ts';
 import { Button, Chip, DocIcon, docKind, EmptyState, Group, Notice, Row, Section, Segmented, Switch, TextField, Toast } from './ui/kit.tsx';
+import { PolicyAdminPanel } from './PolicyAdminPanel.tsx';
 
 /**
  * Operator dashboard (admin LINE userIds only). Metadata only — never document content.
  * Built from the shared UI kit (docs/design-system.md).
  */
 interface AdminLIFFViewProps {
+  initialTab?: 'policy';
   metrics: AdminMetrics;
   usage?: MonthlyUsage | null;
   families: Family[];
@@ -19,7 +21,7 @@ interface AdminLIFFViewProps {
   onRefresh: () => void | Promise<void>;
 }
 
-type AdminTab = 'overview' | 'families' | 'invites' | 'log';
+type AdminTab = 'overview' | 'families' | 'invites' | 'policy' | 'log';
 
 const fmtDate = (iso: string) => {
   const d = new Date(iso);
@@ -323,8 +325,8 @@ const Log: React.FC<{ logs: AuditLog[] }> = ({ logs }) =>
   );
 
 // ---------- shell ----------
-export const AdminLIFFView: React.FC<AdminLIFFViewProps> = ({ metrics, usage, families, inviteCodes, auditLogs, onRefresh }) => {
-  const [tab, setTab] = useState<AdminTab>('overview');
+export const AdminLIFFView: React.FC<AdminLIFFViewProps> = ({ initialTab, metrics, usage, families, inviteCodes, auditLogs, onRefresh }) => {
+  const [tab, setTab] = useState<AdminTab>(initialTab || 'overview');
   const [toast, setToast] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -350,6 +352,7 @@ export const AdminLIFFView: React.FC<AdminLIFFViewProps> = ({ metrics, usage, fa
               { id: 'overview', label: 'Tổng quan' },
               { id: 'families', label: `Gia đình` },
               { id: 'invites', label: 'Mã mời' },
+              { id: 'policy', label: 'Chính sách' },
               { id: 'log', label: 'Nhật ký' },
             ]}
           />
@@ -362,6 +365,7 @@ export const AdminLIFFView: React.FC<AdminLIFFViewProps> = ({ metrics, usage, fa
       {tab === 'overview' && <Overview metrics={metrics} usage={usage} />}
       {tab === 'families' && <Families families={families} onAction={notify} />}
       {tab === 'invites' && <Invites invites={inviteCodes} onAction={notify} />}
+      {tab === 'policy' && <PolicyAdminPanel />}
       {tab === 'log' && <Log logs={auditLogs} />}
 
       {toast && <Toast>{toast}</Toast>}

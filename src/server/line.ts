@@ -25,7 +25,14 @@ export interface LineApi {
   getContent(messageId: string): Promise<{ data: Buffer; contentType: string; hint?: string }>;
   showLoading(chatId: string, seconds?: number): Promise<void>;
   getGroupMemberCount(groupId: string): Promise<number | null>;
+  /** Show this user a different rich menu (by alias). Doesn't use the message quota. */
+  linkRichMenu(userId: string, alias: string): Promise<boolean>;
+  /** Back to the default rich menu. */
+  unlinkRichMenu(userId: string): Promise<boolean>;
 }
+
+/** Alias of the rich menu with the red dot on "Trang gia đình" (created by scripts/richmenu.ts). */
+export const DOT_MENU_ALIAS = 'giaytonhat-dot';
 
 const API = 'https://api.line.me/v2/bot';
 const DATA_API = 'https://api-data.line.me/v2/bot';
@@ -83,6 +90,26 @@ export class LineClient implements LineApi {
     if (!res.ok) return null;
     return ((await res.json()) as { count: number }).count;
   }
+
+  private menuIds = new Map<string, string>();
+
+  async linkRichMenu(userId: string, alias: string) {
+    let id = this.menuIds.get(alias);
+    if (!id) {
+      const res = await fetch(`${API}/richmenu/alias/${encodeURIComponent(alias)}`, { headers: this.headers(false) });
+      if (!res.ok) return false; // alias not created yet (run scripts/richmenu.ts)
+      id = ((await res.json()) as { richMenuId: string }).richMenuId;
+      this.menuIds.set(alias, id);
+    }
+    const res = await fetch(`${API}/user/${encodeURIComponent(userId)}/richmenu/${id}`, { method: 'POST', headers: this.headers(false) });
+    if (res.status === 404) this.menuIds.delete(alias); // menu was recreated
+    return res.ok;
+  }
+
+  async unlinkRichMenu(userId: string) {
+    const res = await fetch(`${API}/user/${encodeURIComponent(userId)}/richmenu`, { method: 'DELETE', headers: this.headers(false) });
+    return res.ok;
+  }
 }
 
 /** Records outgoing messages instead of calling LINE (dev simulator + tests). */
@@ -106,6 +133,10 @@ export class RecordingLineApi implements LineApi {
   }
   async showLoading() {}
   async getGroupMemberCount() { return null; }
+  /** userId → alias of the menu they currently see (absent = default menu). */
+  menus = new Map<string, string>();
+  async linkRichMenu(userId: string, alias: string) { this.menus.set(userId, alias); return true; }
+  async unlinkRichMenu(userId: string) { this.menus.delete(userId); return true; }
 }
 
 export interface QuickItem {

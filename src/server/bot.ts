@@ -12,6 +12,9 @@ import { PageAggregator, PageBatch } from './aggregator.ts';
 import { findExactDuplicate, findSameDocument, mergeInto, pageHash } from './dedupe.ts';
 import { calendarPageUrl, familyIdForChat, liffUrl, newFamily, normalizeCode, rollQuotaMonth, Services } from './service.ts';
 import { jstDate, jstMonth } from './time.ts';
+import { MockPolicyAnalyzer, PolicyAnalyzer } from './policy/analyzer.ts';
+import { PolicyService } from './policy/service.ts';
+import { PageFetcher } from './policy/fetch.ts';
 import { ExtractedDocument, Family, Translation } from '../types/index.ts';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -108,6 +111,9 @@ export interface BotDeps {
   composer: Composer;
   translator?: Translator;
   chatAnalyzer?: ChatAnalyzer;
+  policyAnalyzer?: PolicyAnalyzer;
+  /** Tests only: replaces the real HTTP fetch of official pages. */
+  policyFetchPage?: PageFetcher;
   cfg: AppConfig;
   now?: () => Date;
 }
@@ -115,6 +121,7 @@ export interface BotDeps {
 export class Bot {
   readonly services: Services;
   readonly aggregator: PageAggregator;
+  readonly policy: PolicyService;
   private seenEvents: string[] = [];
   /** Chats that typed "dịch": the next photos are translated only (one-shot, expires). */
   private translateUntil = new Map<string, number>();
@@ -140,6 +147,10 @@ export class Bot {
     this.now = deps.now || (() => new Date());
     this.services = new Services(deps.repo, deps.cfg);
     this.services.onError = (_familyId, type) => this.trackError(type);
+    this.policy = new PolicyService({
+      repo: deps.repo, cfg: deps.cfg, line: deps.line, analyzer: deps.policyAnalyzer || new MockPolicyAnalyzer(), fetchPage: deps.policyFetchPage,
+      recordUsage: (m, d) => this.recordUsage(m, d), notify: (msg, link) => this.notifyAdmins(`🔔 [Admin] ${msg}`, link), now: this.now,
+    });
     this.aggregator = new PageAggregator(deps.cfg.aggregationWindowMs, deps.cfg.maxPagesPerDoc, b => this.processBatch(b));
   }
 
@@ -179,9 +190,9 @@ export class Bot {
   }
 
   /** Push to admins' 1:1 chats (counts against the monthly push quota; admins must have added the bot). */
-  async notifyAdmins(message: string) {
+  async notifyAdmins(message: string, link?: { label: string; uri: string }) {
     for (const id of this.cfg.adminUserIds) {
-      if (await this.line.push(id, [text(message)]).catch(() => false)) {
+      if (await this.line.push(id, [text(message, link ? [{ label: link.label, uri: link.uri }] : undefined)]).catch(() => false)) {
         await this.repo.addUsage(jstMonth(this.now()), { push_messages: 1 });
       }
     }
@@ -408,6 +419,7 @@ export class Bot {
         `🎉 Kích hoạt thành công! Hạn mức: ${family.quota_limit} giấy/tháng.\n\n` +
           '📸 Cách dùng: chụp rõ cả trang giấy, gửi vào đây. Giấy nhiều trang thì gửi liên tiếp, mình sẽ gộp lại.\n' +
           '📅 Gõ "lịch" để thêm hạn & sự kiện vào lịch điện thoại.\n' +
+          '📰 Mới: bản tin chính sách cá nhân hóa — chỉ báo thay đổi về visa, thuế, trợ cấp… ảnh hưởng tới riêng bạn. Gõ "có gì mới" (nhắn riêng với bot) hoặc bấm nút 📰 Chính sách để thiết lập 30 giây.\n' +
           '❓ Gõ "menu" bất cứ lúc nào để hiện các nút bên dưới.',
       ),
       text(
@@ -431,6 +443,7 @@ export class Bot {
       { label: '📷 Chụp giấy', camera: true },
       { label: '🖼️ Chọn ảnh', cameraRoll: true },
       { label: '📅 Lịch', data: 'action=calendar', text: 'Lịch' },
+      { label: '📰 Chính sách', text: 'có gì mới' },
       { label: '🌐 Chỉ dịch', data: 'action=translate_mode', text: 'dịch' },
       { label: '📊 Hạn mức', text: 'trạng thái' },
       { label: '✍️ Soạn tin cô', text: '/soạn' },
@@ -449,6 +462,7 @@ export class Bot {
         '• Tag @tên bot + lời nhắn (vd: "@bot lưu lịch giúp") → mình đọc ~10 tin gần nhất, đề xuất thêm ngày/hạn vào lịch\n' +
         '• "dịch" rồi gửi ảnh → chỉ dịch từng dòng (không lưu, không thêm lịch)\n' +
         '• "dịch <chữ tiếng Nhật>" → dịch đoạn chữ đó\n' +
+        '• "có gì mới" → thay đổi chính sách ảnh hưởng tới riêng bạn (nhắn riêng với bot)\n' +
         '• "trạng thái" → hạn mức tháng này\n' +
         '• "đặt tên <tên>" → đổi tên gia đình\n' +
         '• "nhắc sáng bật/tắt" → 7:00 nhắn việc hôm nay & ngày mai\n' +
@@ -504,6 +518,10 @@ export class Bot {
     }
 
     if (t === 'lich' || t === '/lich') return this.reply(ev, [this.calendarMessage(family)]);
+    if (/^(co gi moi|\/cogimoi|chinh sach|\/chinhsach|ban tin)\??$/.test(t)) {
+      const mode = t.startsWith('co gi moi') || t === '/cogimoi' ? 'whatsnew' : 'intro';
+      return this.reply(ev, await this.policy.chatReply(userId, family.chat_type === 'user', mode));
+    }
     if (t === 'nhac sang bat' || t === 'nhac sang tat' || t === 'nhac sang') {
       if (t !== 'nhac sang') {
         family.daily_digest = t.endsWith('bat');

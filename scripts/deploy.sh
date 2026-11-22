@@ -83,7 +83,7 @@ if [[ "$NEW_URL" != "${URL:-}" ]]; then
 fi
 
 # Scheduler jobs are (re)created on every run so new jobs appear after a --deploy-only update too.
-echo "▶ Cloud Scheduler: hourly cleanup + 7:00 JST digest"
+echo "▶ Cloud Scheduler: hourly cleanup + 7:00 JST digest + 7:30 JST policy newsletter"
 CRON=$(gcloud secrets versions access latest --secret=cron-secret)
 schedule_job() { # name schedule path
   gcloud scheduler jobs describe "$1" --location="$REGION" >/dev/null 2>&1 && \
@@ -94,6 +94,7 @@ schedule_job() { # name schedule path
 }
 schedule_job "${SERVICE}-cleanup" "17 * * * *" /tasks/cleanup
 schedule_job "${SERVICE}-digest" "0 7 * * *" /tasks/digest
+schedule_job "${SERVICE}-policy" "30 7 * * *" /tasks/policy
 
 echo
 echo "✅ Deployed: $NEW_URL"

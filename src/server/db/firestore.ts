@@ -1,10 +1,12 @@
 import { FieldValue, Firestore, Timestamp } from '@google-cloud/firestore';
 import { AuditLog, ErrorLog, ExtractedDocument, Family, InviteCode, MonthlyUsage } from '../../types/index.ts';
+import { PolicyItem, PolicyProfile, PolicyStatus } from '../../types/policy.ts';
 import { emptyUsage, RedeemResult, Repo, UsageDelta } from './repo.ts';
 
 /**
  * Firestore Native (asia-northeast1).
- * Collections: families, documents (TTL on `expire_at`), invite_codes, usage, audit_logs, error_logs (TTL on `expire_at`).
+ * Collections: families, documents (TTL on `expire_at`), invite_codes, usage, audit_logs, error_logs (TTL on `expire_at`),
+ * policy_profiles (doc id = LINE userId), policy_items (doc id = hash of the source URL).
  */
 export class FirestoreRepo implements Repo {
   private db: Firestore;
@@ -128,6 +130,29 @@ export class FirestoreRepo implements Repo {
       tx.set(ref, { month, alerts: FieldValue.arrayUnion(key) }, { merge: true });
       return true;
     });
+  }
+
+  async getPolicyProfile(userId: string) {
+    const s = await this.db.collection('policy_profiles').doc(userId).get();
+    return s.exists ? (s.data() as PolicyProfile) : null;
+  }
+  async savePolicyProfile(p: PolicyProfile) { await this.db.collection('policy_profiles').doc(p.user_id).set(p); }
+  async deletePolicyProfile(userId: string) {
+    const ref = this.db.collection('policy_profiles').doc(userId);
+    if (!(await ref.get()).exists) return false;
+    await ref.delete();
+    return true;
+  }
+  async listPolicyProfiles() { return (await this.db.collection('policy_profiles').get()).docs.map(d => d.data() as PolicyProfile); }
+  async getPolicyItem(id: string) {
+    const s = await this.db.collection('policy_items').doc(id).get();
+    return s.exists ? (s.data() as PolicyItem) : null;
+  }
+  async savePolicyItem(i: PolicyItem) { await this.db.collection('policy_items').doc(i.id).set(i); }
+  async listPolicyItems(status?: PolicyStatus) {
+    const col = this.db.collection('policy_items');
+    const q = await (status ? col.where('status', '==', status) : col).get();
+    return q.docs.map(d => d.data() as PolicyItem).sort((a, b) => b.created_at.localeCompare(a.created_at));
   }
 
   async addAudit(log: AuditLog) { await this.db.collection('audit_logs').doc(log.id).set(log); }

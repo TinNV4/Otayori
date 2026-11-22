@@ -11,6 +11,7 @@ import { MemoryRepo } from '../src/server/db/memory.ts';
 import { Repo } from '../src/server/db/repo.ts';
 import { makeInvite, newFamily } from '../src/server/service.ts';
 import { ExtractedDocument } from '../src/types/index.ts';
+import { PolicyItem, PolicyProfile } from '../src/types/policy.ts';
 import { testConfig } from './helpers.ts';
 
 const impls: Array<[string, () => Promise<Repo>]> = [['memory', async () => new MemoryRepo()]];
@@ -101,5 +102,33 @@ describe.each(impls)('Repo contract: %s', (_name, make) => {
     expect((await repo.listAudit(10)).map(a => a.id)).toEqual(['a2', 'a1']);
     await repo.addError({ id: 'e1', timestamp: '2026-10-01T00:00:00Z', family_id: 'f', error_type: 'T', message: 'm' });
     expect((await repo.listErrors(10))[0].id).toBe('e1');
+  });
+
+  it('policy: profiles are per user; items upsert and filter by status', async () => {
+    const repo = await make();
+    const now = new Date().toISOString();
+    const prof = (user_id: string): PolicyProfile => ({ user_id, visa_type: 'gijinkoku', visa_expiry: '2027-03-15', city: 'nagoya', has_children: false, created_at: now, updated_at: now, reminders_sent: [] });
+    await repo.savePolicyProfile(prof('Ua'));
+    await repo.savePolicyProfile(prof('Ub'));
+    expect((await repo.getPolicyProfile('Ua'))?.visa_expiry).toBe('2027-03-15');
+    expect(await repo.getPolicyProfile('Unobody')).toBeNull();
+    expect(await repo.listPolicyProfiles()).toHaveLength(2);
+    expect(await repo.deletePolicyProfile('Ua')).toBe(true);
+    expect(await repo.deletePolicyProfile('Ua')).toBe(false);
+    expect(await repo.getPolicyProfile('Ub')).not.toBeNull();
+
+    const item = (id: string, status: PolicyItem['status'], created: string): PolicyItem => ({
+      id, source_id: 'isa', issuer: 'x', url: `https://x/${id}`, title_jp: 't', title_vi: 't', summary_vi: 's', action_vi: '', stage: 'decided', severity: 'red',
+      audience: { visa_types: [], cities: [], children_only: false, renewal_related: false }, status, confidence: 1, created_at: created, pushed_user_ids: [], push_failed_user_ids: [],
+    });
+    await repo.savePolicyItem(item('p1', 'pending', '2026-01-01T00:00:00.000Z'));
+    await repo.savePolicyItem(item('p2', 'approved', '2026-02-01T00:00:00.000Z'));
+    const p1 = (await repo.getPolicyItem('p1'))!;
+    p1.status = 'approved';
+    p1.pushed_user_ids.push('Ub');
+    await repo.savePolicyItem(p1);
+    expect((await repo.listPolicyItems()).map(i => i.id)).toEqual(['p2', 'p1']); // newest first
+    expect(await repo.listPolicyItems('pending')).toHaveLength(0);
+    expect((await repo.getPolicyItem('p1'))?.pushed_user_ids).toEqual(['Ub']);
   });
 });
