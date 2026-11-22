@@ -12,5 +12,7 @@ COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
 COPY package.json server.ts tsconfig.json ./
 COPY src ./src
+# Published master data + city list (reviewed in git, shipped with the image).
+COPY data ./data
 # tsx is a runtime dependency (server is TypeScript, run without a separate compile step).
 CMD ["node", "--import", "tsx", "server.ts"]

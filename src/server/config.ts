@@ -45,6 +45,17 @@ export interface AppConfig {
   retentionDays: number;
   leftGroupPurgeDays: number;
   cronSecret: string | null;
+  /** Waste/lookup questions per family per month (cheap, separate from the paper quota). */
+  lookupQuota: number;
+  /** Published master data (data/masterdata/<source>/live.json) and the source registry. */
+  masterdataDir: string;
+  masterdataSources: string;
+  citiesFile: string;
+  cityInfoFile: string;
+  /** "Đi chợ" tables (ingredients, dishes, substitutes). */
+  groceryDir: string;
+  /** 'gsi' = fall back to GSI's reverse geocoder when a LINE location has no usable address. Sends coordinates to a third party, so off by default. */
+  regionGeocoder: 'off' | 'gsi';
 }
 
 export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
@@ -77,6 +88,13 @@ export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
     retentionDays: num('RETENTION_DAYS', 90),
     leftGroupPurgeDays: num('LEFT_GROUP_PURGE_DAYS', 7),
     cronSecret: env.CRON_SECRET || null,
+    lookupQuota: num('LOOKUP_QUOTA', 60),
+    masterdataDir: env.MASTERDATA_DIR || 'data/masterdata',
+    masterdataSources: env.MASTERDATA_SOURCES || 'data/sources',
+    citiesFile: env.CITIES_FILE || 'data/cities.json',
+    cityInfoFile: env.CITY_INFO_FILE || 'data/city-info.json',
+    groceryDir: env.GROCERY_DIR || 'data/grocery',
+    regionGeocoder: env.REGION_GEOCODER === 'gsi' ? 'gsi' : 'off',
   };
 
   if (isProduction) {

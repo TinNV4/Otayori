@@ -1,0 +1,50 @@
+{
+  "id": "chuo-schedule",
+  "city_code": "13102",
+  "kind": "gomi_schedule",
+  "enabled": true,
+  "note": "Imported 2026-10-29 with `data scaffold`; category_map entries mapped to \"other\" or by keyword were chosen by Claude and need an admin look before publish (see docs).",
+  "ckan": {
+    "api": "https://catalog.data.metro.tokyo.lg.jp/api/3/action",
+    "dataset": "t131024d0000000002"
+  },
+  "url": "",
+  "encoding": "shift_jis",
+  "license": "クリエイティブ・コモンズ 表示（CC BY）",
+  "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+  "cadence": "monthly",
+  "adapter": "schedule_csv_v1",
+  "schedule": {
+    "area_columns": [
+      "町名",
+      "丁目"
+    ],
+    "categories": [
+      {
+        "column": "燃やすごみ",
+        "local_category": "燃やすごみ",
+        "common_class": "burnable"
+      },
+      {
+        "column": "燃やさないごみ",
+        "local_category": "燃やさないごみ",
+        "common_class": "non_burnable"
+      },
+      {
+        "column": "プラマーク",
+        "local_category": "プラマーク",
+        "common_class": "plastic"
+      },
+      {
+        "column": "資源",
+        "local_category": "資源",
+        "common_class": "resource"
+      },
+      {
+        "column": "粗大ごみ",
+        "local_category": "粗大ごみ",
+        "common_class": "sodai"
+      }
+    ]
+  }
+}

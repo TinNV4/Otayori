@@ -1,0 +1,37 @@
+{
+  "id": "arakawa-items",
+  "city_code": "13118",
+  "kind": "gomi_items",
+  "enabled": true,
+  "note": "Imported 2026-10-29 with `data scaffold`; category_map entries mapped to \"other\" or by keyword were chosen by Claude and need an admin look before publish (see docs).",
+  "ckan": {
+    "api": "https://catalog.data.metro.tokyo.lg.jp/api/3/action",
+    "dataset": "t131181d0000000002"
+  },
+  "url": "",
+  "encoding": "shift_jis",
+  "license": "クリエイティブ・コモンズ 表示（CC BY）",
+  "attribution": "荒川区 「荒川区ごみと資源の分別品目」 (クリエイティブ・コモンズ 表示（CC BY）)",
+  "cadence": "monthly",
+  "adapter": "ckan_csv_v1",
+  "columns": {
+    "name_jp": "ゴミの品目",
+    "category": "分別区分",
+    "kana": "ゴミの品目_カナ",
+    "note": [
+      "注意点",
+      "備考"
+    ],
+    "fee": "粗大ごみ回収料金",
+    "city_code": "全国地方公共団体コード"
+  },
+  "category_map": {
+    "粗大ごみ": "sodai",
+    "燃やさないごみ": "non_burnable",
+    "燃やすごみ": "burnable",
+    "収集できないもの": "not_collected",
+    "資源": "resource",
+    "拠点回収": "drop_off",
+    "パソコン": "pc"
+  }
+}

@@ -1,0 +1,6859 @@
+{
+ "meta": {
+  "source_id": "chuo-schedule",
+  "version": 1,
+  "content_hash": "d785a92cd5da380349ab16938b3bb85d0858ea3b68404f6d67437932db48f7cb",
+  "row_count": 320,
+  "created_at": "2026-10-29T01:02:51.824Z",
+  "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+  "source_updated_at": "2017-04-02",
+  "warnings": [],
+  "verified_by": "tinnv4",
+  "published_at": "2026-10-29T01:10:46.124Z"
+ },
+ "rows": [
+  {
+   "id": "13102-2524bf023c1d",
+   "city_code": "13102",
+   "area_key": "明石町",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-2a6dc0826517",
+   "city_code": "13102",
+   "area_key": "明石町",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-f7a608238f2d",
+   "city_code": "13102",
+   "area_key": "明石町",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-643b758c2cfe",
+   "city_code": "13102",
+   "area_key": "明石町",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-bf858454afbb",
+   "city_code": "13102",
+   "area_key": "明石町",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-62c55c5d56e9",
+   "city_code": "13102",
+   "area_key": "入船",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-b40974d81313",
+   "city_code": "13102",
+   "area_key": "入船",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-d576d726e2f6",
+   "city_code": "13102",
+   "area_key": "入船",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-ff8308e2628f",
+   "city_code": "13102",
+   "area_key": "入船",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-74eff7da9e4c",
+   "city_code": "13102",
+   "area_key": "入船",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-ea0cd4e685c9",
+   "city_code": "13102",
+   "area_key": "京橋",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   "rule_text": "月曜日~土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-076ed4fcc40e",
+   "city_code": "13102",
+   "area_key": "京橋",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-a7afc4bcba9b",
+   "city_code": "13102",
+   "area_key": "京橋",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-91709a20acb0",
+   "city_code": "13102",
+   "area_key": "京橋",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-9fca2c67f9dd",
+   "city_code": "13102",
+   "area_key": "京橋",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-f1891a2a8de0",
+   "city_code": "13102",
+   "area_key": "銀座1丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   "rule_text": "月曜日~土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-0b5b77c0ab56",
+   "city_code": "13102",
+   "area_key": "銀座2丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   "rule_text": "月曜日~土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-5936e93caecb",
+   "city_code": "13102",
+   "area_key": "銀座1丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-04a7a06c8e1f",
+   "city_code": "13102",
+   "area_key": "銀座2丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-d891d28cfb35",
+   "city_code": "13102",
+   "area_key": "銀座1丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-c4f3b915737e",
+   "city_code": "13102",
+   "area_key": "銀座2丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-0767acb9d055",
+   "city_code": "13102",
+   "area_key": "銀座1丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-0e8275405010",
+   "city_code": "13102",
+   "area_key": "銀座2丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-9ae4d6f4543c",
+   "city_code": "13102",
+   "area_key": "銀座1丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-cc2dc9e0139c",
+   "city_code": "13102",
+   "area_key": "銀座2丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-684e17bffd23",
+   "city_code": "13102",
+   "area_key": "銀座3丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   "rule_text": "月曜日~土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-9a72a61a54fe",
+   "city_code": "13102",
+   "area_key": "銀座4丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   "rule_text": "月曜日~土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-a956cc52b30c",
+   "city_code": "13102",
+   "area_key": "銀座3丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-84da8b599142",
+   "city_code": "13102",
+   "area_key": "銀座4丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-0822ebc8fad3",
+   "city_code": "13102",
+   "area_key": "銀座3丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-c5f8d437a0f0",
+   "city_code": "13102",
+   "area_key": "銀座4丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-28c9ea2638a9",
+   "city_code": "13102",
+   "area_key": "銀座3丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-9a0b1c1bb731",
+   "city_code": "13102",
+   "area_key": "銀座4丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-ece8bb0a2641",
+   "city_code": "13102",
+   "area_key": "銀座3丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-814f340b4484",
+   "city_code": "13102",
+   "area_key": "銀座4丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-ed754126f142",
+   "city_code": "13102",
+   "area_key": "銀座5丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   "rule_text": "月曜日~土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-f087fe4a0f9d",
+   "city_code": "13102",
+   "area_key": "銀座6丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   "rule_text": "月曜日~土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-3b6aa98c550e",
+   "city_code": "13102",
+   "area_key": "銀座5丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-61f185620cc5",
+   "city_code": "13102",
+   "area_key": "銀座6丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-b5c144267457",
+   "city_code": "13102",
+   "area_key": "銀座5丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-79b8b689cba4",
+   "city_code": "13102",
+   "area_key": "銀座6丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-e8ecb70df2b0",
+   "city_code": "13102",
+   "area_key": "銀座5丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-e6294390d54f",
+   "city_code": "13102",
+   "area_key": "銀座6丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-6826e0c55af5",
+   "city_code": "13102",
+   "area_key": "銀座5丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-a9e1b59969d8",
+   "city_code": "13102",
+   "area_key": "銀座6丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-7328d9bd3721",
+   "city_code": "13102",
+   "area_key": "銀座7丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   "rule_text": "月曜日~土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-2d9ebc62016d",
+   "city_code": "13102",
+   "area_key": "銀座8丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   "rule_text": "月曜日~土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-323b225b620a",
+   "city_code": "13102",
+   "area_key": "銀座7丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-cfc10c3a2e98",
+   "city_code": "13102",
+   "area_key": "銀座8丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-132863fcc65a",
+   "city_code": "13102",
+   "area_key": "銀座7丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-a36b6cf13e78",
+   "city_code": "13102",
+   "area_key": "銀座8丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-fd8385af34ad",
+   "city_code": "13102",
+   "area_key": "銀座7丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-9977f10c124d",
+   "city_code": "13102",
+   "area_key": "銀座8丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-d4508df55c51",
+   "city_code": "13102",
+   "area_key": "銀座7丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-fb5227e5a715",
+   "city_code": "13102",
+   "area_key": "銀座8丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-5aa381f2b713",
+   "city_code": "13102",
+   "area_key": "新川",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-b1198b5dcd59",
+   "city_code": "13102",
+   "area_key": "新川",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-699b0a9632f8",
+   "city_code": "13102",
+   "area_key": "新川",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-a01c255d72fa",
+   "city_code": "13102",
+   "area_key": "新川",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-869f26c822c7",
+   "city_code": "13102",
+   "area_key": "新川",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-c89cca810111",
+   "city_code": "13102",
+   "area_key": "新富",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-952f4c94e836",
+   "city_code": "13102",
+   "area_key": "新富",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-8b2eff3bf9f4",
+   "city_code": "13102",
+   "area_key": "新富",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-1c143cb845bd",
+   "city_code": "13102",
+   "area_key": "新富",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-d8f63e6fc078",
+   "city_code": "13102",
+   "area_key": "新富",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-6b331f8510ab",
+   "city_code": "13102",
+   "area_key": "築地",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-d276d70709da",
+   "city_code": "13102",
+   "area_key": "築地",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-e885edd29220",
+   "city_code": "13102",
+   "area_key": "築地",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-e7459e8ea142",
+   "city_code": "13102",
+   "area_key": "築地",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-e84b1da8608c",
+   "city_code": "13102",
+   "area_key": "築地",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-e8b953ac2f06",
+   "city_code": "13102",
+   "area_key": "八丁堀1丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-8f18f8525939",
+   "city_code": "13102",
+   "area_key": "八丁堀1丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-e3cc284ac844",
+   "city_code": "13102",
+   "area_key": "八丁堀1丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-08039c90e5d6",
+   "city_code": "13102",
+   "area_key": "八丁堀1丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-bae8ffc87dac",
+   "city_code": "13102",
+   "area_key": "八丁堀1丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-f4696b3f4fed",
+   "city_code": "13102",
+   "area_key": "八丁堀2丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-6cf744e2bf02",
+   "city_code": "13102",
+   "area_key": "八丁堀3丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-c14cde37c6f2",
+   "city_code": "13102",
+   "area_key": "八丁堀4丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-e297f556d610",
+   "city_code": "13102",
+   "area_key": "八丁堀2丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-3f44b7cc6978",
+   "city_code": "13102",
+   "area_key": "八丁堀3丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-551fc7509d55",
+   "city_code": "13102",
+   "area_key": "八丁堀4丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-65313b77daa9",
+   "city_code": "13102",
+   "area_key": "八丁堀2丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-9029b280c502",
+   "city_code": "13102",
+   "area_key": "八丁堀3丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-7ca2ebd05311",
+   "city_code": "13102",
+   "area_key": "八丁堀4丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-fd6696175483",
+   "city_code": "13102",
+   "area_key": "八丁堀2丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-965c830f5869",
+   "city_code": "13102",
+   "area_key": "八丁堀3丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-fdfe10af2335",
+   "city_code": "13102",
+   "area_key": "八丁堀4丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-e4ac5f35f353",
+   "city_code": "13102",
+   "area_key": "八丁堀2丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-f16ea0efb59e",
+   "city_code": "13102",
+   "area_key": "八丁堀3丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-393a694ec758",
+   "city_code": "13102",
+   "area_key": "八丁堀4丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-2b9ac0fca682",
+   "city_code": "13102",
+   "area_key": "浜離宮庭園",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-71691651661f",
+   "city_code": "13102",
+   "area_key": "浜離宮庭園",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-adcaf1c422c0",
+   "city_code": "13102",
+   "area_key": "浜離宮庭園",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-82322779b29e",
+   "city_code": "13102",
+   "area_key": "浜離宮庭園",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-3075fd3feae3",
+   "city_code": "13102",
+   "area_key": "浜離宮庭園",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-1c4339a9420f",
+   "city_code": "13102",
+   "area_key": "湊",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-a951cf266d2b",
+   "city_code": "13102",
+   "area_key": "湊",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-a8dfec2844cd",
+   "city_code": "13102",
+   "area_key": "湊",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-0acbeaa0639c",
+   "city_code": "13102",
+   "area_key": "湊",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-58ca00a41465",
+   "city_code": "13102",
+   "area_key": "湊",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-0f13fee9d474",
+   "city_code": "13102",
+   "area_key": "八重洲2丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   "rule_text": "月曜日~土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-4e2cc78b38a9",
+   "city_code": "13102",
+   "area_key": "八重洲2丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-35fe2cce0443",
+   "city_code": "13102",
+   "area_key": "八重洲2丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-e7fe6fc4dd18",
+   "city_code": "13102",
+   "area_key": "八重洲2丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-a0132bde86f1",
+   "city_code": "13102",
+   "area_key": "八重洲2丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-fb5c6011328e",
+   "city_code": "13102",
+   "area_key": "大伝馬町",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-771cf66c602b",
+   "city_code": "13102",
+   "area_key": "大伝馬町",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-2f08d0523e5b",
+   "city_code": "13102",
+   "area_key": "大伝馬町",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-8f53e1305f87",
+   "city_code": "13102",
+   "area_key": "大伝馬町",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-dd4805cd75fb",
+   "city_code": "13102",
+   "area_key": "大伝馬町",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-16acf56ede02",
+   "city_code": "13102",
+   "area_key": "蛎殻町1丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-d8bec77fb9e5",
+   "city_code": "13102",
+   "area_key": "蛎殻町1丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-ba3ee05d4dd5",
+   "city_code": "13102",
+   "area_key": "蛎殻町1丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-f8d29ccae167",
+   "city_code": "13102",
+   "area_key": "蛎殻町1丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-02daa36d44e1",
+   "city_code": "13102",
+   "area_key": "蛎殻町1丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-76a35d8e58d8",
+   "city_code": "13102",
+   "area_key": "蛎殻町2丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-b976f9f9cf9b",
+   "city_code": "13102",
+   "area_key": "蛎殻町2丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-7ed6bb9b61c9",
+   "city_code": "13102",
+   "area_key": "蛎殻町2丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-c87a1a8d859e",
+   "city_code": "13102",
+   "area_key": "蛎殻町2丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-1bc5fa63c16c",
+   "city_code": "13102",
+   "area_key": "蛎殻町2丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-8d3ef8b6d4d3",
+   "city_code": "13102",
+   "area_key": "兜町",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-5295713ea9ab",
+   "city_code": "13102",
+   "area_key": "兜町",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-4695bd60fdf0",
+   "city_code": "13102",
+   "area_key": "兜町",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-d8ba014e1418",
+   "city_code": "13102",
+   "area_key": "兜町",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-0735ec510e0b",
+   "city_code": "13102",
+   "area_key": "兜町",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-785b706f0b87",
+   "city_code": "13102",
+   "area_key": "茅場町",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-f2907e7490a3",
+   "city_code": "13102",
+   "area_key": "茅場町",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-0c61c45989c6",
+   "city_code": "13102",
+   "area_key": "茅場町",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-f6059b354517",
+   "city_code": "13102",
+   "area_key": "茅場町",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-984aa26ae1b3",
+   "city_code": "13102",
+   "area_key": "茅場町",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-2dc66ed51104",
+   "city_code": "13102",
+   "area_key": "小網町",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-7c6659bc4531",
+   "city_code": "13102",
+   "area_key": "小網町",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-e46ae196a3fd",
+   "city_code": "13102",
+   "area_key": "小網町",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-4a7edc167c56",
+   "city_code": "13102",
+   "area_key": "小網町",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-50c955c14c40",
+   "city_code": "13102",
+   "area_key": "小網町",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-4540f066da44",
+   "city_code": "13102",
+   "area_key": "小伝馬町1~2番、7~21番",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-ad84220d3e31",
+   "city_code": "13102",
+   "area_key": "小伝馬町1~2番、7~21番",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-aea554388790",
+   "city_code": "13102",
+   "area_key": "小伝馬町1~2番、7~21番",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-030eb4bcc290",
+   "city_code": "13102",
+   "area_key": "小伝馬町1~2番、7~21番",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-e41075a6ecb9",
+   "city_code": "13102",
+   "area_key": "小伝馬町1~2番、7~21番",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-79737501eccb",
+   "city_code": "13102",
+   "area_key": "小伝馬町3~6番",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-5288d5cb446f",
+   "city_code": "13102",
+   "area_key": "小伝馬町3~6番",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-b33f5d251c74",
+   "city_code": "13102",
+   "area_key": "小伝馬町3~6番",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-8b135ef58567",
+   "city_code": "13102",
+   "area_key": "小伝馬町3~6番",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-307d715a719a",
+   "city_code": "13102",
+   "area_key": "小伝馬町3~6番",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-f0191cfbc7b0",
+   "city_code": "13102",
+   "area_key": "小舟町",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-30728fc4d962",
+   "city_code": "13102",
+   "area_key": "小舟町",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-a87ab0bb1cb8",
+   "city_code": "13102",
+   "area_key": "小舟町",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-58d951041368",
+   "city_code": "13102",
+   "area_key": "小舟町",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-d7ce8d17ce1f",
+   "city_code": "13102",
+   "area_key": "小舟町",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-186975087ba6",
+   "city_code": "13102",
+   "area_key": "富沢町",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-0f9bf6f55e3b",
+   "city_code": "13102",
+   "area_key": "富沢町",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-5dfc0e672f89",
+   "city_code": "13102",
+   "area_key": "富沢町",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-5f723ac054c6",
+   "city_code": "13102",
+   "area_key": "富沢町",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-3c4fabac45c7",
+   "city_code": "13102",
+   "area_key": "富沢町",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-0e81d13cf5ff",
+   "city_code": "13102",
+   "area_key": "中洲",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-4287bd3fddcc",
+   "city_code": "13102",
+   "area_key": "中洲",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-84e18c29010f",
+   "city_code": "13102",
+   "area_key": "中洲",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-f4635e6604e4",
+   "city_code": "13102",
+   "area_key": "中洲",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-54d88e1f5c0c",
+   "city_code": "13102",
+   "area_key": "中洲",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-0fd80c03e4a2",
+   "city_code": "13102",
+   "area_key": "日本橋1丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   "rule_text": "月曜日~土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-87e8d05d7c98",
+   "city_code": "13102",
+   "area_key": "日本橋2丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   "rule_text": "月曜日~土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-7857fcd75ba5",
+   "city_code": "13102",
+   "area_key": "日本橋3丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   "rule_text": "月曜日~土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-b7356c8e6884",
+   "city_code": "13102",
+   "area_key": "日本橋1丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-1036516487a0",
+   "city_code": "13102",
+   "area_key": "日本橋2丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-7da211166887",
+   "city_code": "13102",
+   "area_key": "日本橋3丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-b4b3827781bc",
+   "city_code": "13102",
+   "area_key": "日本橋1丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-69b2bad6ebf3",
+   "city_code": "13102",
+   "area_key": "日本橋2丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-7fe678347020",
+   "city_code": "13102",
+   "area_key": "日本橋3丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-ef15fc79fcca",
+   "city_code": "13102",
+   "area_key": "日本橋1丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-e266edbe2cc1",
+   "city_code": "13102",
+   "area_key": "日本橋2丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-724cc1914ddc",
+   "city_code": "13102",
+   "area_key": "日本橋3丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-6368b415a412",
+   "city_code": "13102",
+   "area_key": "日本橋1丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-aef084cbbabf",
+   "city_code": "13102",
+   "area_key": "日本橋2丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-f00c25a977aa",
+   "city_code": "13102",
+   "area_key": "日本橋3丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-fce1feb9597e",
+   "city_code": "13102",
+   "area_key": "人形町1丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-178fac2e4b74",
+   "city_code": "13102",
+   "area_key": "人形町1丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-6c650fec8199",
+   "city_code": "13102",
+   "area_key": "人形町1丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-ba0b3b010a17",
+   "city_code": "13102",
+   "area_key": "人形町1丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-6f15995c32be",
+   "city_code": "13102",
+   "area_key": "人形町1丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-bea7dca281cb",
+   "city_code": "13102",
+   "area_key": "人形町2丁目1~14番",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     2,
+     3,
+     5,
+     6
+    ]
+   },
+   "rule_text": "月曜日・火曜日・水曜日 金曜日・土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-eacf501679d7",
+   "city_code": "13102",
+   "area_key": "人形町2丁目1~14番",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-060be62e713a",
+   "city_code": "13102",
+   "area_key": "人形町2丁目1~14番",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-e5478e500200",
+   "city_code": "13102",
+   "area_key": "人形町2丁目1~14番",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-5ab7bb31fc2b",
+   "city_code": "13102",
+   "area_key": "人形町2丁目1~14番",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-2877bbbf6832",
+   "city_code": "13102",
+   "area_key": "人形町2丁目15~37番",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-bc156c697b67",
+   "city_code": "13102",
+   "area_key": "人形町2丁目15~37番",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-85de36308c00",
+   "city_code": "13102",
+   "area_key": "人形町2丁目15~37番",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-29a246272a4d",
+   "city_code": "13102",
+   "area_key": "人形町2丁目15~37番",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-6e417546b574",
+   "city_code": "13102",
+   "area_key": "人形町2丁目15~37番",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-1bc9ff6a2349",
+   "city_code": "13102",
+   "area_key": "人形町3丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-51938c334d97",
+   "city_code": "13102",
+   "area_key": "人形町3丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-1f2097607d29",
+   "city_code": "13102",
+   "area_key": "人形町3丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-8f996d4ba468",
+   "city_code": "13102",
+   "area_key": "人形町3丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-6f0eff29b17b",
+   "city_code": "13102",
+   "area_key": "人形町3丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-cb05f43caa79",
+   "city_code": "13102",
+   "area_key": "馬喰町",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-33466f6df9f5",
+   "city_code": "13102",
+   "area_key": "馬喰町",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-3a1b284116dc",
+   "city_code": "13102",
+   "area_key": "馬喰町",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-b4b507151867",
+   "city_code": "13102",
+   "area_key": "馬喰町",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-90632cf000f6",
+   "city_code": "13102",
+   "area_key": "馬喰町",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-1ce26016c5b4",
+   "city_code": "13102",
+   "area_key": "箱崎町",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-e9aa0a7ddfc0",
+   "city_code": "13102",
+   "area_key": "箱崎町",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-ab1628d9a42b",
+   "city_code": "13102",
+   "area_key": "箱崎町",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-d7638f327222",
+   "city_code": "13102",
+   "area_key": "箱崎町",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-28a679ec3fb4",
+   "city_code": "13102",
+   "area_key": "箱崎町",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-6a1c6cb39ba2",
+   "city_code": "13102",
+   "area_key": "浜町1丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-f8b9404ec6b3",
+   "city_code": "13102",
+   "area_key": "浜町1丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-d663879fcd52",
+   "city_code": "13102",
+   "area_key": "浜町1丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-6efa90e589f8",
+   "city_code": "13102",
+   "area_key": "浜町1丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-566288429bd2",
+   "city_code": "13102",
+   "area_key": "浜町1丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-47ae705cea7d",
+   "city_code": "13102",
+   "area_key": "浜町2丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-6f2af77d6802",
+   "city_code": "13102",
+   "area_key": "浜町2丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-f0abb90f62e6",
+   "city_code": "13102",
+   "area_key": "浜町2丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-d0f11591ff0a",
+   "city_code": "13102",
+   "area_key": "浜町2丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-98498fcdfd7f",
+   "city_code": "13102",
+   "area_key": "浜町2丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-537a75ae969a",
+   "city_code": "13102",
+   "area_key": "浜町3丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-9136ae64d712",
+   "city_code": "13102",
+   "area_key": "浜町3丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-250b5e17604e",
+   "city_code": "13102",
+   "area_key": "浜町3丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-04ba81fb55cc",
+   "city_code": "13102",
+   "area_key": "浜町3丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-5d99b209681e",
+   "city_code": "13102",
+   "area_key": "浜町3丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-d7b61b1a869d",
+   "city_code": "13102",
+   "area_key": "東日本橋",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-131924e70449",
+   "city_code": "13102",
+   "area_key": "東日本橋",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-7e58041652f1",
+   "city_code": "13102",
+   "area_key": "東日本橋",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-695a3359f8f3",
+   "city_code": "13102",
+   "area_key": "東日本橋",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-6eddec020082",
+   "city_code": "13102",
+   "area_key": "東日本橋",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-11172ca2ebe1",
+   "city_code": "13102",
+   "area_key": "久松町",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-c72849be0ba6",
+   "city_code": "13102",
+   "area_key": "久松町",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-1591cce45c0e",
+   "city_code": "13102",
+   "area_key": "久松町",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-3f454c880a63",
+   "city_code": "13102",
+   "area_key": "久松町",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-4b1d54713f40",
+   "city_code": "13102",
+   "area_key": "久松町",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-87e09eefe876",
+   "city_code": "13102",
+   "area_key": "堀留町",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-0619dd1c1164",
+   "city_code": "13102",
+   "area_key": "堀留町",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-d2f4ab84799d",
+   "city_code": "13102",
+   "area_key": "堀留町",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-1b0df12c55e4",
+   "city_code": "13102",
+   "area_key": "堀留町",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-5567119e2414",
+   "city_code": "13102",
+   "area_key": "堀留町",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-6ac5587055bd",
+   "city_code": "13102",
+   "area_key": "本石町",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-9ef6e3b77af4",
+   "city_code": "13102",
+   "area_key": "本石町",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-1674abd30ba5",
+   "city_code": "13102",
+   "area_key": "本石町",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-56ea098a57cb",
+   "city_code": "13102",
+   "area_key": "本石町",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-6c5119a8eb9e",
+   "city_code": "13102",
+   "area_key": "本石町",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-a31a56fd7fda",
+   "city_code": "13102",
+   "area_key": "本町1丁目1~5番",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-e4e36e40cb38",
+   "city_code": "13102",
+   "area_key": "本町1丁目1~5番",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-5ea6e992cf9c",
+   "city_code": "13102",
+   "area_key": "本町1丁目1~5番",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-a93e83b9576a",
+   "city_code": "13102",
+   "area_key": "本町1丁目1~5番",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-16a9be3bef8f",
+   "city_code": "13102",
+   "area_key": "本町1丁目1~5番",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-07eab485b4f1",
+   "city_code": "13102",
+   "area_key": "本町1丁目6~9番",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-5b3cea3830f9",
+   "city_code": "13102",
+   "area_key": "本町1丁目6~9番",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-b89f9e502bcf",
+   "city_code": "13102",
+   "area_key": "本町1丁目6~9番",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-6a30eb875714",
+   "city_code": "13102",
+   "area_key": "本町1丁目6~9番",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-2790bde6380f",
+   "city_code": "13102",
+   "area_key": "本町1丁目6~9番",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-a4e41909d5e7",
+   "city_code": "13102",
+   "area_key": "本町1丁目10番",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-9d52454bcd61",
+   "city_code": "13102",
+   "area_key": "本町1丁目10番",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-378fcdceaccf",
+   "city_code": "13102",
+   "area_key": "本町1丁目10番",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-003f7e95fc7e",
+   "city_code": "13102",
+   "area_key": "本町1丁目10番",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-636885ea8d13",
+   "city_code": "13102",
+   "area_key": "本町1丁目10番",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-90de677e20b2",
+   "city_code": "13102",
+   "area_key": "本町2丁目1~5番",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-7b40cde17f0d",
+   "city_code": "13102",
+   "area_key": "本町2丁目1~5番",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-9d62cbbf80f2",
+   "city_code": "13102",
+   "area_key": "本町2丁目1~5番",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-92b50c232365",
+   "city_code": "13102",
+   "area_key": "本町2丁目1~5番",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-547a4671c2fc",
+   "city_code": "13102",
+   "area_key": "本町2丁目1~5番",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-aa922a54f6e9",
+   "city_code": "13102",
+   "area_key": "本町2丁目6~8番",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-fbb1e23a00fe",
+   "city_code": "13102",
+   "area_key": "本町2丁目6~8番",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-2643c0939f1d",
+   "city_code": "13102",
+   "area_key": "本町2丁目6~8番",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-11b4ef343f92",
+   "city_code": "13102",
+   "area_key": "本町2丁目6~8番",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-dfd08f3aabd6",
+   "city_code": "13102",
+   "area_key": "本町2丁目6~8番",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-46218d52fdcc",
+   "city_code": "13102",
+   "area_key": "本町3丁目1~5番",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-de3fa838b116",
+   "city_code": "13102",
+   "area_key": "本町3丁目1~5番",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-e496b70f8b81",
+   "city_code": "13102",
+   "area_key": "本町3丁目1~5番",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-427fe2c23767",
+   "city_code": "13102",
+   "area_key": "本町3丁目1~5番",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-ff0b9b84b1fe",
+   "city_code": "13102",
+   "area_key": "本町3丁目1~5番",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-4127da13895a",
+   "city_code": "13102",
+   "area_key": "本町3丁目6~11番",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-aba7fca48794",
+   "city_code": "13102",
+   "area_key": "本町3丁目6~11番",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-e812cba54c4c",
+   "city_code": "13102",
+   "area_key": "本町3丁目6~11番",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-49a15719232e",
+   "city_code": "13102",
+   "area_key": "本町3丁目6~11番",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-cf80ee4ee8f5",
+   "city_code": "13102",
+   "area_key": "本町3丁目6~11番",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-ab47e571f215",
+   "city_code": "13102",
+   "area_key": "本町4丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-3ef04e6df47e",
+   "city_code": "13102",
+   "area_key": "本町4丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-c39a51a538a1",
+   "city_code": "13102",
+   "area_key": "本町4丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-d9c97ee88de5",
+   "city_code": "13102",
+   "area_key": "本町4丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-797ea3623039",
+   "city_code": "13102",
+   "area_key": "本町4丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-987024934854",
+   "city_code": "13102",
+   "area_key": "室町",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-b5b031925f22",
+   "city_code": "13102",
+   "area_key": "室町",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-fede0c36f711",
+   "city_code": "13102",
+   "area_key": "室町",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-384aa4b9cc3e",
+   "city_code": "13102",
+   "area_key": "室町",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-eb22fdad3745",
+   "city_code": "13102",
+   "area_key": "室町",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-23a3660b2ce2",
+   "city_code": "13102",
+   "area_key": "八重洲1丁目",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6
+    ]
+   },
+   "rule_text": "月曜日~土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-4fd2938b8d03",
+   "city_code": "13102",
+   "area_key": "八重洲1丁目",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-d62b6f35ce08",
+   "city_code": "13102",
+   "area_key": "八重洲1丁目",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-db7aae050f12",
+   "city_code": "13102",
+   "area_key": "八重洲1丁目",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-68c05dee3991",
+   "city_code": "13102",
+   "area_key": "八重洲1丁目",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-c7946659583b",
+   "city_code": "13102",
+   "area_key": "横山町",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-64ead7c8eeb6",
+   "city_code": "13102",
+   "area_key": "横山町",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-2e1231ca525f",
+   "city_code": "13102",
+   "area_key": "横山町",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-c5997eaa947d",
+   "city_code": "13102",
+   "area_key": "横山町",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-e91d74909417",
+   "city_code": "13102",
+   "area_key": "横山町",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-11f5a1a77de2",
+   "city_code": "13102",
+   "area_key": "勝どき",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-a982d126d8a4",
+   "city_code": "13102",
+   "area_key": "勝どき",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-ace837925d9d",
+   "city_code": "13102",
+   "area_key": "勝どき",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-7b771201ee3e",
+   "city_code": "13102",
+   "area_key": "勝どき",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-7e8483cf5dd3",
+   "city_code": "13102",
+   "area_key": "勝どき",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-3a7c51d7241a",
+   "city_code": "13102",
+   "area_key": "月島",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-f264b9e49fe9",
+   "city_code": "13102",
+   "area_key": "月島",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-9ace350eda9b",
+   "city_code": "13102",
+   "area_key": "月島",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-952ff7028ae2",
+   "city_code": "13102",
+   "area_key": "月島",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-49bd559a8ecb",
+   "city_code": "13102",
+   "area_key": "月島",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-19065d411015",
+   "city_code": "13102",
+   "area_key": "佃",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-39efd1a80d13",
+   "city_code": "13102",
+   "area_key": "佃",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-9fb5e10ad87c",
+   "city_code": "13102",
+   "area_key": "佃",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-a1038ad63f1f",
+   "city_code": "13102",
+   "area_key": "佃",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-dddacb10040e",
+   "city_code": "13102",
+   "area_key": "佃",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-d7d24072350a",
+   "city_code": "13102",
+   "area_key": "豊海町",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-58ec1d3359ce",
+   "city_code": "13102",
+   "area_key": "豊海町",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-5b6a9c509516",
+   "city_code": "13102",
+   "area_key": "豊海町",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-5d69468eaef7",
+   "city_code": "13102",
+   "area_key": "豊海町",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-ab662e6b7d55",
+   "city_code": "13102",
+   "area_key": "豊海町",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-20068600072d",
+   "city_code": "13102",
+   "area_key": "晴海",
+   "local_category": "燃やすごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-678aee260965",
+   "city_code": "13102",
+   "area_key": "晴海",
+   "local_category": "燃やさないごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-cb8d40628013",
+   "city_code": "13102",
+   "area_key": "晴海",
+   "local_category": "プラマーク",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-ea9545cdf4eb",
+   "city_code": "13102",
+   "area_key": "晴海",
+   "local_category": "資源",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13102-866cbbbb8a6b",
+   "city_code": "13102",
+   "area_key": "晴海",
+   "local_category": "粗大ごみ",
+   "common_class": "sodai",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "chuo-schedule",
+   "source_url": "https://www.city.chuo.lg.jp/documents/984/gomitoshigen.csv",
+   "source_updated_at": "2017-04-02",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "中央区 「ごみと資源の収集曜日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  }
+ ]
+}

@@ -1,0 +1,617 @@
+[
+ {
+  "from": "rau-ram",
+  "options": [
+   {
+    "vi": "húng lủi (bạc hà) + một ít rau mùi",
+    "jp": "ミント + パクチー",
+    "similarity": "medium",
+    "note_vi": "Răm cay nồng, hơi the: mint cho mùi mát, rau mùi cho mùi thơm.",
+    "ingredient_id": "hung-lui"
+   },
+   {
+    "vi": "tía tô",
+    "jp": "大葉",
+    "similarity": "low",
+    "note_vi": "Khác mùi, nhưng cùng là rau thơm ăn kèm.",
+    "ingredient_id": "tia-to"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "ngo-gai",
+  "options": [
+   {
+    "vi": "rau mùi, dùng nhiều hơn",
+    "jp": "パクチー (多めに)",
+    "similarity": "medium",
+    "note_vi": "Ngò gai mùi mạnh hơn rau mùi.",
+    "ingredient_id": "rau-mui"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "hung-que",
+  "options": [
+   {
+    "vi": "basil kiểu Ý",
+    "jp": "バジル",
+    "similarity": "high",
+    "note_vi": "Cùng họ; húng quế Việt vị hồi hơn, cay nhẹ."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "hung-lui",
+  "options": [
+   {
+    "vi": "mint tươi",
+    "jp": "ミント",
+    "similarity": "high",
+    "note_vi": "Cùng loại."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "kinh-gioi",
+  "options": [
+   {
+    "vi": "tía tô",
+    "jp": "大葉",
+    "similarity": "medium",
+    "note_vi": "Mùi gần, nhưng nhẹ hơn.",
+    "ingredient_id": "tia-to"
+   },
+   {
+    "vi": "húng quế",
+    "jp": "バジル",
+    "similarity": "low",
+    "note_vi": "Khác mùi.",
+    "ingredient_id": "hung-que"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "diep-ca",
+  "options": [
+   {
+    "vi": "tía tô + chút chanh",
+    "jp": "大葉 + ライム",
+    "similarity": "low",
+    "note_vi": "Không có mùi tanh đặc trưng; chỉ giữ được cảm giác rau thơm.",
+    "ingredient_id": "tia-to"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "tia-to",
+  "options": [
+   {
+    "vi": "大葉 (siêu thị)",
+    "jp": "大葉",
+    "similarity": "high",
+    "note_vi": "Gần giống; nhỏ và ít thơm hơn một chút."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "la-chanh",
+  "options": [
+   {
+    "vi": "vỏ chanh bào (ライム/レモン)",
+    "jp": "ライムの皮",
+    "similarity": "medium",
+    "note_vi": "Thơm the nhưng không giống hẳn; bào nhỏ, thêm lúc cuối.",
+    "ingredient_id": "chanh"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "sa",
+  "options": [
+   {
+    "vi": "lá chanh + vỏ chanh",
+    "jp": "コブミカンの葉 + ライムの皮",
+    "similarity": "low",
+    "note_vi": "Không thay thế hoàn toàn; dùng tuýp レモングラス nếu có."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "rieng",
+  "options": [
+   {
+    "vi": "gừng + chút ớt",
+    "jp": "しょうが",
+    "similarity": "low",
+    "note_vi": "Mùi khác; tuýp ガランガル ở một số siêu thị gần hơn.",
+    "ingredient_id": "gung"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "nghe",
+  "options": [
+   {
+    "vi": "bột nghệ",
+    "jp": "ターメリックパウダー",
+    "similarity": "high",
+    "note_vi": "Dùng ít hơn (khoảng 1/3 lượng tươi).",
+    "ingredient_id": "bot-nghe"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "la-chuoi",
+  "options": [
+   {
+    "vi": "giấy bạc / giấy nến",
+    "jp": "アルミホイル / クッキングシート",
+    "similarity": "medium",
+    "note_vi": "Chỉ thay được việc gói và hấp, không có mùi thơm của lá."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "la-dua",
+  "options": [
+   {
+    "vi": "vani rất ít (cho xôi/chè)",
+    "jp": "バニラエッセンス (少量)",
+    "similarity": "low",
+    "note_vi": "Chỉ để thơm; không có màu xanh."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "mam-tom",
+  "options": [
+   {
+    "vi": "nước mắm + một ít muối",
+    "jp": "ナンプラー + 塩",
+    "similarity": "low",
+    "note_vi": "Không có mùi lên men đặc trưng; có thể bỏ nếu người nhà không ăn quen.",
+    "ingredient_id": "nuoc-mam"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "nuoc-mam",
+  "options": [
+   {
+    "vi": "ナンプラー (Thái)",
+    "jp": "ナンプラー",
+    "similarity": "high",
+    "note_vi": "Mặn và thơm hơn một chút; thêm ít đường/chanh cho gần vị Việt."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "bun",
+  "options": [
+   {
+    "vi": "ビーフン",
+    "jp": "ビーフン",
+    "similarity": "medium",
+    "note_vi": "Sợi mảnh hơn bún Việt; luộc ngắn tay."
+   },
+   {
+    "vi": "素麺 (nếu bí)",
+    "jp": "そうめん",
+    "similarity": "low",
+    "note_vi": "Làm từ bột mì, khác kết cấu."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "banh-pho",
+  "options": [
+   {
+    "vi": "センレック / ライスヌードル",
+    "jp": "ライスヌードル",
+    "similarity": "medium",
+    "note_vi": "Bánh phở khô ở khu đồ châu Á; hoặc ビーフン bản dẹt."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "gao",
+  "options": [
+   {
+    "vi": "タイ米",
+    "jp": "タイ米",
+    "similarity": "high",
+    "note_vi": "Gần nhất."
+   },
+   {
+    "vi": "日本米 + ít nước hơn",
+    "jp": "日本米",
+    "similarity": "medium",
+    "note_vi": "Dẻo hơn; vo kỹ, cho ít nước hơn một chút."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "bot-nang",
+  "options": [
+   {
+    "vi": "片栗粉",
+    "jp": "片栗粉",
+    "similarity": "medium",
+    "note_vi": "Dùng để làm sánh; khi nấu chè/bánh dai thì kết cấu khác."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "duong-phen",
+  "options": [
+   {
+    "vi": "đường trắng + một ít mật",
+    "jp": "ざらめ / 砂糖",
+    "similarity": "medium",
+    "note_vi": "Vị ngọt thanh của phèn khó thay hoàn toàn.",
+    "ingredient_id": "duong"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "me",
+  "options": [
+   {
+    "vi": "chanh + chút đường",
+    "jp": "ライム + 砂糖",
+    "similarity": "low",
+    "note_vi": "Chua gắt hơn, thiếu vị me.",
+    "ingredient_id": "chanh"
+   },
+   {
+    "vi": "giấm táo/giấm gạo + đường",
+    "jp": "酢 + 砂糖",
+    "similarity": "low",
+    "note_vi": "Chua khác; thêm dần."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "du-du-xanh",
+  "options": [
+   {
+    "vi": "củ cải trắng bào sợi",
+    "jp": "大根",
+    "similarity": "medium",
+    "note_vi": "Dùng cho gỏi; giòn nhưng vị khác.",
+    "ingredient_id": "cu-cai"
+   },
+   {
+    "vi": "cà rốt bào sợi",
+    "jp": "にんじん",
+    "similarity": "medium",
+    "note_vi": "Giòn ngọt.",
+    "ingredient_id": "ca-rot"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "chuoi-xanh",
+  "options": [
+   {
+    "vi": "khoai tây (cho món hầm)",
+    "jp": "じゃがいも",
+    "similarity": "low",
+    "note_vi": "Khác vị chát đặc trưng.",
+    "ingredient_id": "khoai-tay"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "rau-muong",
+  "options": [
+   {
+    "vi": "rau muống mùa hè; ngoài mùa: 空心菜 đông lạnh hoặc ほうれん草/小松菜",
+    "jp": "ほうれん草 / 小松菜",
+    "similarity": "low",
+    "note_vi": "Khác độ giòn."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "cai-xanh",
+  "options": [
+   {
+    "vi": "高菜 / からし菜",
+    "jp": "高菜",
+    "similarity": "high",
+    "note_vi": "Gần nhất."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "cai-ngot",
+  "options": [
+   {
+    "vi": "チンゲンサイ",
+    "jp": "チンゲンサイ",
+    "similarity": "high",
+    "note_vi": "Gần.",
+    "ingredient_id": "cai-thia"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "hanh-tim",
+  "options": [
+   {
+    "vi": "hành tây nhỏ",
+    "jp": "玉ねぎ",
+    "similarity": "medium",
+    "note_vi": "Ngọt hơn, ít thơm.",
+    "ingredient_id": "hanh-tay"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "tom-kho",
+  "options": [
+   {
+    "vi": "桜えび (khô)",
+    "jp": "桜えび",
+    "similarity": "high",
+    "note_vi": "Dễ mua ở siêu thị."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "ca-basa",
+  "options": [
+   {
+    "vi": "cá trắng: タラ, スズキ, ティラピア",
+    "jp": "タラ / スズキ",
+    "similarity": "high",
+    "note_vi": "Dùng cho canh chua, kho."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "xuong-bo",
+  "options": [
+   {
+    "vi": "牛すじ + 牛すね肉",
+    "jp": "牛すじ",
+    "similarity": "medium",
+    "note_vi": "Nước dùng kém béo ngọt hơn xương.",
+    "ingredient_id": "gan-bo"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "xuong-heo",
+  "options": [
+   {
+    "vi": "スペアリブ",
+    "jp": "スペアリブ",
+    "similarity": "medium",
+    "note_vi": "Dễ mua; ninh lâu hơn.",
+    "ingredient_id": "suon-heo"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "gio-heo",
+  "options": [
+   {
+    "vi": "豚バラ / 豚足",
+    "jp": "豚バラ肉",
+    "similarity": "medium",
+    "note_vi": "Giò heo chân giò hiếm; nhờ quầy thịt.",
+    "ingredient_id": "thit-ba-chi"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "hoa-hoi",
+  "options": [
+   {
+    "vi": "八角 (siêu thị khu gia vị)",
+    "jp": "八角",
+    "similarity": "high",
+    "note_vi": "Cùng loại; có thể có ở khu đồ Trung/châu Á."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "hat-dieu-mau",
+  "options": [
+   {
+    "vi": "パプリカパウダー",
+    "jp": "パプリカパウダー",
+    "similarity": "medium",
+    "note_vi": "Chỉ cho màu đỏ cam; ít mùi."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "tuong-ot",
+  "options": [
+   {
+    "vi": "スイートチリソース + 豆板醤",
+    "jp": "スイートチリソース",
+    "similarity": "medium",
+    "note_vi": "Pha theo vị."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "hat-nem",
+  "options": [
+   {
+    "vi": "鶏がらスープの素",
+    "jp": "鶏がらスープの素",
+    "similarity": "high",
+    "note_vi": "Gần nhất."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "cha-lua",
+  "options": [
+   {
+    "vi": "ボンレスハム",
+    "jp": "ボンレスハム",
+    "similarity": "low",
+    "note_vi": "Kết cấu và vị khác; chỉ để ăn kèm."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "ca-phe",
+  "options": [
+   {
+    "vi": "cà phê rang đậm xay thô",
+    "jp": "深煎り粗挽き",
+    "similarity": "medium",
+    "note_vi": "Pha bằng phin hoặc French press."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "banh-mi",
+  "options": [
+   {
+    "vi": "バゲット",
+    "jp": "バゲット",
+    "similarity": "medium",
+    "note_vi": "Vỏ cứng hơn, ruột đặc hơn; nướng nhẹ."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "banh-trang",
+  "options": [
+   {
+    "vi": "ライスペーパー",
+    "jp": "ライスペーパー",
+    "similarity": "high",
+    "note_vi": "Cùng loại."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "dua-cai-chua",
+  "options": [
+   {
+    "vi": "高菜漬け (rửa nước)",
+    "jp": "高菜漬け",
+    "similarity": "medium",
+    "note_vi": "Ít chua hơn; thêm giấm."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "khoai-mon",
+  "options": [
+   {
+    "vi": "里芋",
+    "jp": "里芋",
+    "similarity": "medium",
+    "note_vi": "Nhớt hơn, thời gian nấu ngắn hơn."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "from": "sa-te",
+  "options": [
+   {
+    "vi": "ớt bột + tỏi phi + dầu",
+    "jp": "一味唐辛子 + にんにく + 油",
+    "similarity": "low",
+    "note_vi": "Tự pha."
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ }
+]

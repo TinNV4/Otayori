@@ -1,0 +1,1455 @@
+[
+ {
+  "id": "pho-bo",
+  "vi": "phở bò",
+  "aliases_vi": [
+   "phở bò",
+   "phở",
+   "pho bo",
+   "pho"
+  ],
+  "jp": "フォー・ボー",
+  "desc_vi": "Nước dùng xương bò hầm lâu, bánh phở, thịt bò.",
+  "ingredients": [
+   {
+    "id": "banh-pho",
+    "role": "carb"
+   },
+   {
+    "id": "thit-bo",
+    "role": "main"
+   },
+   {
+    "id": "bap-bo",
+    "role": "main"
+   },
+   {
+    "id": "xuong-bo",
+    "role": "main"
+   },
+   {
+    "id": "hanh-tay",
+    "role": "seasoning"
+   },
+   {
+    "id": "gung",
+    "role": "seasoning"
+   },
+   {
+    "id": "hoa-hoi",
+    "role": "seasoning"
+   },
+   {
+    "id": "que",
+    "role": "seasoning"
+   },
+   {
+    "id": "thao-qua",
+    "role": "optional"
+   },
+   {
+    "id": "nuoc-mam",
+    "role": "seasoning"
+   },
+   {
+    "id": "duong-phen",
+    "role": "seasoning"
+   },
+   {
+    "id": "muoi",
+    "role": "seasoning"
+   },
+   {
+    "id": "hanh-la",
+    "role": "herb"
+   },
+   {
+    "id": "rau-mui",
+    "role": "herb"
+   },
+   {
+    "id": "hung-que",
+    "role": "herb"
+   },
+   {
+    "id": "gia-do",
+    "role": "herb"
+   },
+   {
+    "id": "chanh",
+    "role": "herb"
+   },
+   {
+    "id": "ot",
+    "role": "herb"
+   },
+   {
+    "id": "tuong-hoisin",
+    "role": "optional"
+   },
+   {
+    "id": "tuong-ot",
+    "role": "optional"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "pho-ga",
+  "vi": "phở gà",
+  "aliases_vi": [
+   "phở gà",
+   "phở",
+   "pho ga",
+   "pho"
+  ],
+  "jp": "フォー・ガー",
+  "desc_vi": "Nước dùng gà thanh, bánh phở, thịt gà xé.",
+  "ingredients": [
+   {
+    "id": "banh-pho",
+    "role": "carb"
+   },
+   {
+    "id": "ga",
+    "role": "main"
+   },
+   {
+    "id": "hanh-tay",
+    "role": "seasoning"
+   },
+   {
+    "id": "gung",
+    "role": "seasoning"
+   },
+   {
+    "id": "nuoc-mam",
+    "role": "seasoning"
+   },
+   {
+    "id": "muoi",
+    "role": "seasoning"
+   },
+   {
+    "id": "hanh-la",
+    "role": "herb"
+   },
+   {
+    "id": "rau-mui",
+    "role": "herb"
+   },
+   {
+    "id": "hung-que",
+    "role": "herb"
+   },
+   {
+    "id": "la-chanh",
+    "role": "optional"
+   },
+   {
+    "id": "chanh",
+    "role": "herb"
+   },
+   {
+    "id": "ot",
+    "role": "herb"
+   },
+   {
+    "id": "hat-nem",
+    "role": "optional"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "bun-bo-hue",
+  "vi": "bún bò Huế",
+  "aliases_vi": [
+   "bún bò Huế",
+   "bún bò",
+   "bun bo hue",
+   "bun bo"
+  ],
+  "jp": "ブン・ボー・フエ",
+  "desc_vi": "Bún sợi to, nước dùng sả – ớt, bò và giò heo.",
+  "ingredients": [
+   {
+    "id": "bun",
+    "role": "carb"
+   },
+   {
+    "id": "bap-bo",
+    "role": "main"
+   },
+   {
+    "id": "gan-bo",
+    "role": "main"
+   },
+   {
+    "id": "gio-heo",
+    "role": "main"
+   },
+   {
+    "id": "xuong-heo",
+    "role": "main"
+   },
+   {
+    "id": "sa",
+    "role": "seasoning"
+   },
+   {
+    "id": "ot",
+    "role": "seasoning"
+   },
+   {
+    "id": "hat-dieu-mau",
+    "role": "seasoning"
+   },
+   {
+    "id": "mam-tom",
+    "role": "seasoning"
+   },
+   {
+    "id": "nuoc-mam",
+    "role": "seasoning"
+   },
+   {
+    "id": "duong-phen",
+    "role": "seasoning"
+   },
+   {
+    "id": "hanh-tim",
+    "role": "seasoning"
+   },
+   {
+    "id": "muoi",
+    "role": "seasoning"
+   },
+   {
+    "id": "hanh-la",
+    "role": "herb"
+   },
+   {
+    "id": "rau-mui",
+    "role": "herb"
+   },
+   {
+    "id": "gia-do",
+    "role": "herb"
+   },
+   {
+    "id": "chanh",
+    "role": "herb"
+   },
+   {
+    "id": "hat-nem",
+    "role": "optional"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "bun-cha",
+  "vi": "bún chả",
+  "aliases_vi": [
+   "bún chả",
+   "bun cha"
+  ],
+  "jp": "ブン・チャー",
+  "desc_vi": "Thịt nướng viên, bún, nước chấm chua ngọt, rau sống.",
+  "ingredients": [
+   {
+    "id": "bun",
+    "role": "carb"
+   },
+   {
+    "id": "thit-xay",
+    "role": "main"
+   },
+   {
+    "id": "thit-ba-chi",
+    "role": "main"
+   },
+   {
+    "id": "nuoc-mam",
+    "role": "seasoning"
+   },
+   {
+    "id": "duong",
+    "role": "seasoning"
+   },
+   {
+    "id": "toi",
+    "role": "seasoning"
+   },
+   {
+    "id": "hanh-tim",
+    "role": "seasoning"
+   },
+   {
+    "id": "ot",
+    "role": "seasoning"
+   },
+   {
+    "id": "chanh",
+    "role": "seasoning"
+   },
+   {
+    "id": "giam",
+    "role": "seasoning"
+   },
+   {
+    "id": "ca-rot",
+    "role": "herb"
+   },
+   {
+    "id": "cu-cai",
+    "role": "herb"
+   },
+   {
+    "id": "hung-lui",
+    "role": "herb"
+   },
+   {
+    "id": "tia-to",
+    "role": "herb"
+   },
+   {
+    "id": "xa-lach",
+    "role": "herb"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "bun-rieu",
+  "vi": "bún riêu (bản không cua)",
+  "aliases_vi": [
+   "bún riêu",
+   "bun rieu"
+  ],
+  "jp": "ブン・リエウ",
+  "desc_vi": "Nước dùng cà chua chua nhẹ; bản dễ làm ở Nhật dùng thịt xay, trứng, tôm khô thay cua.",
+  "ingredients": [
+   {
+    "id": "bun",
+    "role": "carb"
+   },
+   {
+    "id": "thit-xay",
+    "role": "main"
+   },
+   {
+    "id": "trung",
+    "role": "main"
+   },
+   {
+    "id": "tom-kho",
+    "role": "main"
+   },
+   {
+    "id": "ca-chua",
+    "role": "main"
+   },
+   {
+    "id": "dau-hu-chien",
+    "role": "main"
+   },
+   {
+    "id": "mam-tom",
+    "role": "seasoning"
+   },
+   {
+    "id": "hanh-tim",
+    "role": "seasoning"
+   },
+   {
+    "id": "me",
+    "role": "seasoning"
+   },
+   {
+    "id": "nuoc-mam",
+    "role": "seasoning"
+   },
+   {
+    "id": "muoi",
+    "role": "seasoning"
+   },
+   {
+    "id": "hanh-la",
+    "role": "herb"
+   },
+   {
+    "id": "tia-to",
+    "role": "herb"
+   },
+   {
+    "id": "rau-muong",
+    "role": "herb"
+   },
+   {
+    "id": "gia-do",
+    "role": "herb"
+   },
+   {
+    "id": "ot",
+    "role": "herb"
+   },
+   {
+    "id": "chanh",
+    "role": "herb"
+   },
+   {
+    "id": "hat-nem",
+    "role": "optional"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "bun-thit-nuong",
+  "vi": "bún thịt nướng",
+  "aliases_vi": [
+   "bún thịt nướng",
+   "bun thit nuong"
+  ],
+  "jp": "ブン・ティット・ヌン",
+  "desc_vi": "Thịt heo ướp sả nướng, bún, rau sống, nước mắm pha.",
+  "ingredients": [
+   {
+    "id": "bun",
+    "role": "carb"
+   },
+   {
+    "id": "thit-ba-chi",
+    "role": "main"
+   },
+   {
+    "id": "sa",
+    "role": "seasoning"
+   },
+   {
+    "id": "toi",
+    "role": "seasoning"
+   },
+   {
+    "id": "hanh-tim",
+    "role": "seasoning"
+   },
+   {
+    "id": "nuoc-mam",
+    "role": "seasoning"
+   },
+   {
+    "id": "duong",
+    "role": "seasoning"
+   },
+   {
+    "id": "dau-hao",
+    "role": "seasoning"
+   },
+   {
+    "id": "tieu",
+    "role": "seasoning"
+   },
+   {
+    "id": "dau-an",
+    "role": "seasoning"
+   },
+   {
+    "id": "dua-leo",
+    "role": "herb"
+   },
+   {
+    "id": "gia-do",
+    "role": "herb"
+   },
+   {
+    "id": "hung-lui",
+    "role": "herb"
+   },
+   {
+    "id": "tia-to",
+    "role": "herb"
+   },
+   {
+    "id": "xa-lach",
+    "role": "herb"
+   },
+   {
+    "id": "hanh-phi",
+    "role": "herb"
+   },
+   {
+    "id": "dau-phong",
+    "role": "herb"
+   },
+   {
+    "id": "ca-rot",
+    "role": "herb"
+   },
+   {
+    "id": "cu-cai",
+    "role": "herb"
+   },
+   {
+    "id": "chanh",
+    "role": "herb"
+   },
+   {
+    "id": "ot",
+    "role": "herb"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "canh-chua-ca",
+  "vi": "canh chua cá",
+  "aliases_vi": [
+   "canh chua cá",
+   "canh chua",
+   "canh chua ca"
+  ],
+  "jp": "カイン・チュア・カー",
+  "desc_vi": "Canh chua me, dứa, cà chua, đậu bắp, cá.",
+  "ingredients": [
+   {
+    "id": "ca-basa",
+    "role": "main"
+   },
+   {
+    "id": "me",
+    "role": "seasoning"
+   },
+   {
+    "id": "ca-chua",
+    "role": "main"
+   },
+   {
+    "id": "dua",
+    "role": "main"
+   },
+   {
+    "id": "dau-bap",
+    "role": "main"
+   },
+   {
+    "id": "gia-do",
+    "role": "main"
+   },
+   {
+    "id": "ngo-gai",
+    "role": "herb"
+   },
+   {
+    "id": "rau-ram",
+    "role": "herb"
+   },
+   {
+    "id": "hanh-phi",
+    "role": "herb"
+   },
+   {
+    "id": "toi",
+    "role": "seasoning"
+   },
+   {
+    "id": "ot",
+    "role": "seasoning"
+   },
+   {
+    "id": "nuoc-mam",
+    "role": "seasoning"
+   },
+   {
+    "id": "duong",
+    "role": "seasoning"
+   },
+   {
+    "id": "muoi",
+    "role": "seasoning"
+   },
+   {
+    "id": "hanh-la",
+    "role": "herb"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "canh-kho-qua",
+  "vi": "canh khổ qua nhồi thịt",
+  "aliases_vi": [
+   "canh khổ qua",
+   "khổ qua nhồi thịt",
+   "canh kho qua"
+  ],
+  "jp": "カイン・コーカー",
+  "desc_vi": "Khổ qua nhồi thịt xay, nấu canh.",
+  "ingredients": [
+   {
+    "id": "kho-qua",
+    "role": "main"
+   },
+   {
+    "id": "thit-xay",
+    "role": "main"
+   },
+   {
+    "id": "nam-mo",
+    "role": "main"
+   },
+   {
+    "id": "mien",
+    "role": "main"
+   },
+   {
+    "id": "hanh-tim",
+    "role": "seasoning"
+   },
+   {
+    "id": "hanh-la",
+    "role": "herb"
+   },
+   {
+    "id": "nuoc-mam",
+    "role": "seasoning"
+   },
+   {
+    "id": "tieu",
+    "role": "seasoning"
+   },
+   {
+    "id": "muoi",
+    "role": "seasoning"
+   },
+   {
+    "id": "hat-nem",
+    "role": "optional"
+   },
+   {
+    "id": "rau-mui",
+    "role": "herb"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "thit-kho-trung",
+  "vi": "thịt kho trứng (thịt kho tàu)",
+  "aliases_vi": [
+   "thịt kho",
+   "thịt kho trứng",
+   "thịt kho tàu",
+   "thit kho"
+  ],
+  "jp": "ティット・コー・チュン",
+  "desc_vi": "Ba chỉ kho nước dừa với trứng.",
+  "ingredients": [
+   {
+    "id": "thit-ba-chi",
+    "role": "main"
+   },
+   {
+    "id": "trung",
+    "role": "main"
+   },
+   {
+    "id": "nuoc-dua",
+    "role": "main"
+   },
+   {
+    "id": "nuoc-mam",
+    "role": "seasoning"
+   },
+   {
+    "id": "duong",
+    "role": "seasoning"
+   },
+   {
+    "id": "hanh-tim",
+    "role": "seasoning"
+   },
+   {
+    "id": "toi",
+    "role": "seasoning"
+   },
+   {
+    "id": "tieu",
+    "role": "seasoning"
+   },
+   {
+    "id": "ot",
+    "role": "optional"
+   },
+   {
+    "id": "hanh-la",
+    "role": "herb"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "ca-kho-to",
+  "vi": "cá kho tộ",
+  "aliases_vi": [
+   "cá kho",
+   "cá kho tộ",
+   "ca kho"
+  ],
+  "jp": "カー・コー・トー",
+  "desc_vi": "Cá kho đậm đà trong nồi đất (ở Nhật hay dùng cá thu).",
+  "ingredients": [
+   {
+    "id": "ca-thu",
+    "role": "main"
+   },
+   {
+    "id": "ca-basa",
+    "role": "optional"
+   },
+   {
+    "id": "nuoc-mam",
+    "role": "seasoning"
+   },
+   {
+    "id": "duong",
+    "role": "seasoning"
+   },
+   {
+    "id": "hanh-tim",
+    "role": "seasoning"
+   },
+   {
+    "id": "toi",
+    "role": "seasoning"
+   },
+   {
+    "id": "ot",
+    "role": "seasoning"
+   },
+   {
+    "id": "tieu",
+    "role": "seasoning"
+   },
+   {
+    "id": "gung",
+    "role": "seasoning"
+   },
+   {
+    "id": "hanh-la",
+    "role": "herb"
+   },
+   {
+    "id": "dau-an",
+    "role": "seasoning"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "ga-kho-gung",
+  "vi": "gà kho gừng",
+  "aliases_vi": [
+   "gà kho gừng",
+   "gà kho",
+   "ga kho gung"
+  ],
+  "jp": "ガー・コー・グン",
+  "desc_vi": "Gà kho nước mắm với nhiều gừng.",
+  "ingredients": [
+   {
+    "id": "ga",
+    "role": "main"
+   },
+   {
+    "id": "gung",
+    "role": "main"
+   },
+   {
+    "id": "hanh-tim",
+    "role": "seasoning"
+   },
+   {
+    "id": "toi",
+    "role": "seasoning"
+   },
+   {
+    "id": "nuoc-mam",
+    "role": "seasoning"
+   },
+   {
+    "id": "duong",
+    "role": "seasoning"
+   },
+   {
+    "id": "tieu",
+    "role": "seasoning"
+   },
+   {
+    "id": "ot",
+    "role": "optional"
+   },
+   {
+    "id": "hanh-la",
+    "role": "herb"
+   },
+   {
+    "id": "dau-an",
+    "role": "seasoning"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "rau-muong-xao-toi",
+  "vi": "rau muống xào tỏi",
+  "aliases_vi": [
+   "rau muống xào",
+   "rau muống xào tỏi",
+   "rau muong xao"
+  ],
+  "jp": "ラウムオン・サオ・トイ",
+  "desc_vi": "Rau muống xào tỏi nhanh lửa lớn.",
+  "ingredients": [
+   {
+    "id": "rau-muong",
+    "role": "main"
+   },
+   {
+    "id": "toi",
+    "role": "main"
+   },
+   {
+    "id": "dau-an",
+    "role": "seasoning"
+   },
+   {
+    "id": "dau-hao",
+    "role": "optional"
+   },
+   {
+    "id": "nuoc-mam",
+    "role": "seasoning"
+   },
+   {
+    "id": "duong",
+    "role": "seasoning"
+   },
+   {
+    "id": "muoi",
+    "role": "seasoning"
+   },
+   {
+    "id": "hat-nem",
+    "role": "optional"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "banh-xeo",
+  "vi": "bánh xèo",
+  "aliases_vi": [
+   "bánh xèo",
+   "banh xeo"
+  ],
+  "jp": "バインセオ",
+  "desc_vi": "Bánh giòn nhân tôm, thịt, giá; cuốn rau, chấm nước mắm.",
+  "ingredients": [
+   {
+    "id": "bot-gao",
+    "role": "carb"
+   },
+   {
+    "id": "bot-nghe",
+    "role": "seasoning"
+   },
+   {
+    "id": "cot-dua",
+    "role": "seasoning"
+   },
+   {
+    "id": "hanh-la",
+    "role": "seasoning"
+   },
+   {
+    "id": "tom",
+    "role": "main"
+   },
+   {
+    "id": "thit-ba-chi",
+    "role": "main"
+   },
+   {
+    "id": "gia-do",
+    "role": "main"
+   },
+   {
+    "id": "hanh-tay",
+    "role": "main"
+   },
+   {
+    "id": "cai-xanh",
+    "role": "herb"
+   },
+   {
+    "id": "tia-to",
+    "role": "herb"
+   },
+   {
+    "id": "hung-lui",
+    "role": "herb"
+   },
+   {
+    "id": "xa-lach",
+    "role": "herb"
+   },
+   {
+    "id": "nuoc-mam",
+    "role": "seasoning"
+   },
+   {
+    "id": "duong",
+    "role": "seasoning"
+   },
+   {
+    "id": "chanh",
+    "role": "seasoning"
+   },
+   {
+    "id": "toi",
+    "role": "seasoning"
+   },
+   {
+    "id": "ot",
+    "role": "seasoning"
+   },
+   {
+    "id": "muoi",
+    "role": "seasoning"
+   },
+   {
+    "id": "dau-an",
+    "role": "seasoning"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "goi-cuon",
+  "vi": "gỏi cuốn",
+  "aliases_vi": [
+   "gỏi cuốn",
+   "goi cuon",
+   "nem cuốn"
+  ],
+  "jp": "ゴイクオン (生春巻き)",
+  "desc_vi": "Bánh tráng cuốn tôm, thịt, bún, rau; chấm tương.",
+  "ingredients": [
+   {
+    "id": "banh-trang",
+    "role": "carb"
+   },
+   {
+    "id": "bun",
+    "role": "carb"
+   },
+   {
+    "id": "tom",
+    "role": "main"
+   },
+   {
+    "id": "thit-ba-chi",
+    "role": "main"
+   },
+   {
+    "id": "xa-lach",
+    "role": "herb"
+   },
+   {
+    "id": "hung-lui",
+    "role": "herb"
+   },
+   {
+    "id": "rau-mui",
+    "role": "herb"
+   },
+   {
+    "id": "he",
+    "role": "herb"
+   },
+   {
+    "id": "dua-leo",
+    "role": "herb"
+   },
+   {
+    "id": "tuong-hoisin",
+    "role": "seasoning"
+   },
+   {
+    "id": "dau-phong",
+    "role": "seasoning"
+   },
+   {
+    "id": "toi",
+    "role": "seasoning"
+   },
+   {
+    "id": "ot",
+    "role": "seasoning"
+   },
+   {
+    "id": "duong",
+    "role": "seasoning"
+   },
+   {
+    "id": "nuoc-mam",
+    "role": "seasoning"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "cha-gio",
+  "vi": "chả giò (nem rán)",
+  "aliases_vi": [
+   "chả giò",
+   "nem rán",
+   "cha gio",
+   "nem ran"
+  ],
+  "jp": "チャーヨー (揚げ春巻き)",
+  "desc_vi": "Nem chiên giòn nhân thịt, miến, nấm mèo.",
+  "ingredients": [
+   {
+    "id": "banh-trang",
+    "role": "carb"
+   },
+   {
+    "id": "thit-xay",
+    "role": "main"
+   },
+   {
+    "id": "tom",
+    "role": "main"
+   },
+   {
+    "id": "nam-mo",
+    "role": "main"
+   },
+   {
+    "id": "mien",
+    "role": "main"
+   },
+   {
+    "id": "ca-rot",
+    "role": "main"
+   },
+   {
+    "id": "hanh-tay",
+    "role": "main"
+   },
+   {
+    "id": "trung",
+    "role": "seasoning"
+   },
+   {
+    "id": "hanh-tim",
+    "role": "seasoning"
+   },
+   {
+    "id": "tieu",
+    "role": "seasoning"
+   },
+   {
+    "id": "nuoc-mam",
+    "role": "seasoning"
+   },
+   {
+    "id": "dau-an",
+    "role": "seasoning"
+   },
+   {
+    "id": "xa-lach",
+    "role": "herb"
+   },
+   {
+    "id": "hung-lui",
+    "role": "herb"
+   },
+   {
+    "id": "tia-to",
+    "role": "herb"
+   },
+   {
+    "id": "duong",
+    "role": "seasoning"
+   },
+   {
+    "id": "chanh",
+    "role": "seasoning"
+   },
+   {
+    "id": "toi",
+    "role": "seasoning"
+   },
+   {
+    "id": "ot",
+    "role": "seasoning"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "com-tam-suon",
+  "vi": "cơm tấm sườn",
+  "aliases_vi": [
+   "cơm tấm",
+   "cơm tấm sườn",
+   "com tam"
+  ],
+  "jp": "コムタム・スオン",
+  "desc_vi": "Sườn nướng ướp sả, cơm tấm, trứng, đồ chua.",
+  "ingredients": [
+   {
+    "id": "gao",
+    "role": "carb"
+   },
+   {
+    "id": "suon-heo",
+    "role": "main"
+   },
+   {
+    "id": "sa",
+    "role": "seasoning"
+   },
+   {
+    "id": "toi",
+    "role": "seasoning"
+   },
+   {
+    "id": "hanh-tim",
+    "role": "seasoning"
+   },
+   {
+    "id": "nuoc-mam",
+    "role": "seasoning"
+   },
+   {
+    "id": "duong",
+    "role": "seasoning"
+   },
+   {
+    "id": "dau-hao",
+    "role": "seasoning"
+   },
+   {
+    "id": "tieu",
+    "role": "seasoning"
+   },
+   {
+    "id": "trung",
+    "role": "main"
+   },
+   {
+    "id": "dua-leo",
+    "role": "herb"
+   },
+   {
+    "id": "ca-chua",
+    "role": "herb"
+   },
+   {
+    "id": "hanh-phi",
+    "role": "herb"
+   },
+   {
+    "id": "hanh-la",
+    "role": "herb"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "bo-kho",
+  "vi": "bò kho",
+  "aliases_vi": [
+   "bò kho",
+   "bo kho"
+  ],
+  "jp": "ボーコー",
+  "desc_vi": "Bò hầm hồi quế, ăn với bánh mì hoặc bún.",
+  "ingredients": [
+   {
+    "id": "bap-bo",
+    "role": "main"
+   },
+   {
+    "id": "ca-rot",
+    "role": "main"
+   },
+   {
+    "id": "sa",
+    "role": "seasoning"
+   },
+   {
+    "id": "hoa-hoi",
+    "role": "seasoning"
+   },
+   {
+    "id": "que",
+    "role": "seasoning"
+   },
+   {
+    "id": "hat-dieu-mau",
+    "role": "seasoning"
+   },
+   {
+    "id": "nuoc-mam",
+    "role": "seasoning"
+   },
+   {
+    "id": "duong",
+    "role": "seasoning"
+   },
+   {
+    "id": "hanh-tim",
+    "role": "seasoning"
+   },
+   {
+    "id": "toi",
+    "role": "seasoning"
+   },
+   {
+    "id": "gung",
+    "role": "seasoning"
+   },
+   {
+    "id": "banh-mi",
+    "role": "carb"
+   },
+   {
+    "id": "rau-mui",
+    "role": "herb"
+   },
+   {
+    "id": "hanh-la",
+    "role": "herb"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "ca-ri-ga",
+  "vi": "cà ri gà",
+  "aliases_vi": [
+   "cà ri gà",
+   "ca ri ga",
+   "cà ri"
+  ],
+  "jp": "カリー・ガー",
+  "desc_vi": "Cà ri gà kiểu Việt với nước cốt dừa, khoai.",
+  "ingredients": [
+   {
+    "id": "ga",
+    "role": "main"
+   },
+   {
+    "id": "khoai-tay",
+    "role": "main"
+   },
+   {
+    "id": "ca-rot",
+    "role": "main"
+   },
+   {
+    "id": "hanh-tay",
+    "role": "main"
+   },
+   {
+    "id": "sa",
+    "role": "seasoning"
+   },
+   {
+    "id": "toi",
+    "role": "seasoning"
+   },
+   {
+    "id": "hanh-tim",
+    "role": "seasoning"
+   },
+   {
+    "id": "cot-dua",
+    "role": "seasoning"
+   },
+   {
+    "id": "bot-ca-ri",
+    "role": "seasoning"
+   },
+   {
+    "id": "duong",
+    "role": "seasoning"
+   },
+   {
+    "id": "nuoc-mam",
+    "role": "seasoning"
+   },
+   {
+    "id": "muoi",
+    "role": "seasoning"
+   },
+   {
+    "id": "dau-an",
+    "role": "seasoning"
+   },
+   {
+    "id": "banh-mi",
+    "role": "carb"
+   },
+   {
+    "id": "ot",
+    "role": "optional"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "xoi-man",
+  "vi": "xôi mặn",
+  "aliases_vi": [
+   "xôi mặn",
+   "xôi",
+   "xoi man",
+   "xoi"
+  ],
+  "jp": "ソイ・マン (おこわ)",
+  "desc_vi": "Xôi nếp với lạp xưởng, hành phi, đậu phộng.",
+  "ingredients": [
+   {
+    "id": "gao-nep",
+    "role": "carb"
+   },
+   {
+    "id": "lap-xuong",
+    "role": "main"
+   },
+   {
+    "id": "hanh-phi",
+    "role": "main"
+   },
+   {
+    "id": "nam-huong",
+    "role": "main"
+   },
+   {
+    "id": "tom-kho",
+    "role": "optional"
+   },
+   {
+    "id": "dau-phong",
+    "role": "herb"
+   },
+   {
+    "id": "vung",
+    "role": "herb"
+   },
+   {
+    "id": "hanh-la",
+    "role": "herb"
+   },
+   {
+    "id": "dau-an",
+    "role": "seasoning"
+   },
+   {
+    "id": "muoi",
+    "role": "seasoning"
+   },
+   {
+    "id": "hat-nem",
+    "role": "optional"
+   },
+   {
+    "id": "la-chuoi",
+    "role": "optional"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ },
+ {
+  "id": "canh-bi-dao",
+  "vi": "canh bí đao nấu tôm",
+  "aliases_vi": [
+   "canh bí đao",
+   "bí đao nấu tôm",
+   "canh bi dao"
+  ],
+  "jp": "カイン・ビーダオ",
+  "desc_vi": "Canh bí đao thanh mát nấu tôm hoặc thịt xay.",
+  "ingredients": [
+   {
+    "id": "bi-dao",
+    "role": "main"
+   },
+   {
+    "id": "tom",
+    "role": "main"
+   },
+   {
+    "id": "thit-xay",
+    "role": "optional"
+   },
+   {
+    "id": "hanh-tim",
+    "role": "seasoning"
+   },
+   {
+    "id": "hanh-la",
+    "role": "herb"
+   },
+   {
+    "id": "rau-mui",
+    "role": "herb"
+   },
+   {
+    "id": "nuoc-mam",
+    "role": "seasoning"
+   },
+   {
+    "id": "hat-nem",
+    "role": "optional"
+   },
+   {
+    "id": "muoi",
+    "role": "seasoning"
+   },
+   {
+    "id": "tieu",
+    "role": "seasoning"
+   }
+  ],
+  "status": "draft",
+  "source": "claude-draft-2026-10-28"
+ }
+]

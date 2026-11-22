@@ -34,7 +34,13 @@ export function newFamily(chatId: string, chatType: Family['chat_type'], cfg: Ap
 /** Reset monthly quota when the JST month rolls over. Returns true if changed. */
 export function rollQuotaMonth(family: Family, now: Date): boolean {
   const m = jstMonth(now);
-  if (family.quota_month === m) return false;
+  let changed = false;
+  if (family.lookup_month !== m && (family.lookup_used || family.lookup_month)) {
+    family.lookup_month = m;
+    family.lookup_used = 0;
+    changed = true;
+  }
+  if (family.quota_month === m) return changed;
   family.quota_month = m;
   family.quota_used = 0;
   return true;
@@ -116,6 +122,8 @@ export class Services {
       family.invite_code = '';
       family.quota_used = 0;
       family.pending_delete_until = undefined;
+      family.region = undefined;
+      family.lookup_used = 0;
       await this.repo.saveFamily(family);
     }
     await this.audit(actor, 'DELETE_FAMILY_DATA', `Xóa ${n} tài liệu, thu hồi link lịch`, familyId);

@@ -15,7 +15,15 @@ import { jstDate, jstMonth } from './time.ts';
 import { MockPolicyAnalyzer, PolicyAnalyzer } from './policy/analyzer.ts';
 import { PolicyService } from './policy/service.ts';
 import { PageFetcher } from './policy/fetch.ts';
-import { ExtractedDocument, Family, Translation } from '../types/index.ts';
+import { ExtractedDocument, Family, FamilyRegion, Translation } from '../types/index.ts';
+import { answerGomi, GomiDeps } from './lens/gomi/core.ts';
+import { GomiInput, MockRecognizer } from './lens/gomi/recognize.ts';
+import { areaRows } from './lens/gomi/schedule.ts';
+import { answerGrocery } from './lens/grocery/core.ts';
+import { EMPTY_GROCERY } from './lens/grocery/data.ts';
+import { LabelRecognizer, MockLabelRecognizer } from './lens/grocery/recognize.ts';
+import { GroceryData } from './lens/grocery/types.ts';
+import { chomeAfterCity, cityByMuniCd, cityFromAddress, cityNameFromAddress, City, describeRegion, findCities, Geocoder, regionFor } from './lens/regions.ts';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type LineEvent = any;
@@ -32,6 +40,7 @@ const SUGGESTION_TTL_MS = 30 * 60_000;
 /** Push messages kept back from digests for reply-token fallbacks and admin alerts. */
 const PUSH_RESERVE = 20;
 const LAST_PAGES_TTL_MS = 10 * 60_000;
+const GOMI_MODE_MS = 5 * 60_000;
 
 /** Bilingual line list split across LINE messages (≤5 per reply, 5000 chars each). Quick replies go on the last one. */
 export function formatTranslation(t: Translation, quick: QuickItem[]): LineMessage[] {
@@ -60,6 +69,22 @@ export type IngestResult =
 /** Strip Vietnamese diacritics + lowercase, for forgiving command matching. */
 export function fold(s: string): string {
   return s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/đ/g, 'd').replace(/Đ/g, 'D').toLowerCase().trim();
+}
+
+/** "rác pin sạc" → { arg: "pin sạc" }; matches command words ignoring diacritics, longest command first. */
+function commandArg(raw: string, commands: string[]): { cmd: string; arg: string } | null {
+  const words = raw.trim().replace(/^\//, '').split(/\s+/);
+  for (const cmd of [...commands].sort((a, b) => b.split(' ').length - a.split(' ').length)) {
+    const n = cmd.split(' ').length;
+    if (words.length >= n && fold(words.slice(0, n).join(' ')) === cmd) return { cmd, arg: words.slice(n).join(' ').trim() };
+  }
+  return null;
+}
+
+/** GSI town name ("西日暮里二丁目") is already town + chome. */
+function chomeFromTown(town: string): string | undefined {
+  const t = town.normalize('NFKC').trim().slice(0, 30);
+  return t || undefined;
 }
 
 function chatOf(source: any): { chatId: string; chatType: Family['chat_type'] } | null {
@@ -116,6 +141,14 @@ export interface BotDeps {
   policyFetchPage?: PageFetcher;
   cfg: AppConfig;
   now?: () => Date;
+  /** Waste-sorting module (recognizer + city dictionary). Offline mock with an empty dictionary when omitted. */
+  gomi?: Omit<GomiDeps, 'repo' | 'now'>;
+  /** "Đi chợ" tables + label reader. Empty tables and an offline mock when omitted. */
+  grocery?: { data: GroceryData; recognizer?: LabelRecognizer };
+  /** Cities a family can pick (data/cities.json). */
+  cities?: City[];
+  /** Fallback for a location pin without a usable address (see REGION_GEOCODER). */
+  geocoder?: Geocoder;
 }
 
 export class Bot {
@@ -125,6 +158,10 @@ export class Bot {
   private seenEvents: string[] = [];
   /** Chats that typed "dịch": the next photos are translated only (one-shot, expires). */
   private translateUntil = new Map<string, number>();
+  /** Chats in "rác" mode: photos and plain text are waste-sorting questions until it expires or "hủy". */
+  private gomiUntil = new Map<string, number>();
+  /** Same for "đi chợ": typed questions are answered from the tables, photos are product labels. */
+  private groceryUntil = new Map<string, number>();
   /** Last translated pages per chat (RAM only, 10 min) so "Đọc & thêm lịch" doesn't need a re-send. */
   private lastPages = new Map<string, { pages: Page[]; at: number }>();
   private translator: Translator;
@@ -133,6 +170,9 @@ export class Bot {
   readonly history = new ChatHistory();
   /** Calendar suggestions waiting for ✅ (RAM only, 30 min). */
   private suggestions = new Map<string, { familyId: string; doc: ExtractedDocument; at: number }>();
+  private gomi: Omit<GomiDeps, 'repo' | 'now'>;
+  private cities: City[];
+  private grocery: { data: GroceryData; recognizer: LabelRecognizer };
   private repo: Repo;
   private line: LineApi;
   private cfg: AppConfig;
@@ -141,6 +181,9 @@ export class Bot {
   constructor(private readonly deps: BotDeps) {
     this.translator = deps.translator || new MockTranslator();
     this.chatAnalyzer = deps.chatAnalyzer || new MockChatAnalyzer();
+    this.gomi = deps.gomi || { recognizer: new MockRecognizer(), dictionary: { rows: () => [] } };
+    this.cities = deps.cities || [];
+    this.grocery = { data: deps.grocery?.data || EMPTY_GROCERY, recognizer: deps.grocery?.recognizer || new MockLabelRecognizer() };
     this.repo = deps.repo;
     this.line = deps.line;
     this.cfg = deps.cfg;
@@ -331,6 +374,7 @@ export class Bot {
         const type = ev.message?.type;
         if (type === 'text') return this.onText(ev, family, userId);
         if (type === 'image' || type === 'file') return this.onMedia(ev, family, userId);
+        if (type === 'location') return this.onLocation(ev, family);
         return;
       }
       default:
@@ -445,6 +489,10 @@ export class Bot {
       { label: '📅 Lịch', data: 'action=calendar', text: 'Lịch' },
       { label: '📰 Chính sách', text: 'có gì mới' },
       { label: '🌐 Chỉ dịch', data: 'action=translate_mode', text: 'dịch' },
+      { label: '🗑️ Phân loại rác', data: 'action=gomi_mode', text: 'rác' },
+      { label: '🛒 Đi chợ', data: 'action=grocery_mode', text: 'đi chợ' },
+      { label: '📍 Khu vực', text: 'khu vực' },
+      { label: '📅 Lịch rác', text: 'lịch rác' },
       { label: '📊 Hạn mức', text: 'trạng thái' },
       { label: '✍️ Soạn tin cô', text: '/soạn' },
     ];
@@ -463,6 +511,10 @@ export class Bot {
         '• "dịch" rồi gửi ảnh → chỉ dịch từng dòng (không lưu, không thêm lịch)\n' +
         '• "dịch <chữ tiếng Nhật>" → dịch đoạn chữ đó\n' +
         '• "có gì mới" → thay đổi chính sách ảnh hưởng tới riêng bạn (nhắn riêng với bot)\n' +
+        '• "rác" rồi gửi ảnh/gõ tên đồ → loại rác & cách bỏ (vd: "rác pin sạc")\n' +
+        '• "đi chợ" rồi chụp nhãn sản phẩm / gõ tên món (vd: "đi chợ phở bò") / gõ "thay rau răm"\n' +
+        '• "lịch rác" → thêm lịch đổ rác của khu bạn vào lịch điện thoại (nhắc 20:00 tối hôm trước)\n' +
+        '• "khu vực" → đặt thành phố/khu để tra rác đúng nơi (gửi vị trí LINE hoặc gõ tên)\n' +
         '• "trạng thái" → hạn mức tháng này\n' +
         '• "đặt tên <tên>" → đổi tên gia đình\n' +
         '• "nhắc sáng bật/tắt" → 7:00 nhắn việc hôm nay & ngày mai\n' +
@@ -522,6 +574,7 @@ export class Bot {
       const mode = t.startsWith('co gi moi') || t === '/cogimoi' ? 'whatsnew' : 'intro';
       return this.reply(ev, await this.policy.chatReply(userId, family.chat_type === 'user', mode));
     }
+    if (t === 'lich rac' || t === '/lichrac') return this.gomiCalendar(ev, family);
     if (t === 'nhac sang bat' || t === 'nhac sang tat' || t === 'nhac sang') {
       if (t !== 'nhac sang') {
         family.daily_digest = t.endsWith('bat');
@@ -545,10 +598,27 @@ export class Bot {
       this.translateUntil.delete(family.line_chat_id);
       return this.reply(ev, [text('Đã tắt chế độ dịch. Ảnh gửi tiếp sẽ được đọc và thêm vào lịch như bình thường.')]);
     }
+    if ((t === 'huy' || t === '/huy') && this.gomiActive(family)) {
+      this.gomiUntil.delete(family.line_chat_id);
+      return this.reply(ev, [text('Đã tắt chế độ phân loại rác. Ảnh gửi tiếp sẽ được đọc như giấy tờ.')]);
+    }
+    if ((t === 'huy' || t === '/huy') && this.groceryActive(family)) {
+      this.groceryUntil.delete(family.line_chat_id);
+      return this.reply(ev, [text('Đã tắt chế độ đi chợ. Ảnh gửi tiếp sẽ được đọc như giấy tờ.')]);
+    }
     if (t === 'trang thai' || t === '/trangthai') {
       return this.reply(ev, [text(`📊 Tháng ${family.quota_month}: đã dùng ${family.quota_used}/${family.quota_limit} giấy.`)]);
     }
+    const rac = commandArg(raw, ['phan loai rac', 'phan loai', 'rac']);
+    if (rac) return rac.arg ? this.gomiText(ev, family, rac.arg) : this.startGomiMode(ev, family);
+    const cho = raw.trim().startsWith('/') ? commandArg(raw, ['di cho', 'cho']) : commandArg(raw, ['di cho']);
+    if (cho) return cho.arg ? this.groceryText(ev, family, cho.arg) : this.startGroceryMode(ev, family);
+    const kv = commandArg(raw, ['khu vuc', 'khuvuc']);
+    if (kv) return this.regionCommand(ev, family, kv.arg);
     if (t.startsWith('/soan')) return this.compose(ev, family, raw.replace(/^\/\S+\s*/, ''));
+
+    if (this.gomiActive(family)) return this.gomiText(ev, family, raw); // follow-up question while in "rác" mode
+    if (this.groceryActive(family)) return this.groceryText(ev, family, raw); // follow-up while in "đi chợ" mode
 
     // Tagged in a group (or any text in 1:1): look for dates/deadlines in the conversation and offer to save them.
     if (mentioned || family.chat_type === 'user') return this.analyzeChat(ev, family, raw, context, quoted);
@@ -678,6 +748,12 @@ export class Bot {
       if (action === 'chat_skip') return this.reply(ev, [text('OK, không lưu.')]);
       return this.saveSuggestion(ev, family, s.doc);
     }
+    if (action === 'gomi_mode' && family.status === 'active') return this.startGomiMode(ev, family);
+    if (action === 'grocery_mode' && family.status === 'active') return this.startGroceryMode(ev, family);
+    if (action === 'region_cancel') {
+      return this.reply(ev, [text('Ok, chưa đổi khu vực. Gõ: khu vực <tên thành phố> (vd: khu vực Yokohama), hoặc gửi vị trí.', this.regionQuick())]);
+    }
+    if (action === 'region_set' && family.status === 'active') return this.applyRegion(ev, family, params);
     if (action === 'read_last' && family.status === 'active') {
       const last = this.lastPages.get(family.line_chat_id);
       if (!last || Date.now() - last.at > LAST_PAGES_TTL_MS) {
@@ -722,12 +798,15 @@ export class Bot {
   private async onMedia(ev: LineEvent, family: Family, userId?: string) {
     const msg = ev.message;
     const translating = (this.translateUntil.get(family.line_chat_id) || 0) > Date.now();
-    const blocker = translating ? await this.translateBlocker(family) : await this.intakeBlocker(family);
+    const gomi = !translating && this.gomiActive(family);
+    const grocery = !translating && !gomi && this.groceryActive(family);
+    const blocker = translating ? await this.translateBlocker(family) : gomi || grocery ? await this.gomiBlocker(family) : await this.intakeBlocker(family);
     if (blocker) {
       // In groups, don't nag on every photo of a pending family — only active/suspended/quota cases.
       if (family.chat_type === 'user' || family.status !== 'pending_terms') await this.reply(ev, [text(blocker)]);
       return;
     }
+    if ((gomi || grocery) && msg.type === 'file') return this.reply(ev, [text('Chế độ này chỉ nhận ảnh. Bạn chụp rồi gửi lại nhé.')]);
     if (msg.type === 'file' && !/\.pdf$/i.test(msg.fileName || '')) {
       return this.reply(ev, [text('Hiện mình chỉ đọc được ảnh và file PDF.')]);
     }
@@ -754,7 +833,7 @@ export class Bot {
     await this.line.showLoading(family.line_chat_id, 30);
     const page: Page = { data: content.data, mediaType, hint: content.hint };
     const res = this.aggregator.add({
-      mode: translating ? 'translate' : 'read',
+      mode: translating ? 'translate' : gomi ? 'gomi' : grocery ? 'grocery' : 'read',
       chatId: family.line_chat_id,
       familyId: family.family_id,
       page,
@@ -765,8 +844,8 @@ export class Bot {
     if (res.dropped === 1) {
       await this.services.logError(family.family_id, 'TOO_MANY_PAGES', `Bỏ trang vượt quá ${this.cfg.maxPagesPerDoc}`);
     }
-    // A PDF is a complete document on its own.
-    if (mediaType === 'application/pdf') await this.aggregator.flush(family.line_chat_id);
+    // A PDF is a complete document on its own; one photo of an item is one question (no 15s wait).
+    if (mediaType === 'application/pdf' || gomi || grocery) await this.aggregator.flush(family.line_chat_id);
   }
 
   private async send(batch: PageBatch, messages: LineMessage[]) {
@@ -919,6 +998,8 @@ export class Bot {
   /** LINE path: ingest a batch from the chat and answer there. */
   async processBatch(batch: PageBatch) {
     if (batch.mode === 'translate') return this.translateBatch(batch);
+    if (batch.mode === 'gomi') return this.gomiBatch(batch);
+    if (batch.mode === 'grocery') return this.groceryBatch(batch);
     const r = await this.ingest(batch.familyId, batch.pages);
     if (r.kind === 'blocked' || r.kind === 'error') return this.send(batch, [text(r.message)]);
     if (r.kind === 'duplicate') return this.send(batch, [this.duplicateMessage(r.doc, r.added)]);
@@ -939,5 +1020,249 @@ export class Bot {
       ? [text(body), { ...this.calendarMessage(family), quickReply: text('', quick).quickReply }]
       : [text(body, quick)];
     await this.send(batch, messages);
+  }
+
+  // ---------- waste sorting (rác) + region ----------
+
+  private gomiActive(family: Family) {
+    return (this.gomiUntil.get(family.line_chat_id) || 0) > Date.now();
+  }
+
+  /** Lookups share the monthly Claude budget but have their own (cheap) counter, not the paper quota. */
+  private async gomiBlocker(family: Family): Promise<string | null> {
+    if (family.status !== 'active') return '⚠️ Gia đình chưa kích hoạt hoặc đang tạm dừng.';
+    if ((family.lookup_used || 0) >= this.cfg.lookupQuota) {
+      return `⚠️ Gia đình đã hỏi hết ${this.cfg.lookupQuota} lượt tra cứu (rác, nhãn sản phẩm) của tháng này (tính riêng với giấy tờ). Lượt hỏi làm mới vào ngày 1 tháng sau.`;
+    }
+    if (!(await this.withinBudget())) return '⚠️ Hệ thống tạm dừng do đã hết ngân sách Beta tháng này. Xin lỗi gia đình!';
+    return null;
+  }
+
+  private regionQuick(withLocation = true): QuickItem[] {
+    return [...(withLocation ? [{ label: '📍 Gửi vị trí', location: true }] : []), { label: '☰ Menu', text: 'menu' }];
+  }
+
+  private regionPrompt(): LineMessage {
+    return text(
+      '📍 Mình cần biết bạn ở đâu để tra đúng quy định rác của thành phố.\n\n' +
+        '• Bấm "Gửi vị trí" bên dưới rồi chọn nơi bạn ở (mình chỉ lưu tên thành phố và khu, không lưu tọa độ hay số nhà), hoặc\n' +
+        '• Gõ: khu vực <tên thành phố>, ví dụ: khu vực Yokohama / khu vực 荒川区\n\n' +
+        'Xong thì hỏi lại món đồ nhé.',
+      this.regionQuick(),
+    );
+  }
+
+  private scheduleFor(family: Family) {
+    const book = this.gomi.schedule;
+    if (!book || !family.region) return { rows: [], ambiguous: false };
+    return areaRows(book.rows(family.region.city_code), family.region.chome_label);
+  }
+
+  private async gomiCalendar(ev: LineEvent, family: Family) {
+    if (family.status !== 'active') return;
+    if (!family.region) return this.reply(ev, [this.regionPrompt()]);
+    const { rows, ambiguous } = this.scheduleFor(family);
+    if (!rows.length) {
+      return this.reply(ev, [text(
+        ambiguous
+          ? '📅 Lịch đổ rác khác nhau theo từng 丁目. Gõ "khu vực" kèm số 丁目 (vd: khu vực 荒川区 西日暮里2丁目) để mình lấy đúng lịch.'
+          : `📅 Mình chưa có lịch đổ rác của ${describeRegion(family.region)}. Bạn vẫn hỏi từng món được: gõ "rác".`,
+        this.regionQuick(false),
+      )]);
+    }
+    return this.reply(ev, [text(
+      `🗑️ Lịch đổ rác — ${describeRegion(family.region)}\n` + calendarPageUrl(this.cfg, family) + '\n\n' +
+        'Mở link → kéo xuống thẻ "Lịch đổ rác" → bấm thêm vào lịch iPhone / Google. App lịch tự nhắc 20:00 tối hôm trước (không tốn tin nhắn LINE).\n🔒 Link riêng của gia đình, đừng chia sẻ ra ngoài.',
+      this.regionQuick(false),
+    )]);
+  }
+
+  private async startGomiMode(ev: LineEvent, family: Family) {
+    this.groceryUntil.delete(family.line_chat_id);
+    this.gomiUntil.set(family.line_chat_id, Date.now() + GOMI_MODE_MS);
+    const where = family.region ? `📍 Khu vực: ${describeRegion(family.region)}` : '📍 Chưa đặt khu vực — gõ "khu vực" hoặc gửi vị trí để tra theo thành phố.';
+    return this.reply(ev, [text(
+      '🗑️ PHÂN LOẠI RÁC: chụp ảnh món đồ, hoặc gõ tên (vd: pin sạc, tủ lạnh, chai nhựa) trong 5 phút tới. Hỏi được nhiều món liên tiếp.\n' + where,
+      [{ label: '📷 Chụp đồ', camera: true }, { label: '🖼️ Chọn ảnh', cameraRoll: true }, ...(family.region ? [] : [{ label: '📍 Gửi vị trí', location: true }]), { label: 'Hủy', text: 'hủy' }],
+    )]);
+  }
+
+  /** One question → answer. Never throws; always returns something to say. */
+  private async lookupGomi(family: Family, input: GomiInput): Promise<LineMessage[]> {
+    const blocker = await this.gomiBlocker(family);
+    if (blocker) return [text(blocker)];
+    const now = this.now();
+    try {
+      const a = await answerGomi(input, family.region ? { city_code: family.region.city_code, chome_label: family.region.chome_label } : undefined, { ...this.gomi, repo: this.repo, now: () => now });
+      if (a.cost_usd) await this.recordUsage(jstMonth(now), { cost_usd: a.cost_usd });
+      if (a.cost_usd && a.outcome !== 'no_region') { // an answer was given: count it (free typed lookups and "where do you live?" prompts don't count)
+        family.lookup_used = (family.lookup_used || 0) + 1;
+        family.lookup_month = jstMonth(now);
+        family.last_active = now.toISOString();
+        await this.repo.saveFamily(family);
+      }
+      this.gomiUntil.set(family.line_chat_id, Date.now() + GOMI_MODE_MS);
+      return a.outcome === 'no_region' ? [this.regionPrompt()] : a.messages;
+    } catch (err) {
+      await this.services.logError(family.family_id, 'GOMI_LOOKUP', String((err as Error)?.message || err));
+      return [text('😥 Chưa tra được món này. Bạn thử lại sau ít phút, hoặc gõ tên món bằng chữ nhé.')];
+    }
+  }
+
+  private async gomiText(ev: LineEvent, family: Family, item: string) {
+    if (family.status !== 'active') return;
+    return this.reply(ev, await this.lookupGomi(family, { text: item.slice(0, 200) }));
+  }
+
+  private async gomiBatch(batch: PageBatch) {
+    const family = await this.repo.getFamily(batch.familyId);
+    if (!family) return;
+    rollQuotaMonth(family, this.now());
+    return this.send(batch, await this.lookupGomi(family, { pages: batch.pages.slice(0, 3) }));
+  }
+
+  private async regionCommand(ev: LineEvent, family: Family, arg: string) {
+    if (family.status !== 'active') return;
+    if (!arg) {
+      return this.reply(ev, [text(
+        (family.region ? `📍 Khu vực hiện tại: ${describeRegion(family.region)}\n\n` : '📍 Chưa đặt khu vực.\n\n') +
+          'Đổi/đặt: bấm "Gửi vị trí" (mình chỉ lưu tên thành phố + khu, không lưu tọa độ/số nhà) hoặc gõ: khu vực <tên thành phố>.\n' +
+          (this.cities.length ? `Đang có dữ liệu riêng: ${this.cities.map(c => c.name_jp).join(', ')}. Thành phố khác vẫn hỏi được theo quy tắc chung.` : ''),
+        this.regionQuick(),
+      )]);
+    }
+    const hits = findCities(this.cities, arg);
+    if (hits.length === 1) return this.setRegion(ev, family, hits[0], arg, chomeAfterCity(hits[0], arg), 'text');
+    if (hits.length > 1) {
+      return this.reply(ev, [text(
+        `Bạn ở thành phố nào?`,
+        hits.slice(0, 8).map(c => ({ label: c.name_jp, data: new URLSearchParams({ action: 'region_set', c: c.code, v: 'text', ...(chomeAfterCity(c, arg) ? { t: chomeAfterCity(c, arg)! } : {}) }).toString(), text: c.name_jp })),
+      )]);
+    }
+    return this.offerUnsupported(ev, arg.slice(0, 30), undefined, 'text');
+  }
+
+  /** The city isn't in data/cities.json: let the family opt into generic answers (explicit choice, so typos don't become regions). */
+  private offerUnsupported(ev: LineEvent, name: string, chome: string | undefined, via: FamilyRegion['via']) {
+    return this.reply(ev, [text(
+      `Mình chưa có dữ liệu riêng cho 「${name}」. Bạn vẫn hỏi rác được: mình trả lời theo quy tắc chung (tivi/tủ lạnh/pin… luôn có cảnh báo đúng luật) và ghi rõ "chưa chắc, kiểm tra lại quy định của thành phố".`,
+      [
+        { label: '✅ Dùng quy tắc chung', data: new URLSearchParams({ action: 'region_set', c: 'unsupported', n: name, ...(chome ? { t: chome } : {}), v: via }).toString(), text: 'Dùng quy tắc chung' },
+        { label: 'Không', data: 'action=region_cancel', text: 'Không' },
+      ],
+    )]);
+  }
+
+  private async applyRegion(ev: LineEvent, family: Family, params: URLSearchParams) {
+    const code = params.get('c') || '';
+    const via = params.get('v') === 'location' ? 'location' : 'text';
+    const chome = (params.get('t') || '').slice(0, 30) || undefined;
+    if (code === 'unsupported') {
+      const name = (params.get('n') || '').slice(0, 30);
+      if (!name) return;
+      return this.setRegion(ev, family, null, name, chome, via);
+    }
+    const city = this.cities.find(c => c.code === code);
+    if (!city) return;
+    return this.setRegion(ev, family, city, city.name_jp, chome, via);
+  }
+
+  private async setRegion(ev: LineEvent, family: Family, city: City | null, name: string, chome: string | undefined, via: FamilyRegion['via']) {
+    family.region = regionFor(city, name, chome, via, this.now());
+    await this.repo.saveFamily(family);
+    // Demand signal for which cities to add next (name only, no user).
+    if (!city) await this.repo.logUnknownItem('region', name, '', this.now());
+    const rows = city ? this.gomi.dictionary.rows(city.code).length : 0;
+    const sched = this.scheduleFor(family);
+    return this.reply(ev, [text(
+      `✅ Đã đặt khu vực: ${describeRegion(family.region)}\n` +
+        (rows
+          ? `Dữ liệu phân loại rác của thành phố: ${rows} mục.`
+          : 'Thành phố này chưa có dữ liệu riêng: mình trả lời theo quy tắc chung và ghi rõ "chưa chắc".') +
+        (sched.rows.length ? '\n📅 Có lịch đổ rác của khu bạn — gõ "lịch rác" để thêm vào lịch điện thoại (nhắc 20:00 tối hôm trước).' : '') +
+        (sched.ambiguous ? '\n📅 Lịch đổ rác khác nhau theo từng 丁目: gõ "khu vực" kèm số 丁目 (vd: khu vực 荒川区 西日暮里2丁目) để có lịch đúng.' : '') +
+        '\n🔒 Chỉ lưu tên thành phố và khu (町丁目), không lưu tọa độ hay số nhà. Đổi: gõ "khu vực <tên>". Xóa: "xóa dữ liệu".\n\nHỏi thử: gõ "rác" rồi gửi ảnh hoặc tên món.',
+      [{ label: '🗑️ Hỏi rác', data: 'action=gomi_mode', text: 'rác' }, { label: '☰ Menu', text: 'menu' }],
+    )]);
+  }
+
+  /** LINE location message → suggest the city (and town) for the family to confirm. Coordinates are never stored. */
+  private async onLocation(ev: LineEvent, family: Family) {
+    if (family.status !== 'active') return;
+    const { address = '', latitude, longitude } = ev.message || {};
+    let city: City | null = null;
+    let chome: string | undefined;
+    const fromAddress = cityFromAddress(this.cities, String(address));
+    if (fromAddress) ({ city, chome_label: chome } = fromAddress);
+    let name = city?.name_jp ?? cityNameFromAddress(String(address));
+
+    if (!name && this.deps.geocoder && typeof latitude === 'number' && typeof longitude === 'number') {
+      const g = await this.deps.geocoder(latitude, longitude);
+      if (g) {
+        city = cityByMuniCd(this.cities, g.muniCd) ?? null;
+        name = city?.name_jp;
+        chome = g.town ? chomeFromTown(g.town) : undefined;
+      }
+    }
+    if (!name) {
+      return this.reply(ev, [text('Mình chưa đọc được thành phố từ vị trí này. Bạn gõ: khu vực <tên thành phố> (vd: khu vực Yokohama) nhé.', this.regionQuick(false))]);
+    }
+    if (!city) return this.offerUnsupported(ev, name, chome, 'location');
+    return this.reply(ev, [text(
+      `📍 Có phải bạn ở ${describeRegion(regionFor(city, name, chome, 'location', this.now()))}?\n(Mình chỉ giữ tên thành phố và khu, bỏ tọa độ và số nhà.)`,
+      [
+        { label: '✅ Đúng', data: new URLSearchParams({ action: 'region_set', c: city.code, v: 'location', ...(chome ? { t: chome } : {}) }).toString(), text: 'Đúng' },
+        { label: 'Không phải', data: 'action=region_cancel', text: 'Không phải' },
+      ],
+    )]);
+  }
+
+  // ---------- grocery (đi chợ) ----------
+
+  private groceryActive(family: Family) {
+    return (this.groceryUntil.get(family.line_chat_id) || 0) > Date.now();
+  }
+
+  private async startGroceryMode(ev: LineEvent, family: Family) {
+    if (family.status !== 'active') return;
+    this.gomiUntil.delete(family.line_chat_id);
+    this.groceryUntil.set(family.line_chat_id, Date.now() + GOMI_MODE_MS);
+    return this.reply(ev, [text(
+      '🛒 ĐI CHỢ NHẬT (5 phút tới):\n• Chụp NHÃN sản phẩm → đọc nhãn, hạn dùng, cách bảo quản.\n• Gõ tên MÓN (vd: phở bò, bún bò và canh chua) → danh sách đồ cần mua + nơi mua.\n• Gõ "thay rau răm" → đồ thay thế.\n• Gõ tên nguyên liệu → tên tiếng Nhật & nơi bán.',
+      [{ label: '📷 Chụp nhãn', camera: true }, { label: '🖼️ Chọn ảnh', cameraRoll: true }, { label: 'Hủy', text: 'hủy' }],
+    )]);
+  }
+
+  /** Typed questions are answered from the tables: no model, no quota. */
+  private async groceryText(ev: LineEvent, family: Family, input: string) {
+    if (family.status !== 'active') return;
+    this.groceryUntil.set(family.line_chat_id, Date.now() + GOMI_MODE_MS);
+    const a = await answerGrocery({ text: input }, { data: this.grocery.data, repo: this.repo, now: this.now });
+    return this.reply(ev, a.messages);
+  }
+
+  /** A label photo: Claude transcribes it; counts as one lookup. */
+  private async groceryBatch(batch: PageBatch) {
+    const family = await this.repo.getFamily(batch.familyId);
+    if (!family) return;
+    rollQuotaMonth(family, this.now());
+    const blocker = await this.gomiBlocker(family);
+    if (blocker) return this.send(batch, [text(blocker)]);
+    const now = this.now();
+    try {
+      const a = await answerGrocery({ pages: batch.pages.slice(0, 3) }, { data: this.grocery.data, recognizer: this.grocery.recognizer, repo: this.repo, now: () => now });
+      if (a.cost_usd) {
+        await this.recordUsage(jstMonth(now), { cost_usd: a.cost_usd });
+        family.lookup_used = (family.lookup_used || 0) + 1;
+        family.lookup_month = jstMonth(now);
+        family.last_active = now.toISOString();
+        await this.repo.saveFamily(family);
+      }
+      this.groceryUntil.set(batch.chatId, Date.now() + GOMI_MODE_MS);
+      return this.send(batch, a.messages);
+    } catch (err) {
+      await this.services.logError(family.family_id, 'GROCERY_LABEL', String((err as Error)?.message || err));
+      return this.send(batch, [text('😥 Chưa đọc được nhãn này. Bạn thử chụp lại gần hơn, đủ sáng, rõ cả mặt sau (chỗ ghi thành phần và hạn dùng) nhé.')]);
+    }
   }
 }

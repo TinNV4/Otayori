@@ -1,0 +1,45 @@
+{
+  "id": "bunkyo-schedule",
+  "city_code": "13105",
+  "kind": "gomi_schedule",
+  "enabled": true,
+  "note": "Imported 2026-10-29 with `data scaffold`; category_map entries mapped to \"other\" or by keyword were chosen by Claude and need an admin look before publish (see docs).",
+  "ckan": {
+    "api": "https://catalog.data.metro.tokyo.lg.jp/api/3/action",
+    "dataset": "t131059d0110060001"
+  },
+  "url": "",
+  "encoding": "shift_jis",
+  "license": "クリエイティブ・コモンズ 表示（CC BY）",
+  "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+  "cadence": "monthly",
+  "adapter": "schedule_csv_v1",
+  "schedule": {
+    "area_columns": [
+      "町名",
+      "丁目"
+    ],
+    "categories": [
+      {
+        "column": "可燃ごみ（週2回）",
+        "local_category": "可燃ごみ",
+        "common_class": "burnable"
+      },
+      {
+        "column": "不燃ごみ（月2回）",
+        "local_category": "不燃ごみ",
+        "common_class": "non_burnable"
+      },
+      {
+        "column": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）（週1回）",
+        "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+        "common_class": "resource"
+      },
+      {
+        "column": "資源（プラスチック）（週1回）",
+        "local_category": "資源（プラスチック）",
+        "common_class": "plastic"
+      }
+    ]
+  }
+}

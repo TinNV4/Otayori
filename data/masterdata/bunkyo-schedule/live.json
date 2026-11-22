@@ -1,0 +1,6246 @@
+{
+ "meta": {
+  "source_id": "bunkyo-schedule",
+  "version": 1,
+  "content_hash": "052637d82299e20cecff008341b2b61406a2eac973e31e1961160ffdd5fa5f5f",
+  "row_count": 280,
+  "created_at": "2026-10-29T01:02:51.824Z",
+  "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+  "source_updated_at": "2026-01-30",
+  "warnings": [],
+  "verified_by": "tinnv4",
+  "published_at": "2026-10-29T01:10:45.395Z"
+ },
+ "rows": [
+  {
+   "id": "13105-acf4731e8be7",
+   "city_code": "13105",
+   "area_key": "後楽1丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-5fbc851b9690",
+   "city_code": "13105",
+   "area_key": "後楽1丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-af085fb16840",
+   "city_code": "13105",
+   "area_key": "後楽1丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-6640810f1e64",
+   "city_code": "13105",
+   "area_key": "後楽1丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-6ca4160d4c70",
+   "city_code": "13105",
+   "area_key": "後楽2丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-732301d46bd8",
+   "city_code": "13105",
+   "area_key": "後楽2丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-bc1eb2fbdda2",
+   "city_code": "13105",
+   "area_key": "後楽2丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-8dbcb71fd831",
+   "city_code": "13105",
+   "area_key": "後楽2丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-bea1eb0935fc",
+   "city_code": "13105",
+   "area_key": "春日1丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-f662866b2d01",
+   "city_code": "13105",
+   "area_key": "春日1丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-86305dd0c94c",
+   "city_code": "13105",
+   "area_key": "春日1丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-46efb6c1c784",
+   "city_code": "13105",
+   "area_key": "春日1丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-baa862d45b4f",
+   "city_code": "13105",
+   "area_key": "春日2丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-d3e8cb3cbb68",
+   "city_code": "13105",
+   "area_key": "春日2丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-3c77a0b27537",
+   "city_code": "13105",
+   "area_key": "春日2丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-47b1b7bf718d",
+   "city_code": "13105",
+   "area_key": "春日2丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-a3ffaae28cc9",
+   "city_code": "13105",
+   "area_key": "小石川1丁目1~16番",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-76857616b784",
+   "city_code": "13105",
+   "area_key": "小石川1丁目1~16番",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-9228cd8f51a6",
+   "city_code": "13105",
+   "area_key": "小石川1丁目1~16番",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-8e2e8254ffeb",
+   "city_code": "13105",
+   "area_key": "小石川1丁目1~16番",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-679d342252ed",
+   "city_code": "13105",
+   "area_key": "小石川1丁目17~28番",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-895e1c66101a",
+   "city_code": "13105",
+   "area_key": "小石川1丁目17~28番",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     5
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-2c82bf9fc3d1",
+   "city_code": "13105",
+   "area_key": "小石川1丁目17~28番",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-3b61d4797ce6",
+   "city_code": "13105",
+   "area_key": "小石川1丁目17~28番",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-af5544467f77",
+   "city_code": "13105",
+   "area_key": "小石川2丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-546ed3ecfa46",
+   "city_code": "13105",
+   "area_key": "小石川3丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-70c821ce3e53",
+   "city_code": "13105",
+   "area_key": "小石川2丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-370ec3d680be",
+   "city_code": "13105",
+   "area_key": "小石川3丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-1d6e8a3dd275",
+   "city_code": "13105",
+   "area_key": "小石川2丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-2d5e91f9ced1",
+   "city_code": "13105",
+   "area_key": "小石川3丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-36f6cd8a82e6",
+   "city_code": "13105",
+   "area_key": "小石川2丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-c6c550d73b4f",
+   "city_code": "13105",
+   "area_key": "小石川3丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-092fed7746f5",
+   "city_code": "13105",
+   "area_key": "小石川4丁目1~14番",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-bad83924498a",
+   "city_code": "13105",
+   "area_key": "小石川4丁目1~14番",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-d5d28660cbf6",
+   "city_code": "13105",
+   "area_key": "小石川4丁目1~14番",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-92d37db971e2",
+   "city_code": "13105",
+   "area_key": "小石川4丁目1~14番",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-4400ad98e362",
+   "city_code": "13105",
+   "area_key": "小石川4丁目15~22番",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-5821885754db",
+   "city_code": "13105",
+   "area_key": "小石川4丁目15~22番",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-1f982f39942e",
+   "city_code": "13105",
+   "area_key": "小石川4丁目15~22番",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-7fec69da1184",
+   "city_code": "13105",
+   "area_key": "小石川4丁目15~22番",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-3bc1f398e099",
+   "city_code": "13105",
+   "area_key": "小石川5丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-83872ca5ab7d",
+   "city_code": "13105",
+   "area_key": "小石川5丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-6e29d4d5e1e7",
+   "city_code": "13105",
+   "area_key": "小石川5丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-031e1037f0d7",
+   "city_code": "13105",
+   "area_key": "小石川5丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-33aeac95de0c",
+   "city_code": "13105",
+   "area_key": "白山1丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-993e53d443b3",
+   "city_code": "13105",
+   "area_key": "白山1丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     3
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-52f6af71d015",
+   "city_code": "13105",
+   "area_key": "白山1丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-969e1b31ea33",
+   "city_code": "13105",
+   "area_key": "白山1丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-29306f54a7c0",
+   "city_code": "13105",
+   "area_key": "白山2丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-6537b8c6828f",
+   "city_code": "13105",
+   "area_key": "白山5丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-ad6d14f34f87",
+   "city_code": "13105",
+   "area_key": "白山2丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     5
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-4dd669e4d3de",
+   "city_code": "13105",
+   "area_key": "白山5丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     5
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-dcc232ae794c",
+   "city_code": "13105",
+   "area_key": "白山2丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-59710a7c3795",
+   "city_code": "13105",
+   "area_key": "白山5丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-2f4d225cec95",
+   "city_code": "13105",
+   "area_key": "白山2丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-a012078695e9",
+   "city_code": "13105",
+   "area_key": "白山5丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-1fba45181d71",
+   "city_code": "13105",
+   "area_key": "白山3丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-70c8d82909ba",
+   "city_code": "13105",
+   "area_key": "白山4丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-ed9e8f344020",
+   "city_code": "13105",
+   "area_key": "白山3丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     5
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-1dba52f131b6",
+   "city_code": "13105",
+   "area_key": "白山4丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     5
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-76da34e47b74",
+   "city_code": "13105",
+   "area_key": "白山3丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-0ed64cc4486f",
+   "city_code": "13105",
+   "area_key": "白山4丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-644bf34ae233",
+   "city_code": "13105",
+   "area_key": "白山3丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-eee9cb4f066d",
+   "city_code": "13105",
+   "area_key": "白山4丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-e96595e1f557",
+   "city_code": "13105",
+   "area_key": "千石1丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-4ffc4c1dbcd2",
+   "city_code": "13105",
+   "area_key": "千石2丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-d48b9aa59cab",
+   "city_code": "13105",
+   "area_key": "千石3丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-7289c17c34d5",
+   "city_code": "13105",
+   "area_key": "千石4丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-df250aa95f6a",
+   "city_code": "13105",
+   "area_key": "千石1丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     5
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-cc9c196a846e",
+   "city_code": "13105",
+   "area_key": "千石2丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     5
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-a175ca390275",
+   "city_code": "13105",
+   "area_key": "千石3丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     5
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-57f6c97589ac",
+   "city_code": "13105",
+   "area_key": "千石4丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     5
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-818bec51876b",
+   "city_code": "13105",
+   "area_key": "千石1丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-ede0a5cc3f5b",
+   "city_code": "13105",
+   "area_key": "千石2丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-59036f4cd21b",
+   "city_code": "13105",
+   "area_key": "千石3丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-a3870f05ccb2",
+   "city_code": "13105",
+   "area_key": "千石4丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-ce05718a968f",
+   "city_code": "13105",
+   "area_key": "千石1丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-48dc87539220",
+   "city_code": "13105",
+   "area_key": "千石2丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-45b9f5ec19f9",
+   "city_code": "13105",
+   "area_key": "千石3丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-d7c545f714d1",
+   "city_code": "13105",
+   "area_key": "千石4丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-b190c09341ab",
+   "city_code": "13105",
+   "area_key": "水道1丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-345c76894653",
+   "city_code": "13105",
+   "area_key": "水道2丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-2f1d02765523",
+   "city_code": "13105",
+   "area_key": "水道1丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-1684ac6393f8",
+   "city_code": "13105",
+   "area_key": "水道2丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-a3c1dceeafee",
+   "city_code": "13105",
+   "area_key": "水道1丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-f86e23ad67db",
+   "city_code": "13105",
+   "area_key": "水道2丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-57b6890cac4c",
+   "city_code": "13105",
+   "area_key": "水道1丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-cc8af9851342",
+   "city_code": "13105",
+   "area_key": "水道2丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-d9ab937fdb2f",
+   "city_code": "13105",
+   "area_key": "小日向1丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-9b955097529a",
+   "city_code": "13105",
+   "area_key": "小日向2丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-1e5631e8bdcc",
+   "city_code": "13105",
+   "area_key": "小日向3丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-ef8ae74ed202",
+   "city_code": "13105",
+   "area_key": "小日向4丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-53bcd00166ce",
+   "city_code": "13105",
+   "area_key": "小日向1丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-6aebf523d55c",
+   "city_code": "13105",
+   "area_key": "小日向2丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-325265fb0191",
+   "city_code": "13105",
+   "area_key": "小日向3丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-6e9be0873ef4",
+   "city_code": "13105",
+   "area_key": "小日向4丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-63cc60232d02",
+   "city_code": "13105",
+   "area_key": "小日向1丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-cacbac084b98",
+   "city_code": "13105",
+   "area_key": "小日向2丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-16ae8340de34",
+   "city_code": "13105",
+   "area_key": "小日向3丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-423450cd64b6",
+   "city_code": "13105",
+   "area_key": "小日向4丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-1c797aa5e361",
+   "city_code": "13105",
+   "area_key": "小日向1丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-aa15c9406c97",
+   "city_code": "13105",
+   "area_key": "小日向2丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-3a1f71fec8e0",
+   "city_code": "13105",
+   "area_key": "小日向3丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-7804306ba247",
+   "city_code": "13105",
+   "area_key": "小日向4丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-f8afe16fc424",
+   "city_code": "13105",
+   "area_key": "大塚1丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-ca36eac43dd2",
+   "city_code": "13105",
+   "area_key": "大塚2丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-dee8897e15b1",
+   "city_code": "13105",
+   "area_key": "大塚1丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-75b7b6856333",
+   "city_code": "13105",
+   "area_key": "大塚2丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-8036915bcce1",
+   "city_code": "13105",
+   "area_key": "大塚1丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-ce9ef4a39966",
+   "city_code": "13105",
+   "area_key": "大塚2丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-8737d69f24e9",
+   "city_code": "13105",
+   "area_key": "大塚1丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-1add75f50e84",
+   "city_code": "13105",
+   "area_key": "大塚2丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-f051046d7809",
+   "city_code": "13105",
+   "area_key": "大塚3丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-ad09fd786dde",
+   "city_code": "13105",
+   "area_key": "大塚4丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-c01ceea5c4e8",
+   "city_code": "13105",
+   "area_key": "大塚5丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-236cd80910f0",
+   "city_code": "13105",
+   "area_key": "大塚6丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-9fd64afad2f7",
+   "city_code": "13105",
+   "area_key": "大塚3丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-6ec907ac35b7",
+   "city_code": "13105",
+   "area_key": "大塚4丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-7f51a249f67f",
+   "city_code": "13105",
+   "area_key": "大塚5丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-921bf43705dd",
+   "city_code": "13105",
+   "area_key": "大塚6丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-06d7be2de897",
+   "city_code": "13105",
+   "area_key": "大塚3丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-4c2000394d9a",
+   "city_code": "13105",
+   "area_key": "大塚4丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-c82c633380fd",
+   "city_code": "13105",
+   "area_key": "大塚5丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-a07cdf2942fe",
+   "city_code": "13105",
+   "area_key": "大塚6丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-a58bd8d8e0c0",
+   "city_code": "13105",
+   "area_key": "大塚3丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-41219f9b2ab2",
+   "city_code": "13105",
+   "area_key": "大塚4丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-34f8ff69234a",
+   "city_code": "13105",
+   "area_key": "大塚5丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-fa2bfc08b64f",
+   "city_code": "13105",
+   "area_key": "大塚6丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-56599989c7e0",
+   "city_code": "13105",
+   "area_key": "関口1丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-691aee8df9db",
+   "city_code": "13105",
+   "area_key": "関口2丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-39811990e4a6",
+   "city_code": "13105",
+   "area_key": "関口3丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-ddbb0664b8d8",
+   "city_code": "13105",
+   "area_key": "関口1丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-6094932caf27",
+   "city_code": "13105",
+   "area_key": "関口2丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-324eec5f877a",
+   "city_code": "13105",
+   "area_key": "関口3丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-8257f65e48c9",
+   "city_code": "13105",
+   "area_key": "関口1丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-0a82a644111d",
+   "city_code": "13105",
+   "area_key": "関口2丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-56b7cd5185f6",
+   "city_code": "13105",
+   "area_key": "関口3丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-1ff44573e787",
+   "city_code": "13105",
+   "area_key": "関口1丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-53975bb44794",
+   "city_code": "13105",
+   "area_key": "関口2丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-16bf57b14124",
+   "city_code": "13105",
+   "area_key": "関口3丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-9bcdea9026ec",
+   "city_code": "13105",
+   "area_key": "目白台1丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-d637b605ea9a",
+   "city_code": "13105",
+   "area_key": "目白台2丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-7d56db3743c5",
+   "city_code": "13105",
+   "area_key": "目白台3丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-8b7064fc6c2b",
+   "city_code": "13105",
+   "area_key": "目白台1丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-1a973096929d",
+   "city_code": "13105",
+   "area_key": "目白台2丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-59020ff117bf",
+   "city_code": "13105",
+   "area_key": "目白台3丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-1e4bb385699a",
+   "city_code": "13105",
+   "area_key": "目白台1丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-b1cbb9e90230",
+   "city_code": "13105",
+   "area_key": "目白台2丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-b5cb0015fe21",
+   "city_code": "13105",
+   "area_key": "目白台3丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-4a1d14bc32af",
+   "city_code": "13105",
+   "area_key": "目白台1丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-e1c633f43f8b",
+   "city_code": "13105",
+   "area_key": "目白台2丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-ba6d853f8895",
+   "city_code": "13105",
+   "area_key": "目白台3丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-7b6be4a4a58f",
+   "city_code": "13105",
+   "area_key": "音羽1丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-3ffc54baf0fa",
+   "city_code": "13105",
+   "area_key": "音羽2丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-7d6d6f93b56b",
+   "city_code": "13105",
+   "area_key": "音羽1丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-a81ab3500308",
+   "city_code": "13105",
+   "area_key": "音羽2丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     1
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-b1f10073afaa",
+   "city_code": "13105",
+   "area_key": "音羽1丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-63c1989f49e2",
+   "city_code": "13105",
+   "area_key": "音羽2丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-2621fe7a2fd0",
+   "city_code": "13105",
+   "area_key": "音羽1丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-b141bb3c4448",
+   "city_code": "13105",
+   "area_key": "音羽2丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-29a552368b53",
+   "city_code": "13105",
+   "area_key": "本郷1丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-ab515ca4bda0",
+   "city_code": "13105",
+   "area_key": "本郷2丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-6617d6f40aff",
+   "city_code": "13105",
+   "area_key": "本郷1丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-cf20557ab41a",
+   "city_code": "13105",
+   "area_key": "本郷2丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-c47922a882cf",
+   "city_code": "13105",
+   "area_key": "本郷1丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-ab49bc97efa7",
+   "city_code": "13105",
+   "area_key": "本郷2丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-1ce0e39b4303",
+   "city_code": "13105",
+   "area_key": "本郷1丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-0e185a23a4fc",
+   "city_code": "13105",
+   "area_key": "本郷2丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-a7493a418187",
+   "city_code": "13105",
+   "area_key": "本郷3丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-93442d11b873",
+   "city_code": "13105",
+   "area_key": "本郷4丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-4021396689d1",
+   "city_code": "13105",
+   "area_key": "本郷5丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-389fe75990a0",
+   "city_code": "13105",
+   "area_key": "本郷6丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-c6a5af53b784",
+   "city_code": "13105",
+   "area_key": "本郷7丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-7a6cddaada3f",
+   "city_code": "13105",
+   "area_key": "本郷3丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-aa6ed05f22dc",
+   "city_code": "13105",
+   "area_key": "本郷4丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-12deab4a1603",
+   "city_code": "13105",
+   "area_key": "本郷5丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-523222e3914c",
+   "city_code": "13105",
+   "area_key": "本郷6丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-ea3f242c6169",
+   "city_code": "13105",
+   "area_key": "本郷7丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-d32b1fcb2b67",
+   "city_code": "13105",
+   "area_key": "本郷3丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-9b48e56bc1bf",
+   "city_code": "13105",
+   "area_key": "本郷4丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-e137205561ef",
+   "city_code": "13105",
+   "area_key": "本郷5丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-b1ed11e1f99a",
+   "city_code": "13105",
+   "area_key": "本郷6丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-466cd3c93945",
+   "city_code": "13105",
+   "area_key": "本郷7丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-bdade5f33f24",
+   "city_code": "13105",
+   "area_key": "本郷3丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-5014be6d5bb1",
+   "city_code": "13105",
+   "area_key": "本郷4丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-ab93606b95c9",
+   "city_code": "13105",
+   "area_key": "本郷5丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-db80bdf0766c",
+   "city_code": "13105",
+   "area_key": "本郷6丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-8ee90f8c93cb",
+   "city_code": "13105",
+   "area_key": "本郷7丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-f7eb616169e3",
+   "city_code": "13105",
+   "area_key": "湯島1丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-9ee622516cda",
+   "city_code": "13105",
+   "area_key": "湯島1丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-7c0f2ecd6603",
+   "city_code": "13105",
+   "area_key": "湯島1丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-a3acb9e18cac",
+   "city_code": "13105",
+   "area_key": "湯島1丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-11fdf5370e79",
+   "city_code": "13105",
+   "area_key": "湯島2丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-2b03094913d0",
+   "city_code": "13105",
+   "area_key": "湯島3丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-26aa276c6e94",
+   "city_code": "13105",
+   "area_key": "湯島4丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2,
+     5
+    ]
+   },
+   "rule_text": "火曜日・金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-1c2117cb2391",
+   "city_code": "13105",
+   "area_key": "湯島2丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-a4611cd772a4",
+   "city_code": "13105",
+   "area_key": "湯島3丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-4cff11c9ac40",
+   "city_code": "13105",
+   "area_key": "湯島4丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     4
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-04e4d43b9e04",
+   "city_code": "13105",
+   "area_key": "湯島2丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-048107c2b33a",
+   "city_code": "13105",
+   "area_key": "湯島3丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-eda6ea744cf4",
+   "city_code": "13105",
+   "area_key": "湯島4丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3
+    ]
+   },
+   "rule_text": "水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-e11f11401842",
+   "city_code": "13105",
+   "area_key": "湯島2丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-2b0ef0820a96",
+   "city_code": "13105",
+   "area_key": "湯島3丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-0fc540a0f9c7",
+   "city_code": "13105",
+   "area_key": "湯島4丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     6
+    ]
+   },
+   "rule_text": "土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-73b4ba5552e1",
+   "city_code": "13105",
+   "area_key": "西片1丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-9fa0af462030",
+   "city_code": "13105",
+   "area_key": "西片2丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-01d78b3d042d",
+   "city_code": "13105",
+   "area_key": "西片1丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-63b482696052",
+   "city_code": "13105",
+   "area_key": "西片2丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     6
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-16f31f183c25",
+   "city_code": "13105",
+   "area_key": "西片1丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-a313fe79a844",
+   "city_code": "13105",
+   "area_key": "西片2丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-80a4d5802b81",
+   "city_code": "13105",
+   "area_key": "西片1丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-3e8881174f49",
+   "city_code": "13105",
+   "area_key": "西片2丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-9803bd992132",
+   "city_code": "13105",
+   "area_key": "向丘1丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-99dc56589f6c",
+   "city_code": "13105",
+   "area_key": "向丘2丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-792cce55d5d2",
+   "city_code": "13105",
+   "area_key": "向丘1丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     3
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-624251437db3",
+   "city_code": "13105",
+   "area_key": "向丘2丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     3
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-2ffd82f7bb80",
+   "city_code": "13105",
+   "area_key": "向丘1丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-1b6ae4ea00bd",
+   "city_code": "13105",
+   "area_key": "向丘2丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-4d5ad8e23bb0",
+   "city_code": "13105",
+   "area_key": "向丘1丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-0060f73f9b5b",
+   "city_code": "13105",
+   "area_key": "向丘2丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-e8ebd51a10a1",
+   "city_code": "13105",
+   "area_key": "弥生1丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-d5cc51ab0148",
+   "city_code": "13105",
+   "area_key": "弥生2丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-5abe00414183",
+   "city_code": "13105",
+   "area_key": "弥生1丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     3
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-d7f0ab553a71",
+   "city_code": "13105",
+   "area_key": "弥生2丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     3
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-ba21b04ea8ec",
+   "city_code": "13105",
+   "area_key": "弥生1丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-4be60c6bfc93",
+   "city_code": "13105",
+   "area_key": "弥生2丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-23d7556e4104",
+   "city_code": "13105",
+   "area_key": "弥生1丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-4128ecf3d979",
+   "city_code": "13105",
+   "area_key": "弥生2丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-41877e3b5706",
+   "city_code": "13105",
+   "area_key": "根津1丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-2a78d8540594",
+   "city_code": "13105",
+   "area_key": "根津2丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-0146a1591baa",
+   "city_code": "13105",
+   "area_key": "根津1丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     3
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-164a53a605f2",
+   "city_code": "13105",
+   "area_key": "根津2丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     3
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-8d31b5aa50aa",
+   "city_code": "13105",
+   "area_key": "根津1丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-07c8dc0a6531",
+   "city_code": "13105",
+   "area_key": "根津2丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-713bdf21b066",
+   "city_code": "13105",
+   "area_key": "根津1丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-c1cd7dc6d905",
+   "city_code": "13105",
+   "area_key": "根津2丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-2f3707b65ae1",
+   "city_code": "13105",
+   "area_key": "千駄木1丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-c4c5b5c0f52f",
+   "city_code": "13105",
+   "area_key": "千駄木2丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1,
+     4
+    ]
+   },
+   "rule_text": "月曜日・木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-ca2cea2aac3a",
+   "city_code": "13105",
+   "area_key": "千駄木1丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     3
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-59489a0b925a",
+   "city_code": "13105",
+   "area_key": "千駄木2丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     3
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4水曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-d8395fd8f947",
+   "city_code": "13105",
+   "area_key": "千駄木1丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-80e6e63d7534",
+   "city_code": "13105",
+   "area_key": "千駄木2丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     2
+    ]
+   },
+   "rule_text": "火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-fd98234e6328",
+   "city_code": "13105",
+   "area_key": "千駄木1丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-c087dd710289",
+   "city_code": "13105",
+   "area_key": "千駄木2丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     5
+    ]
+   },
+   "rule_text": "金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-819ea28a0c97",
+   "city_code": "13105",
+   "area_key": "千駄木3丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-f82592da4599",
+   "city_code": "13105",
+   "area_key": "千駄木4丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-6ebe7b7c72f2",
+   "city_code": "13105",
+   "area_key": "千駄木5丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-37f7cf9a50ce",
+   "city_code": "13105",
+   "area_key": "千駄木3丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     2
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-f9300304b0fd",
+   "city_code": "13105",
+   "area_key": "千駄木4丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     2
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-4e328597cd09",
+   "city_code": "13105",
+   "area_key": "千駄木5丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     2
+    ],
+    "nths": [
+     1,
+     3
+    ]
+   },
+   "rule_text": "第1・第3火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-f7528326abcb",
+   "city_code": "13105",
+   "area_key": "千駄木3丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-5d151ba58e1a",
+   "city_code": "13105",
+   "area_key": "千駄木4丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-41d18ab6527f",
+   "city_code": "13105",
+   "area_key": "千駄木5丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-4b4d2edb5206",
+   "city_code": "13105",
+   "area_key": "千駄木3丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-fb2497f56b20",
+   "city_code": "13105",
+   "area_key": "千駄木4丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-e7345afe29f4",
+   "city_code": "13105",
+   "area_key": "千駄木5丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-4e9b4c20f482",
+   "city_code": "13105",
+   "area_key": "本駒込1丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-a02584d8f33f",
+   "city_code": "13105",
+   "area_key": "本駒込2丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-b0cddd729380",
+   "city_code": "13105",
+   "area_key": "本駒込1丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     5
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-a7616c216d0d",
+   "city_code": "13105",
+   "area_key": "本駒込2丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     5
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4金曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-fad6228eda0f",
+   "city_code": "13105",
+   "area_key": "本駒込1丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-c2db6371fa2d",
+   "city_code": "13105",
+   "area_key": "本駒込2丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-18e166e809bc",
+   "city_code": "13105",
+   "area_key": "本駒込1丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-a1d3638285ce",
+   "city_code": "13105",
+   "area_key": "本駒込2丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-7ef27271448e",
+   "city_code": "13105",
+   "area_key": "本駒込3丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-d793cdc530ae",
+   "city_code": "13105",
+   "area_key": "本駒込4丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-bc7e5033e5eb",
+   "city_code": "13105",
+   "area_key": "本駒込5丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-46534182a886",
+   "city_code": "13105",
+   "area_key": "本駒込6丁目",
+   "local_category": "可燃ごみ",
+   "common_class": "burnable",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     3,
+     6
+    ]
+   },
+   "rule_text": "水曜日・土曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-f3a4f81fee81",
+   "city_code": "13105",
+   "area_key": "本駒込3丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     2
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-c13f6d4edcd1",
+   "city_code": "13105",
+   "area_key": "本駒込4丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     2
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-2440dd74a14e",
+   "city_code": "13105",
+   "area_key": "本駒込5丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     2
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-df304cf56cb0",
+   "city_code": "13105",
+   "area_key": "本駒込6丁目",
+   "local_category": "不燃ごみ",
+   "common_class": "non_burnable",
+   "rule": {
+    "type": "nth",
+    "days": [
+     2
+    ],
+    "nths": [
+     2,
+     4
+    ]
+   },
+   "rule_text": "第2・第4火曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-0ffce63410a8",
+   "city_code": "13105",
+   "area_key": "本駒込3丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-04b9e164d90c",
+   "city_code": "13105",
+   "area_key": "本駒込4丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-5a868e4c5e5f",
+   "city_code": "13105",
+   "area_key": "本駒込5丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-d2985f3b0ea5",
+   "city_code": "13105",
+   "area_key": "本駒込6丁目",
+   "local_category": "資源（新聞、雑誌、雑がみ、段ボール、びん、缶、ペットボトル）",
+   "common_class": "resource",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     1
+    ]
+   },
+   "rule_text": "月曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-c784b2103cf6",
+   "city_code": "13105",
+   "area_key": "本駒込3丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-941cc85fc196",
+   "city_code": "13105",
+   "area_key": "本駒込4丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-4921c2f315ab",
+   "city_code": "13105",
+   "area_key": "本駒込5丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  },
+  {
+   "id": "13105-11471e086564",
+   "city_code": "13105",
+   "area_key": "本駒込6丁目",
+   "local_category": "資源（プラスチック）",
+   "common_class": "plastic",
+   "rule": {
+    "type": "weekly",
+    "days": [
+     4
+    ]
+   },
+   "rule_text": "木曜日",
+   "source_id": "bunkyo-schedule",
+   "source_url": "https://www.city.bunkyo.lg.jp/documents/6059/syusyubi.csv",
+   "source_updated_at": "2026-01-30",
+   "fetched_at": "2026-10-29T01:02:51.824Z",
+   "license": "クリエイティブ・コモンズ 表示（CC BY）",
+   "attribution": "文京区 「ごみと資源の収集日」 (クリエイティブ・コモンズ 表示（CC BY）)",
+   "status": "verified"
+  }
+ ]
+}

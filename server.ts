@@ -11,6 +11,15 @@ import { ClaudePolicyAnalyzer, MockPolicyAnalyzer } from './src/server/policy/an
 import { LineClient, RecordingLineApi } from './src/server/line.ts';
 import { lineIdTokenVerifier } from './src/server/auth.ts';
 import { makeInvite } from './src/server/service.ts';
+import { ClaudeRecognizer, MockRecognizer } from './src/server/lens/gomi/recognize.ts';
+import { dictionaryFromStore } from './src/server/lens/gomi/dictionary.ts';
+import { loadSources } from './src/server/lens/masterdata/registry.ts';
+import { FileMasterStore } from './src/server/lens/masterdata/store.ts';
+import { loadCities, gsiGeocoder } from './src/server/lens/regions.ts';
+import { loadCityInfo } from './src/server/lens/cityinfo.ts';
+import { EMPTY_GROCERY, loadGrocery } from './src/server/lens/grocery/data.ts';
+import { ClaudeLabelRecognizer, MockLabelRecognizer } from './src/server/lens/grocery/recognize.ts';
+import { scheduleFromStore } from './src/server/lens/gomi/schedule.ts';
 
 const cfg = loadConfig();
 const repo = createRepo(cfg);
@@ -22,7 +31,41 @@ const chatAnalyzer = cfg.anthropicApiKey ? new ClaudeChatAnalyzer(cfg.anthropicA
 const policyAnalyzer = cfg.anthropicApiKey ? new ClaudePolicyAnalyzer(cfg.anthropicApiKey) : new MockPolicyAnalyzer();
 const verifyIdToken = cfg.liffChannelId ? lineIdTokenVerifier(cfg.liffChannelId) : null;
 
-const { app, bot } = createApp({ cfg, repo, line, extractor, composer, translator, chatAnalyzer, policyAnalyzer, verifyIdToken });
+// Waste sorting: published master data ships with the image (data/masterdata/<source>/live.json).
+// A broken registry must not take the bot down: log it loudly and fall back to national rules + generic answers.
+let sources: ReturnType<typeof loadSources> = [];
+let cities: ReturnType<typeof loadCities> = [];
+let cityInfo: ReturnType<typeof loadCityInfo> = {};
+try {
+  sources = loadSources(cfg.masterdataSources);
+  cities = loadCities(cfg.citiesFile);
+  cityInfo = loadCityInfo(cfg.cityInfoFile);
+} catch (err) {
+  console.error('[gomi] master data registry failed to load, serving generic answers only:', (err as Error).message);
+}
+const masterStore = new FileMasterStore(cfg.masterdataDir);
+const gomi = {
+  recognizer: cfg.anthropicApiKey ? new ClaudeRecognizer(cfg.anthropicApiKey) : new MockRecognizer(),
+  dictionary: dictionaryFromStore(masterStore, sources),
+  schedule: scheduleFromStore(masterStore, sources),
+  cityInfo: (code: string) => cityInfo[code] ?? {},
+};
+
+let groceryData = EMPTY_GROCERY;
+try {
+  groceryData = loadGrocery(cfg.groceryDir);
+} catch (err) {
+  console.error('[grocery] tables failed to load, "đi chợ" will answer without data:', (err as Error).message);
+}
+const grocery = {
+  data: groceryData,
+  recognizer: cfg.anthropicApiKey ? new ClaudeLabelRecognizer(cfg.anthropicApiKey) : new MockLabelRecognizer(),
+};
+
+const { app, bot } = createApp({
+  cfg, repo, line, extractor, composer, translator, chatAnalyzer, policyAnalyzer, verifyIdToken, gomi, cities, grocery,
+  geocoder: cfg.regionGeocoder === 'gsi' ? gsiGeocoder : undefined,
+});
 
 async function start() {
   if (cfg.devMode && (await repo.listInviteCodes()).length === 0) {

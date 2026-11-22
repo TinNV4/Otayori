@@ -5,3 +5,6 @@ dist
 .git
 tests
 *.log
+data/masterdata/*/staged.json
+data/masterdata/*/state.json
+data/masterdata/*/history

@@ -35,10 +35,11 @@ const Vi: React.FC = () => (
         <li>Mã nhóm LINE và mã người dùng LINE của thành viên đã nhắn trong nhóm — để chỉ người trong nhóm mới xem được trang gia đình.</li>
         <li>Đánh giá 👍/👎 và số giấy đã dùng trong tháng.</li>
         <li>Chỉ khi bạn tự điền ở tab “Chính sách”: loại visa, ngày hết hạn visa, nơi ở, có con nhỏ hay không — dùng để chọn tin phù hợp và nhắc hạn. Chỉ bạn xem được, không hiện trong nhóm. Xóa bất cứ lúc nào ngay trong tab đó.</li>
+        <li>Nếu bạn đặt <b>khu vực</b> để tra rác: chỉ <b>tên thành phố và khu (町丁目)</b>. Tọa độ và số nhà <b>không được lưu</b> (vị trí LINE chỉ dùng để đọc tên thành phố rồi bỏ).</li>
       </ul>
       <p><b>Bản dịch</b> (“Chỉ dịch”) <b>không được lưu</b>.</p>
       <p>Nội dung tin nhắn trong nhóm <b>không được lưu</b>, trừ các mục lịch bạn đã xác nhận.</p>
-      <p>Không thu thập tên thật, số điện thoại, địa chỉ hay danh bạ.</p>
+      <p>Không thu thập tên thật, số điện thoại, địa chỉ nhà hay danh bạ. Câu hỏi phân loại rác (ảnh/tên món) không gắn với tên bạn; món chưa có trong dữ liệu chỉ được ghi lại bằng tên món và thành phố.</p>
     </Section>
 
     <Section icon={Timer} title="Thời gian lưu & cách xóa">

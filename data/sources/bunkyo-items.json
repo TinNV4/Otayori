@@ -1,0 +1,41 @@
+{
+  "id": "bunkyo-items",
+  "city_code": "13105",
+  "kind": "gomi_items",
+  "enabled": true,
+  "note": "Imported 2026-10-29 with `data scaffold`; category_map entries mapped to \"other\" or by keyword were chosen by Claude and need an admin look before publish (see docs).",
+  "ckan": {
+    "api": "https://catalog.data.metro.tokyo.lg.jp/api/3/action",
+    "dataset": "t131059d0110060002"
+  },
+  "url": "",
+  "encoding": "shift_jis",
+  "license": "クリエイティブ・コモンズ 表示（CC BY）",
+  "attribution": "文京区 「ごみと資源の分別品目」 (クリエイティブ・コモンズ 表示（CC BY）)",
+  "cadence": "monthly",
+  "adapter": "ckan_csv_v1",
+  "columns": {
+    "name_jp": "品名",
+    "category": "種別",
+    "note": "説明",
+    "fee": "料金"
+  },
+  "category_map": {
+    "粗大ごみ": "sodai",
+    "可燃ごみ": "burnable",
+    "不燃ごみ": "non_burnable",
+    "プラスチック(資源)": "plastic",
+    "不可": "not_collected",
+    "不燃ごみ、粗大ごみ": "non_burnable",
+    "資源": "resource",
+    "可燃ごみ、粗大ごみ": "burnable",
+    "プラスチック(資源)、粗大ごみ": "plastic",
+    "プラスチック(資源)、可燃ごみ": "plastic",
+    "不燃ごみ(水銀含有物)": "non_burnable",
+    "可燃ごみ、不燃ごみ": "burnable",
+    "資源、可燃ごみ": "resource",
+    "プラスチック(資源)、可燃ごみ、粗大ごみ": "plastic",
+    "可燃ごみ、不燃ごみ、粗大ごみ": "burnable",
+    "プラスチック(資源)、不燃ごみ": "plastic"
+  }
+}

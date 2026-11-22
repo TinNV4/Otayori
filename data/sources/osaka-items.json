@@ -1,0 +1,37 @@
+{
+  "id": "osaka-items",
+  "city_code": "27100",
+  "kind": "gomi_items",
+  "adapter": "html_items_v1",
+  "enabled": true,
+  "url": "https://www.city.osaka.lg.jp/kankyo/page/0000384507.html",
+  "encoding": "utf-8",
+  "license": "クリエイティブ・コモンズ 表示（CC BY 4.0）",
+  "attribution": "大阪市「粗大ごみ処理手数料一覧表」(CC BY 4.0)",
+  "html": {
+    "columns": [
+      "五十音",
+      "品名",
+      "手数料"
+    ],
+    "header_rows": 0,
+    "tables": [
+      0,
+      1,
+      2
+    ],
+    "constants": {
+      "種別": "粗大ごみ"
+    }
+  },
+  "columns": {
+    "name_jp": "品名",
+    "category": "種別",
+    "fee": "手数料"
+  },
+  "category_map": {
+    "粗大ごみ": "sodai"
+  },
+  "cadence": "monthly",
+  "note": "Only the 粗大ごみ fee list (品目ごとの処理手数料、1〜3の表). Size-based rows (表4・5) are not items. 大阪市 has no 分別 item dataset; data.city.osaka.lg.jp was unreachable (proxy) when imported."
+}
