@@ -2,7 +2,7 @@
   "id": "fuchu-schedule",
   "city_code": "13206",
   "kind": "gomi_schedule",
-  "enabled": false,
+  "enabled": true,
   "note": "府中市 has no open schedule data: the 16 district calendars (A1–D4, 令和8年度 2026-04-01..2027-03-31) are image-only PDFs. Transcribed day by day into data/raw/fuchu/schedule-r8.csv (scripts/calendar-dates-to-csv.py, areas from data/raw/fuchu/areas.json), checked for weekly gaps and spot-checked against the pages. Sync with --file data/raw/fuchu/schedule-r8.csv. Renew every March when the city publishes the next year's calendars. 家庭廃食用油 = monthly Sunday pickup at 文化センター (drop_off).",
   "url": "https://www.city.fuchu.tokyo.jp/kurashi/gomirisaikuru/bunbetu_calendar/gomicalendar/gomicalender.html",
   "encoding": "utf-8",

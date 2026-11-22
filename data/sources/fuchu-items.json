@@ -2,7 +2,7 @@
   "id": "fuchu-items",
   "city_code": "13206",
   "kind": "gomi_items",
-  "enabled": false,
+  "enabled": true,
   "note": "府中市 (Tokyo). 家庭用廃食用油 = monthly pickup at 文化センター → drop_off; せん定した枝 = phone 粗大ごみ center, 5 bundles free → other (city note shown); 落ち葉・下草 and おむつ go out on 燃やすごみ day (marked bags) → burnable. No open collection schedule: district (A1, B1…) calendars are PDFs only.",
   "ckan": {
     "api": "https://catalog.data.metro.tokyo.lg.jp/api/3/action",
