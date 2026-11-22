@@ -9,7 +9,7 @@ import { answerGomi } from '../src/server/lens/gomi/core.ts';
 import { generateGomiIcs, rruleFor } from '../src/server/lens/gomi/gomiIcs.ts';
 import { MockRecognizer } from '../src/server/lens/gomi/recognize.ts';
 import {
-  areaRows, firstDate, inSuspension, isoWeekday, nextCollectionFor, nextDate, normArea, ScheduleBook, scheduleFromStore, suspendedDates,
+  areaRows, firstDate, inSuspension, isoWeekday, nextCollectionFor, nextDate, normArea, rowsForItem, ScheduleBook, scheduleFromStore, suspendedDates,
 } from '../src/server/lens/gomi/schedule.ts';
 import { getAdapter, SyncError } from '../src/server/lens/masterdata/adapters.ts';
 import { validateSourceConfig } from '../src/server/lens/masterdata/registry.ts';
@@ -120,6 +120,21 @@ describe('schedule_csv_v1 adapter', () => {
     expect(ics).not.toContain('RRULE');
     expect(ics.match(/BEGIN:VEVENT/g)).toHaveLength(3); // 10-30, 11-03, 01-05 (10-27 is past)
     expect(ics).toContain('DTSTART;VALUE=DATE:20270105');
+  });
+  it('picks the city category the item belongs to, not the first day of the same class (府中市 paper / hazard days)', () => {
+    const row = (local_category: string, common_class: CommonClass, dates: string[]) =>
+      ({ id: local_category, city_code: '13206', area_key: '府中町1丁目', local_category, common_class, rule: { type: 'dates', dates }, rule_text: '' } as unknown as ScheduleRow);
+    const rows = [
+      row('紙パック', 'paper', ['2026-11-25']), row('雑誌・雑がみ', 'paper', ['2026-12-09']),
+      row('スプレー缶・ライター', 'hazardous', ['2026-12-14']), row('リチウムイオン電池', 'hazardous', ['2026-11-30']), row('有害ごみ', 'hazardous', ['2026-11-30']),
+      row('古布', 'cloth', ['2026-11-25']),
+    ];
+    const pick = (classes: CommonClass[], hints: string[]) => rowsForItem(rows, classes, hints).map(r => r.local_category);
+    expect(pick(['paper'], ['雑誌・雑がみ', '雑誌'])).toEqual(['雑誌・雑がみ']); // own category
+    expect(pick(['hazardous'], ['危険ごみ', 'スプレー缶'])).toEqual(['スプレー缶・ライター']); // name inside the label
+    expect(pick(['hazardous'], ['有害ごみ', '乾電池', 'リチウムイオン電池'])).toEqual(['有害ごみ']); // own category beats a generic hint
+    expect(pick(['cloth'], ['古布・古着'])).toEqual(['古布']); // label inside the category
+    expect(pick(['paper'], ['ごみ'])).toEqual(['紙パック', '雑誌・雑がみ']); // no usable hint → same class
   });
   it('stops on text it cannot read, listing it', () => {
     let err: SyncError | undefined;

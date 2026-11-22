@@ -37,6 +37,14 @@ export interface GomiAnswer {
  *   2. city dictionary (verified rows, with source + date);
  *   3. AI generic fallback, labelled unsure, and logged for an admin.
  */
+/** Names a city's schedule may give the separate day for each hazard (府中市: 「スプレー缶・ライター」, 「リチウムイオン電池」). */
+const HAZARD_HINTS: Record<'battery' | 'aerosol' | 'lighter' | 'gas_canister', string[]> = {
+  battery: ['リチウムイオン電池', '電池', 'バッテリー'],
+  aerosol: ['スプレー缶', 'スプレー'],
+  lighter: ['ライター'],
+  gas_canister: ['カセットボンベ', 'ガスボンベ', 'スプレー缶'],
+};
+
 export async function answerGomi(
   input: GomiInput,
   region: { city_code: string; chome_label?: string } | undefined,
@@ -63,7 +71,11 @@ export async function answerGomi(
         const msgs = matchedMessage(q, matches, city, now, null);
         return done('matched', [{ ...msgs[0], text: `${hazardCaution(guard.hazard)}\n\n${msgs[0].text}` }, ...msgs.slice(1)]);
       }
-      return done('hazard', hazardMessage(guard.hazard, matches.length ? matches : null, now));
+      const next = region && deps.schedule
+        ? nextCollectionFor(deps.schedule, region.city_code, region.chome_label, ['hazardous', ...matches.map(m => m.item.common_class)], jstDate(now),
+          [...matches.map(m => m.item.local_category), ...matches.map(m => m.item.name_jp), q.name_jp, ...q.alt_names_jp, ...HAZARD_HINTS[guard.hazard]])
+        : null;
+      return done('hazard', hazardMessage(guard.hazard, matches.length ? matches : null, now, next));
     }
     if (!region) return done('no_region', [noRegionMessage()]);
 
@@ -72,7 +84,8 @@ export async function answerGomi(
       const found = matches.map(m => m.item);
       const next = deps.nextCollection
         ? deps.nextCollection(region.city_code, region.chome_label, found)
-        : deps.schedule ? nextCollectionFor(deps.schedule, region.city_code, region.chome_label, found.map(i => i.common_class), jstDate(now)) : null;
+        : deps.schedule ? nextCollectionFor(deps.schedule, region.city_code, region.chome_label, found.map(i => i.common_class), jstDate(now),
+          [...found.map(i => i.local_category), ...found.map(i => i.name_jp), q.name_jp, ...q.alt_names_jp]) : null;
       return done('matched', matchedMessage(q, matches, city, now, next));
     }
     // Only loose name overlaps: the generic answer, with those entries listed as leads (and logged as a gap).

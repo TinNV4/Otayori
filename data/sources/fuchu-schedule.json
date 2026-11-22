@@ -1,0 +1,96 @@
+{
+  "id": "fuchu-schedule",
+  "city_code": "13206",
+  "kind": "gomi_schedule",
+  "enabled": false,
+  "note": "府中市 has no open schedule data: the 16 district calendars (A1–D4, 令和8年度 2026-04-01..2027-03-31) are image-only PDFs. Transcribed day by day into data/raw/fuchu/schedule-r8.csv (scripts/calendar-dates-to-csv.py, areas from data/raw/fuchu/areas.json), checked for weekly gaps and spot-checked against the pages. Sync with --file data/raw/fuchu/schedule-r8.csv. Renew every March when the city publishes the next year's calendars. 家庭廃食用油 = monthly Sunday pickup at 文化センター (drop_off).",
+  "url": "https://www.city.fuchu.tokyo.jp/kurashi/gomirisaikuru/bunbetu_calendar/gomicalendar/gomicalender.html",
+  "encoding": "utf-8",
+  "license": "CC BY 4.0（府中市オープンデータ、カレンダーページに表示）",
+  "attribution": "府中市 「令和8年度ごみ・資源物の出し方カレンダー」 (CC BY 4.0)",
+  "cadence": "monthly",
+  "adapter": "schedule_csv_v1",
+  "schedule": {
+    "area_columns": [
+      "町名",
+      "丁目"
+    ],
+    "categories": [
+      {
+        "column": "燃やすごみ",
+        "local_category": "燃やすごみ",
+        "common_class": "burnable"
+      },
+      {
+        "column": "燃やさないごみ",
+        "local_category": "燃やさないごみ",
+        "common_class": "non_burnable"
+      },
+      {
+        "column": "容器包装プラスチック",
+        "local_category": "容器包装プラスチック",
+        "common_class": "plastic"
+      },
+      {
+        "column": "ペットボトル",
+        "local_category": "ペットボトル",
+        "common_class": "pet"
+      },
+      {
+        "column": "びん",
+        "local_category": "びん",
+        "common_class": "glass"
+      },
+      {
+        "column": "かん",
+        "local_category": "かん",
+        "common_class": "can"
+      },
+      {
+        "column": "スプレー缶・ライター",
+        "local_category": "スプレー缶・ライター",
+        "common_class": "hazardous"
+      },
+      {
+        "column": "リチウムイオン電池",
+        "local_category": "リチウムイオン電池",
+        "common_class": "hazardous"
+      },
+      {
+        "column": "有害ごみ",
+        "local_category": "有害ごみ",
+        "common_class": "hazardous"
+      },
+      {
+        "column": "古布",
+        "local_category": "古布",
+        "common_class": "cloth"
+      },
+      {
+        "column": "紙パック",
+        "local_category": "紙パック",
+        "common_class": "paper"
+      },
+      {
+        "column": "段ボール",
+        "local_category": "段ボール",
+        "common_class": "paper"
+      },
+      {
+        "column": "新聞",
+        "local_category": "新聞",
+        "common_class": "paper"
+      },
+      {
+        "column": "雑誌・雑がみ",
+        "local_category": "雑誌・雑がみ",
+        "common_class": "paper"
+      },
+      {
+        "column": "家庭廃食用油",
+        "local_category": "家庭廃食用油",
+        "common_class": "drop_off"
+      }
+    ]
+  }
+}

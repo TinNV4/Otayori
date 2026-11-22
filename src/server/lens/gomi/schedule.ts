@@ -138,8 +138,33 @@ export function describeRule(rule: ScheduleRule): string {
 export type NextInfo = { date: string; label: string } | { hint: string };
 
 /** Next collection of the given classes for the family's area. `null` = no schedule data at all for this city. */
+/**
+ * Schedule rows for an item, most specific first. A city that collects 雑誌・雑がみ, 紙パック and 段ボール on
+ * different days must not answer "magazines" with the 紙パック day just because both are paper:
+ *   1. the row whose label is the item's own city category (「雑誌・雑がみ」),
+ *   2. else rows whose label contains a hint or is contained in one (スプレー缶 → 「スプレー缶・ライター」),
+ *   3. else every row of the same common class.
+ */
+export function rowsForItem(rows: ScheduleRow[], classes: CommonClass[], hints: string[] = []): ScheduleRow[] {
+  const clean = (s: string) => normArea(s.replace(/【[^】]*】|（[^）]*）|\([^)]*\)/g, ''));
+  const hs = [...new Set(hints.map(clean))].filter(h => h.length >= 2 && !/^(ごみ|資源|資源物)$/.test(h));
+  // Hints are ordered (the item's own category first), so "乾電池 → 有害ごみ" wins over a generic "電池" hint.
+  for (const h of hs) {
+    const exact = rows.filter(r => clean(r.local_category) === h);
+    if (exact.length) return exact;
+  }
+  for (const h of hs) {
+    const near = rows.filter(r => {
+      const label = clean(r.local_category);
+      return label.includes(h) || (label.length >= 2 && h.includes(label));
+    });
+    if (near.length) return near;
+  }
+  return rows.filter(r => classes.includes(r.common_class));
+}
+
 export function nextCollectionFor(
-  book: ScheduleBook, cityCode: string, chomeLabel: string | undefined, classes: CommonClass[], today: string,
+  book: ScheduleBook, cityCode: string, chomeLabel: string | undefined, classes: CommonClass[], today: string, hints: string[] = [],
 ): NextInfo | null {
   const all = book.rows(cityCode);
   if (!all.length) return null;
@@ -147,7 +172,7 @@ export function nextCollectionFor(
   if (ambiguous) return { hint: 'Ngày đổ khác nhau theo từng 丁目 — gõ "khu vực" kèm số 丁目 (ví dụ: khu vực 荒川区 西日暮里2丁目) để mình báo đúng ngày.' };
   const sus = book.suspensions(cityCode);
   let best: { date: string; row: ScheduleRow } | null = null;
-  for (const r of rows.filter(x => classes.includes(x.common_class))) {
+  for (const r of rowsForItem(rows, classes, hints)) {
     const d = nextDate(r.rule, today, sus);
     if (d && (!best || d < best.date)) best = { date: d, row: r };
   }

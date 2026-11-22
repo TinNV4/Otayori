@@ -105,7 +105,7 @@ export function hazardCaution(hazard: Exclude<Hazard, 'none'>): string {
   return `🔥 Lưu ý an toàn: ${HAZARD_VI[hazard].name.toLowerCase()} — ${HAZARD_VI[hazard].why}. Làm đúng ghi chú của thành phố bên dưới.`;
 }
 
-export function hazardMessage(hazard: Exclude<Hazard, 'none'>, matched: Match[] | null, now: Date): LineMessage[] {
+export function hazardMessage(hazard: Exclude<Hazard, 'none'>, matched: Match[] | null, now: Date, next?: NextInfo | null): LineMessage[] {
   const h = HAZARD_VI[hazard];
   const lines = [
     `🔥 ${h.name} — NGUY CƠ CHÁY NỔ`,
@@ -114,6 +114,7 @@ export function hazardMessage(hazard: Exclude<Hazard, 'none'>, matched: Match[] 
   if (matched?.length) {
     const labels = [...new Set(matched.map(m => m.item.local_category))].join(' / ');
     lines.push('', `Thành phố của bạn xếp vào: 「${labels}」`, ...matched.slice(0, 2).filter(m => m.item.note).map(m => `📝 Ghi chú của thành phố (tiếng Nhật): ${m.item.note}`));
+    if (next && 'date' in next) lines.push(`📅 Ngày đổ gần nhất tại khu bạn: ${next.label} (${dateVi(next.date)})`);
     lines.push('', sourceLine(matched.map(m => m.item), now));
   } else {
     lines.push('', 'Cách bỏ (điểm thu gom riêng, ngày riêng, hay cần tháo/dán băng keo cực pin…) khác nhau theo thành phố — hãy làm đúng hướng dẫn của thành phố bạn.');
