@@ -130,6 +130,35 @@ describe('chỉ dịch (translate only)', () => {
   });
 });
 
+describe('hardening (HTTP)', () => {
+  it('rejects anonymous large bodies before parsing them', async () => {
+    const big = JSON.stringify({ pages: [{ data: 'A'.repeat(2_000_000), mediaType: 'image/jpeg' }] });
+    const res = await fetch(`${base}/api/documents/upload`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: big });
+    expect(res.status).toBe(401);
+  });
+
+  it('compose requires an active family and bounds its inputs', async () => {
+    const famB = familyIdForChat('CB');
+    const fam = (await repo.getFamily(famB))!;
+    fam.status = 'suspended';
+    await repo.saveFamily(fam);
+    const r1 = await fetch(`${base}/api/compose-renraku`, { method: 'POST', headers: auth('tokB'), body: JSON.stringify({ content_vi: 'xin nghỉ' }) });
+    expect(r1.status).toBe(403);
+    fam.status = 'active';
+    await repo.saveFamily(fam);
+    const r2 = await fetch(`${base}/api/compose-renraku`, { method: 'POST', headers: auth('tokB'), body: JSON.stringify({ content_vi: 'xin nghỉ', child_name: 'x'.repeat(5000) }) });
+    expect(r2.status).toBe(200);
+    expect((await r2.json()).japanese_text.length).toBeLessThan(2000);
+  });
+
+  it('sends basic security headers and protects cron with the secret', async () => {
+    const res = await fetch(`${base}/health`);
+    expect(res.headers.get('x-content-type-options')).toBe('nosniff');
+    expect(res.headers.get('x-frame-options')).toBe('DENY');
+    expect((await fetch(`${base}/tasks/cleanup`, { method: 'POST', headers: { 'x-cron-secret': 'wrong' } })).status).toBe(403);
+  });
+});
+
 describe('admin', () => {
   it('is forbidden for regular users', async () => {
     expect((await fetch(`${base}/api/admin/metrics`, { headers: auth('tokA') })).status).toBe(403);

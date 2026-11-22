@@ -1,8 +1,9 @@
+import crypto from 'crypto';
 import express, { Response } from 'express';
 import { AppConfig } from './config.ts';
 import { Repo } from './db/repo.ts';
 import { Bot } from './bot.ts';
-import { Extractor, MAX_IMAGE_BYTES, MAX_PDF_BYTES, Page, SUPPORTED_IMAGE_TYPES } from './extract.ts';
+import { Extractor, MAX_IMAGE_BYTES, MAX_PDF_BYTES, MAX_PDF_PAGES, Page, pdfPageCount, SUPPORTED_IMAGE_TYPES } from './extract.ts';
 import { Composer } from './renraku.ts';
 import { MockTranslator, TranslationError, Translator } from './translate.ts';
 import { ChatAnalyzer } from './chat.ts';
@@ -38,6 +39,13 @@ function adminFamily(f: Family) {
   return { ...rest, ics_token: '', members_count: f.members_count ?? member_user_ids.length };
 }
 
+function safeEqual(given: unknown, expected: string): boolean {
+  if (typeof given !== 'string') return false;
+  const a = Buffer.from(given);
+  const b = Buffer.from(expected);
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
+}
+
 export function createApp(deps: AppDeps) {
   const { cfg, repo, line } = deps;
   const translator = deps.translator || new MockTranslator();
@@ -45,6 +53,12 @@ export function createApp(deps: AppDeps) {
   const services = bot.services;
   const app = express();
   app.disable('x-powered-by');
+  app.use((_req, res, next) => {
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('X-Frame-Options', 'DENY');
+    res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+    next();
+  });
   app.set('trust proxy', true);
 
   // ---------- Health ----------
@@ -104,7 +118,7 @@ export function createApp(deps: AppDeps) {
 
   // ---------- Scheduled housekeeping (Cloud Scheduler) ----------
   app.post('/tasks/cleanup', async (req, res) => {
-    if (!cfg.cronSecret || req.headers['x-cron-secret'] !== cfg.cronSecret) {
+    if (!cfg.cronSecret || !safeEqual(req.headers['x-cron-secret'], cfg.cronSecret)) {
       res.status(403).json({ error: 'forbidden' });
       return;
     }
@@ -112,7 +126,7 @@ export function createApp(deps: AppDeps) {
   });
 
   app.post('/tasks/digest', async (req, res) => {
-    if (!cfg.cronSecret || req.headers['x-cron-secret'] !== cfg.cronSecret) {
+    if (!cfg.cronSecret || !safeEqual(req.headers['x-cron-secret'], cfg.cronSecret)) {
       res.status(403).json({ error: 'forbidden' });
       return;
     }
@@ -127,8 +141,23 @@ export function createApp(deps: AppDeps) {
   // Photos uploaded from the LIFF app need a bigger body; everything else stays small.
   const smallJson = express.json({ limit: cfg.devMode ? '15mb' : '100kb' });
   const uploadJson = express.json({ limit: '25mb' });
-  api.use((req, res, next) => (['/documents/upload', '/translate'].includes(req.path) ? uploadJson : smallJson)(req, res, next));
+  // Authenticate from headers BEFORE reading any body, so anonymous clients can't make us buffer 25MB.
   api.use(authMiddleware(cfg, deps.verifyIdToken));
+  api.use((req, res, next) => (['/documents/upload', '/translate'].includes(req.path) ? uploadJson : smallJson)(req, res, next));
+
+  /** Per-user cap on endpoints that spend Claude budget (single instance → in-memory is enough). */
+  const aiCalls = new Map<string, number[]>();
+  function aiRateLimited(req: AuthedRequest, res: Response, perHour = 30): boolean {
+    const now = Date.now();
+    const recent = (aiCalls.get(req.userId!) || []).filter(t => now - t < 3600_000);
+    if (recent.length >= perHour) {
+      res.status(429).json({ error: 'Bạn thao tác quá nhiều. Vui lòng thử lại sau ít phút.' });
+      return true;
+    }
+    aiCalls.set(req.userId!, [...recent, now]);
+    if (aiCalls.size > 5000) aiCalls.clear();
+    return false;
+  }
 
   /** Resolve the family the caller may access (must be a member of the LINE chat). */
   async function memberFamily(req: AuthedRequest, res: Response): Promise<Family | null> {
@@ -247,6 +276,7 @@ export function createApp(deps: AppDeps) {
     const fam = await memberFamily(req, res);
     if (!fam) return;
     const n = await services.purgeFamilyData(fam.family_id, req.userId!);
+    bot.forgetChat(fam);
     res.json({ success: true, deleted: n });
   });
 
@@ -277,6 +307,10 @@ export function createApp(deps: AppDeps) {
         res.status(400).json({ error: 'Chỉ nhận ảnh JPG/PNG/WebP hoặc PDF' });
         return null;
       }
+      if (isPdf && pdfPageCount(data) > MAX_PDF_PAGES) {
+        res.status(413).json({ error: `PDF tối đa ${MAX_PDF_PAGES} trang` });
+        return null;
+      }
       if (!data.length || data.length > (isPdf ? MAX_PDF_BYTES : MAX_IMAGE_BYTES)) {
         res.status(413).json({ error: 'File quá lớn' });
         return null;
@@ -290,7 +324,7 @@ export function createApp(deps: AppDeps) {
     const fam = await memberFamily(req, res);
     if (!fam) return;
     const pages = parsePages(req, res);
-    if (!pages) return;
+    if (!pages || aiRateLimited(req, res)) return;
     const r = await bot.ingest(fam.family_id, pages);
     if (r.kind === 'blocked' || r.kind === 'error') {
       res.status(r.kind === 'blocked' ? 403 : 422).json({ error: r.message });
@@ -308,7 +342,7 @@ export function createApp(deps: AppDeps) {
     if (!fam) return;
     if (fam.status !== 'active') { res.status(403).json({ error: 'Gia đình chưa kích hoạt hoặc đang tạm dừng.' }); return; }
     const pages = parsePages(req, res);
-    if (!pages) return;
+    if (!pages || aiRateLimited(req, res)) return;
     const month = jstMonth();
     if ((await repo.getUsage(month)).cost_usd >= cfg.monthlyBudgetUsd) {
       res.status(429).json({ error: 'Hệ thống tạm dừng do đã hết ngân sách Beta tháng này.' });
@@ -328,12 +362,16 @@ export function createApp(deps: AppDeps) {
   api.post('/compose-renraku', async (req: AuthedRequest, res) => {
     const fam = await memberFamily(req, res);
     if (!fam) return;
-    const content = String(req.body.content_vi || '').trim();
+    if (fam.status !== 'active') { res.status(403).json({ error: 'Gia đình chưa kích hoạt hoặc đang tạm dừng.' }); return; }
+    const field = (v: unknown, max: number) => (typeof v === 'string' ? v.trim().slice(0, max) : undefined);
+    const content = field(req.body.content_vi, 1000);
     if (!content) { res.status(400).json({ error: 'empty' }); return; }
+    if (aiRateLimited(req, res)) return;
     const usage = await repo.getUsage(jstMonth());
     if (usage.cost_usd >= cfg.monthlyBudgetUsd) { res.status(429).json({ error: 'budget_exhausted' }); return; }
+    const topic = ['absence', 'lateness', 'general', 'health'].includes(req.body.topic) ? req.body.topic : 'general';
     const { result, cost_usd } = await deps.composer.compose({
-      topic: req.body.topic || 'general', content_vi: content, child_name: req.body.child_name, class_name: req.body.class_name,
+      topic, content_vi: content, child_name: field(req.body.child_name, 60), class_name: field(req.body.class_name, 60),
     });
     await bot.recordUsage(jstMonth(), { cost_usd });
     res.json(result);
@@ -384,7 +422,7 @@ export function createApp(deps: AppDeps) {
 
   admin.post('/invite-codes', async (req: AuthedRequest, res) => {
     const code = normalizeCode(String(req.body.code || ''));
-    if (code.length < 4) { res.status(400).json({ error: 'code must be ≥4 chars [A-Z0-9-]' }); return; }
+    if (code.length < 6) { res.status(400).json({ error: 'Mã cần ít nhất 6 ký tự (A-Z, 0-9, -).' }); return; }
     if (await repo.getInviteCode(code)) { res.status(409).json({ error: 'exists' }); return; }
     const invite = makeInvite(code, {
       quota: Number(req.body.quota) || cfg.defaultQuota,

@@ -248,14 +248,14 @@ const Invites: React.FC<{ invites: InviteCode[]; onAction: (msg: string) => void
     <>
       <Section title="Tạo mã mới">
         <div className="space-y-3 rounded-card border border-line bg-surface p-4">
-          {label('Mã (chữ và số, ≥ 4 ký tự)', <TextField value={code} onChange={(e) => setCode(e.target.value.toUpperCase())} placeholder="VD: DOT2" autoCapitalize="characters" className="font-mono" />)}
+          {label('Mã (chữ, số, gạch nối · ≥ 6 ký tự, khó đoán)', <TextField value={code} onChange={(e) => setCode(e.target.value.toUpperCase())} placeholder="VD: DOT2-HOA" autoCapitalize="characters" className="font-mono" />)}
           <div className="grid grid-cols-2 gap-3">
             {label('Số gia đình tối đa', <TextField value={maxUses} onChange={(e) => setMaxUses(e.target.value.replace(/\D/g, ''))} inputMode="numeric" />)}
             {label('Giấy / tháng mỗi nhà', <TextField value={quota} onChange={(e) => setQuota(e.target.value.replace(/\D/g, ''))} inputMode="numeric" />)}
           </div>
           {label('Ghi chú (tùy chọn)', <TextField value={note} onChange={(e) => setNote(e.target.value)} placeholder="VD: Đợt 2 — nhóm phụ huynh lớp Hoa" />)}
           {error && <Notice tone="danger" icon={AlertTriangle}>{error}</Notice>}
-          <Button icon={Plus} block loading={busy} disabled={code.trim().length < 4 || !Number(maxUses) || !Number(quota)} onClick={create}>Tạo mã</Button>
+          <Button icon={Plus} block loading={busy} disabled={code.trim().length < 6 || !Number(maxUses) || !Number(quota)} onClick={create}>Tạo mã</Button>
         </div>
       </Section>
 

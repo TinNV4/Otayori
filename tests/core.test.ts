@@ -26,7 +26,9 @@ describe('model routing + cost', () => {
     expect(needsSonnet('otayori', 0.65)).toBe(true);
   });
   it('prices per 1M tokens', () => {
-    expect(calculateCostUsd(HAIKU_MODEL, 1_000_000, 1_000_000)).toBeCloseTo(0.6);
+    expect(calculateCostUsd(HAIKU_MODEL, 100_000, 100_000)).toBeCloseTo(0.06);
+    // Haiku prompts above 100K input tokens are billed at the long-prompt rate
+    expect(calculateCostUsd(HAIKU_MODEL, 200_000, 0)).toBeCloseTo(0.1);
     expect(calculateCostUsd(SONNET_MODEL, 2000, 600)).toBeCloseTo(0.01);
   });
 });

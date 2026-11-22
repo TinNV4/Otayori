@@ -38,6 +38,7 @@ async function main() {
     case 'invite:create': {
       if (!a1) throw new Error('code required');
       const code = normalizeCode(a1);
+      if (code.length < 6) throw new Error('code must be at least 6 characters (A-Z, 0-9, -)');
       if (await repo.getInviteCode(code)) throw new Error(`${code} already exists`);
       const inv = makeInvite(code, {
         maxUses: Number(flag('max', String(cfg.maxBetaFamilies))),

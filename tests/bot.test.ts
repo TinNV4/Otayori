@@ -449,3 +449,38 @@ describe('tag the bot → suggest calendar items from the chat', () => {
     expect(seen[0].history[0].speaker).toMatch(/^Người [A-Z]$/);
   });
 });
+
+describe('security hardening', () => {
+  it('a member removed from the group loses access and the calendar link rotates', async () => {
+    const { bot, repo } = await setup();
+    await activate(bot, group('Cgroup1', 'Uex'));
+    await bot.handleWebhook({ events: [textEv(group('Cgroup1', 'Ustay'), 'hi')] });
+    const fid = familyIdForChat('Cgroup1');
+    const before = (await repo.getFamily(fid))!;
+    expect(before.member_user_ids).toEqual(expect.arrayContaining(['Uex', 'Ustay']));
+    await bot.handleWebhook({ events: [ev(group('Cgroup1', undefined as never), { type: 'memberLeft', left: { members: [{ type: 'user', userId: 'Uex' }] } })] });
+    const after = (await repo.getFamily(fid))!;
+    expect(after.member_user_ids).toEqual(['Ustay']);
+    expect(after.ics_token).not.toBe(before.ics_token);
+    expect(await repo.findFamiliesByMember('Uex')).toHaveLength(0);
+  });
+
+  it('limits invite-code guessing per chat and does not echo the code to the group', async () => {
+    const { bot, line } = await setup();
+    await bot.handleWebhook({ events: [ev(group(), { type: 'join' }), textEv(group(), 'Đồng ý')] });
+    for (let i = 0; i < 5; i++) await bot.handleWebhook({ events: [textEv(group(), `WRONG${i}X`)] });
+    await bot.handleWebhook({ events: [textEv(group(), 'BETA2026')] });
+    expect(lastText(line)).toContain('nhiều lần');
+  });
+
+  it('"xóa dữ liệu" also drops pending chat suggestions held in RAM', async () => {
+    const { bot, repo, line } = await setup();
+    await activate(bot);
+    await bot.handleWebhook({ events: [ev(group(), { type: 'message', message: { id: 'mx', type: 'text', text: '@Kami Việt tiệc 5/12 18:00', mention: { mentionees: [{ index: 0, length: 10, isSelf: true }] } } })] });
+    const id = JSON.stringify(line.sent[line.sent.length - 1].messages[0].quickReply).match(/chat_add&id=(\w+)/)![1];
+    await bot.handleWebhook({ events: [textEv(group(), 'xóa dữ liệu')] });
+    await bot.handleWebhook({ events: [ev(group(), { type: 'postback', postback: { data: 'action=delete_confirm' } })] });
+    await bot.handleWebhook({ events: [ev(group(), { type: 'postback', postback: { data: `action=chat_add&id=${id}` } })] });
+    expect(await repo.listDocuments(familyIdForChat('Cgroup1'))).toHaveLength(0);
+  });
+});

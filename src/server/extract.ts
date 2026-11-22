@@ -13,8 +13,14 @@ const PRICING: Record<string, { input: number; output: number }> = {
   [SONNET_MODEL]: { input: 2.0, output: 10.0 },
 };
 
+/** Haiku 5.5 bills prompts above 100K input tokens at a higher rate. */
+const LONG_PROMPT_TOKENS = 100_000;
+const LONG_PROMPT_PRICING: Record<string, { input: number; output: number }> = {
+  [HAIKU_MODEL]: { input: 0.5, output: 2.5 },
+};
+
 export function calculateCostUsd(model: string, inputTokens: number, outputTokens: number): number {
-  const p = PRICING[model];
+  const p = (inputTokens > LONG_PROMPT_TOKENS && LONG_PROMPT_PRICING[model]) || PRICING[model];
   if (!p) return 0;
   return (inputTokens * p.input + outputTokens * p.output) / 1_000_000;
 }
@@ -28,7 +34,14 @@ export function needsSonnet(docType: DocType, confidence: number): boolean {
 
 export const SUPPORTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'] as const;
 export const MAX_IMAGE_BYTES = 3_750_000; // ~5MB once base64-encoded (API per-image limit)
-export const MAX_PDF_BYTES = 20_000_000;
+export const MAX_PDF_BYTES = 10_000_000;
+/** Each PDF page is billed like an image; school/office papers are rarely longer. */
+export const MAX_PDF_PAGES = 10;
+
+/** Cheap page count from the PDF object table (good enough to reject huge files; not a full parser). */
+export function pdfPageCount(data: Buffer): number {
+  return (data.toString('latin1').match(/\/Type\s*\/Page(?![a-zA-Z])/g) || []).length;
+}
 
 export interface Page {
   data: Buffer;

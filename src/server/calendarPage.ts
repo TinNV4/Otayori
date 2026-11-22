@@ -78,7 +78,7 @@ ${inLine ? `<div class="warn">Bạn đang mở trong LINE. Bấm <b>⋯</b> (gó
     <li>Bấm nút dưới → đăng nhập Google → bấm <b>Thêm</b> (Add).</li>
   </ol>` : ''}
   <a class="btn${isAndroid ? ' primary' : ''}" href="${esc(links.google)}" target="_blank" rel="noopener">Thêm vào Google Calendar</a>
-  <a class="btn" href="#" onclick="navigator.clipboard.writeText('${esc(links.google)}').then(()=>{this.textContent='Đã sao chép ✓ — dán vào trình duyệt máy tính'});return false;">Sao chép link để mở trên máy tính</a>
+  <a class="btn" href="#" data-copy="${esc(links.google)}" data-done="Đã sao chép ✓ — dán vào trình duyệt máy tính">Sao chép link để mở trên máy tính</a>
   <ol class="muted">
     <li>Không thấy hộp thoại <b>Thêm lịch?</b> → mở link trên máy tính (gửi link qua LINE cho chính mình).</li>
     <li>Không thấy lịch trong app điện thoại → app Google Calendar → ☰ → Cài đặt → lịch "Giấy Tờ Nhật" → bật <b>Đồng bộ hóa</b>.</li>
@@ -95,7 +95,16 @@ ${inLine ? `<div class="warn">Bạn đang mở trong LINE. Bấm <b>⋯</b> (gó
   <h2>Link thủ công</h2>
   <div class="muted">Cho Outlook / app lịch khác (mục "Đăng ký từ URL"). Đừng chia sẻ link này ra ngoài gia đình.</div>
   <input readonly value="${esc(links.https)}" onclick="this.select()">
-  <a class="btn" href="#" onclick="navigator.clipboard.writeText('${esc(links.https)}').then(()=>{this.textContent='Đã sao chép ✓'});return false;">Sao chép link</a>
+  <a class="btn" href="#" data-copy="${esc(links.https)}" data-done="Đã sao chép ✓">Sao chép link</a>
 </div>
-</main></body></html>`;
+</main>
+<script>
+document.querySelectorAll('[data-copy]').forEach(function (el) {
+  el.addEventListener('click', function (e) {
+    e.preventDefault();
+    navigator.clipboard.writeText(el.getAttribute('data-copy')).then(function () { el.textContent = el.getAttribute('data-done'); });
+  });
+});
+</script>
+</body></html>`;
 }

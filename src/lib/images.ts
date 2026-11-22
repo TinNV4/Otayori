@@ -1,6 +1,6 @@
 /** Phone photos are 3–12MB; Claude reads documents fine at ~2000px, so shrink before upload. */
 const MAX_EDGE = 2000;
-const MAX_PDF_BYTES = 20_000_000;
+const MAX_PDF_BYTES = 10_000_000;
 
 export interface UploadPage {
   data: string; // base64, no data: prefix
@@ -28,7 +28,7 @@ async function loadImage(file: File): Promise<HTMLImageElement> {
 
 export async function prepareFile(file: File): Promise<UploadPage> {
   if (file.type === 'application/pdf') {
-    if (file.size > MAX_PDF_BYTES) throw new Error('File PDF quá lớn (tối đa 20MB).');
+    if (file.size > MAX_PDF_BYTES) throw new Error('File PDF quá lớn (tối đa 10MB).');
     return { data: toBase64(await file.arrayBuffer()), mediaType: 'application/pdf' };
   }
   const img = await loadImage(file); // iOS converts HEIC to JPEG for web file inputs

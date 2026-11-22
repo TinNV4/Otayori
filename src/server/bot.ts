@@ -1,7 +1,7 @@
 import { AppConfig } from './config.ts';
 import { Repo, UsageDelta } from './db/repo.ts';
 import {
-  ExtractionError, Extractor, MAX_IMAGE_BYTES, MAX_PDF_BYTES, Page, SONNET_MODEL, SUPPORTED_IMAGE_TYPES, toDocument,
+  ExtractionError, Extractor, MAX_IMAGE_BYTES, MAX_PDF_BYTES, MAX_PDF_PAGES, Page, pdfPageCount, SONNET_MODEL, SUPPORTED_IMAGE_TYPES, toDocument,
 } from './extract.ts';
 import { Composer } from './renraku.ts';
 import { MockTranslator, Translator } from './translate.ts';
@@ -235,6 +235,14 @@ export class Bot {
     return { sent, skippedQuota };
   }
 
+  /** Drop everything kept in RAM for a family (chat context, pending suggestions, translate pages). */
+  forgetChat(family: Pick<Family, 'family_id' | 'line_chat_id'>) {
+    this.history.clear(family.line_chat_id);
+    this.translateUntil.delete(family.line_chat_id);
+    this.lastPages.delete(family.line_chat_id);
+    for (const [id, s] of this.suggestions) if (s.familyId === family.family_id) this.suggestions.delete(id);
+  }
+
   /** Process a verified webhook payload. Errors per event are isolated. */
   async handleWebhook(body: { events?: LineEvent[] }) {
     for (const ev of body.events || []) {
@@ -292,6 +300,18 @@ export class Bot {
         const ids: string[] = (ev.joined?.members || []).map((m: { userId?: string }) => m.userId).filter(Boolean);
         family.member_user_ids = [...new Set([...family.member_user_ids, ...ids])].slice(-50);
         return this.repo.saveFamily(family);
+      }
+      case 'memberLeft': {
+        // Someone left / was removed from the group: revoke their app access and the calendar link they may hold.
+        const family = await this.repo.getFamily(familyIdForChat(chat.chatId));
+        if (!family) return;
+        const gone = new Set<string>((ev.left?.members || []).map((m: { userId?: string }) => m.userId).filter(Boolean));
+        if (!gone.size) return;
+        family.member_user_ids = family.member_user_ids.filter(id => !gone.has(id));
+        await this.repo.saveFamily(family);
+        await this.services.rotateIcsToken(family.family_id, 'system');
+        await this.services.audit('system', 'MEMBER_LEFT', `${gone.size} thành viên rời nhóm — đã thu hồi quyền xem và đổi link lịch`, family.family_id);
+        return;
       }
       case 'postback':
         return this.onPostback(ev, await this.loadFamily(chat.chatId, chat.chatType, userId), userId);
@@ -356,8 +376,14 @@ export class Bot {
     return this.reply(ev, [text('Cảm ơn bạn đã đồng ý ✅\nBây giờ hãy gửi mã mời của gia đình (ví dụ: BETA2026).')]);
   }
 
+  private redeemAttempts = new Map<string, number[]>();
+
   private async redeem(ev: LineEvent, family: Family, rawCode: string, userId?: string) {
     const code = normalizeCode(rawCode);
+    const now = Date.now();
+    const recent = (this.redeemAttempts.get(family.line_chat_id) || []).filter(t => now - t < 3600_000);
+    if (recent.length >= 5) return this.reply(ev, [text('⚠️ Bạn đã nhập sai mã nhiều lần. Vui lòng thử lại sau 1 giờ.')]);
+    this.redeemAttempts.set(family.line_chat_id, [...recent, now]);
     if (family.status === 'pending_terms') {
       return this.reply(ev, [text('Vui lòng bấm "Đồng ý" điều khoản trước khi nhập mã mời.', [{ label: '✅ Đồng ý', data: 'action=accept_terms', text: 'Đồng ý điều khoản' }])]);
     }
@@ -502,7 +528,7 @@ export class Bot {
       return this.reply(ev, [text('Đã tắt chế độ dịch. Ảnh gửi tiếp sẽ được đọc và thêm vào lịch như bình thường.')]);
     }
     if (t === 'trang thai' || t === '/trangthai') {
-      return this.reply(ev, [text(`📊 Tháng ${family.quota_month}: đã dùng ${family.quota_used}/${family.quota_limit} giấy.\nMã mời: ${family.invite_code}`)]);
+      return this.reply(ev, [text(`📊 Tháng ${family.quota_month}: đã dùng ${family.quota_used}/${family.quota_limit} giấy.`)]);
     }
     if (t.startsWith('/soan')) return this.compose(ev, family, raw.replace(/^\/\S+\s*/, ''));
 
@@ -589,7 +615,7 @@ export class Bot {
       return this.reply(ev, [text('Yêu cầu xóa đã hết hạn. Gõ "xóa dữ liệu" để bắt đầu lại.')]);
     }
     const n = await this.services.purgeFamilyData(family.family_id, userId || 'user');
-    this.history.clear(family.line_chat_id);
+    this.forgetChat(family);
     return this.reply(ev, [text(`✅ Đã xóa ${n} giấy tờ và vô hiệu link lịch cũ.\nNếu muốn dùng lại: bấm Đồng ý và nhập lại mã mời.`,
       [{ label: '✅ Đồng ý', data: 'action=accept_terms', text: 'Đồng ý điều khoản' }])]);
   }
@@ -624,7 +650,7 @@ export class Bot {
     }
     if (action === 'calendar' && family.status === 'active') return this.reply(ev, [this.calendarMessage(family)]);
     if (action === 'translate_mode' && family.status === 'active') return this.startTranslateMode(ev, family);
-    if (action === 'chat_add' || action === 'chat_skip') {
+    if ((action === 'chat_add' || action === 'chat_skip') && family.status === 'active') {
       const id = params.get('id') || '';
       const s = this.suggestions.get(id);
       this.suggestions.delete(id);
@@ -697,6 +723,9 @@ export class Bot {
       return this.reply(ev, [text('⚠️ Không tải được ảnh từ LINE. Bạn gửi lại giúp mình nhé.')]);
     }
     const mediaType = msg.type === 'file' ? 'application/pdf' : content.contentType;
+    if (mediaType === 'application/pdf' && pdfPageCount(content.data) > MAX_PDF_PAGES) {
+      return this.reply(ev, [text(`⚠️ PDF dài quá ${MAX_PDF_PAGES} trang. Bạn gửi riêng các trang cần đọc nhé.`)]);
+    }
     if (mediaType === 'application/pdf' ? content.data.length > MAX_PDF_BYTES : content.data.length > MAX_IMAGE_BYTES) {
       return this.reply(ev, [text('⚠️ File quá lớn. Bạn chụp lại hoặc gửi file nhỏ hơn nhé.')]);
     }
