@@ -3,12 +3,12 @@ import { nextDayCompact } from '../../time.ts';
 import { FamilyRegion } from '../../../types/index.ts';
 import { ScheduleRow, ScheduleRule } from '../masterdata/types.ts';
 import { CLASS_VI } from './compose.ts';
-import { describeRule, firstDate, Suspension, suspendedDates } from './schedule.ts';
+import { describeRule, firstDate, inSuspension, Suspension, suspendedDates } from './schedule.ts';
 
 const compact = (d: string) => d.replace(/-/g, '');
 const BYDAY = ['', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'];
 
-export function rruleFor(rule: ScheduleRule): string {
+export function rruleFor(rule: Exclude<ScheduleRule, { type: 'dates' }>): string {
   if (rule.type === 'weekly') return `FREQ=WEEKLY;BYDAY=${rule.days.map(d => BYDAY[d]).join(',')}`;
   return `FREQ=MONTHLY;BYDAY=${rule.nths.flatMap(n => rule.days.map(d => `${n}${BYDAY[d]}`)).join(',')}`;
 }
@@ -41,6 +41,30 @@ export function generateGomiIcs(
 
   // 粗大ごみ is by appointment: a weekly all-day event would send people to the curb with nothing booked.
   for (const r of rows.filter(x => x.common_class !== 'sodai')) {
+    const label0 = `${CLASS_VI[r.common_class]} (${r.local_category})`;
+    if (r.rule.type === 'dates') {
+      // Day-by-day calendar: one event per date (RDATE support varies between calendar apps).
+      const desc = [`📍 ${where}`, `🗓️ ${describeRule(r.rule)}`, `Nguồn: ${r.attribution}, cập nhật ${r.source_updated_at}.`].join('\n');
+      for (const d of r.rule.dates.filter(x => x >= today && !inSuspension(x, suspensions))) {
+        lines.push(
+          'BEGIN:VEVENT',
+          `UID:gomi-${r.id}-${compact(d)}@giaytonhat.app`,
+          `DTSTAMP:${stamp}`,
+          `DTSTART;VALUE=DATE:${compact(d)}`,
+          `DTEND;VALUE=DATE:${nextDayCompact(compact(d))}`,
+          `SUMMARY:${escapeIcsText(`🗑️ ${label0}`)}`,
+          `DESCRIPTION:${escapeIcsText(desc)}`,
+          'TRANSP:TRANSPARENT',
+          'BEGIN:VALARM',
+          'ACTION:DISPLAY',
+          `DESCRIPTION:${escapeIcsText(`Mai đổ rác: ${label0}. Chuẩn bị tối nay!`)}`,
+          'TRIGGER:-PT4H',
+          'END:VALARM',
+          'END:VEVENT',
+        );
+      }
+      continue;
+    }
     const start = firstDate(r.rule, today);
     if (!start) continue;
     const label = `${CLASS_VI[r.common_class]} (${r.local_category})`;

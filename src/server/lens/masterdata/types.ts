@@ -122,7 +122,9 @@ export interface GomiItem extends Provenance {
 export type ScheduleRule =
   | { type: 'weekly'; days: number[] }
   /** Every month, on these weekdays of these weeks (第2・4水曜 → days [3], nths [2, 4]). */
-  | { type: 'nth'; days: number[]; nths: number[] };
+  | { type: 'nth'; days: number[]; nths: number[] }
+  /** The city's own calendar, day by day (府中市 publishes per-area yearly calendars, not a rule). Sorted YYYY-MM-DD. */
+  | { type: 'dates'; dates: string[] };
 
 export interface ScheduleRow extends Provenance {
   id: string;

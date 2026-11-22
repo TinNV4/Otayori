@@ -91,6 +91,7 @@ export function inSuspension(date: string, sus: Suspension[]): boolean {
 }
 
 export function occursOn(rule: ScheduleRule, date: string): boolean {
+  if (rule.type === 'dates') return rule.dates.includes(date);
   if (!rule.days.includes(isoWeekday(date))) return false;
   return rule.type === 'weekly' || rule.nths.includes(Math.ceil(Number(date.slice(8, 10)) / 7));
 }
@@ -120,6 +121,14 @@ export function suspendedDates(rule: ScheduleRule, from: string, sus: Suspension
 export const WEEKDAY_VI = ['', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy', 'Chủ nhật'];
 
 export function describeRule(rule: ScheduleRule): string {
+  if (rule.type === 'dates') {
+    // Name the usual weekday(s) so people can remember it; the exact days come from the city's calendar.
+    const count = new Map<number, number>();
+    for (const d of rule.dates) count.set(isoWeekday(d), (count.get(isoWeekday(d)) || 0) + 1);
+    const usual = [...count].filter(([, n]) => n >= rule.dates.length * 0.2).sort((a, b) => a[0] - b[0]).map(([d]) => WEEKDAY_VI[d]);
+    const last = rule.dates[rule.dates.length - 1];
+    return `theo lịch năm của thành phố${usual.length ? ` (thường ${usual.join(', ')})` : ''}, đến ${last.slice(8, 10)}/${last.slice(5, 7)}/${last.slice(0, 4)}`;
+  }
   const days = rule.days.map(d => WEEKDAY_VI[d]).join(', ');
   return rule.type === 'weekly' ? `hàng tuần: ${days}` : `tuần ${rule.nths.join(' & ')} của tháng: ${days}`;
 }
@@ -142,6 +151,10 @@ export function nextCollectionFor(
     const d = nextDate(r.rule, today, sus);
     if (d && (!best || d < best.date)) best = { date: d, row: r };
   }
-  if (!best) return rows.length ? null : { hint: 'Chưa có lịch đổ rác cho khu của bạn trong dữ liệu.' };
+  if (!best) {
+    const expired = rows.some(r => classes.includes(r.common_class) && r.rule.type === 'dates' && r.rule.dates[r.rule.dates.length - 1] < today);
+    if (expired) return { hint: 'Lịch năm của thành phố trong dữ liệu đã hết hạn — đang chờ cập nhật lịch mới. Xem lịch giấy hoặc trang của thành phố.' };
+    return rows.length ? null : { hint: 'Chưa có lịch đổ rác cho khu của bạn trong dữ liệu.' };
+  }
   return { date: best.date, label: `${WEEKDAY_VI[isoWeekday(best.date)]} · 「${best.row.local_category}」` };
 }

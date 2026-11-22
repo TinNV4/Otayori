@@ -14,6 +14,11 @@ const NONE = /^(?:なし|無し|無|収集なし|-+|ー+|―+|－+|—+|×|✕|\
  * Returns `'none'` for an empty/"なし" cell and `null` for text it can't read (the caller must stop, not guess).
  */
 export function parseRuleText(raw: string): ScheduleRule | 'none' | null {
+  // A list of dates ("2026-04-03 2026-04-10 …"): the city's day-by-day calendar.
+  const dates = raw.trim().split(/[\s,;、]+/).filter(Boolean);
+  if (dates.length && dates.every(d => /^\d{4}-\d{2}-\d{2}$/.test(d) && !Number.isNaN(Date.parse(`${d}T00:00:00Z`)) && new Date(`${d}T00:00:00Z`).toISOString().startsWith(d))) {
+    return { type: 'dates', dates: [...new Set(dates)].sort() };
+  }
   const s = raw
     .normalize('NFKC')
     .replace(/[（(][^）)]*[）)]/g, '') // "(祝日も収集)" etc.

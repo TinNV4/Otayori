@@ -104,6 +104,23 @@ describe('schedule_csv_v1 adapter', () => {
     expect(areaRows(sr, '野方1丁目').rows.map(r => r.common_class).sort()).toEqual(['burnable', 'sodai']);
     expect(areaRows(sr, '野方').ambiguous).toBe(true); // 野方3丁目 differs from 1–2丁目
   });
+  it('day-by-day calendars (府中市): a cell of dates is a dates rule; ICS gets one event per future date', () => {
+    expect(parseRuleText('2026-04-10 2026-04-03 2026-04-03')).toEqual({ type: 'dates', dates: ['2026-04-03', '2026-04-10'] });
+    expect(parseRuleText('2026-02-30')).toBeNull(); // not a real date → never guessed
+    const cfg: SourceConfig = { ...src, schedule: { area_columns: ['町名', '丁目'], categories: [{ column: '燃やすごみ', local_category: '燃やすごみ', common_class: 'burnable' }] } };
+    const { rows } = parse(Buffer.from('町名,丁目,燃やすごみ\n府中町,1・2,2026-10-27 2026-10-30 2026-11-03 2027-01-05\n宮町,,2026-10-27\n'), cfg);
+    const sr = rows as ScheduleRow[];
+    expect(sr.map(r => r.area_key).sort()).toEqual(['宮町', '府中町1丁目', '府中町2丁目']);
+    const rule = sr.find(r => r.area_key === '府中町1丁目')!.rule;
+    expect(nextDate(rule, '2026-10-28')).toBe('2026-10-30');
+    expect(nextDate(rule, '2026-11-04')).toBe('2027-01-05'); // the city's gap (year end) is respected
+    expect(nextDate(rule, '2027-01-06')).toBeNull(); // past the calendar: no made-up date
+    const region = { city_code: '13206', city_name_jp: '府中市', chome_label: '府中町1丁目', label_vi: 'x', set_at: '', via: 'text' as const };
+    const ics = generateGomiIcs(region, sr.filter(r => r.area_key === '府中町1丁目'), [], '2026-10-28', NOW);
+    expect(ics).not.toContain('RRULE');
+    expect(ics.match(/BEGIN:VEVENT/g)).toHaveLength(3); // 10-30, 11-03, 01-05 (10-27 is past)
+    expect(ics).toContain('DTSTART;VALUE=DATE:20270105');
+  });
   it('stops on text it cannot read, listing it', () => {
     let err: SyncError | undefined;
     try { parse(csv(['13118,A,月・木,毎日,', '13118,B,随時,毎日,'])); } catch (e) { err = e as SyncError; }
