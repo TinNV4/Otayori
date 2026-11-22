@@ -1,1 +1,85 @@
 @import "tailwindcss";
+
+/*
+ * Giấy Tờ Nhật — design tokens (see docs/design-system.md).
+ * Use these utilities instead of raw Tailwind palette colors or arbitrary sizes:
+ *   bg-canvas / bg-surface / bg-brand-600 · text-ink / text-ink-2 / text-ink-3 · border-line
+ *   text-caption / text-footnote / text-body / text-headline / text-title / text-display
+ *   rounded-control / rounded-card / rounded-sheet · shadow-bar / shadow-float
+ */
+@theme {
+  /* Typography: system UI fonts render Vietnamese diacritics and 日本語 well and feel native. */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP",
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --text-caption: 12px;
+  --text-caption--line-height: 16px;
+  --text-footnote: 13px;
+  --text-footnote--line-height: 18px;
+  --text-subhead: 15px;
+  --text-subhead--line-height: 22px;
+  --text-body: 16px;
+  --text-body--line-height: 24px;
+  --text-headline: 17px;
+  --text-headline--line-height: 24px;
+  --text-title: 20px;
+  --text-title--line-height: 28px;
+  --text-display: 26px;
+  --text-display--line-height: 32px;
+
+  /* Brand: one calm green, used for primary actions and "today" only. */
+  --color-brand-50: #edf6f1;
+  --color-brand-100: #d5eadf;
+  --color-brand-600: #1b7a56;
+  --color-brand-700: #146145;
+
+  /* Neutrals */
+  --color-canvas: #f3f4f6;
+  --color-surface: #ffffff;
+  --color-sunken: #f7f8fa;
+  --color-line: #e5e7eb;
+  --color-line-strong: #d1d5db;
+  --color-ink: #111827;
+  --color-ink-2: #4b5563;
+  --color-ink-3: #8b929e;
+
+  /* Semantic */
+  --color-danger: #c0362c;
+  --color-danger-soft: #fdecea;
+  --color-warn: #9a5b00;
+  --color-warn-soft: #fff4dd;
+  --color-info: #1d5fbf;
+  --color-info-soft: #eaf1fc;
+
+  --radius-control: 10px;
+  --radius-card: 14px;
+  --radius-sheet: 20px;
+
+  --shadow-bar: 0 -1px 0 0 var(--color-line);
+  --shadow-float: 0 6px 20px -6px rgb(17 24 39 / 0.28), 0 2px 6px -2px rgb(17 24 39 / 0.12);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-canvas text-ink font-sans antialiased;
+  }
+  ::selection {
+    @apply bg-brand-100 text-ink;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-brand-600);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      transition-duration: 0ms !important;
+      animation-duration: 0ms !important;
+    }
+  }
+}

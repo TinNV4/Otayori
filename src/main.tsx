@@ -8,5 +8,5 @@ import './index.css';
 const isPublicPrivacy = new URLSearchParams(window.location.search).get('tab') === 'privacy';
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>{isPublicPrivacy ? <div className="min-h-screen bg-slate-50"><PrivacyAndGuideView /></div> : <App />}</StrictMode>,
+  <StrictMode>{isPublicPrivacy ? <div className="min-h-[100dvh] bg-canvas"><PrivacyAndGuideView /></div> : <App />}</StrictMode>,
 );

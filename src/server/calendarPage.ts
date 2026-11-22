@@ -43,26 +43,26 @@ export function renderCalendarPage(family: Family, docs: ExtractedDocument[], li
 <html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex"><title>Thêm vào lịch · Giấy Tờ Nhật</title>
 <style>
-:root{--bg:#f8fafc;--card:#fff;--fg:#0f172a;--muted:#64748b;--line:#e2e8f0;--accent:#059669}
-@media (prefers-color-scheme:dark){:root{--bg:#0b1220;--card:#111a2e;--fg:#e2e8f0;--muted:#94a3b8;--line:#1e293b;--accent:#34d399}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 -apple-system,system-ui,"Segoe UI",sans-serif}
+:root{--bg:#f3f4f6;--card:#fff;--fg:#111827;--muted:#4b5563;--line:#e5e7eb;--accent:#1b7a56;--warn-bg:#fff4dd;--warn:#9a5b00}
+@media (prefers-color-scheme:dark){:root{--bg:#0b0f14;--card:#151a21;--fg:#e5e7eb;--muted:#9ca3af;--line:#262c35;--accent:#2f9e74;--warn-bg:#3a2a07;--warn:#f5c15c}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP","Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
 main{max-width:520px;margin:0 auto;padding:20px 16px 40px}
-h1{font-size:22px;margin:4px 0 2px}.muted{color:var(--muted);font-size:14px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:14px}
-.btn{display:block;text-align:center;text-decoration:none;font-weight:600;border-radius:12px;padding:14px;margin-top:10px;border:1px solid var(--line);color:var(--fg);background:var(--card)}
+h1{font-size:26px;line-height:32px;margin:4px 0 4px;letter-spacing:-.01em}.muted{color:var(--muted);font-size:15px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:12px}
+.btn{display:flex;align-items:center;justify-content:center;min-height:52px;text-decoration:none;font-weight:600;font-size:17px;border-radius:10px;padding:0 16px;margin-top:12px;border:1px solid #d1d5db;color:var(--fg);background:var(--card)}
 .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
-.warn{background:#fef3c7;color:#78350f;border-radius:12px;padding:12px;font-size:14px;margin-top:14px}
+.warn{background:var(--warn-bg);color:var(--warn);border-radius:14px;padding:12px;font-size:15px;margin-top:12px}
 ol{padding-left:20px;margin:8px 0 0}li{margin:4px 0}ul{padding-left:18px;margin:8px 0 0}
 input{width:100%;font:13px ui-monospace,monospace;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--fg)}
-h2{font-size:16px;margin:0}
+h2{font-size:17px;font-weight:600;margin:0}
 </style></head><body><main>
 <div class="muted">Giấy Tờ Nhật · lịch gia đình</div>
-<h1>📅 ${esc(family.family_name)}</h1>
+<h1>${esc(family.family_name)}</h1>
 <div class="muted">Thêm 1 lần, sau đó lịch tự cập nhật mỗi khi bot đọc giấy mới.</div>
 ${inLine ? `<div class="warn">Bạn đang mở trong LINE. Bấm <b>⋯</b> (góc trên phải) → <b>Mở bằng trình duyệt</b> (Safari/Chrome), rồi bấm nút bên dưới.</div>` : ''}
 
 <div class="card">
-  <h2>🍎 iPhone / iPad / Mac</h2>
+  <h2>iPhone · iPad · Mac</h2>
   <a class="btn primary" href="${esc(links.webcal)}">Thêm vào lịch iPhone</a>
   <ol class="muted">
     <li>Bấm nút trên → chọn <b>Đăng ký</b> (Subscribe).</li>
@@ -71,7 +71,7 @@ ${inLine ? `<div class="warn">Bạn đang mở trong LINE. Bấm <b>⋯</b> (gó
 </div>
 
 <div class="card">
-  <h2>🟦 Google Calendar ${isAndroid ? '(Android)' : ''}</h2>
+  <h2>Google Calendar${isAndroid ? ' (Android)' : ''}</h2>
   <div class="muted">Google chỉ cho thêm lịch theo link trên <b>giao diện máy tính</b>. Làm 1 lần, sau đó lịch tự hiện trong app Google Calendar trên điện thoại.</div>
   ${isMobile ? `<ol class="muted">
     <li>Trong Chrome bấm <b>⋮</b> → bật <b>Trang web cho máy tính</b> (Desktop site).</li>

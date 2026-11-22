@@ -6,18 +6,14 @@ import { AdminLIFFView } from './components/AdminLIFFView.tsx';
 import { PrivacyAndGuideView } from './components/PrivacyAndGuideView.tsx';
 import { ExtractedDocument, Family, AdminMetrics, InviteCode, AuditLog, MeResponse, Translation } from './types/index.ts';
 import { apiFetch, initAuth } from './lib/api.ts';
-import { ChevronLeft } from 'lucide-react';
+import { Loader2, Users, WifiOff } from 'lucide-react';
+import { AppBar, Button, EmptyState } from './components/ui/kit.tsx';
 
 type Screen = 'family' | 'admin' | 'simulator' | 'privacy';
 
 const SubPage: React.FC<{ title: string; onBack: () => void; children: React.ReactNode }> = ({ title, onBack, children }) => (
-  <div className="min-h-[100dvh] bg-slate-50">
-    <header className="sticky top-0 z-20 bg-white/95 backdrop-blur border-b border-slate-200 h-14 flex items-center px-2">
-      <button onClick={onBack} className="h-11 px-2 flex items-center gap-1 text-[16px] text-emerald-700 font-medium">
-        <ChevronLeft className="w-6 h-6" /> Quay lại
-      </button>
-      <div className="flex-1 text-center text-[16px] font-semibold text-slate-900 pr-20">{title}</div>
-    </header>
+  <div className="min-h-[100dvh] bg-canvas">
+    <AppBar title={title} back={{ onClick: onBack }} />
     {children}
   </div>
 );
@@ -173,13 +169,17 @@ export default function App() {
   };
 
   if (isLoading) {
-    return <div className="min-h-[100dvh] flex items-center justify-center text-[15px] text-slate-500">Đang tải…</div>;
+    return (
+      <div className="flex min-h-[100dvh] items-center justify-center gap-2 text-subhead text-ink-2" role="status">
+        <Loader2 className="h-5 w-5 animate-spin" /> Đang tải…
+      </div>
+    );
   }
   if (authError || !me) {
     return (
-      <div className="min-h-[100dvh] flex flex-col items-center justify-center p-6 text-center text-[16px] text-slate-600">
-        Không đăng nhập được. Vui lòng mở trang này từ LINE.
-        {authError && <div className="mt-2 text-xs text-slate-400">{authError}</div>}
+      <div className="mx-auto max-w-md">
+        <EmptyState icon={WifiOff} title="Không đăng nhập được" body="Vui lòng mở trang này từ LINE (menu của bot → Trang gia đình)." />
+        {authError && <p className="mt-3 text-center text-caption text-ink-3">{authError}</p>}
       </div>
     );
   }
@@ -190,7 +190,7 @@ export default function App() {
   if (screen === 'admin' && me.is_admin) {
     return (
       <SubPage title="Quản trị" onBack={() => setScreen('family')}>
-        {metrics ? <AdminLIFFView metrics={metrics} families={allFamilies} inviteCodes={inviteCodes} auditLogs={auditLogs} onRefresh={loadAppData} /> : <p className="p-6 text-slate-500">Đang tải…</p>}
+        {metrics ? <AdminLIFFView metrics={metrics} families={allFamilies} inviteCodes={inviteCodes} auditLogs={auditLogs} onRefresh={loadAppData} /> : <p className="p-6 text-subhead text-ink-2">Đang tải…</p>}
       </SubPage>
     );
   }
@@ -212,14 +212,18 @@ export default function App() {
 
   if (!family) {
     return (
-      <div className="min-h-[100dvh] max-w-md mx-auto flex flex-col items-center justify-center px-8 text-center">
-        <div className="text-5xl">📮</div>
-        <p className="mt-4 text-[18px] font-semibold text-slate-900">Chưa tìm thấy gia đình của bạn</p>
-        <p className="mt-2 text-[15px] text-slate-500">
-          Thêm bot vào nhóm LINE gia đình, bấm “Đồng ý”, nhập mã mời và gửi ít nhất 1 tin nhắn trong nhóm. Sau đó mở lại trang này.
-        </p>
-        {me.dev_mode && <button onClick={() => setScreen('simulator')} className="mt-6 h-12 px-5 rounded-2xl bg-emerald-600 text-white font-semibold">Mở LINE Test Lab</button>}
-        {me.is_admin && <button onClick={() => setScreen('admin')} className="mt-3 h-12 px-5 rounded-2xl border border-slate-200 font-semibold">Quản trị</button>}
+      <div className="mx-auto max-w-md">
+        <EmptyState
+          icon={Users}
+          title="Chưa tìm thấy gia đình của bạn"
+          body="Thêm bot vào nhóm LINE gia đình, bấm “Đồng ý”, nhập mã mời và gửi ít nhất 1 tin nhắn trong nhóm. Sau đó mở lại trang này."
+          action={
+            <div className="flex flex-col gap-2">
+              {me.dev_mode && <Button onClick={() => setScreen('simulator')}>Mở LINE Test Lab</Button>}
+              {me.is_admin && <Button variant="secondary" onClick={() => setScreen('admin')}>Quản trị</Button>}
+            </div>
+          }
+        />
       </div>
     );
   }
