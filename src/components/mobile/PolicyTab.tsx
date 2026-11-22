@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import liff from '@line/liff';
-import { ExternalLink, Loader2, Pencil, Trash2 } from 'lucide-react';
+import { CheckCircle2, ExternalLink, Info, Newspaper, Pencil, Trash2 } from 'lucide-react';
 import { apiFetch } from '../../lib/api.ts';
-import {
-  PolicyFeed, PolicyFeedEntry, PolicyProfile, SEVERITY_ICON, SEVERITY_LABEL, Severity,
-} from '../../types/policy.ts';
+import { PolicyFeed, PolicyFeedEntry, PolicyProfile, SEVERITY_LABEL, Severity } from '../../types/policy.ts';
+import { AppBar, Button, Chip, EmptyState, Group, Notice, Row, Section, Switch } from '../ui/kit.tsx';
 
 function openExternal(url: string) {
   try {
@@ -16,6 +15,9 @@ function openExternal(url: string) {
 }
 
 const fmtDay = (iso: string) => `${Number(iso.slice(8, 10))}/${Number(iso.slice(5, 7))}/${iso.slice(0, 4)}`;
+
+/** Severity → status tone (design system: status colors only for status). */
+export const SEVERITY_TONE: Record<Severity, 'danger' | 'warn' | 'info'> = { red: 'danger', yellow: 'warn', green: 'info' };
 
 /** Unread count for the tab badge. */
 export function usePolicyUnread(): [number, (n: number) => void] {
@@ -29,33 +31,53 @@ export function usePolicyUnread(): [number, (n: number) => void] {
   return [n, setN];
 }
 
-const TONE: Record<Severity, string> = {
-  red: 'border-rose-200 bg-rose-50',
-  yellow: 'border-amber-200 bg-amber-50',
-  green: 'border-emerald-200 bg-emerald-50',
-};
-
 const EntryCard: React.FC<{ e: PolicyFeedEntry }> = ({ e }) => (
-  <div className={`rounded-2xl border p-4 ${TONE[e.severity]}`}>
-    <div className="flex items-start gap-2">
-      <div className="text-[17px] font-bold text-slate-900 leading-snug flex-1">
-        {SEVERITY_ICON[e.severity]} {e.title_vi}
-      </div>
-      {e.unread && <span className="shrink-0 mt-1 px-2 py-0.5 rounded-full bg-rose-500 text-white text-[11px] font-bold">MỚI</span>}
+  <div className="rounded-card border border-line bg-surface p-4">
+    <div className="flex flex-wrap gap-1.5">
+      <Chip tone={SEVERITY_TONE[e.severity]}>{SEVERITY_LABEL[e.severity]}</Chip>
+      {e.unread && <Chip tone="brand">Mới</Chip>}
+      {e.deadline && <Chip tone="warn">Hạn {fmtDay(e.deadline)}</Chip>}
+      {e.effective_date && <Chip>Áp dụng từ {fmtDay(e.effective_date)}</Chip>}
     </div>
-    {(e.deadline || e.effective_date) && (
-      <div className="mt-1 text-[14px] font-semibold text-slate-700">
-        {[e.deadline && `Hạn: ${fmtDay(e.deadline)}`, e.effective_date && `Áp dụng từ: ${fmtDay(e.effective_date)}`].filter(Boolean).join(' · ')}
+    <h3 className="mt-2 text-headline font-semibold">{e.title_vi}</h3>
+    <p className="mt-1.5 text-body text-ink">{e.personal_vi || e.summary_vi}</p>
+    {e.action_vi && (
+      <div className="mt-3 flex gap-2 rounded-control bg-brand-50 p-3 text-subhead text-brand-700">
+        <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" />
+        <div><span className="font-semibold">Việc cần làm: </span>{e.action_vi}</div>
       </div>
     )}
-    <p className="mt-2 text-[16px] text-slate-800 leading-relaxed">{e.personal_vi || e.summary_vi}</p>
-    <p className="mt-2 text-[14px] text-slate-600">💡 Vì sao bạn nhận tin: {e.reason_vi}</p>
-    {e.action_vi && <p className="mt-2 text-[16px] font-semibold text-slate-900">✅ Việc cần làm: {e.action_vi}</p>}
-    <button onClick={() => openExternal(e.url)} className="mt-3 h-11 px-4 rounded-xl bg-white border border-slate-200 text-[15px] font-semibold text-emerald-700 flex items-center gap-2">
-      <ExternalLink className="w-4 h-4" /> Nguồn: {e.issuer.split(' (')[0]}
-    </button>
-    <p className="mt-2 text-[12px] text-slate-500">Tóm tắt từ nguồn chính thức, không phải tư vấn pháp lý. Hãy kiểm tra lại trên trang gốc.</p>
+    <p className="mt-3 flex gap-1.5 text-footnote text-ink-2">
+      <Info className="mt-0.5 h-4 w-4 shrink-0" />
+      <span>Vì sao bạn nhận tin: {e.reason_vi}</span>
+    </p>
+    <div className="mt-3">
+      <Button variant="secondary" icon={ExternalLink} onClick={() => openExternal(e.url)}>Nguồn: {e.issuer.split(' (')[0]}</Button>
+    </div>
+    <p className="mt-2 text-caption text-ink-3">Tóm tắt từ nguồn chính thức, không phải tư vấn pháp lý. Hãy kiểm tra lại trên trang gốc.</p>
   </div>
+);
+
+const Select: React.FC<{ label: string; value: string; onChange: (v: string) => void; options: Array<{ id: string; label: string }>; empty?: string }> = ({ label, value, onChange, options, empty = 'Chọn' }) => (
+  <select
+    aria-label={label}
+    value={value}
+    onChange={(e) => onChange(e.target.value)}
+    className="h-11 w-full rounded-control border border-line bg-surface px-3 text-body focus:border-brand-600 focus:outline-none"
+  >
+    <option value="">— {empty} —</option>
+    {options.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
+  </select>
+);
+
+const DateInput: React.FC<{ label: string; value: string; onChange: (v: string) => void }> = ({ label, value, onChange }) => (
+  <input
+    type="date"
+    aria-label={label}
+    value={value}
+    onChange={(e) => onChange(e.target.value)}
+    className="h-11 w-full rounded-control border border-line bg-surface px-3 text-body focus:border-brand-600 focus:outline-none"
+  />
 );
 
 const ProfileForm: React.FC<{
@@ -75,9 +97,11 @@ const ProfileForm: React.FC<{
   const [sector, setSector] = useState<string>(p?.sector || '');
   const [plan, setPlan] = useState<string>(p?.plan || '');
   const [tax, setTax] = useState<string>(p?.resident_tax || '');
+  const [more, setMore] = useState(!!(p && (p.license_status || p.contract_type || p.plan || p.resident_tax || p.sector)));
   const isTokutei = visa === 'tokutei1' || visa === 'tokutei2';
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const o = feed.options;
 
   const save = async () => {
     setBusy(true);
@@ -102,99 +126,82 @@ const ProfileForm: React.FC<{
     const res = await apiFetch('/api/policy/profile', { method: 'DELETE' });
     if (res.ok) onDeleted();
   };
-  const field = 'w-full h-12 px-3 rounded-xl border border-slate-300 bg-white text-[16px]';
 
   return (
-    <div className="p-4 space-y-4">
-      <div>
-        <div className="text-[20px] font-bold text-slate-900">📰 Bản tin chính sách của bạn</div>
-        <p className="mt-1 text-[15px] text-slate-600">Chỉ báo thay đổi ảnh hưởng tới chính bạn, kèm hạn chót và việc cần làm. Trả lời 3 câu hỏi (30 giây):</p>
-      </div>
-      <label className="block">
-        <span className="text-[15px] font-semibold text-slate-800">1. Tư cách lưu trú (在留資格)</span>
-        <select value={visa} onChange={(e) => setVisa(e.target.value)} className={`${field} mt-1`}>
-          <option value="">— Chọn —</option>
-          {feed.options.visa_types.map((v) => <option key={v.id} value={v.id}>{v.label}</option>)}
-        </select>
-      </label>
-      <label className="block">
-        <span className="text-[15px] font-semibold text-slate-800">Ngày hết hạn trên thẻ 在留カード</span>
-        <input type="date" value={expiry} onChange={(e) => setExpiry(e.target.value)} className={`${field} mt-1`} />
-        <span className="text-[13px] text-slate-500">Để nhận nhắc gia hạn trước 3 tháng. Bỏ trống nếu chưa muốn nhập.</span>
-      </label>
-      <label className="block">
-        <span className="text-[15px] font-semibold text-slate-800">2. Bạn sống ở đâu?</span>
-        <select value={city} onChange={(e) => setCity(e.target.value)} className={`${field} mt-1`}>
-          <option value="">— Chọn —</option>
-          {feed.options.cities.map((c) => <option key={c.id} value={c.id}>{c.name_vi}</option>)}
-        </select>
-      </label>
-      <label className="flex items-center gap-3 min-h-12">
-        <input type="checkbox" checked={kids} onChange={(e) => setKids(e.target.checked)} className="w-6 h-6 accent-emerald-600" />
-        <span className="text-[16px] text-slate-800">3. Nhà mình có con nhỏ</span>
-      </label>
-      <details className="rounded-2xl border border-slate-200 bg-white" open={!!(p && (p.license_status || p.contract_type || p.plan || p.resident_tax || p.sector))}>
-        <summary className="h-12 px-4 flex items-center text-[16px] font-semibold text-slate-800 cursor-pointer">➕ Thông tin thêm (không bắt buộc)</summary>
-        <div className="px-4 pb-4 space-y-4">
-          <p className="text-[13px] text-slate-500">Càng điền, tin càng đúng người — và bạn nhận được nhắc hạn bằng lái, 住民税. Bỏ trống = vẫn nhận mọi tin chung.</p>
+    <>
+      <AppBar
+        title={p ? 'Sửa hồ sơ' : 'Bản tin chính sách'}
+        subtitle={p ? undefined : 'Chỉ báo thay đổi ảnh hưởng tới chính bạn, kèm hạn và việc cần làm. Trả lời 3 câu (30 giây).'}
+        back={onCancel ? { onClick: onCancel } : undefined}
+        large={!p}
+      />
+
+      <Section title="1. Tư cách lưu trú (在留資格)">
+        <Select label="Tư cách lưu trú" value={visa} onChange={setVisa} options={o.visa_types} />
+      </Section>
+      <Section title="Ngày hết hạn trên thẻ 在留カード" footer="Để nhắc gia hạn trước 3 tháng. Bỏ trống nếu chưa muốn nhập.">
+        <DateInput label="Ngày hết hạn visa" value={expiry} onChange={setExpiry} />
+      </Section>
+      <Section title="2. Bạn sống ở đâu?">
+        <Select label="Nơi sống" value={city} onChange={setCity} options={o.cities.map((c) => ({ id: c.id, label: c.name_vi }))} />
+      </Section>
+      <Section title="3. Gia đình">
+        <Group>
+          <Row title="Nhà mình có con nhỏ" trailing={<Switch checked={kids} onChange={setKids} label="Nhà mình có con nhỏ" />} />
+        </Group>
+      </Section>
+
+      <Section
+        title="Thông tin thêm (không bắt buộc)"
+        footer={more ? 'Càng điền, tin càng đúng người, và bạn được nhắc hạn bằng lái, 住民税. Bỏ trống thì vẫn nhận mọi tin chung.' : undefined}
+      >
+        <Group>
+          <Row title="Thêm chi tiết" subtitle="Ngành, hợp đồng, bằng lái, kế hoạch, 住民税" trailing={<Switch checked={more} onChange={setMore} label="Thêm chi tiết" />} />
+        </Group>
+      </Section>
+      {more && (
+        <>
           {isTokutei && (
-            <label className="block">
-              <span className="text-[15px] font-semibold text-slate-800">Ngành 特定技能</span>
-              <select value={sector} onChange={(e) => setSector(e.target.value)} className={`${field} mt-1`}>
-                <option value="">— Không chọn —</option>
-                {feed.options.sectors.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
-              </select>
-            </label>
+            <Section title="Ngành 特定技能">
+              <Select label="Ngành 特定技能" value={sector} onChange={setSector} options={o.sectors} empty="Không chọn" />
+            </Section>
           )}
-          <label className="block">
-            <span className="text-[15px] font-semibold text-slate-800">Loại hợp đồng</span>
-            <select value={contract} onChange={(e) => setContract(e.target.value)} className={`${field} mt-1`}>
-              <option value="">— Không chọn —</option>
-              {feed.options.contract_types.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
-            </select>
-          </label>
-          <label className="block">
-            <span className="text-[15px] font-semibold text-slate-800">Bằng lái xe</span>
-            <select value={license} onChange={(e) => setLicense(e.target.value)} className={`${field} mt-1`}>
-              <option value="">— Không chọn —</option>
-              {feed.options.license_statuses.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
-            </select>
-          </label>
+          <Section title="Loại hợp đồng">
+            <Select label="Loại hợp đồng" value={contract} onChange={setContract} options={o.contract_types} empty="Không chọn" />
+          </Section>
+          <Section title="Bằng lái xe">
+            <Select label="Bằng lái xe" value={license} onChange={setLicense} options={o.license_statuses} empty="Không chọn" />
+          </Section>
           {(license === 'japan' || license === 'converting') && (
-            <label className="block">
-              <span className="text-[15px] font-semibold text-slate-800">Ngày hết hạn bằng lái</span>
-              <input type="date" value={licenseExpiry} onChange={(e) => setLicenseExpiry(e.target.value)} className={`${field} mt-1`} />
-            </label>
+            <Section title="Ngày hết hạn bằng lái">
+              <DateInput label="Ngày hết hạn bằng lái" value={licenseExpiry} onChange={setLicenseExpiry} />
+            </Section>
           )}
-          <label className="block">
-            <span className="text-[15px] font-semibold text-slate-800">Kế hoạch sắp tới</span>
-            <select value={plan} onChange={(e) => setPlan(e.target.value)} className={`${field} mt-1`}>
-              <option value="">— Không chọn —</option>
-              {feed.options.plans.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
-            </select>
-          </label>
-          <label className="block">
-            <span className="text-[15px] font-semibold text-slate-800">住民税 (thuế cư trú) đóng thế nào?</span>
-            <select value={tax} onChange={(e) => setTax(e.target.value)} className={`${field} mt-1`}>
-              <option value="">— Không chọn —</option>
-              {feed.options.resident_tax.map((o) => <option key={o.id} value={o.id}>{o.label}</option>)}
-            </select>
-            <span className="text-[13px] text-slate-500">Chọn "tự đóng" để nhận nhắc trước hạn mỗi kỳ.</span>
-          </label>
-        </div>
-      </details>
-      {error && <div className="rounded-xl bg-rose-50 border border-rose-200 p-3 text-[15px] text-rose-700">{error}</div>}
-      <button disabled={busy || !visa || !city} onClick={save} className="w-full h-12 rounded-2xl bg-emerald-600 disabled:bg-slate-300 text-white text-[16px] font-semibold flex items-center justify-center gap-2">
-        {busy && <Loader2 className="w-5 h-5 animate-spin" />} Lưu
-      </button>
-      {onCancel && <button onClick={onCancel} className="w-full h-12 rounded-2xl border border-slate-200 text-[16px] font-semibold text-slate-700">Hủy</button>}
-      <p className="text-[13px] text-slate-500">🔒 Thông tin này chỉ dùng để chọn tin phù hợp và nhắc hạn. Chỉ bạn xem được; người vận hành chỉ thấy số liệu tổng. Không hiện trong nhóm LINE.</p>
-      {p && (
-        <button onClick={remove} className="h-11 px-3 text-[15px] font-semibold text-rose-600 flex items-center gap-2">
-          <Trash2 className="w-4 h-4" /> Xóa hồ sơ chính sách
-        </button>
+          <Section title="Kế hoạch sắp tới">
+            <Select label="Kế hoạch sắp tới" value={plan} onChange={setPlan} options={o.plans} empty="Không chọn" />
+          </Section>
+          <Section title="住民税 (thuế cư trú) đóng thế nào?" footer='Chọn "tự đóng" để được nhắc trước hạn mỗi kỳ.'>
+            <Select label="Cách đóng 住民税" value={tax} onChange={setTax} options={o.resident_tax} empty="Không chọn" />
+          </Section>
+        </>
       )}
-    </div>
+
+      <Section footer="Thông tin này chỉ dùng để chọn tin phù hợp và nhắc hạn. Chỉ bạn xem được; người vận hành chỉ thấy số liệu tổng. Không hiện trong nhóm LINE.">
+        {error && <div className="mb-3"><Notice tone="danger">{error}</Notice></div>}
+        <div className="space-y-2">
+          <Button size="lg" block loading={busy} disabled={!visa || !city} onClick={save}>Lưu</Button>
+          {onCancel && <Button size="lg" variant="secondary" block onClick={onCancel}>Hủy</Button>}
+        </div>
+      </Section>
+
+      {p && (
+        <Section>
+          <Group>
+            <Row tone="danger" leading={<Trash2 className="mt-0.5 h-5 w-5 text-danger" />} title="Xóa hồ sơ chính sách" chevron={false} onClick={remove} />
+          </Group>
+        </Section>
+      )}
+    </>
   );
 };
 
@@ -210,7 +217,7 @@ export const PolicyTab: React.FC<{ onSeen: () => void }> = ({ onSeen }) => {
       if (!res.ok) return setError(data.error || `Lỗi ${res.status}`);
       setFeed(data);
       if (data.profile) {
-        // Entries stay marked "MỚI" in this view; the badge clears for next time.
+        // Entries stay marked "Mới" in this view; the badge clears for next time.
         apiFetch('/api/policy/seen', { method: 'POST' }).then(onSeen).catch(() => undefined);
       }
     } catch (err) {
@@ -219,8 +226,22 @@ export const PolicyTab: React.FC<{ onSeen: () => void }> = ({ onSeen }) => {
   };
   useEffect(() => { void load(); }, []);
 
-  if (error) return <div className="p-6 text-[16px] text-slate-600">{error}</div>;
-  if (!feed) return <div className="p-6 flex items-center gap-2 text-slate-500"><Loader2 className="w-5 h-5 animate-spin" /> Đang tải…</div>;
+  if (error) {
+    return (
+      <>
+        <AppBar title="Chính sách" large />
+        <div className="px-4 pt-4"><Notice tone="danger">{error}</Notice></div>
+      </>
+    );
+  }
+  if (!feed) {
+    return (
+      <>
+        <AppBar title="Chính sách" large />
+        <p className="px-5 pt-4 text-subhead text-ink-2">Đang tải…</p>
+      </>
+    );
+  }
 
   if (!feed.profile || editing) {
     return (
@@ -237,39 +258,35 @@ export const PolicyTab: React.FC<{ onSeen: () => void }> = ({ onSeen }) => {
   const visa = feed.options.visa_types.find((v) => v.id === profile.visa_type)?.label;
   const city = feed.options.cities.find((c) => c.id === profile.city)?.name_vi;
   const groups: Severity[] = ['red', 'yellow', 'green'];
+  const summary = [visa, city, profile.has_children && 'có con nhỏ', profile.visa_expiry && `visa đến ${fmtDay(profile.visa_expiry)}`].filter(Boolean).join(' · ');
 
   return (
-    <div className="p-4 space-y-5">
-      <div className="flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <div className="text-[20px] font-bold text-slate-900">📰 Chính sách cho bạn</div>
-          <div className="mt-1 text-[14px] text-slate-600">
-            {visa} · {city}{profile.has_children ? ' · có con nhỏ' : ''}{profile.visa_expiry ? ` · visa đến ${fmtDay(profile.visa_expiry)}` : ''}
-          </div>
-        </div>
-        <button onClick={() => setEditing(true)} className="shrink-0 h-11 px-3 rounded-xl border border-slate-200 bg-white text-[15px] font-semibold text-slate-700 flex items-center gap-1">
-          <Pencil className="w-4 h-4" /> Sửa
-        </button>
-      </div>
+    <>
+      <AppBar title="Chính sách" subtitle="Thay đổi ảnh hưởng tới riêng bạn" large />
+      <Section title="Hồ sơ của bạn">
+        <Group>
+          <Row
+            leading={<Pencil className="mt-0.5 h-5 w-5 text-ink-2" />}
+            title={summary}
+            subtitle="Sửa để nhận tin đúng hơn"
+            onClick={() => setEditing(true)}
+          />
+        </Group>
+      </Section>
 
       {feed.items.length === 0 && (
-        <div className="rounded-2xl bg-white border border-slate-200 p-6 text-center">
-          <div className="text-4xl">👍</div>
-          <p className="mt-2 text-[16px] font-semibold text-slate-900">Chưa có thay đổi nào ảnh hưởng tới bạn</p>
-          <p className="mt-1 text-[14px] text-slate-500">Có tin khẩn mình sẽ nhắn ngay trong LINE. Nhắc hạn visa tự động trước 3 tháng.</p>
-        </div>
+        <EmptyState icon={Newspaper} title="Chưa có thay đổi nào ảnh hưởng tới bạn" body="Có tin khẩn mình sẽ nhắn ngay trong LINE. Nhắc hạn visa tự động trước 3 tháng." />
       )}
 
       {groups.map((sev) => {
         const items = feed.items.filter((i) => i.severity === sev);
         if (!items.length) return null;
         return (
-          <section key={sev} className="space-y-3">
-            <h3 className="text-[15px] font-bold text-slate-700">{SEVERITY_ICON[sev]} {SEVERITY_LABEL[sev]} ({items.length})</h3>
-            {items.map((e) => <EntryCard key={e.id} e={e} />)}
-          </section>
+          <Section key={sev} title={`${SEVERITY_LABEL[sev]} (${items.length})`} tone={sev === 'red' ? 'danger' : 'default'}>
+            <div className="space-y-3">{items.map((e) => <EntryCard key={e.id} e={e} />)}</div>
+          </Section>
         );
       })}
-    </div>
+    </>
   );
 };

@@ -352,7 +352,7 @@ export const AdminLIFFView: React.FC<AdminLIFFViewProps> = ({ initialTab, metric
               { id: 'overview', label: 'Tổng quan' },
               { id: 'families', label: `Gia đình` },
               { id: 'invites', label: 'Mã mời' },
-              { id: 'policy', label: 'Chính sách' },
+              { id: 'policy', label: 'Tin' },
               { id: 'log', label: 'Nhật ký' },
             ]}
           />

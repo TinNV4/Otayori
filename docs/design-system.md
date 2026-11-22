@@ -48,7 +48,7 @@ Sentence case everywhere — no ALL-CAPS headers.
 |---|---|---|
 | `Screen` | `bar`, `footer`, `overlay`, `layer` | Full-height page; `footer` = sticky action area above safe area |
 | `AppBar` | `title`, `back`, `right`, `large`, `subtitle` | Home tabs use `large` (title only); pushed screens use `back` |
-| `TabBar` | items with `badge` | Max 4 items; active = brand + bolder stroke |
+| `TabBar` | items with `badge` | Max 5 items; active = brand + bolder stroke |
 | `Section` | `title`, `tone` (default/brand/danger), `footer` | Sentence-case 13px header, optional footnote below |
 | `Group` | — | White rounded container with dividers |
 | `Row` | `leading`, `title`, `subtitle`, `meta`, `trailing`, `onClick`, `chevron`, `tone` | Chevron auto when navigable |
@@ -75,6 +75,6 @@ Sentence case everywhere — no ALL-CAPS headers.
 - None: family app, admin dashboard, privacy page, calendar page and the dev LINE Test Lab all use the kit.
 
 ## Admin dashboard patterns (`AdminLIFFView`)
-- Segmented control (4 tabs max) under the bar instead of a second tab bar.
+- Segmented control (5 tabs max, short labels) under the bar instead of a second tab bar.
 - KPI tile: label + icon (footnote), value (`text-display`), optional meter (brand → warn ≥80% → danger ≥100%) and hint (caption).
 - Destructive admin actions (suspend) ask for confirmation; results reported with `Toast`.
