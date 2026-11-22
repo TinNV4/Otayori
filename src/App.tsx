@@ -4,7 +4,7 @@ import { prepareFile } from './lib/images.ts';
 import { LineSimulatorView } from './components/LineSimulatorView.tsx';
 import { AdminLIFFView } from './components/AdminLIFFView.tsx';
 import { PrivacyAndGuideView } from './components/PrivacyAndGuideView.tsx';
-import { ExtractedDocument, Family, AdminMetrics, InviteCode, AuditLog, MeResponse, Translation } from './types/index.ts';
+import { ExtractedDocument, Family, AdminMetrics, InviteCode, AuditLog, MeResponse, MonthlyUsage, Translation } from './types/index.ts';
 import { apiFetch, initAuth } from './lib/api.ts';
 import { Loader2, Users, WifiOff } from 'lucide-react';
 import { AppBar, Button, EmptyState } from './components/ui/kit.tsx';
@@ -30,6 +30,7 @@ export default function App() {
   const [family, setFamily] = useState<Family | null>(null);
   const [documents, setDocuments] = useState<ExtractedDocument[]>([]);
   const [metrics, setMetrics] = useState<AdminMetrics | null>(null);
+  const [usage, setUsage] = useState<MonthlyUsage | null>(null);
   const [allFamilies, setAllFamilies] = useState<Family[]>([]);
   const [inviteCodes, setInviteCodes] = useState<InviteCode[]>([]);
   const [auditLogs, setAuditLogs] = useState<AuditLog[]>([]);
@@ -66,7 +67,11 @@ export default function App() {
         const [m, f, i, l] = await Promise.all([
           apiFetch('/api/admin/metrics'), apiFetch('/api/admin/families'), apiFetch('/api/admin/invite-codes'), apiFetch('/api/admin/audit-logs'),
         ]);
-        if (m.ok) setMetrics((await m.json()).metrics);
+        if (m.ok) {
+          const j = await m.json();
+          setMetrics(j.metrics);
+          setUsage(j.usage || null);
+        }
         if (f.ok) setAllFamilies((await f.json()).families);
         if (i.ok) setInviteCodes((await i.json()).invite_codes);
         if (l.ok) setAuditLogs((await l.json()).audit_logs);
@@ -190,7 +195,7 @@ export default function App() {
   if (screen === 'admin' && me.is_admin) {
     return (
       <SubPage title="Quản trị" onBack={() => setScreen('family')}>
-        {metrics ? <AdminLIFFView metrics={metrics} families={allFamilies} inviteCodes={inviteCodes} auditLogs={auditLogs} onRefresh={loadAppData} /> : <p className="p-6 text-subhead text-ink-2">Đang tải…</p>}
+        {metrics ? <AdminLIFFView metrics={metrics} usage={usage} families={allFamilies} inviteCodes={inviteCodes} auditLogs={auditLogs} onRefresh={loadAppData} /> : <p className="p-6 text-subhead text-ink-2">Đang tải…</p>}
       </SubPage>
     );
   }

@@ -72,4 +72,9 @@ Sentence case everywhere — no ALL-CAPS headers.
 | Explain with a short footnote under a section | Long paragraphs above the content |
 
 ## Known gaps
-- Admin dashboard (`AdminLIFFView`) and dev Test Lab still use the old styles (operator-only screens).
+- Dev-only LINE Test Lab still uses the old styles.
+
+## Admin dashboard patterns (`AdminLIFFView`)
+- Segmented control (4 tabs max) under the bar instead of a second tab bar.
+- KPI tile: label + icon (footnote), value (`text-display`), optional meter (brand → warn ≥80% → danger ≥100%) and hint (caption).
+- Destructive admin actions (suspend) ask for confirmation; results reported with `Toast`.
