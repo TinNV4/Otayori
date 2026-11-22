@@ -202,7 +202,9 @@ export const ckanCsvV1: Adapter = {
       if (!name || !label) { skipped++; continue; }
       const cls = classOf.get(label);
       if (!cls) { unknown.add(label); continue; }
-      const note = norm(noteCols.map(k => r[k] || '').filter(Boolean).join(' / '));
+      // Drop a column that repeats another (府中市 copies 料金備考 into 備考).
+      const parts = [...new Set(noteCols.map(k => (r[k] || '').trim()).filter(Boolean))];
+      const note = norm(parts.filter((x, i) => !parts.some((y, j) => j !== i && y.length > x.length && y.includes(x))).join(' / '));
       const fee = c.fee ? Number((r[c.fee] || '').normalize('NFKC').replace(/[^\d]/g, '')) : 0;
       const base = crypto.createHash('sha1').update(`${src.city_code}|${name}|${note}`).digest('hex').slice(0, 12);
       const n = (seen.get(base) || 0) + 1;

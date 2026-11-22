@@ -1,0 +1,49 @@
+{
+  "id": "fuchu-items",
+  "city_code": "13206",
+  "kind": "gomi_items",
+  "enabled": false,
+  "note": "府中市 (Tokyo). 家庭用廃食用油 = monthly pickup at 文化センター → drop_off; せん定した枝 = phone 粗大ごみ center, 5 bundles free → other (city note shown); 落ち葉・下草 and おむつ go out on 燃やすごみ day (marked bags) → burnable. No open collection schedule: district (A1, B1…) calendars are PDFs only.",
+  "ckan": {
+    "api": "https://catalog.data.metro.tokyo.lg.jp/api/3/action",
+    "dataset": "t132063d0000000021"
+  },
+  "url": "https://catalog.data.metro.tokyo.lg.jp/dataset/t132063d0000000021",
+  "encoding": "utf-8",
+  "license": "クリエイティブ・コモンズ 表示（CC BY）",
+  "attribution": "府中市 「ゴミの分別方法一覧」 (クリエイティブ・コモンズ 表示（CC BY）)",
+  "cadence": "monthly",
+  "adapter": "ckan_csv_v1",
+  "columns": {
+    "name_jp": "ゴミの品目",
+    "category": "分別区分",
+    "note": [
+      "注意点",
+      "料金備考",
+      "備考"
+    ],
+    "fee": "料金",
+    "city_code": "全国地方公共団体コード"
+  },
+  "category_map": {
+    "燃やさないごみ": "non_burnable",
+    "粗大ごみ": "sodai",
+    "燃やすごみ": "burnable",
+    "市では収集できないもの": "not_collected",
+    "容器包装プラスチック": "plastic",
+    "雑誌・雑がみ": "paper",
+    "古布・古着": "cloth",
+    "危険ごみ": "hazardous",
+    "びん": "glass",
+    "有害ごみ": "hazardous",
+    "かん": "can",
+    "段ボール": "paper",
+    "新聞": "paper",
+    "紙パック": "paper",
+    "ペットボトル": "pet",
+    "家庭用廃食用油": "drop_off",
+    "せん定した枝": "other",
+    "落ち葉・下草": "burnable",
+    "おむつ": "burnable"
+  }
+}

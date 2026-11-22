@@ -8,6 +8,7 @@
   { "code": "13118", "prefecture_jp": "東京都", "name_jp": "荒川区", "name_vi": "quận Arakawa (Tokyo)", "aliases": ["arakawa"] },
   { "code": "13121", "prefecture_jp": "東京都", "name_jp": "足立区", "name_vi": "quận Adachi (Tokyo)", "aliases": ["adachi"] },
   { "code": "13123", "prefecture_jp": "東京都", "name_jp": "江戸川区", "name_vi": "quận Edogawa (Tokyo)", "aliases": ["edogawa"] },
+  { "code": "13206", "prefecture_jp": "東京都", "name_jp": "府中市", "name_vi": "thành phố Fuchu (Tokyo)", "aliases": ["fuchu"] },
   { "code": "13213", "prefecture_jp": "東京都", "name_jp": "東村山市", "name_vi": "thành phố Higashimurayama (Tokyo)", "aliases": ["higashimurayama"] },
   { "code": "13229", "prefecture_jp": "東京都", "name_jp": "西東京市", "name_vi": "thành phố Nishitokyo (Tokyo)", "aliases": ["nishitokyo", "nishi tokyo"] },
   { "code": "14100", "prefecture_jp": "神奈川県", "name_jp": "横浜市", "name_vi": "thành phố Yokohama", "aliases": ["yokohama"], "designated": true },

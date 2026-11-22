@@ -15,6 +15,10 @@ export function scoreName(query: string, item: GomiItem): number {
   const kana = fold(item.kana);
   if (q === name) return 1;
   if (kana && q === kana) return 0.95;
+  // Cities qualify names in brackets: "おむつ【使用済】", "てんぷら油【液体】", "たんす（幅1m以上）".
+  // The bare name matches every variant; variants share the score so the answer lists them all.
+  const base = fold(item.name_jp.replace(/【[^】]*】|［[^］]*］|\[[^\]]*\]|（[^）]*）|\([^)]*\)/g, ''));
+  if (base && base !== name && q === base) return 0.93;
   // Cities write "缶／飲食缶 缶詰の缶", "紙パック／牛乳" or "傘(金属製)": a part names the thing ("缶", "傘").
   const parts = item.name_jp.split(/[／/、,，・\s（）()]+/).map(fold).filter(Boolean);
   if (parts.length > 1 && parts.includes(q)) return 0.92;

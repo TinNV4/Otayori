@@ -70,6 +70,10 @@ describe('ckan_csv_v1 adapter: real Tokyo-standard files', () => {
     expect(items[0]).toMatchObject({ note: '大きいもの / 二人で運ぶ', fee_yen: 1200, common_class: 'sodai' });
     expect(items[1].fee_yen).toBeUndefined();
   });
+  it('drops a note column that only repeats another one (府中市: 料金備考 copied into 備考)', () => {
+    const { rows } = parse2(['123456,たんす,タンス,粗大ごみ,高さで料金,申し込みください。高さで料金,', '123456,箱,ハコ,燃やすごみ,同じ,同じ,']);
+    expect((rows as GomiItem[]).map(r => r.note)).toEqual(['申し込みください。高さで料金', '同じ']);
+  });
   it('reports a missing note/fee column by name', () => {
     expect(() => getAdapter('ckan_csv_v1').parse(Buffer.from('全国地方公共団体コード,ゴミの品目,分別区分\n123456,a,粗大ごみ'), cfg, { fetchedAt: '', sourceUrl: '', sourceUpdatedAt: '2026-04-01' })).toThrow(/missing column.*備考/);
   });

@@ -109,6 +109,13 @@ describe('dictionary matching', () => {
     expect(matchItems([item('生ごみ、台所ごみ', 'burnable')], q({ name_jp: '生ごみ' }))[0].score).toBeGreaterThanOrEqual(0.9);
     expect(matchItems([item('生ごみ、台所ごみ', 'burnable')], q({ name_jp: '台所ごみ' }))[0].score).toBeGreaterThanOrEqual(0.9);
   });
+  it('a bare name matches city names qualified in 【】 (府中市: "おむつ【使用済】"), listing every variant', () => {
+    const rows = [item('おむつ【使用済】', 'burnable'), item('ペット用おむつ', 'burnable'), item('アイスクリームの容器【紙製】', 'burnable'), item('アイスクリームの容器【プラスチック製】', 'plastic')];
+    const [hit] = matchItems(rows, q({ name_jp: 'おむつ' }));
+    expect(hit.item.name_jp).toBe('おむつ【使用済】');
+    expect(hit.score).toBeGreaterThanOrEqual(0.9);
+    expect(matchItems(rows, q({ name_jp: 'アイスクリームの容器' })).map(m => m.item.common_class).sort()).toEqual(['burnable', 'plastic']);
+  });
   it('skips retired rows', () => {
     expect(m('古い辞書')).toEqual([]);
   });
